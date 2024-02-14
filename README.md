@@ -7,7 +7,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 - Jack Barter
 - Shawn Broderick
 - Evan Savage
-- 
+- Joseph Skinner
 -
 
 ## Prerequisites
