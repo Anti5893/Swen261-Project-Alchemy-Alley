@@ -1,6 +1,6 @@
-package com.alchemyalley.persistence;
+package com.alchemyalley.api.persistence;
 
-import com.alchemyalley.model.Recipe;
+import com.alchemyalley.api.model.Recipe;
 
 /**
  * Interface to interact with crafting data

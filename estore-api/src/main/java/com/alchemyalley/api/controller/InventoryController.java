@@ -1,4 +1,4 @@
-package com.alchemyalley.controller;
+package com.alchemyalley.api.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.alchemyalley.persistence.ProductDAO;
-import com.alchemyalley.model.Product;
+import com.alchemyalley.api.persistence.ProductDAO;
+import com.alchemyalley.api.model.Product;
 
 @RestController
 @RequestMapping("inventory")

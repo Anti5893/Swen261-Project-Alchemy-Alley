@@ -1,4 +1,4 @@
-package com.alchemyalley.persistence;
+package com.alchemyalley.api.persistence;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.alchemyalley.model.Product;
+import com.alchemyalley.api.model.Product;
 
 /**
  * An implementation of {@link ProductDAO} that uses JSON.
@@ -66,9 +66,9 @@ public class ProductFileDAO implements ProductDAO {
         nextId = 0;
 
         Product[] productArray = this.objectMapper.readValue(new File(this.fileName), Product[].class);
-        for (Product product : productArray) {
+        for(Product product : productArray) {
             this.products.put(product.getId(), product);
-            if (product.getId() > nextId) nextId = product.getId();
+            if(product.getId() > nextId) nextId = product.getId();
         }
 
         ++nextId;
@@ -115,25 +115,24 @@ public class ProductFileDAO implements ProductDAO {
     //     }
     // }
     @Override
-public Product createProduct(Product product) throws IOException {
-    synchronized(this.products){
-        for (Product existingProduct : this.products.values()) {
-            if (existingProduct.getName().equalsIgnoreCase(product.getName())) {
-                return null;
+    public Product createProduct(Product product) throws IOException {
+        synchronized(this.products) {
+            for(Product existingProduct : this.products.values()) {
+                if(existingProduct.getName().equalsIgnoreCase(product.getName())) {
+                    return null;
+                }
             }
+            Product newProduct = new Product(nextId(), product.getName(), product.getType(), product.getPrice(), product.getQuantity());
+            this.products.put(newProduct.getId(), newProduct);
+            save();
+            return newProduct;
         }
-        Product newProduct = new Product(nextId(), product.getName(), product.getType(), product.getPrice(), product.getQuantity());
-        this.products.put(newProduct.getId(), newProduct);
-        save(); 
-        return newProduct;
     }
-}
-
 
     @Override
     public Product updateProduct(Product product) throws IOException {
         synchronized(this.products) {
-            if (!this.products.containsKey(product.getId())) return null;
+            if(!this.products.containsKey(product.getId())) return null;
 
             this.products.put(product.getId(), product);
             save();

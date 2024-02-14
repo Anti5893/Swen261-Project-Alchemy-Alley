@@ -1,7 +1,7 @@
-package com.alchemyalley.persistence;
+package com.alchemyalley.api.persistence;
 
 import java.io.IOException;
-import com.alchemyalley.model.Product;
+import com.alchemyalley.api.model.Product;
 
 public interface ProductDAO {
 

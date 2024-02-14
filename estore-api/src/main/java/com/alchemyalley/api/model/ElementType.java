@@ -1,4 +1,4 @@
-package com.alchemyalley.model;
+package com.alchemyalley.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

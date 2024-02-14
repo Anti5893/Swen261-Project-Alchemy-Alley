@@ -1,4 +1,4 @@
-package com.alchemyalley.controller;
+package com.alchemyalley.api.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
@@ -7,9 +7,9 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
-import com.alchemyalley.persistence.ProductDAO;
-import com.alchemyalley.model.ElementType;
-import com.alchemyalley.model.Product;
+import com.alchemyalley.api.persistence.ProductDAO;
+import com.alchemyalley.api.model.ElementType;
+import com.alchemyalley.api.model.Product;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
