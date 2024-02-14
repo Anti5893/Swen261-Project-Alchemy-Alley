@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.2</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>2.5.6</version>
+		<relativePath/>
 	</parent>
-	<groupId>com.estore.api</groupId>
-	<artifactId>estore-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>estore-api</name>
-	<description>API for E-Store</description>
-	<properties>
-		<java.version>11</java.version>
-		<jacoco.version>0.8.7</jacoco.version>
-		<exec.maven.version>3.0.0</exec.maven.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<groupId>com.alchemyalley.api</groupId>
+	<artifactId>AlchemyAlleyAPI</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>API for Alchemy Alley</description>
+
+	<properties>
+		<java.version>17</java.version>
+		<jacoco.version>0.8.7</jacoco.version>
+		<maven.exec.version>3.0.0</maven.exec.version>
+		<maven.assembly.version>3.1.0</maven.assembly.version>
+	</properties>
 
 	<build>
 		<plugins>
@@ -39,7 +30,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>${exec.maven.version}</version>
+				<version>${maven.exec.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -62,10 +53,18 @@
 							</arguments>
 						</configuration>
 					</execution>
+					<execution>
+						<id>zip</id>
+						<configuration>
+						  <executable>mvn</executable>
+						  <arguments>
+							<argument>assembly:single@zip</argument>
+						  </arguments>
+						</configuration>
+					  </execution>
 				</executions>
 				<configuration>
-					<mainClass>com.estore.api.estoreapi.EstoreApiApplication</mainClass>
-					<arguments></arguments>
+					<mainClass>com.alchemyalley.api.AlchemyAlleyApiApplication</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -73,8 +72,8 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
 				<configuration>
-					<destfile>/target/coverage-reports/jacoco-unit.exec</destfile>
-					<datafile>/target/coverage-reports/jacoco-unit.exec</datafile>
+					<destFile>/target/coverage-reports/jacoco-unit.exec</destFile>
+					<dataFile>/target/coverage-reports/jacoco-unit.exec</dataFile>
 				</configuration>
 				<executions>
 					<execution>
@@ -99,7 +98,7 @@
 						<id>controller</id>
 						<configuration>
 							<footer>Controller Tier</footer>
-							<title>E-Store API Controller Tier Test Coverage</title>
+							<title>Alchemy Alley API Controller Tier Test Coverage</title>
 							<outputDirectory>target/site/jacoco/controller</outputDirectory>
 						</configuration>
 						<goals>
@@ -110,7 +109,7 @@
 						<id>persistence</id>
 						<configuration>
 							<footer>Persistence Tier</footer>
-							<title>E-Store API Persistence Tier Test Coverage</title>
+							<title>Alchemy Alley API Persistence Tier Test Coverage</title>
 							<outputDirectory>target/site/jacoco/persistence</outputDirectory>
 						</configuration>
 						<goals>
@@ -121,7 +120,7 @@
 						<id>model</id>
 						<configuration>
 							<footer>Model Tier</footer>
-							<title>E-Store API Model Tier Test Coverage</title>
+							<title>Alchemy Alley API Model Tier Test Coverage</title>
 							<outputDirectory>target/site/jacoco/model</outputDirectory>
 						</configuration>
 						<goals>
@@ -150,6 +149,39 @@
 			 		</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven.assembly.version}</version>
+				<executions>
+					<execution>
+						<id>zip</id>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assembly/zip.xml</descriptor>
+							</descriptors>
+							<finalName>AlchemyAlleyAPI</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+						</configuration>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
