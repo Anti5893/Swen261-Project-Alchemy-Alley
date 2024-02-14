@@ -1,23 +1,20 @@
-# E-Store:  Wizard Spells
-# Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
+# E-Store:  Alchemy Alley
 
 An online E-store system built in Java 11=> and ___ _replace with other platform requirements_ ___
   
 ## Team
 
 - Jack Barter
-- Shawn Broderick
-- Evan Savage
-- Joseph Skinner
-- Garrett Tupper
-
+-
+-
+-
+-
 
 ## Prerequisites
 
 - Java 21 (Make sure to have correct JAVA_HOME setup in your environment)
 - Maven
--  _add any other tech stack requirements_
-
+- Angular CLI
 
 ## How to run it
 
