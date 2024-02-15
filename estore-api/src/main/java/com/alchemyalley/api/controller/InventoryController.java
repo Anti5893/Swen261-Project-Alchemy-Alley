@@ -82,7 +82,7 @@ public class InventoryController {
         try {
             Product created = productDAO.createProduct(product);
 
-            if (created== null || productDAO.getProduct(product.getId()) != null) {
+            if (created == null || productDAO.getProduct(product.getId()) != null) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             } else {
                 return new ResponseEntity<>(created,HttpStatus.CREATED);
