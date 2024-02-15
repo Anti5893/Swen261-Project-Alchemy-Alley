@@ -46,7 +46,7 @@ public class InventoryController {
 		}
 	}
 
-	@GetMapping("/products")
+	@GetMapping("/inventory/products/")
 	public ResponseEntity<Product[]> getProducts() {
 		
 		LOG.info("GET/inventory/products");
