@@ -38,7 +38,7 @@ public class InventoryControllerTest {
     }
 
    @Test
-   public void testGetHero() throws IOException {  // getHero may throw IOException
+   public void testGetProduct() throws IOException {  // getHero may throw IOException
        // Setup
        Product product = new Product(100,"Prod1",ElementType.EARTH,3.5,10);
        // When the same id is passed in, our mock Hero DAO will return the Hero object
@@ -53,7 +53,7 @@ public class InventoryControllerTest {
    }
 
    @Test
-   public void testGetHeroNotFound() throws Exception { // createHero may throw IOException
+   public void testGetProductNotFound() throws Exception { // createHero may throw IOException
        // Setup
        int productID = 99;
        // When the same id is passed in, our mock Hero DAO will return null, simulating
@@ -67,19 +67,19 @@ public class InventoryControllerTest {
        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
    }
 
-//    @Test
-//    public void testGetHeroHandleException() throws Exception { // createHero may throw IOException
-//        // Setup
-//        int heroId = 99;
-//        // When getHero is called on the Mock Hero DAO, throw an IOException
-//        doThrow(new IOException()).when(mockProductDAO).getHero(heroId);
+   @Test
+   public void testGetProductHandleException() throws Exception { // createHero may throw IOException
+       // Setup
+       int productID = 99;
+       // When getHero is called on the Mock Hero DAO, throw an IOException
+       doThrow(new IOException()).when(mockProductDAO).getProduct(productID);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.getHero(heroId);
+       // Invoke
+       ResponseEntity<Product> response = inventoryController.getProduct(productID);
 
-//        // Analyze
-//        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-//    }
+       // Analyze
+       assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+   }
 
     /*****************************************************************
      * The following tests will fail until all inventoryController methods
