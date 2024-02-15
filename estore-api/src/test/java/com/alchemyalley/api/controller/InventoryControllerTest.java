@@ -37,20 +37,20 @@ public class InventoryControllerTest {
         inventoryController = new InventoryController(mockProductDAO);
     }
 
-//    @Test
-//    public void testGetHero() throws IOException {  // getHero may throw IOException
-//        // Setup
-//        Product hero = new Product(99,"Galactic Agent");
-//        // When the same id is passed in, our mock Hero DAO will return the Hero object
-//        when(mockProductDAO.getHero(hero.getId())).thenReturn(hero);
+   @Test
+   public void testGetHero() throws IOException {  // getHero may throw IOException
+       // Setup
+       Product product = new Product(100,"Prod1",ElementType.EARTH,3.5,10);
+       // When the same id is passed in, our mock Hero DAO will return the Hero object
+       when(mockProductDAO.getProduct(product.getId())).thenReturn(product);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.getHero(hero.getId());
+       // Invoke
+       ResponseEntity<Product> response = inventoryController.getProduct(product.getId());
 
-//        // Analyze
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(hero, response.getBody());
-//    }
+       // Analyze
+       assertEquals(HttpStatus.OK, response.getStatusCode());
+       assertEquals(product, response.getBody());
+   }
 
 //    @Test
 //    public void testGetHeroNotFound() throws Exception { // createHero may throw IOException
