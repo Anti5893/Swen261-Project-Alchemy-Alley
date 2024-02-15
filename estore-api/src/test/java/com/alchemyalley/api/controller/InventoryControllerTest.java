@@ -52,20 +52,20 @@ public class InventoryControllerTest {
        assertEquals(product, response.getBody());
    }
 
-//    @Test
-//    public void testGetHeroNotFound() throws Exception { // createHero may throw IOException
-//        // Setup
-//        int heroId = 99;
-//        // When the same id is passed in, our mock Hero DAO will return null, simulating
-//        // no hero found
-//        when(mockProductDAO.getHero(heroId)).thenReturn(null);
+   @Test
+   public void testGetHeroNotFound() throws Exception { // createHero may throw IOException
+       // Setup
+       int productID = 99;
+       // When the same id is passed in, our mock Hero DAO will return null, simulating
+       // no hero found
+       when(mockProductDAO.getProduct(productID)).thenReturn(null);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.getHero(heroId);
+       // Invoke
+       ResponseEntity<Product> response = inventoryController.getProduct(productID);
 
-//        // Analyze
-//        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-//    }
+       // Analyze
+       assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+   }
 
 //    @Test
 //    public void testGetHeroHandleException() throws Exception { // createHero may throw IOException
