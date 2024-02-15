@@ -79,54 +79,50 @@ public class InventoryController {
 		}
 	}
 
-    @PutMapping("/products")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
-        LOG.info("PUT /inventory/products " + product);
+	@PutMapping("/products")
+	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+		LOG.info("PUT /inventory/products " + product);
 
-        try {
-            Product updated = this.productDAO.updateProduct(product);
+		try {
+			Product updated = this.productDAO.updateProduct(product);
 
-	        return updated != null ?
-                    new ResponseEntity<>(updated, HttpStatus.OK) :
-                    new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+			return updated != null ? new ResponseEntity<>(updated, HttpStatus.OK)
+					: new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-    @PostMapping("")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        LOG.info("POST /inventory/products " + product);
+	@PostMapping("")
+	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+		LOG.info("POST /inventory/products " + product);
 
-        try {
-            Product created = productDAO.createProduct(product);
+		try {
+			Product created = productDAO.createProduct(product);
 
-            if (created== null || productDAO.getProduct(product.getId()) != null) {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
-            } else {
-                return new ResponseEntity<>(created,HttpStatus.CREATED);
-            }
-        } catch (IOException e) {
-            LOG.log(Level.SEVERE, e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+			if (created == null || productDAO.getProduct(product.getId()) != null) {
+				return new ResponseEntity<>(HttpStatus.CONFLICT);
+			} else {
+				return new ResponseEntity<>(created, HttpStatus.CREATED);
+			}
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteHero(@PathVariable int id) {
-        /*LOG.info("DELETE /heroes/" + id);
+	@DeleteMapping("/products/{id}")
+	public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+		LOG.info("DELETE /inventory/products/" + id);
 
-	    try {
-		    boolean existed = heroDao.deleteHero(id);
-            return existed ?
-                    new ResponseEntity<>(HttpStatus.OK) :
-                    new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    } catch (IOException e) {
-            LOG.log(Level.SEVERE, e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }*/
-        return null;
-    }
+		try {
+			boolean existed = productDAO.deleteProduct(id);
+			return existed ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 }
