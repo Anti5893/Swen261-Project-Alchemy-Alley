@@ -11,7 +11,6 @@ import com.alchemyalley.api.persistence.ProductDAO;
 import com.alchemyalley.api.model.ElementType;
 import com.alchemyalley.api.model.Product;
 
-import org.assertj.core.util.diff.Delta.TYPE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
