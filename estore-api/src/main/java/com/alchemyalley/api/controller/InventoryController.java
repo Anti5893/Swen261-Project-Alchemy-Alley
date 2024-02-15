@@ -116,7 +116,7 @@ public class InventoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteHero(@PathVariable int id) {
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         LOG.info("DELETE /heroes/" + id);
 
 	    try {
