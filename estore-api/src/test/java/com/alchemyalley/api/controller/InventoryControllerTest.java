@@ -18,25 +18,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
-* Test the Hero Controller class
-*
-* @author SWEN Faculty
-*/
+ * Test the Product Controller class.
+ *
+ * @author Group 2
+ */
 @Tag("Controller-tier")
 public class InventoryControllerTest {
 
-   private InventoryController inventoryController;
-   private ProductDAO mockProductDAO;
+    private InventoryController inventoryController;
+    private ProductDAO mockProductDAO;
 
-   /**
-    * Before each test, create a new inventoryController object and inject
-    * a mock Hero DAO
-    */
-   @BeforeEach
-   public void setupinventoryController() {
-       mockProductDAO = mock(ProductDAO.class);
-       inventoryController = new InventoryController(mockProductDAO);
-   }
+    /**
+     * Before each test, create a new inventoryController object and inject a mock Product DAO
+     */
+    @BeforeEach
+    public void setupInventoryController() {
+        mockProductDAO = mock(ProductDAO.class);
+        inventoryController = new InventoryController(mockProductDAO);
+    }
 
 //    @Test
 //    public void testGetHero() throws IOException {  // getHero may throw IOException
@@ -82,10 +81,10 @@ public class InventoryControllerTest {
 //        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 //    }
 
-   /*****************************************************************
-    * The following tests will fail until all inventoryController methods
-    * are implemented.
-    ****************************************************************/
+    /*****************************************************************
+     * The following tests will fail until all inventoryController methods
+     * are implemented.
+     ****************************************************************/
 
 //    @Test
 //    public void testCreateHero() throws IOException {  // createHero may throw IOException
@@ -133,52 +132,45 @@ public class InventoryControllerTest {
 //        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 //    }
 
-//    @Test
-//    public void testUpdateHero() throws IOException { // updateHero may throw IOException
-//        // Setup
-//        Product hero = new Product(99,"Wi-Fire");
-//        // when updateHero is called, return true simulating successful
-//        // update and save
-//        when(mockProductDAO.updateHero(hero)).thenReturn(hero);
-//        ResponseEntity<Product> response = inventoryController.updateHero(hero);
-//        hero.setName("Bolt");
+    @Test
+    public void testUpdateHero() throws IOException {
+        // Setup
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        when(mockProductDAO.updateProduct(product)).thenReturn(product);
 
-//        // Invoke
-//        response = inventoryController.updateHero(hero);
+        // Invoke
+        ResponseEntity<Product> response = inventoryController.updateProduct(product);
 
-//        // Analyze
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(hero, response.getBody());
-//    }
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(product, response.getBody());
+    }
 
-//    @Test
-//    public void testUpdateHeroFailed() throws IOException { // updateHero may throw IOException
-//        // Setup
-//        Product hero = new Product(99,"Galactic Agent");
-//        // when updateHero is called, return true simulating successful
-//        // update and save
-//        when(mockProductDAO.updateHero(hero)).thenReturn(null);
+    @Test
+    public void testUpdateHeroFailed() throws IOException {
+        // Setup
+	    Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+	    when(mockProductDAO.updateProduct(product)).thenReturn(null);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.updateHero(hero);
+        // Invoke
+        ResponseEntity<Product> response = inventoryController.updateProduct(product);
 
-//        // Analyze
-//        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-//    }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
-//    @Test
-//    public void testUpdateHeroHandleException() throws IOException { // updateHero may throw IOException
-//        // Setup
-//        Product hero = new Product(99,"Galactic Agent");
-//        // When updateHero is called on the Mock Hero DAO, throw an IOException
-//        doThrow(new IOException()).when(mockProductDAO).updateHero(hero);
+    @Test
+    public void testUpdateHeroHandleException() throws IOException {
+        // Setup
+	    Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+	    doThrow(new IOException()).when(mockProductDAO).updateProduct(product);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.updateHero(hero);
+        // Invoke
+        ResponseEntity<Product> response = inventoryController.updateProduct(product);
 
-//        // Analyze
-//        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-//    }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 
 //    @Test
 //    public void testGetHeroes() throws IOException { // getHeroes may throw IOException
@@ -210,39 +202,39 @@ public class InventoryControllerTest {
 //        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 //    }
 
-   @Test
-   public void testSearchProducts() throws IOException {
-       // Setup
-       String searchString = "fire";
-       Product[] products = new Product[3];
-       products[0] = new Product(0, "Fire", ElementType.AIR, 1.5, 50);
-       products[1] = new Product(6, "Fire Bolt", ElementType.AIR, 1.5, 50);
-       products[2] = new Product(13, "Fire Rain", ElementType.AIR, 1.5, 50);
-       // When findProducts is called with the search string, return the two
-       // products above
-       when(mockProductDAO.findProducts(searchString)).thenReturn(products);
+    @Test
+    public void testSearchProducts() throws IOException {
+        // Setup
+        String searchString = "fire";
+        Product[] products = new Product[3];
+        products[0] = new Product(0, "Fire", ElementType.AIR, 1.5, 50);
+        products[1] = new Product(6, "Fire Bolt", ElementType.AIR, 1.5, 50);
+        products[2] = new Product(13, "Fire Rain", ElementType.AIR, 1.5, 50);
+        // When findProducts is called with the search string, return the two
+        // products above
+        when(mockProductDAO.findProducts(searchString)).thenReturn(products);
 
-       // Invoke
-       ResponseEntity<Product[]> response = inventoryController.searchProducts(searchString);
+        // Invoke
+        ResponseEntity<Product[]> response = inventoryController.searchProducts(searchString);
 
-       // Analyze
-       assertEquals(HttpStatus.OK, response.getStatusCode());
-       assertEquals(products, response.getBody());
-   }
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(products, response.getBody());
+    }
 
-   @Test
-   public void testSearchProductsHandleException() throws IOException {
-       // Setup
-       String searchString = "an";
-       // When findProducts is called on the Mock Product DAO, throw an IOException
-       doThrow(new IOException()).when(mockProductDAO).findProducts(searchString);
+    @Test
+    public void testSearchProductsHandleException() throws IOException {
+        // Setup
+        String searchString = "an";
+        // When findProducts is called on the Mock Product DAO, throw an IOException
+        doThrow(new IOException()).when(mockProductDAO).findProducts(searchString);
 
-       // Invoke
-       ResponseEntity<Product[]> response = inventoryController.searchProducts(searchString);
+        // Invoke
+        ResponseEntity<Product[]> response = inventoryController.searchProducts(searchString);
 
-       // Analyze
-       assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-   }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 
 //    @Test
 //    public void testDeleteHero() throws IOException { // deleteHero may throw IOException
