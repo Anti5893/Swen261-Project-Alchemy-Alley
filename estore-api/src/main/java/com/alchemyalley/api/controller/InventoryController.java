@@ -40,10 +40,10 @@ public class InventoryController {
 			new ResponseEntity<>(product, HttpStatus.OK) :
 			new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-			} catch(IOException e) {
-				LOG.log(Level.SEVERE,e.getLocalizedMessage());
-				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		  }
+		} catch(IOException e) {
+			LOG.log(Level.SEVERE,e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("/products")
@@ -55,11 +55,10 @@ public class InventoryController {
 			Product[] products = productDAO.getProducts();
 		  	return new ResponseEntity<>(products, HttpStatus.OK);
 
-		  } catch (IOException e) {
-				LOG.log(Level.SEVERE, e.getLocalizedMessage());
-				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		  }
-		 
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("/products")
