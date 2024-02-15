@@ -117,7 +117,7 @@ public class InventoryController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
-        LOG.info("DELETE /heroes/" + id);
+        LOG.info("DELETE /products/" + id);
 
 	    try {
 		    boolean existed = productDAO.deleteProduct(id);
