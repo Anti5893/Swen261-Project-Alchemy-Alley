@@ -32,14 +32,13 @@ public class InventoryController {
 
 	@GetMapping("/products/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable int id) {
-		
-		LOG.info("GET/inventory/products" + id);
+		LOG.info("GET /inventory/products" + id);
+
 		try {
 			Product product = productDAO.getProduct(id);
 			return product != null ?
-			new ResponseEntity<>(product, HttpStatus.OK) :
-			new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+				new ResponseEntity<>(product, HttpStatus.OK) :
+				new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch(IOException e) {
 			LOG.log(Level.SEVERE,e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,13 +47,11 @@ public class InventoryController {
 
 	@GetMapping("/products/")
 	public ResponseEntity<Product[]> getProducts() {
-		
-		LOG.info("GET/inventory/products");
+		LOG.info("GET /inventory/products");
 		  
 		try {
 			Product[] products = productDAO.getProducts();
 		  	return new ResponseEntity<>(products, HttpStatus.OK);
-
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,12 +69,29 @@ public class InventoryController {
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
-
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+    @PostMapping("/products")
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        LOG.info("POST /inventory/products " + product);
+
+        try {
+            Product created = productDAO.createProduct(product);
+
+            if (created == null || productDAO.getProduct(product.getId()) != null) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            } else {
+                return new ResponseEntity<>(created,HttpStatus.CREATED);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 	@PutMapping("/products")
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
@@ -88,24 +102,6 @@ public class InventoryController {
 
 			return updated != null ? new ResponseEntity<>(updated, HttpStatus.OK)
 					: new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	@PostMapping("")
-	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-		LOG.info("POST /inventory/products " + product);
-
-		try {
-			Product created = productDAO.createProduct(product);
-
-			if (created == null || productDAO.getProduct(product.getId()) != null) {
-				return new ResponseEntity<>(HttpStatus.CONFLICT);
-			} else {
-				return new ResponseEntity<>(created, HttpStatus.CREATED);
-			}
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
