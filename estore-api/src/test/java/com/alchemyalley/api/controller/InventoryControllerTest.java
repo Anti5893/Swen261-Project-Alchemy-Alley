@@ -38,60 +38,49 @@ public class InventoryControllerTest {
         inventoryController = new InventoryController(mockProductDAO);
     }
 
-    // @Test
-    // public void testGetProduct() throws IOException { // getProduct may throw
-    // IOException
-    // // Setup
-    // Product product = new Product(99,"Galactic Agent");
-    // // When the same id is passed in, our mock Product DAO will return the
-    // Product object
-    // when(mockProductDAO.getProduct(product.getId())).thenReturn(product);
+    @Test
+    public void testGetProduct() throws IOException {  // getHero may throw IOException
+        // Setup
+        Product product = new Product(100,"Prod1",ElementType.EARTH,3.5,10);
+        // When the same id is passed in, our mock Hero DAO will return the Hero object
+        when(mockProductDAO.getProduct(product.getId())).thenReturn(product);
 
-    // // Invoke
-    // ResponseEntity<Product> response =
-    // inventoryController.getProduct(product.getId());
+        // Invoke
+        ResponseEntity<Product> response = inventoryController.getProduct(product.getId());
 
-    // // Analyze
-    // assertEquals(HttpStatus.OK, response.getStatusCode());
-    // assertEquals(product, response.getBody());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(product, response.getBody());
+    }
 
-    // @Test
-    // public void testGetProductNotFound() throws Exception { // createProduct may
-    // throw IOException
-    // // Setup
-    // int productId = 99;
-    // // When the same id is passed in, our mock Product DAO will return null,
-    // simulating
-    // // no product found
-    // when(mockProductDAO.getProduct(productId)).thenReturn(null);
+    @Test
+    public void testGetProductNotFound() throws Exception { // createHero may throw IOException
+        // Setup
+        int productID = 99;
+        // When the same id is passed in, our mock Hero DAO will return null, simulating
+        // no hero found
+        when(mockProductDAO.getProduct(productID)).thenReturn(null);
 
-    // // Invoke
-    // ResponseEntity<Product> response = inventoryController.getProduct(productId);
+        // Invoke
+        ResponseEntity<Product> response = inventoryController.getProduct(productID);
 
-    // // Analyze
-    // assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
-    // @Test
-    // public void testGetProductHandleException() throws Exception { //
-    // createProduct may throw IOException
-    // // Setup
-    // int productId = 99;
-    // // When getProduct is called on the Mock Product DAO, throw an IOException
-    // doThrow(new IOException()).when(mockProductDAO).getProduct(productId);
+    @Test
+    public void testGetProductHandleException() throws Exception { // createHero may throw IOException
+        // Setup
+        int productID = 99;
+        // When getHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockProductDAO).getProduct(productID);
 
-    // // Invoke
-    // ResponseEntity<Product> response = inventoryController.getProduct(productId);
+        // Invoke
+        ResponseEntity<Product> response = inventoryController.getProduct(productID);
 
-    // // Analyze
-    // assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    // }
-
-    /*****************************************************************
-     * The following tests will fail until all inventoryController methods
-     * are implemented.
-     ****************************************************************/
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 
     // @Test
     // public void testCreateProduct() throws IOException { // createProduct may
@@ -184,38 +173,6 @@ public class InventoryControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
-
-    // @Test
-    // public void testGetProducts() throws IOException { // getProducts may throw
-    // IOException
-    // // Setup
-    // Product[] products = new Product[2];
-    // products[0] = new Product(99,"Bolt");
-    // products[1] = new Product(100,"The Great Iguana");
-    // // When getProducts is called return the products created above
-    // when(mockProductDAO.getProducts()).thenReturn(products);
-
-    // // Invoke
-    // ResponseEntity<Product[]> response = inventoryController.getProducts();
-
-    // // Analyze
-    // assertEquals(HttpStatus.OK, response.getStatusCode());
-    // assertEquals(products, response.getBody());
-    // }
-
-    // @Test
-    // public void testGetProductsHandleException() throws IOException { //
-    // getProducts may throw IOException
-    // // Setup
-    // // When getProducts is called on the Mock Product DAO, throw an IOException
-    // doThrow(new IOException()).when(mockProductDAO).getProducts();
-
-    // // Invoke
-    // ResponseEntity<Product[]> response = inventoryController.getProducts();
-
-    // // Analyze
-    // assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    // }
 
     @Test
     public void testSearchProducts() throws IOException {
