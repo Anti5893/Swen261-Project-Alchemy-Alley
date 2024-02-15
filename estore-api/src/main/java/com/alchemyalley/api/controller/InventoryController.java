@@ -117,18 +117,17 @@ public class InventoryController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteHero(@PathVariable int id) {
-        /*LOG.info("DELETE /heroes/" + id);
+        LOG.info("DELETE /heroes/" + id);
 
 	    try {
-		    boolean existed = heroDao.deleteHero(id);
+		    boolean existed = productDAO.deleteProduct(id);
             return existed ?
                     new ResponseEntity<>(HttpStatus.OK) :
                     new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }*/
-        return null;
+	    }
     }
 
 }
