@@ -30,7 +30,7 @@ public class InventoryController {
 		this.productDAO = productDAO;
 	}
 
-	@GetMapping("inventory/products/{id}")
+	@GetMapping("products/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable int id) {
 		
 		  LOG.info("GET /inventory/products" + id);
