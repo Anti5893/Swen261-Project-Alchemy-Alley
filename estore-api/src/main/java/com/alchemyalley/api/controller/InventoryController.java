@@ -82,7 +82,7 @@ public class InventoryController {
 	}
 
     @PutMapping("/products")
-    public ResponseEntity<Product> updateHero(@RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
         LOG.info("PUT /inventory/products " + product);
 
         try {
@@ -98,7 +98,7 @@ public class InventoryController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Product> createHero(@RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         LOG.info("POST /inventory/products " + product);
 
         try {
