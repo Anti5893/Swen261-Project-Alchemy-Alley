@@ -97,8 +97,8 @@ public class InventoryController {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<Product> createHero(@RequestBody Product product) {
+    @PostMapping("/products")
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         LOG.info("POST /inventory/products " + product);
 
         try {

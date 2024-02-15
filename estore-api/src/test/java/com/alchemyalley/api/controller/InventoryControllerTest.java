@@ -11,6 +11,7 @@ import com.alchemyalley.api.persistence.ProductDAO;
 import com.alchemyalley.api.model.ElementType;
 import com.alchemyalley.api.model.Product;
 
+import org.assertj.core.util.diff.Delta.TYPE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -87,51 +88,52 @@ public class InventoryControllerTest {
     * are implemented.
     ****************************************************************/
 
-//    @Test
-//    public void testCreateHero() throws IOException {  // createHero may throw IOException
-//        // Setup
-//        Product hero = new Product(99,"Wi-Fire");
-//        // when createHero is called, return true simulating successful
-//        // creation and save
-//        when(mockProductDAO.createHero(hero)).thenReturn(hero);
+   @Test
+   public void testCreateProduct() throws IOException {  // createProduct may throw IOException
+       // Setup
+       Product product = new Product(1, "Air spell", ElementType.AIR, 10, 0);
+       // when createHero is called, return true simulating successful
+       // creation and save
+       when(mockProductDAO.createProduct(product)).thenReturn(product);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.createHero(hero);
+       // Invoke
+       ResponseEntity<Product> response = inventoryController.createProduct(product);
 
-//        // Analyze
-//        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-//        assertEquals(hero, response.getBody());
-//    }
+       // Analyze
+       assertEquals(HttpStatus.CREATED, response.getStatusCode());
+       assertEquals(product, response.getBody());
+   }
 
-//    @Test
-//    public void testCreateHeroFailed() throws IOException {  // createHero may throw IOException
-//        // Setup
-//        Product hero = new Product(99,"Bolt");
-//        // when createHero is called, return false simulating failed
-//        // creation and save
-//        when(mockProductDAO.createHero(hero)).thenReturn(null);
+   @Test
+   public void testCreateProductFailed() throws IOException {  // createProduct may throw IOException
+       // Setup
+       // when createHero is called, return true simulating successful
+       Product Product = new Product(1, "Steam", ElementType.FIRE, 10, 0);
+       // when createProduct is called, return false simulating failed
+       // creation and save
+       when(mockProductDAO.createProduct(Product)).thenReturn(null);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.createHero(hero);
+       // Invoke
+       ResponseEntity<Product> response = inventoryController.createProduct(Product);
 
-//        // Analyze
-//        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
-//    }
+       // Analyze
+       assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+   }
 
-//    @Test
-//    public void testCreateHeroHandleException() throws IOException {  // createHero may throw IOException
-//        // Setup
-//        Product hero = new Product(99,"Ice Gladiator");
+   @Test
+   public void testCreateProductHandleException() throws IOException {  // createProduct may throw IOException
+       // Setup
+       Product Product = new Product(3, "Ice spell", ElementType.WATER, 10, 0);
 
-//        // When createHero is called on the Mock Hero DAO, throw an IOException
-//        doThrow(new IOException()).when(mockProductDAO).createHero(hero);
+       // When createProduct is called on the Mock Product DAO, throw an IOException
+       doThrow(new IOException()).when(mockProductDAO).createProduct(Product);
 
-//        // Invoke
-//        ResponseEntity<Product> response = inventoryController.createHero(hero);
+       // Invoke
+       ResponseEntity<Product> response = inventoryController.createProduct(Product);
 
-//        // Analyze
-//        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-//    }
+       // Analyze
+       assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+   }
 
 //    @Test
 //    public void testUpdateHero() throws IOException { // updateHero may throw IOException
