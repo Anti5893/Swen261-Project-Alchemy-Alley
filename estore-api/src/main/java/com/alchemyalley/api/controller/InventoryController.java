@@ -33,31 +33,31 @@ public class InventoryController {
 	@GetMapping("/products/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable int id) {
 		
-		  LOG.info("GET/inventory/products" + id);
-		 try {
-		 	Product product = productDAO.getProduct(id);
+		LOG.info("GET/inventory/products" + id);
+		try {
+			Product product = productDAO.getProduct(id);
 			return product != null ?
 			new ResponseEntity<>(product, HttpStatus.OK) :
 			new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		  } 
-		  catch(IOException e) {
-			LOG.log(Level.SEVERE,e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+			} catch(IOException e) {
+				LOG.log(Level.SEVERE,e.getLocalizedMessage());
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		  }
 	}
 
 	@GetMapping("/products")
 	public ResponseEntity<Product[]> getProducts() {
 		
-		 LOG.info("GET/inventory/products");
+		LOG.info("GET/inventory/products");
 		  
-		  try {
-		 	Product[] products = productDAO.getProducts();
+		try {
+			Product[] products = productDAO.getProducts();
 		  	return new ResponseEntity<>(products, HttpStatus.OK);
-		  } 
-		  catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		  } catch (IOException e) {
+				LOG.log(Level.SEVERE, e.getLocalizedMessage());
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		  }
 		 
 	}
