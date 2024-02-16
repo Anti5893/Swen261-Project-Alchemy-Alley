@@ -17,13 +17,13 @@ public interface CraftingDAO {
 	 * @return          The {@link Recipe} its associated with,
 	 *                  or {@code null} if non-existent
 	 */
-	Recipe getRecipe(Integer[] inputs) throws IOException;
+	Recipe getRecipe(Integer[] inputs);
 
 	/**
 	 * Retrieves all recipes.
 	 *
 	 * @return  An array of all {@link Recipe} objects
 	 */
-	Recipe[] getAllRecipes() throws IOException;
+	Recipe[] getAllRecipes();
 
 }
