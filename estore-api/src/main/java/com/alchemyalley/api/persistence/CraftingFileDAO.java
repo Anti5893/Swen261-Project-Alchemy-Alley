@@ -36,7 +36,7 @@ public class CraftingFileDAO implements CraftingDAO {
 	}
 
 	/**
-	 * Loads the recipes from file.
+	 * Loads the JSON file on disk and stores it in a map.
 	 *
 	 * @throws IOException  If there is an error reading from disk
 	 */
@@ -50,12 +50,6 @@ public class CraftingFileDAO implements CraftingDAO {
 		}
 	}
 
-	/**
-	 * Searches for a recipe by its product id inputs.
-	 *
-	 * @param inputs    The product ids of the recipe's input
-	 * @return          The recipe if found, if not, null
-	 */
 	@Override
 	public Recipe getRecipe(Integer[] inputs) {
 		for(Map.Entry<Integer[], Recipe> entry : this.recipes.entrySet()) {
@@ -67,11 +61,6 @@ public class CraftingFileDAO implements CraftingDAO {
 		return null;
 	}
 
-	/**
-	 * Retrieves all recipes loaded from disk.
-	 *
-	 * @return  All {@link Recipe} objects that have been loaded
-	 */
 	@Override
 	public Recipe[] getAllRecipes() {
 		return this.recipes.values().toArray(new Recipe[0]);

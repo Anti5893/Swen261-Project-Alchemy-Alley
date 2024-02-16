@@ -20,12 +20,20 @@ import com.alchemyalley.api.model.Product;
 @Component
 public class ProductFileDAO implements ProductDAO {
 
-    Map<Integer, Product> products;
+    private final Map<Integer, Product> products;
     private static int nextId;
-    private final ObjectMapper objectMapper;
     private final String fileName;
+    private final ObjectMapper objectMapper;
 
+    /**
+     * Creates an instance of this DAO over a JSON file.
+     *
+     * @param fileName      The file to load.
+     * @param objectMapper  The object mapper.
+     * @throws IOException  If there is an error reading from disk
+     */
     public ProductFileDAO(@Value("${products.file}") String fileName, ObjectMapper objectMapper) throws IOException {
+        this.products = new TreeMap<>();
         this.fileName = fileName;
         this.objectMapper = objectMapper;
         load();
@@ -55,14 +63,12 @@ public class ProductFileDAO implements ProductDAO {
         return productArray;
     }
 
-    private boolean save() throws IOException {
-        Product[] productArray = getProductsArray();
-        this.objectMapper.writeValue(new File(this.fileName),productArray);
-        return true;
-    }
-
+    /**
+     * Loads the JSON file on disk and stores it in a map.
+     *
+     * @throws IOException  If there is an error reading from disk
+     */
     private void load() throws IOException {
-        this.products = new TreeMap<>();
         nextId = 0;
 
         Product[] productArray = this.objectMapper.readValue(new File(this.fileName), Product[].class);
@@ -72,6 +78,16 @@ public class ProductFileDAO implements ProductDAO {
         }
 
         ++nextId;
+    }
+
+    /**
+     * Saves the map to disk as a JSON file.
+     *
+     * @throws IOException  If there is an error saving to disk
+     */
+    private void save() throws IOException {
+        Product[] productArray = getProductsArray();
+        this.objectMapper.writeValue(new File(this.fileName), productArray);
     }
 
     @Override
@@ -88,16 +104,12 @@ public class ProductFileDAO implements ProductDAO {
         }
     }
 
-    /**
-     ** {@inheritDoc}
-     */
     @Override
     public Product getProduct(int id) {
         synchronized(this.products) {
             return this.products.getOrDefault(id, null);
         }
     }
-
 
     @Override
     public Product createProduct(Product product) throws IOException {
@@ -130,7 +142,8 @@ public class ProductFileDAO implements ProductDAO {
         synchronized(this.products) {
             if(this.products.containsKey(id)) {
                 this.products.remove(id);
-                return save();
+                save();
+                return true;
             } else {
                 return false;
             }
