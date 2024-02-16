@@ -2,8 +2,6 @@ package com.alchemyalley.api.persistence;
 
 import com.alchemyalley.api.model.Recipe;
 
-import java.io.IOException;
-
 /**
  * Interface to interact with crafting data.
  * @author Group 2

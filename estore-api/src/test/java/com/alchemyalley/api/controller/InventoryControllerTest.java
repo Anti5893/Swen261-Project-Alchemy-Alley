@@ -24,8 +24,8 @@ import org.springframework.http.ResponseEntity;
 @Tag("Controller-tier")
 public class InventoryControllerTest {
 
+	private ProductDAO mockProductDAO;
     private InventoryController inventoryController;
-    private ProductDAO mockProductDAO;
 
     /**
      * Before each test, creates a new {@link InventoryController} object
@@ -33,18 +33,18 @@ public class InventoryControllerTest {
      */
     @BeforeEach
     public void setupInventoryController() {
-        inventoryController = new InventoryController(mockProductDAO);
-        mockProductDAO = mock(ProductDAO.class);
+	    this.mockProductDAO = mock(ProductDAO.class);
+        this.inventoryController = new InventoryController(this.mockProductDAO);
     }
 
     @Test
     public void testGetProduct() {
         // Setup
 	    Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-        when(mockProductDAO.getProduct(product.getId())).thenReturn(product);
+        when(this.mockProductDAO.getProduct(product.getId())).thenReturn(product);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.getProduct(product.getId());
+        ResponseEntity<Product> response = this.inventoryController.getProduct(product.getId());
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -55,10 +55,10 @@ public class InventoryControllerTest {
     public void testGetProductNotFound() {
         // Setup
         int productID = 99;
-        when(mockProductDAO.getProduct(productID)).thenReturn(null);
+        when(this.mockProductDAO.getProduct(productID)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.getProduct(productID);
+        ResponseEntity<Product> response = this.inventoryController.getProduct(productID);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -72,10 +72,10 @@ public class InventoryControllerTest {
         products[0] = new Product(0, "Fire", ElementType.AIR, 1.5, 50);
         products[1] = new Product(6, "Fire Bolt", ElementType.AIR, 1.5, 50);
         products[2] = new Product(13, "Fire Rain", ElementType.AIR, 1.5, 50);
-        when(mockProductDAO.findProducts(searchString)).thenReturn(products);
+        when(this.mockProductDAO.findProducts(searchString)).thenReturn(products);
 
         // Invoke
-        ResponseEntity<Product[]> response = inventoryController.searchProducts(searchString);
+        ResponseEntity<Product[]> response = this.inventoryController.searchProducts(searchString);
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -83,26 +83,13 @@ public class InventoryControllerTest {
     }
 
     @Test
-    public void testSearchProductsHandleException() {
-        // Setup
-        String searchString = "an";
-        doThrow(new IOException()).when(mockProductDAO).findProducts(searchString);
-
-        // Invoke
-        ResponseEntity<Product[]> response = inventoryController.searchProducts(searchString);
-
-        // Analyze
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    }
-
-    @Test
     public void testCreateProduct() throws IOException {
         // Setup
         Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-        when(mockProductDAO.createProduct(product)).thenReturn(product);
+        when(this.mockProductDAO.createProduct(product)).thenReturn(product);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.createProduct(product);
+        ResponseEntity<Product> response = this.inventoryController.createProduct(product);
 
         // Analyze
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -113,10 +100,10 @@ public class InventoryControllerTest {
     public void testCreateProductFailed() throws IOException {
         // Setup
         Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-        when(mockProductDAO.createProduct(product)).thenReturn(null);
+        when(this.mockProductDAO.createProduct(product)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.createProduct(product);
+        ResponseEntity<Product> response = this.inventoryController.createProduct(product);
 
         // Analyze
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
@@ -126,10 +113,10 @@ public class InventoryControllerTest {
 	public void testCreateProductHandleException() throws IOException {
 		// Setup
 		Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-		doThrow(new IOException()).when(mockProductDAO).createProduct(product);
+		doThrow(new IOException()).when(this.mockProductDAO).createProduct(product);
 
 		// Invoke
-		ResponseEntity<Product> response = inventoryController.createProduct(product);
+		ResponseEntity<Product> response = this.inventoryController.createProduct(product);
 
 		// Analyze
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -139,10 +126,10 @@ public class InventoryControllerTest {
     public void testUpdateProduct() throws IOException {
         // Setup
         Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-        when(mockProductDAO.updateProduct(product)).thenReturn(product);
+        when(this.mockProductDAO.updateProduct(product)).thenReturn(product);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.updateProduct(product);
+        ResponseEntity<Product> response = this.inventoryController.updateProduct(product);
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -153,10 +140,10 @@ public class InventoryControllerTest {
     public void testUpdateProductFailed() throws IOException {
         // Setup
         Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-        when(mockProductDAO.updateProduct(product)).thenReturn(null);
+        when(this.mockProductDAO.updateProduct(product)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.updateProduct(product);
+        ResponseEntity<Product> response = this.inventoryController.updateProduct(product);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -166,10 +153,10 @@ public class InventoryControllerTest {
     public void testUpdateProductHandleException() throws IOException {
         // Setup
         Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-        doThrow(new IOException()).when(mockProductDAO).updateProduct(product);
+        doThrow(new IOException()).when(this.mockProductDAO).updateProduct(product);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.updateProduct(product);
+        ResponseEntity<Product> response = this.inventoryController.updateProduct(product);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -179,10 +166,10 @@ public class InventoryControllerTest {
     public void testDeleteProduct() throws IOException {
         // Setup
         int productId = 99;
-        when(mockProductDAO.deleteProduct(productId)).thenReturn(true);
+        when(this.mockProductDAO.deleteProduct(productId)).thenReturn(true);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.deleteProduct(productId);
+        ResponseEntity<Product> response = this.inventoryController.deleteProduct(productId);
 
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -192,10 +179,10 @@ public class InventoryControllerTest {
     public void testDeleteProductNotFound() throws IOException {
         // Setup
         int productId = 99;
-        when(mockProductDAO.deleteProduct(productId)).thenReturn(false);
+        when(this.mockProductDAO.deleteProduct(productId)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.deleteProduct(productId);
+        ResponseEntity<Product> response = this.inventoryController.deleteProduct(productId);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -205,10 +192,10 @@ public class InventoryControllerTest {
     public void testDeleteProductHandleException() throws IOException {
         // Setup
         int productId = 99;
-        doThrow(new IOException()).when(mockProductDAO).deleteProduct(productId);
+        doThrow(new IOException()).when(this.mockProductDAO).deleteProduct(productId);
 
         // Invoke
-        ResponseEntity<Product> response = inventoryController.deleteProduct(productId);
+        ResponseEntity<Product> response = this.inventoryController.deleteProduct(productId);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
