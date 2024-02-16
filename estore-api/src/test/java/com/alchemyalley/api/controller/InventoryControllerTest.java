@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
 @Tag("Controller-tier")
 public class InventoryControllerTest {
 
-	private ProductDAO mockProductDAO;
+    private ProductDAO mockProductDAO;
     private InventoryController inventoryController;
 
     /**
@@ -33,14 +33,14 @@ public class InventoryControllerTest {
      */
     @BeforeEach
     public void setupInventoryController() {
-	    this.mockProductDAO = mock(ProductDAO.class);
+        this.mockProductDAO = mock(ProductDAO.class);
         this.inventoryController = new InventoryController(this.mockProductDAO);
     }
 
     @Test
     public void testGetProduct() {
         // Setup
-	    Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
         when(this.mockProductDAO.getProduct(product.getId())).thenReturn(product);
 
         // Invoke
@@ -109,18 +109,18 @@ public class InventoryControllerTest {
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 
-	@Test
-	public void testCreateProductHandleException() throws IOException {
-		// Setup
-		Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
-		doThrow(new IOException()).when(this.mockProductDAO).createProduct(product);
+    @Test
+    public void testCreateProductHandleException() throws IOException {
+        // Setup
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        doThrow(new IOException()).when(this.mockProductDAO).createProduct(product);
 
-		// Invoke
-		ResponseEntity<Product> response = this.inventoryController.createProduct(product);
+        // Invoke
+        ResponseEntity<Product> response = this.inventoryController.createProduct(product);
 
-		// Analyze
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-	}
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 
     @Test
     public void testUpdateProduct() throws IOException {
