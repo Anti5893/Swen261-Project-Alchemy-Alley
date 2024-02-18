@@ -5,15 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * This is a built in test that comes with the Spring framework that validates
- * that the REST API service starts (that's it)
+ * This tests the built-in API server that Spring provides.
+ * @author Group 2
  */
 @Tag("Controller-tier")
 @SpringBootTest
-class AlchemyAlleyApiApplicationTests {
+public class AlchemyAlleyApiApplicationTests {
 
 	@Test
 	void testContextLoads() {
+
 	}
 
 }

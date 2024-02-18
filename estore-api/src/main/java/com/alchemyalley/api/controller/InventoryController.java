@@ -19,6 +19,10 @@ import java.util.logging.Logger;
 import com.alchemyalley.api.persistence.ProductDAO;
 import com.alchemyalley.api.model.Product;
 
+/**
+ * Controller responsible for requests beginning with /inventory/
+ * @author Group 2
+ */
 @RestController
 @RequestMapping("inventory")
 public class InventoryController {
@@ -32,61 +36,44 @@ public class InventoryController {
 
 	@GetMapping("/products/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable int id) {
-		LOG.info("GET /inventory/products" + id);
+		LOG.info("GET /inventory/products/" + id);
 
-		try {
-			Product product = productDAO.getProduct(id);
-			return product != null ?
+		Product product = this.productDAO.getProduct(id);
+		return product != null ?
 				new ResponseEntity<>(product, HttpStatus.OK) :
 				new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} catch(IOException e) {
-			LOG.log(Level.SEVERE,e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 
 	@GetMapping("/products/")
 	public ResponseEntity<Product[]> getProducts() {
 		LOG.info("GET /inventory/products");
-		  
-		try {
-			Product[] products = productDAO.getProducts();
-		  	return new ResponseEntity<>(products, HttpStatus.OK);
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+
+		Product[] products = this.productDAO.getProducts();
+		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 
 	@GetMapping("/products")
 	public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
 		LOG.info("GET /inventory/products?name=" + name);
 
-		try {
-			Product[] products = productDAO.findProducts(name);
-			if (products.length > 0) {
-				return new ResponseEntity<>(products, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		Product[] products = this.productDAO.findProducts(name);
+		if(products.length > 0) {
+			return new ResponseEntity<>(products, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-    @PostMapping("/products")
+	@PostMapping("/products")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         LOG.info("POST /inventory/products " + product);
 
         try {
-            Product created = productDAO.createProduct(product);
+            Product created = this.productDAO.createProduct(product);
 
-            if (created == null || productDAO.getProduct(product.getId()) != null) {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
-            } else {
-                return new ResponseEntity<>(created,HttpStatus.CREATED);
-            }
+			return created == null ?
+					new ResponseEntity<>(HttpStatus.CONFLICT) :
+					new ResponseEntity<>(created,HttpStatus.CREATED);
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -100,8 +87,9 @@ public class InventoryController {
 		try {
 			Product updated = this.productDAO.updateProduct(product);
 
-			return updated != null ? new ResponseEntity<>(updated, HttpStatus.OK)
-					: new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return updated != null ?
+					new ResponseEntity<>(updated, HttpStatus.OK) :
+					new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,7 +101,7 @@ public class InventoryController {
 		LOG.info("DELETE /inventory/products/" + id);
 
 		try {
-			boolean existed = productDAO.deleteProduct(id);
+			boolean existed = this.productDAO.deleteProduct(id);
 			return existed ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
