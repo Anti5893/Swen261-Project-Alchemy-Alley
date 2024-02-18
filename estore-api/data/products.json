@@ -1,1 +1,1 @@
-[{"id":1,"name":"Steam","type":"AIR","price":10.99,"quantity":20}]
+[{"id":1,"name":"Steam","type":"AIR","price":10.99,"quantity":20},{"id":2,"name":"Flint","type":"EARTH","price":12.99,"quantity":15},{"id":3,"name":"Ice","type":"WATER","price":8.99,"quantity":35}]
