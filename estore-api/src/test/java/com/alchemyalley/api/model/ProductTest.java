@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test the Product class.
- *
+ * Tests the Product class.
  * @author Group 2
  */
 @Tag("Model-tier")
