@@ -7,6 +7,10 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the User class.
+ * @author Group 2
+ */
 @Tag("Model-tier")
 public class UserTest {
 
