@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/**
+ * Controller responsible for requests beginning with /users
+ * @author Group 2
+ */
 @RestController
 @RequestMapping("users")
 public class UsersController {

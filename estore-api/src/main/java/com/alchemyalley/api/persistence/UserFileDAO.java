@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * An implementation of {@link UserDAO} that uses JSON.
+ * @author Group 2
+ */
 @Component
 public class UserFileDAO implements UserDAO {
 
@@ -17,6 +21,13 @@ public class UserFileDAO implements UserDAO {
 	private final String fileName;
 	private final ObjectMapper objectMapper;
 
+	/**
+	 * Creates an instance of this DAO over a JSON file.
+	 *
+	 * @param fileName      The file to load.
+	 * @param objectMapper  The object mapper.
+	 * @throws IOException  If there is an error reading from disk
+	 */
 	public UserFileDAO(@Value("${users.file}") String fileName, ObjectMapper objectMapper) throws IOException {
 		this.users = new HashMap<>();
 		this.fileName = fileName;
@@ -24,6 +35,11 @@ public class UserFileDAO implements UserDAO {
 		load();
 	}
 
+	/**
+	 * Loads the JSON file on disk and stores it in a map.
+	 *
+	 * @throws IOException  If there is an error reading from disk
+	 */
 	private void load() throws IOException {
 		User[] users = this.objectMapper.readValue(new File(this.fileName), User[].class);
 
@@ -32,6 +48,11 @@ public class UserFileDAO implements UserDAO {
 		}
 	}
 
+	/**
+	 * Saves the map to disk as a JSON file.
+	 *
+	 * @throws IOException  If there is an error saving to disk
+	 */
 	private void save() throws IOException {
 		User[] users = this.users.values().toArray(new User[0]);
 		this.objectMapper.writeValue(new File(this.fileName), users);
