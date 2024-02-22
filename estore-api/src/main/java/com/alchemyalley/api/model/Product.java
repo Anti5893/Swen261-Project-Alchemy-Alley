@@ -17,7 +17,7 @@ public class Product {
     @JsonProperty("quantity") private int quantity;
 
     /**
-     * Creates a Product with its given attributes.
+     * Creates a {@code Product} with its given attributes.
      *
      * @param id        The id of the product
      * @param name      The name of the product

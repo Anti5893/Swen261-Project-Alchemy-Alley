@@ -19,8 +19,8 @@ import java.util.Map;
 public class CraftingFileDAO implements CraftingDAO {
 
 	Map<Integer[], Recipe> recipes;
-	private final ObjectMapper objectMapper;
 	private final String fileName;
+	private final ObjectMapper objectMapper;
 
 	/**
 	 * Creates an instance of this DAO over a JSON file.

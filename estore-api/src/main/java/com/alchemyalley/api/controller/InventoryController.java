@@ -20,7 +20,7 @@ import com.alchemyalley.api.persistence.ProductDAO;
 import com.alchemyalley.api.model.Product;
 
 /**
- * Controller responsible for requests beginning with /inventory/
+ * Controller responsible for requests beginning with /inventory
  * @author Group 2
  */
 @RestController
