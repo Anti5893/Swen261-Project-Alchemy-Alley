@@ -68,4 +68,11 @@ public class UserFileDAO implements UserDAO {
 		return newUser;
 	}
 
+	public User authenticateUser(User user) {
+		User storedUser = this.users.getOrDefault(user.getUsername(), null);
+		if(storedUser == null) return null;
+
+		return user.getPassword().equals(storedUser.getPassword()) ? storedUser : null;
+	}
+
 }

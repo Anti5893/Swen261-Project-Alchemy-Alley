@@ -20,4 +20,6 @@ public interface UserDAO {
 	 */
 	User createUser(User user) throws IOException;
 
+	User authenticateUser(User user);
+
 }
