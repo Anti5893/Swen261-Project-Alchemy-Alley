@@ -75,4 +75,31 @@ public class UsersControllerTest {
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
 
+	@Test
+	public void testAuthenticateUser() {
+		// Setup
+		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 });
+		when(this.userDAO.authenticateUser(user)).thenReturn(user);
+
+		// Invoke
+		ResponseEntity<User> response = this.usersController.authenticateUser(user);
+
+		// Analyze
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(user, response.getBody());
+	}
+
+	@Test
+	public void testAuthenticateUserFailed() {
+		// Setup
+		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 });
+		when(this.userDAO.authenticateUser(user)).thenReturn(null);
+
+		// Invoke
+		ResponseEntity<User> response = this.usersController.authenticateUser(user);
+
+		// Analyze
+		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+	}
+
 }
