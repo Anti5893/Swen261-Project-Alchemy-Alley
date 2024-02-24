@@ -59,13 +59,15 @@ public class UserFileDAO implements UserDAO {
 	}
 
 	public User createUser(User user) throws IOException {
-		if(this.users.containsKey(user.getUsername())) return null;
+		synchronized(this.users) {
+			if(this.users.containsKey(user.getUsername())) return null;
 
-		User newUser = new User(user.getUsername(), user.getPassword(), false, new int[] {}, new int[] {});
-		this.users.put(user.getUsername(), newUser);
-		save();
+			User newUser = new User(user.getUsername(), user.getPassword(), false, new int[] {}, new int[] {});
+			this.users.put(user.getUsername(), newUser);
+			save();
 
-		return newUser;
+			return newUser;
+		}
 	}
 
 	public User authenticateUser(User user) {
