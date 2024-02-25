@@ -22,8 +22,8 @@ validInfo(){
 
 register(username : string, password : string): void {
   this.service.addUser({username, password} as User)
-  .subscribe(hero => {
-    this.users.push(hero);
+  .subscribe(user=> {
+    this.users.push(user);
   });
   console.log(username, password);
   }
