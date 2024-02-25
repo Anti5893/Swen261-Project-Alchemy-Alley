@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
@@ -11,14 +10,18 @@ import { UserService } from '../user.service';
 })
 
 export class RegisterComponent {
-@Input() username ? : string;
-@Input() password ? : string;
-constructor(service : UserService){
-  }
+  username  : string = '';
+  password  : string = '';
+  passwordConfirm : string = ''
 
-  register(){
-    if(this.username && this.password){
-      console.log(this.username, this.password)
-    }
+constructor(private service : UserService){}
+
+validInfo(){
+  return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''))
+}
+
+register(username : string, password : string): void {
+  this.service.addUser({username, password} as User);
+  console.log(username, password);
   }
 }

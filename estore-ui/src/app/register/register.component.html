@@ -3,8 +3,13 @@
 <div>
     <label for = 'new-user-username'>Username: </label>
     <input id = 'new-user-username'[(ngModel)] = 'username'>
+
     <label for = 'new-user-password'>Password: </label>
     <input id = 'new-user-password'[(ngModel)] = 'password'>
-    <button (click) = 'register()'>Register</button>
+
+    <label for = 'new-user-password-confirm'>Confirm Password: </label>
+    <input id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
+
+    <button *ngIf="validInfo()" (click) = 'register(username, password)'>Register</button>
 </div>
 
