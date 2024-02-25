@@ -20,4 +20,14 @@ public interface UserDAO {
 	 */
 	User createUser(User user) throws IOException;
 
+	/**
+	 * Checks whether the provided user's credentials
+	 * align with an existing stored {@link User}.
+	 *
+	 * @param user  The provided user credentials
+	 * @return      The stored {@link User} instance,
+	 *              or {@code null} if invalid
+	 */
+	User authenticateUser(User user);
+
 }
