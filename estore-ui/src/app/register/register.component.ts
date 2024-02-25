@@ -12,8 +12,8 @@ import { UserService } from '../user.service';
 export class RegisterComponent {
   username  : string = '';
   password  : string = '';
-  passwordConfirm : string = ''
-
+  passwordConfirm : string = '';
+  users: User[] = [];
 constructor(private service : UserService){}
 
 validInfo(){
@@ -21,7 +21,10 @@ validInfo(){
 }
 
 register(username : string, password : string): void {
-  this.service.addUser({username, password} as User);
+  this.service.addUser({username, password} as User)
+  .subscribe(hero => {
+    this.users.push(hero);
+  });
   console.log(username, password);
   }
 }
