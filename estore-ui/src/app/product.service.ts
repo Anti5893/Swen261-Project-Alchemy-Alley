@@ -7,17 +7,13 @@ import { Product } from './product';
 	providedIn: 'root',
 })
 export class ProductService {
-	private productsUrl = 'http://localhost:8080/inventory/products';
+	private productsUrl = 'http://localhost:8080/inventory/products/';
 
 	httpOptions = {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 	};
 
-	private http: HttpClient;
-
-	constructor(http: HttpClient) {
-		this.http = http;
-	}
+	constructor(private http: HttpClient) {}
 
 	getProducts(): Observable<Product[]> {
 		return this.http.get<Product[]>(this.productsUrl);

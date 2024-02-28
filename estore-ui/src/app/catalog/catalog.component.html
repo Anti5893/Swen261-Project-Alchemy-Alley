@@ -7,18 +7,20 @@
 			</div>
 			<div id="catalog-product-details">
 				<div id="catalog-product-naming">
-					<h1 class="header" id="catalog-product-name">
-						{{ product.name }}
-					</h1>
-					<span class="badge" id="catalog-product-type">{{
-						product.type
-					}}</span>
+					<span class="header" id="catalog-product-name">
+						name={{ product.name }}
+					</span>
+					<span class="badge" id="catalog-product-type">
+						type={{ product.type }}
+					</span>
 				</div>
 				<div id="catalog-product-pricing">
-					<h1 id="catalog-product-price">{{ product.name }}</h1>
-					<h2 id="catalog-product-quantity">
-						{{ product.quantity }}
-					</h2>
+					<span id="catalog-product-price">
+						price={{ product.price }}
+					</span>
+					<span id="catalog-product-quantity">
+						quantity={{ product.quantity }}
+					</span>
 				</div>
 			</div>
 		</div>
