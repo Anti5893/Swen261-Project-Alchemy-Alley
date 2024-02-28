@@ -19,4 +19,8 @@ export class UserService {
   addUser(user : User) : Observable<User>{
     return this.http.post<User>(this.url, user,this.httpOptions)
   }
+
+  updateCart(userId: number, cart: number[]) : Observable<User>{
+    return this.http.put<User>(this.url, {cart}, this.httpOptions);
+  }
 }

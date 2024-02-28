@@ -30,4 +30,6 @@ public interface UserDAO {
 	 */
 	User authenticateUser(User user);
 
+    User updateUser(User user) throws IOException;
+
 }

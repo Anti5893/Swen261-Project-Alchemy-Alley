@@ -1,5 +1,6 @@
 package com.alchemyalley.api.persistence;
 
+import com.alchemyalley.api.model.Product;
 import com.alchemyalley.api.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -76,5 +77,12 @@ public class UserFileDAO implements UserDAO {
 
 		return user.getPassword().equals(storedUser.getPassword()) ? storedUser : null;
 	}
-
+	public User updateUser(User user) throws IOException {
+		synchronized (this.users){
+		if (!this.users.containsKey(user.getUsername())) return null;
+		this.users.put(user.getPassword(), user);
+		save();
+		return user;
+		}
+	}
 }

@@ -1,6 +1,9 @@
+import { PRODUCTS } from './../mock-products';
+import { Product } from '../product';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
   standalone: true,
@@ -14,6 +17,7 @@ import { NgIf, NgFor } from '@angular/common';
 })
 export class CartComponent {
   products = [];
+  // products = PRODUCTS;
 
   constructor(private http: HttpClient) {
     this.fetchProducts();

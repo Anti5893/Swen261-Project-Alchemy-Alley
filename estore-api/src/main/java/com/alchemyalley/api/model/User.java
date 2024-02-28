@@ -16,7 +16,7 @@ public class User {
 	@JsonProperty("password") private final String password;
 	@JsonProperty("admin") private final boolean admin;
 	@JsonProperty("unlocked") private final int[] unlocked;
-	@JsonProperty("cart") private final int[] cart;
+	@JsonProperty("cart") private int[] cart;
 
 	/**
 	 * Creates a {@code User} with its given attributes.
@@ -80,6 +80,14 @@ public class User {
 	 */
 	public int[] getCart() {
 		return this.cart;
+	}
+	/**
+	 * Sets the cart to a new cart.
+	 * 
+	 * @param newCart: Array of int's representing product ids.
+	 */
+	public void setCart(int[] newCart){
+		this.cart = newCart;
 	}
 
 	/**

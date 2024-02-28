@@ -1,1 +1,1 @@
-[{"username":"JackyFTW","password":"securePassword123","admin":false,"unlocked":[],"cart":[]}]
+[{"username":"JackyFTW","password":"securePassword123","admin":false,"unlocked":[],"cart":[]},{"username":"exampleUser","password":"examplePass","admin":false,"unlocked":[],"cart":[1,2]},{"username":"exampleUser","password":"examplePass","admin":false,"unlocked":[],"cart":[1,2,3]}]
