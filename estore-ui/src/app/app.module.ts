@@ -17,7 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
     RegisterComponent,
     CatalogComponent,
     AdminComponent,
-    CartComponent
+    // CartComponent
   ],
   imports: [
     BrowserModule,
