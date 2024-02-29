@@ -17,7 +17,7 @@ export class RegisterComponent {
   constructor(private userService: UserService) { }
 
   validInfo() {
-    return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''))
+    return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''));
   }
 
   register(username: string, password: string){

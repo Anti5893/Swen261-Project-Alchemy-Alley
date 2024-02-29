@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../user';
 
 
 
@@ -8,12 +9,12 @@ import { Injectable } from '@angular/core';
 })
 export class CredentialsService {
   
-  storeCurrentUser(username : string, userPassword : string){
-    localStorage.setItem('currentUsername', username);
-    localStorage.setItem('currentUserPassword',userPassword);
+  storeCurrentUser(user : User){
+    localStorage.setItem('currentUsername', user.username)
+    localStorage.setItem('currentPassword', user.password)
   }
   removeCurrentUser(){
     localStorage.removeItem('currentUsername');
-    localStorage.removeItem('currentUserPassword');
+    localStorage.removeItem('currentPassword');
   }
 }
