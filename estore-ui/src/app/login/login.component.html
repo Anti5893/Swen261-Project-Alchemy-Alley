@@ -6,7 +6,7 @@
     <label for = 'new-user-password'>Password: </label>
     <input id = 'new-user-password'[(ngModel)] = 'password'>
 
-    <button [routerLink]="'/catalog'">Login</button>
+    <button [routerLink]="'/catalog'" (click)="authenticateUser(username,password)">Login</button>
 </div>
 
 <a routerLink="/register">Not a member? Register Here</a>

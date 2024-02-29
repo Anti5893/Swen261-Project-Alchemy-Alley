@@ -14,17 +14,16 @@ export class RegisterComponent {
   password: string = '';
   passwordConfirm: string = '';
   users: User[] = [];
-  constructor(private service: UserService) { }
+  constructor(private userService: UserService) { }
 
   validInfo() {
     return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''))
   }
 
-  register(username: string, password: string): void {
-    this.service.addUser({ username, password } as User)
+  register(username: string, password: string){
+    return this.userService.addUser({ username, password } as User)
       .subscribe(user => {
         this.users.push(user);
       });
-    console.log(username, password);
   }
 }

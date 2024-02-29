@@ -12,11 +12,16 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  private url = 'http://localhost:8080/users';
+  private usersUrl = 'http://localhost:8080/users';
 
   constructor(private http: HttpClient){}
 
   addUser(user : User) : Observable<User>{
-    return this.http.post<User>(this.url, user,this.httpOptions)
+    return this.http.post<User>(this.usersUrl, user,this.httpOptions)
+  }
+
+  authenticateUser(user : User) : Observable<User>{
+    const authUrl = this.usersUrl + '/auth';
+    return this.http.post<User>(authUrl, user, this.httpOptions); 
   }
 }
