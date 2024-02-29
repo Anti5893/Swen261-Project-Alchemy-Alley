@@ -8,7 +8,8 @@
 
     <label for = 'new-user-password-confirm'>Confirm Password: </label>
     <input id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
-
+    
+    <a [routerLink]="'/login'">Back To Login</a>
     <button [routerLink] = "'/login'" *ngIf="validInfo()" (click) = 'register(username, password)'>Register</button>
 </div>
-
+<router-outlet></router-outlet>

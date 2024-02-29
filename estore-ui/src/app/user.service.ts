@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpResponse } from '@angular/common/http';
+import { map, tap } from 'rxjs';
 
 import { User } from '../user';
 import { Observable } from 'rxjs';
@@ -30,3 +31,6 @@ export class UserService {
     return this.http.post<User>(authUrl,user,this.httpOptionsResponse)
   }
 }
+
+
+

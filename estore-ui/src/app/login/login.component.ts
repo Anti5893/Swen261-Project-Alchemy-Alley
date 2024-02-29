@@ -1,4 +1,7 @@
 import { Component , Input} from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs';
+import { tap } from 'rxjs'; 
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
@@ -14,20 +17,25 @@ export class LoginComponent {
   username : string = '';
   password : string = '';
   users: User[] = [];
+  isAuthenticated = false;
 
-  authenticateResponseCode : number = 0
-
-
+  
   constructor(private userService : UserService, private credentialsService : CredentialsService){ }
 
-  authenticateUser(username : string, password : string){
-    this.userService.authenticateUser({username, password} as User).subscribe((response : HttpResponse<User>) =>{
-      this.authenticateResponseCode = response.status;
-      console.log(this.authenticateResponseCode)
-    })
+  getAuthenticationStatus(username: string, password: string): Observable<number> {
+    return this.userService.authenticateUser({ username, password } as User).pipe(
+      map((response: HttpResponse<User>) => response.status),
+    );
   }
 
   storeCurrentUser(username : string, password : string){
-    this.credentialsService.storeCurrentUser({username, password} as User);
+    this.credentialsService.storeCurrentUser({username, password} as User)
+  }
+
+  authenticateUser() {
+    this.getAuthenticationStatus(this.username, this.password).subscribe((code: number) => {
+      this.isAuthenticated = code !== 401;
+    });
+    return this.isAuthenticated;
   }
 }
