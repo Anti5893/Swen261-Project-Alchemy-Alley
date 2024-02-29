@@ -4,7 +4,7 @@
   <a routerLink="/catalog">Catalog</a>
   <a routerLink="/admin">Admin</a>
   <a routerLink="/cart">Cart</a>
-  <button (click)="logOut()">Logout</button>
+  <button [routerLink]="'/login'" (click)="logOut()">Logout</button>
   
 </nav>
 
