@@ -10,21 +10,21 @@ import { UserService } from '../user.service';
 })
 
 export class RegisterComponent {
-  username  : string = '';
-  password  : string = '';
-  passwordConfirm : string = '';
+  username: string = '';
+  password: string = '';
+  passwordConfirm: string = '';
   users: User[] = [];
-constructor(private service : UserService){}
+  constructor(private service: UserService) { }
 
-validInfo(){
-  return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''))
-}
+  validInfo() {
+    return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''))
+  }
 
-register(username : string, password : string): void {
-  this.service.addUser({username, password} as User)
-  .subscribe(user=> {
-    this.users.push(user);
-  });
-  console.log(username, password);
+  register(username: string, password: string): void {
+    this.service.addUser({ username, password } as User)
+      .subscribe(user => {
+        this.users.push(user);
+      });
+    console.log(username, password);
   }
 }
