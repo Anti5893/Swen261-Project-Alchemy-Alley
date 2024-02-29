@@ -1,7 +1,7 @@
 import { Component , Input} from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
-import { tap } from 'rxjs'; 
+import { Router } from '@angular/router';
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
@@ -20,7 +20,7 @@ export class LoginComponent {
   isAuthenticated = false;
 
   
-  constructor(private userService : UserService, private credentialsService : CredentialsService){ }
+  constructor(private userService : UserService, private credentialsService : CredentialsService, private router : Router){ }
 
   getAuthenticationStatus(username: string, password: string): Observable<number> {
     return this.userService.authenticateUser({ username, password } as User).pipe(
@@ -37,5 +37,13 @@ export class LoginComponent {
       this.isAuthenticated = code !== 401;
     });
     return this.isAuthenticated;
+  }
+
+  onClick(){
+    this.authenticateUser()
+    if(this.isAuthenticated){
+      this.storeCurrentUser(this.username,this.password)
+      this.router.navigate(['/catalog'])
+    }
   }
 }
