@@ -29,7 +29,13 @@ export class LoginComponent {
   }
 
   storeCurrentUser(username : string, password : string){
-    this.credentialsService.storeCurrentUser({username, password} as User)
+    if(this.username == 'Admin' && this.password == 'Admin123'){
+      this.credentialsService.storeCurrentUser({username,password,isAdmin:true} as User)
+    }
+    else{
+      this.credentialsService.storeCurrentUser({username, password} as User)
+    }
+    
   }
 
   authenticateUser() {

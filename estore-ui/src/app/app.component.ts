@@ -17,4 +17,7 @@ export class AppComponent {
   isLoggedIn(){
     return this.credentialsService.isLoggedIn()
   }
+  isAdmin(){
+    return this.credentialsService.isAdmin()
+  }
 }
