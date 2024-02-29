@@ -17,4 +17,8 @@ export class CredentialsService {
     localStorage.removeItem('currentUsername');
     localStorage.removeItem('currentPassword');
   }
+
+  isLoggedIn() : boolean{
+    return (localStorage.getItem('currentUsername') != null && localStorage.getItem('currentPassword') != null);
+  }
 }

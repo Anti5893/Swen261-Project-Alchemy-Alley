@@ -14,4 +14,7 @@ export class AppComponent {
   logOut(){
     this.credentialsService.removeCurrentUser()
   }
+  isLoggedIn(){
+    return this.credentialsService.isLoggedIn()
+  }
 }
