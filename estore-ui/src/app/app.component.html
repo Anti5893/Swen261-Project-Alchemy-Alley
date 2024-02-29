@@ -1,5 +1,5 @@
 
-<nav *ngIf="isLoggedIn() == true; else notLoggedIn" >
+<nav *ngIf="isLoggedIn(); else notLoggedIn" >
   <h1>Alchemy Alley</h1>
   <a routerLink="/catalog">Catalog</a>
   <a routerLink="/admin">Admin</a>
@@ -11,7 +11,7 @@
 <ng-template #notLoggedIn>
   <nav>
     <h1>Alchemy Alley</h1>
-    <a routerLink="/login">login</a>    
+    <a routerLink="/login"></a>    
   </nav>
 </ng-template>
 <router-outlet></router-outlet>
