@@ -1,6 +1,7 @@
 package com.alchemyalley.api.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,21 @@ public class ProductTest {
 	    assertEquals(price, product.getPrice());
 	    assertEquals(quantity, product.getQuantity());
     }
+
+	@Test
+	public void testConstructorException() {
+		// Setup
+		int id = -1;
+		String name = "Steam";
+		ElementType type = ElementType.AIR;
+		double price = 19.99;
+		int quantity = 50;
+
+		// Invoke & Analyze
+		assertThrows(IllegalArgumentException.class,
+				() -> new Product(id, name, type, price, quantity),
+				"IllegalStateException not thrown");
+	}
 
     @Test
     public void testToString() {

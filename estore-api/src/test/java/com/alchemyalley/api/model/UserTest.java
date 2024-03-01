@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests the User class.
@@ -32,6 +32,21 @@ public class UserTest {
 		assertEquals(admin, user.isAdmin());
 		assertEquals(unlocked, user.getUnlocked());
 		assertEquals(cart, user.getCart());
+	}
+
+	@Test
+	public void testConstructorException() {
+		// Setup
+		String username = "";
+		String password = "securePassword";
+		boolean admin = true;
+		int[] unlocked = { 1, 2, 3 };
+		int[] cart = { 1, 2 };
+
+		// Invoke & Analyze
+		assertThrows(IllegalArgumentException.class,
+				() -> new User(username, password, admin, unlocked, cart),
+				"IllegalArgumentException not thrown");
 	}
 
 	@Test
