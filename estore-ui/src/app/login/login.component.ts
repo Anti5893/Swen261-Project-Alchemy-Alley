@@ -1,5 +1,5 @@
 import { Component , Input} from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ObservedValueOf } from 'rxjs';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -22,11 +22,7 @@ export class LoginComponent {
   
   constructor(private userService : UserService, private credentialsService : CredentialsService, private router : Router){ }
 
-  getAuthenticationStatus(username: string, password: string): Observable<number> {
-    return this.userService.authenticateUser({ username, password } as User).pipe(
-      map((response: HttpResponse<User>) => response.status),
-    );
-  }
+  
 
   storeCurrentUser(username : string, password : string){
     if(this.username == 'Admin' && this.password == 'Admin123'){
@@ -38,18 +34,30 @@ export class LoginComponent {
     
   }
 
-  authenticateUser() {
-    this.getAuthenticationStatus(this.username, this.password).subscribe((code: number) => {
-      this.isAuthenticated = code !== 401;
+  getAuthenticationStatus(username: string, password: string): Observable<number> {
+    return this.userService.authenticateUser({ username, password } as User).pipe(
+      map((response: HttpResponse<User>) => response.status)
+    );
+  }
+
+  authenticateUser() : Observable<boolean>{
+    return new Observable<boolean>(observer =>{
+      this.getAuthenticationStatus(this.username,this.password).subscribe(
+        (code : Number) => {
+          this.isAuthenticated = (code !== 400);
+          observer.next(this.isAuthenticated)
+          observer.complete()
+        }
+      );
     });
-    return this.isAuthenticated;
   }
 
   onClick(){
-    this.authenticateUser()
-    if(this.isAuthenticated){
-      this.storeCurrentUser(this.username,this.password)
-      this.router.navigate(['/catalog'])
-    }
+    this.authenticateUser().subscribe(isAuthenticated =>{
+      if(isAuthenticated){
+        this.storeCurrentUser(this.username, this.password);
+        this.router.navigate(['/catalog']);
+      }
+    })
   }
 }
