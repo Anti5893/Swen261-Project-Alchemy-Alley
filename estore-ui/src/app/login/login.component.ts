@@ -18,6 +18,8 @@ export class LoginComponent {
   password : string = '';
   users: User[] = [];
   isAuthenticated = false;
+  errorMessage = '';
+  buttonClicked = false;
 
   
   constructor(private userService : UserService, private credentialsService : CredentialsService, private router : Router){ }
@@ -52,11 +54,17 @@ export class LoginComponent {
     });
   }
 
+  showErrorMesssage(){
+    return (this.buttonClicked && !this.isAuthenticated)
+  }
+
   onClick(){
+    this.buttonClicked = true;
     this.authenticateUser().subscribe(isAuthenticated =>{
       if(isAuthenticated){
         this.storeCurrentUser(this.username, this.password);
         this.router.navigate(['/catalog']);
+        this.errorMessage = '';
       }
     })
   }

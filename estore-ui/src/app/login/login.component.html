@@ -7,6 +7,8 @@
     <input id = 'new-user-password'[(ngModel)] = 'password'>
 
     <button (click)="onClick()">Login</button>
+    <p *ngIf="showErrorMesssage()">Error - Ensure You Entered Correct Credentials</p>
+
 </div>
 
 <a routerLink="/register">Not a member? Register Here</a>
