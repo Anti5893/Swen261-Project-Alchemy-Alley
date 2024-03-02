@@ -46,7 +46,7 @@ export class LoginComponent {
     return new Observable<boolean>(observer =>{
       this.getAuthenticationStatus(this.username,this.password).subscribe(
         (code : Number) => {
-          this.isAuthenticated = (code !== 400);
+          this.isAuthenticated = (code != 400);
           observer.next(this.isAuthenticated)
           observer.complete()
         }

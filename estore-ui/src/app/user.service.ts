@@ -25,7 +25,7 @@ export class UserService {
   addUser(user : User) : Observable<User>{
     return this.http.post<User>(this.usersUrl, user,this.httpOptionsUser)
   }
-
+  
   authenticateUser(user : User) : Observable<HttpResponse<User>>{
     const authUrl = this.usersUrl + '/auth';
     return this.http.post<User>(authUrl,user,this.httpOptionsResponse)

@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
+import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,16 +17,22 @@ export class RegisterComponent {
   password: string = '';
   passwordConfirm: string = '';
   users: User[] = [];
-  constructor(private userService: UserService) { }
+  alreadyExists = false;
+  buttonClicked = false;
+  constructor(private userService: UserService, private router : Router) { }
 
-  validInfo() {
-    return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''));
-  }
-
-  register(username: string, password: string){
-    return this.userService.addUser({ username, password } as User)
-      .subscribe(user => {
-        this.users.push(user);
-      });
+  
+  registerOnClick(username : string , password : string){
+    this.userService.authenticateUser({username, password} as User).subscribe(
+      (response) =>{
+        this.alreadyExists = (response.status == 200)
+      },
+      (error) =>{
+        this.alreadyExists = false;
+        this.userService.addUser({username, password} as User).subscribe();
+        this.router.navigate(['/login']);
+      }
+    )
   }
 }
+
