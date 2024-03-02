@@ -21,6 +21,9 @@ export class RegisterComponent {
   buttonClicked = false;
   constructor(private userService: UserService, private router : Router) { }
 
+  fieldsFull(){
+    return(this.password != '' && this.username != '' && this.passwordConfirm != '');
+  }
   
   registerOnClick(username : string , password : string){
     this.userService.authenticateUser({username, password} as User).subscribe(
@@ -28,9 +31,11 @@ export class RegisterComponent {
         this.alreadyExists = (response.status == 200)
       },
       (error) =>{
+        if(error.status == 401 && this.fieldsFull()){
         this.alreadyExists = false;
         this.userService.addUser({username, password} as User).subscribe();
         this.router.navigate(['/login']);
+        }
       }
     )
   }
