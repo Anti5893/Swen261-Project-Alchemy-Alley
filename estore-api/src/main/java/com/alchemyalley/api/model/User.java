@@ -29,7 +29,8 @@ public class User {
 	 */
 	public User(@JsonProperty("username") String username, @JsonProperty("password") String password,
 	            @JsonProperty("admin") boolean admin, @JsonProperty("unlocked") int[] unlocked,
-	            @JsonProperty("cart") int[] cart) {
+	            @JsonProperty("cart") int[] cart) throws IllegalArgumentException {
+		if(username.isEmpty()) throw new IllegalArgumentException("Username cannot be empty");
 		this.username = username;
 		this.password = password;
 		this.admin = admin;

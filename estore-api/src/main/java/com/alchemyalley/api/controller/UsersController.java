@@ -41,4 +41,14 @@ public class UsersController {
 		}
 	}
 
+	@PostMapping("/auth")
+	public ResponseEntity<User> authenticateUser(@RequestBody User user) {
+		LOG.info("POST /users/auth " + user);
+
+		User storedUser = this.userDAO.authenticateUser(user);
+		return storedUser != null ?
+				new ResponseEntity<>(storedUser, HttpStatus.OK) :
+				new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	}
+
 }

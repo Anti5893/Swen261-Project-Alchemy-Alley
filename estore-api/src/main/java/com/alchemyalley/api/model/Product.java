@@ -27,7 +27,8 @@ public class Product {
      */
     public Product(@JsonProperty("id") int id, @JsonProperty("name") String name,
                    @JsonProperty("type") ElementType type, @JsonProperty("price") double price,
-                   @JsonProperty("quantity") int quantity) {
+                   @JsonProperty("quantity") int quantity) throws IllegalArgumentException {
+        if(id < 0) throw new IllegalArgumentException("Product ID cannot be < 0");
         this.id = id;
         this.name = name;
         this.type = type;
