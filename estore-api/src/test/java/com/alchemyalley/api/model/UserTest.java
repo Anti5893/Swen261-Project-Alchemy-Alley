@@ -54,4 +54,26 @@ public class UserTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void testSetCart()
+	{
+		String username = "Jack";
+		String password = "securePassword";
+		boolean admin = true;
+		int[] unlocked = { 1, 2, 3 };
+		int[] cart = { 1, 2 };
+
+		User user = new User(username, password, admin, unlocked, cart);
+		int[] newCart = {1,2,3};
+		user.setCart(newCart);
+		String expected = String.format(User.STRING_FORMAT, username, password, admin,
+		Arrays.toString(unlocked), Arrays.toString(newCart));
+
+		// Invoke
+		String actual = user.toString();
+
+		// Analyze
+		assertEquals(expected, actual);
+	}
+
 }

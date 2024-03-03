@@ -53,7 +53,7 @@ public class UsersController {
 				new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
-	@PutMapping("")
+	@PutMapping("/{username}")
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		LOG.info("PUT /users " + user);
 		

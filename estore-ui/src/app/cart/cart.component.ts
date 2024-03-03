@@ -16,23 +16,8 @@ import { NgIf, NgFor } from '@angular/common';
   ]
 })
 export class CartComponent {
-  products = [];
-  // products = PRODUCTS;
+  products = PRODUCTS;
 
-  constructor(private http: HttpClient) {
-    this.fetchProducts();
-  }
-
-  fetchProducts(): void {
-    this.http.get<any>('http://localhost:8080/users').subscribe({
-      next: (response) => {
-        this.products = response.cart;
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      }
-    });
-  }
 
   getTotalPrice(): number {
     return this.products.reduce((total, product) => total + product.price, 0);

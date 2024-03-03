@@ -77,10 +77,15 @@ public class UserFileDAO implements UserDAO {
 
 		return user.getPassword().equals(storedUser.getPassword()) ? storedUser : null;
 	}
+	/**
+	 * Updates the given user.
+	 * @param user: user that is being altered to new data
+	 * @return The updated User.
+	 */
 	public User updateUser(User user) throws IOException {
 		synchronized (this.users){
 		if (!this.users.containsKey(user.getUsername())) return null;
-		this.users.put(user.getPassword(), user);
+		this.users.put(user.getUsername(), user);
 		save();
 		return user;
 		}

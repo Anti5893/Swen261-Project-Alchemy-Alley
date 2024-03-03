@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 import { User } from '../user';
 import { Observable } from 'rxjs';
+import { Product } from './product';
 
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +21,8 @@ export class UserService {
     return this.http.post<User>(this.url, user,this.httpOptions)
   }
 
-  updateCart(userId: number, cart: number[]) : Observable<User>{
-    return this.http.put<User>(this.url, {cart}, this.httpOptions);
+  updateCart(user: User, newCart: number[]) : Observable<User>{
+    user.cart = newCart;
+    return this.http.put<User>(this.url, user, this.httpOptions);
   }
 }

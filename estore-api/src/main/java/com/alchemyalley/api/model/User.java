@@ -14,8 +14,8 @@ public class User {
 
 	@JsonProperty("username") private final String username;
 	@JsonProperty("password") private final String password;
-	@JsonProperty("admin") private final boolean admin;
-	@JsonProperty("unlocked") private final int[] unlocked;
+	@JsonProperty("admin") private boolean admin;
+	@JsonProperty("unlocked") private int[] unlocked;
 	@JsonProperty("cart") private int[] cart;
 
 	/**
@@ -88,6 +88,13 @@ public class User {
 	 */
 	public void setCart(int[] newCart){
 		this.cart = newCart;
+	}
+
+	public void updatedUser(boolean admin, int[] cart, int[] unlocked )
+	{
+		this.admin = admin;
+		this.unlocked = unlocked;
+		this.cart = cart;
 	}
 
 	/**
