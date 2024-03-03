@@ -1,12 +1,9 @@
 import { Component , Input} from '@angular/core';
-import { Observable, ObservedValueOf } from 'rxjs';
-import { map } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
 import { CredentialsService } from '../credentials.service';
-import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
