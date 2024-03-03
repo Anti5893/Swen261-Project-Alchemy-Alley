@@ -6,7 +6,7 @@
     <label for = 'new-user-password'>Password: </label>
     <input id = 'new-user-password'[(ngModel)] = 'password'>
 
-    <button (click)="onClick()">Login</button>
+    <button (click)="onClick(username,password)">Login</button>
     <p *ngIf="showErrorMesssage()">Error - Incorrect Username or Password</p>
 
 </div>

@@ -18,7 +18,6 @@ export class LoginComponent {
   password : string = '';
   users: User[] = [];
   isAuthenticated = false;
-  errorMessage = '';
   buttonClicked = false;
 
   
@@ -38,36 +37,27 @@ export class LoginComponent {
     
   }
 
-  getAuthenticationStatus(username: string, password: string): Observable<number> {
-    return this.userService.authenticateUser({ username, password } as User).pipe(
-      map((response: HttpResponse<User>) => response.status)
-    );
-  }
-
-  authenticateUser() : Observable<boolean>{
-    return new Observable<boolean>(observer =>{
-      this.getAuthenticationStatus(this.username,this.password).subscribe(
-        (code : Number) => {
-          this.isAuthenticated = (code != 400);
-          observer.next(this.isAuthenticated)
-          observer.complete()
-        }
-      );
-    });
-  }
-
+ 
   showErrorMesssage(){
     return (this.buttonClicked && !this.isAuthenticated)
   }
 
-  onClick(){
+  //Again - not sure why the first .subscribe is crossed out but it works and is cleaner than my other solution
+  onClick(username : string, password : string){
     this.buttonClicked = true;
-    this.authenticateUser().subscribe(isAuthenticated =>{
-      if(isAuthenticated){
-        this.storeCurrentUser(this.username, this.password);
-        this.router.navigate(['/catalog']);
-        this.errorMessage = '';
+    this.userService.authenticateUser({username,password} as User).subscribe(
+      (response) =>{
+        if(response.status === 200){
+          this.isAuthenticated = true;
+          this.storeCurrentUser(username,password);
+          this.router.navigate(['/catalog']);
+        }
+      },
+      (error) =>{
+        if(this.fieldsFull()){
+          this.isAuthenticated = false;
+        }
       }
-    })
+    )
   }
 }
