@@ -8,7 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -105,6 +108,35 @@ public class UserFileDAOTest {
 
 		// Analyze
 		assertNull(actual);
+	}
+	@Test
+	public void testUpdateUserSucess() throws IOException {
+		//Setup
+		User originalUser = new User("Jack", "securePassword", true, new int[] {1, 2, 3}, new int[] {1, 2});
+   		User updatedUser = new User("Jack", "newSecurePassword", false, new int[] {4, 5, 6}, new int[] {3, 4});
+
+    	Map<String, User> users = new HashMap<>();
+    	users.put(originalUser.getUsername(), originalUser);
+
+    	// Invoke
+   		User result = userFileDAO.updateUser(updatedUser);
+
+   		// Analyze
+    	assertNotNull(result);
+		assertEquals(updatedUser.isAdmin(), result.isAdmin());
+    	assertArrayEquals(updatedUser.getCart(), result.getCart());
+    	assertArrayEquals(updatedUser.getUnlocked(), result.getUnlocked());
+	}
+	@Test
+	public void testUpdateUserFailureUserNotFound() throws IOException {
+		// Setup
+		User nonExistentUser = new User("NonExistentUser", "password", false, new int[] {}, new int[] {});
+
+		// Invoke
+		User result = userFileDAO.updateUser(nonExistentUser);
+
+		// Analyze
+		assertNull(result, "Update operation should return null for non-existent user.");
 	}
 
 }
