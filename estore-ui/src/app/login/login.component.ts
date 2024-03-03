@@ -24,7 +24,9 @@ export class LoginComponent {
   
   constructor(private userService : UserService, private credentialsService : CredentialsService, private router : Router){ }
 
-  
+  fieldsFull(){
+    return(this.password != '' && this.username != '');
+  }
 
   storeCurrentUser(username : string, password : string){
     if(this.username == 'Admin' && this.password == 'Admin123'){
