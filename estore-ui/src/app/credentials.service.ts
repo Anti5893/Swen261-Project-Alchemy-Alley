@@ -10,6 +10,8 @@ export class CredentialsService {
   storeCurrentUser(user : User){
     localStorage.setItem('currentUsername', user.username)
     localStorage.setItem('currentPassword', user.password)
+    localStorage.setItem('currentCart', user.cart.toString())
+    localStorage.setItem('currentUnlocked', user.unlocked.toString())
     if(user.isAdmin == true){
       localStorage.setItem('currentAdmin', 'true')
     }
