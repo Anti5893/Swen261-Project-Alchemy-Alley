@@ -2,8 +2,6 @@ import { Component, OnInit } from "@angular/core";
 
 import { ProductService } from "../product.service";
 import { Product } from "../product";
-import { Observable, catchError } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
 	selector: "app-catalog",
@@ -33,10 +31,7 @@ export class CatalogComponent implements OnInit {
 	searchProducts(query: string): void {
 		this.productService.searchProduct(query).subscribe(
 			(response) => {
-				if (!response.ok) {
-					console.log("status was not ok");
-					this.products = [];
-				} else if (response.body) {
+				if (response.body) {
 					this.products = response.body;
 				}
 			},
