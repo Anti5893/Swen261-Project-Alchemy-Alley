@@ -10,10 +10,11 @@ import { AdminProductDetailComponent } from './admin-product-detail/admin-produc
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'catalog', component: CatalogComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'admin', component: AdminComponent },
   { path: 'admin/:id', component: AdminProductDetailComponent }
 ];
 
