@@ -16,7 +16,7 @@ export class ProductService {
 	constructor(private http: HttpClient) {}
 
 	getProducts(): Observable<Product[]> {
-		return this.http.get<Product[]>(this.productsUrl);
+		return this.http.get<Product[]>(`${this.productsUrl}/`);
 	}
 
 	getProduct(id: number): Observable<Product> {
@@ -34,7 +34,7 @@ export class ProductService {
 
 	addProduct(product: Product): Observable<Product> {
 		return this.http.post<Product>(
-			this.productsUrl,
+			`${this.productsUrl}/`,
 			product,
 			this.httpOptions
 		);
@@ -42,7 +42,7 @@ export class ProductService {
 
 	updateProduct(product: Product): Observable<Product> {
 		return this.http.put<Product>(
-			this.productsUrl,
+			`${this.productsUrl}/`,
 			product,
 			this.httpOptions
 		);
