@@ -4,11 +4,14 @@
     <input id = 'new-user-username'[(ngModel)] = 'username'>
 
     <label for = 'new-user-password'>Password: </label>
-    <input id = 'new-user-password'[(ngModel)] = 'password'>
+    <input type = 'password' id = 'new-user-password'[(ngModel)] = 'password'>
 
     <label for = 'new-user-password-confirm'>Confirm Password: </label>
-    <input id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
-
-    <button *ngIf="validInfo()" (click) = 'register(username, password)'>Register</button>
+    <input type = 'password'  id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
+    
+    <a [routerLink]="'/login'">Back To Login</a>
+    <button (click) = "registerOnClick(username,password)">Register</button>
+    <p *ngIf="showErrorMessage">Error - User Already EWxists</p>
+    <p *ngIf="showPasswordsDontMatch()">Error - Passwords Don't Match</p>
 </div>
-
+<router-outlet></router-outlet>

@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { Observable, catchError, map } from 'rxjs';
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
+import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,21 +13,46 @@ import { UserService } from '../user.service';
 })
 
 export class RegisterComponent {
-  username  : string = '';
-  password  : string = '';
-  passwordConfirm : string = '';
+  username: string = '';
+  password: string = '';
+  passwordConfirm: string = '';
   users: User[] = [];
-constructor(private service : UserService){}
+  buttonClicked = false;
+  showErrorMessage = false;
+  passwordsMatch = true;
+  constructor(private userService: UserService, private router : Router) { }
 
-validInfo(){
-  return (this.username != '' && (this.password == this.passwordConfirm) && (this.password != '' && this.passwordConfirm != ''))
-}
+  fieldsFull(){
+    return(this.password != '' && this.username != '' && this.passwordConfirm != '');
+  }
 
-register(username : string, password : string): void {
-  this.service.addUser({username, password} as User)
-  .subscribe(user=> {
-    this.users.push(user);
-  });
-  console.log(username, password);
+  showPasswordsDontMatch(){
+    return(!this.passwordsMatch && this.buttonClicked);
+  }
+
+  
+  registerOnClick(username: string, password: string) {
+    this.buttonClicked = true;
+
+    if(this.password != this.passwordConfirm){
+      this.passwordsMatch = false;
+      return;
+    }
+    if(this.fieldsFull()){
+      this.userService.addUser({username,password} as User).subscribe(
+        (response) =>{
+          if(response.status == 201){
+            this.router.navigate(['/login']);
+            console.log("User Registered Successfully");
+          }
+        },
+        (error) =>{
+          if(error.status == 409){
+            this.showErrorMessage = true;
+          }
+        }
+      )
+    }
   }
 }
+

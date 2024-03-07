@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CredentialsService } from './credentials.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title: any;
+  title = "Alchemy Alley";
+
+  constructor(private credentialsService : CredentialsService){ }
+
+  logOut(){
+    this.credentialsService.removeCurrentUser()
+  }
+  isLoggedIn(){
+    return this.credentialsService.isLoggedIn()
+  }
+  isAdmin(){
+    return this.credentialsService.isAdmin()
+  }
 }

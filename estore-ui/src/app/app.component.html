@@ -1,9 +1,17 @@
-<nav>
+
+<nav *ngIf="isLoggedIn(); else notLoggedIn" >
   <h1>Alchemy Alley</h1>
   <a routerLink="/catalog">Catalog</a>
-  <a routerLink="/admin">Admin</a>
+  <a *ngIf="isAdmin()" routerLink="/admin">Admin</a>
   <a routerLink="/cart">Cart</a>
-  <a routerLink="/login">login</a>
-  <button>Logout</button>
+  <button [routerLink]="'/login'" (click)="logOut()">Logout</button>
 </nav>
+
+
+<ng-template #notLoggedIn>
+  <nav>
+    <h1>Alchemy Alley</h1>
+    <a routerLink="/login"></a>    
+  </nav>
+</ng-template>
 <router-outlet></router-outlet>
