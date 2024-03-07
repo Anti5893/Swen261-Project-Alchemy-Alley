@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpResponse } from '@angular/common/http';
-import { map, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { User } from '../user';
-import { Observable } from 'rxjs';
+
 
 
 @Injectable({ providedIn: 'root' })
@@ -14,16 +14,12 @@ export class UserService {
     observe: 'response' as 'response'
   };
 
-  httpOptionsUser = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-
   private usersUrl = 'http://localhost:8080/users';
 
   constructor(private http: HttpClient){}
 
-  addUser(user : User) : Observable<User>{
-    return this.http.post<User>(this.usersUrl, user,this.httpOptionsUser)
+  addUser(user : User) : Observable<HttpResponse<User>>{
+    return this.http.post<User>(this.usersUrl, user,this.httpOptionsResponse)
   }
   
   authenticateUser(user : User) : Observable<HttpResponse<User>>{

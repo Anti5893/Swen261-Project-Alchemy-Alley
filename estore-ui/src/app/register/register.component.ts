@@ -30,7 +30,7 @@ export class RegisterComponent {
     return(!this.passwordsMatch && this.buttonClicked);
   }
 
-  // IDK why the subscribe is crossed out but this is the only way i could get it to work 
+  
   registerOnClick(username: string, password: string) {
     this.buttonClicked = true;
 
@@ -38,19 +38,21 @@ export class RegisterComponent {
       this.passwordsMatch = false;
       return;
     }
-    this.userService.authenticateUser({ username, password } as User).subscribe(
-      (response) => {
-        if (response.status === 200) {
-          this.showErrorMessage = true;
+    if(this.fieldsFull()){
+      this.userService.addUser({username,password} as User).subscribe(
+        (response) =>{
+          if(response.status == 201){
+            this.router.navigate(['/login']);
+            console.log("User Registered Successfully");
+          }
+        },
+        (error) =>{
+          if(error.status == 409){
+            this.showErrorMessage = true;
+          }
         }
-      },
-      (error) => {
-        if (this.fieldsFull()) {
-          this.userService.addUser({ username, password } as User).subscribe();
-          this.router.navigate(['/login']);
-        }
-      }
-    );
+      )
+    }
   }
 }
 
