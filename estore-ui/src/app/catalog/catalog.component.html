@@ -1,28 +1,29 @@
 <div class="wrapper" id="catalog">
-	<div id="catalog-options"></div>
+	<div id="catalog-options">
+		<input #searchBox id="catalog-search" (input)="searchProducts(searchBox.value)" />
+	</div>
 	<div id="catalog-products">
-		<div *ngFor="let product of products">
-			<div class="image-container" id="catalog-product-image">
-				<img src="" />
-			</div>
-			<div id="catalog-product-details">
-				<div id="catalog-product-naming">
-					<span class="header" id="catalog-product-name">
-						name={{ product.name }}
-					</span>
-					<span class="badge" id="catalog-product-type">
-						type={{ product.type }}
-					</span>
+		<div *ngIf="products.length > 0; else elseBlock">
+			<div *ngFor="let product of products">
+				<div class="image-container" id="catalog-product-image">
+					<img src="" />
 				</div>
-				<div id="catalog-product-pricing">
-					<span id="catalog-product-price">
-						price={{ product.price }}
-					</span>
-					<span id="catalog-product-quantity">
-						quantity={{ product.quantity }}
-					</span>
+				<div id="catalog-product-details">
+					<div id="catalog-product-naming">
+						<span class="header" id="catalog-product-name">
+							name={{ product.name }}
+						</span>
+						<span class="badge" id="catalog-product-type">
+							type={{ product.type }}
+						</span>
+					</div>
+					<div id="catalog-product-pricing">
+						<span id="catalog-product-price"> price={{ product.price }} </span>
+						<span id="catalog-product-quantity"> quantity={{ product.quantity }} </span>
+					</div>
 				</div>
 			</div>
 		</div>
+		<ng-template id="catalog-products-empty" #elseBlock>No products found</ng-template>
 	</div>
 </div>
