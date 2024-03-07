@@ -19,15 +19,15 @@ export class AdminComponent implements OnInit {
 
   getProducts(): void {
     this.productService.getProducts()
-    .subscribe(products => this.products = products);
+    .subscribe(response => this.products = response.body!);
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
     this.productService.addProduct({ name } as Product)
-      .subscribe(product => {
-        this.products.push(product);
+      .subscribe(response => {
+        this.products.push(response.body!);
       });
   }
 
