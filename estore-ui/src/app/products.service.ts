@@ -34,7 +34,7 @@ export class ProductService {
 
 	addProduct(product: Product): Observable<Product> {
 		return this.http.post<Product>(
-			`${this.productsUrl}/`,
+			`${this.productsUrl}`,
 			product,
 			this.httpOptions
 		);
