@@ -7,7 +7,7 @@ import { CredentialsService } from './credentials.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title: any;
+  title = "Alchemy Alley";
 
   constructor(private credentialsService : CredentialsService){ }
 
