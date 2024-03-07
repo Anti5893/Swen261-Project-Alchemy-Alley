@@ -1,5 +1,5 @@
 import { Component , Input} from '@angular/core';
-import { Router, UrlSegment } from '@angular/router';
+import { Router} from '@angular/router';
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
