@@ -15,7 +15,7 @@ export class LoginComponent {
   password : string = '';
   users: User[] = [];
   isAuthenticated = false;
-  buttonClicked = false;
+  requestSent = false;
 
   
   constructor(private userService : UserService, private credentialsService : CredentialsService, private router : Router){ }
@@ -27,12 +27,11 @@ export class LoginComponent {
 
  
   showErrorMesssage(){
-    return (this.buttonClicked && !this.isAuthenticated)
+    return (this.requestSent && !this.isAuthenticated)
   }
 
  
   onClick(username : string, password : string){
-    this.buttonClicked = true;
     this.userService.authenticateUser({username,password} as User).subscribe(
       (response) =>{
         if(response.status == 200){
@@ -41,11 +40,13 @@ export class LoginComponent {
           this.credentialsService.storeCurrentUser(loggedUser);
           this.router.navigate(['/catalog']);
         }
+        this.requestSent = true;
       },
       (error) =>{
         if(this.fieldsFull()){
           this.isAuthenticated = false;
         }
+        this.requestSent = true;
       }
     )
   }
