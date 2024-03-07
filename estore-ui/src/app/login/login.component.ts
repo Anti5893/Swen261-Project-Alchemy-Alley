@@ -1,5 +1,5 @@
 import { Component , Input} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 
 import { User } from '../../user';
 import { UserService } from '../user.service';
@@ -24,15 +24,6 @@ export class LoginComponent {
     return(this.password != '' && this.username != '');
   }
 
-  storeCurrentUser(username : string, password : string){
-    if(this.username == 'Admin' && this.password == 'Admin123'){
-      this.credentialsService.storeCurrentUser({username,password,isAdmin:true} as User)
-    }
-    else{
-      this.credentialsService.storeCurrentUser({username, password} as User)
-    }
-    
-  }
 
  
   showErrorMesssage(){
@@ -46,7 +37,9 @@ export class LoginComponent {
       (response) =>{
         if(response.status === 200){
           this.isAuthenticated = true;
-          this.storeCurrentUser(username,password);
+          const loggedUser = response.body;
+          console.log(loggedUser?.admin);
+          this.credentialsService.storeCurrentUser(loggedUser);
           this.router.navigate(['/catalog']);
         }
       },

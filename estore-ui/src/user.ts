@@ -1,7 +1,7 @@
 export interface User{
     username: string
     password: string,
-    isAdmin : boolean,
+    admin : boolean,
     unlocked  : number[],
     cart  : number[]
 }
