@@ -31,7 +31,7 @@ export class AdminComponent implements OnInit {
   }
 
   delete(product: Product): void {
-    this.products = this.products.filter(h => h !== product);
+    this.products = this.products.filter(p => p !== product);
     this.productService.deleteProduct(product.id).subscribe();
   }
 }

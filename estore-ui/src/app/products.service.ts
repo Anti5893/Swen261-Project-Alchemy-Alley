@@ -7,7 +7,7 @@ import { Product } from './product';
 	providedIn: 'root',
 })
 export class ProductService {
-	private productsUrl = 'http://localhost:8080/inventory/products/';
+	private productsUrl = 'http://localhost:8080/inventory/products';
 
 	httpOptions = {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -16,11 +16,11 @@ export class ProductService {
 	constructor(private http: HttpClient) {}
 
 	getProducts(): Observable<Product[]> {
-		return this.http.get<Product[]>(this.productsUrl);
+		return this.http.get<Product[]>(`${this.productsUrl}/`);
 	}
 
 	getProduct(id: number): Observable<Product> {
-		const url = `${this.productsUrl}${id}`;
+		const url = `${this.productsUrl}/${id}`;
 		return this.http.get<Product>(url);
 	}
 
@@ -34,7 +34,7 @@ export class ProductService {
 
 	addProduct(product: Product): Observable<Product> {
 		return this.http.post<Product>(
-			this.productsUrl,
+			`${this.productsUrl}/`,
 			product,
 			this.httpOptions
 		);
@@ -42,14 +42,14 @@ export class ProductService {
 
 	updateProduct(product: Product): Observable<Product> {
 		return this.http.put<Product>(
-			this.productsUrl,
+			`${this.productsUrl}`,
 			product,
 			this.httpOptions
 		);
 	}
 
 	deleteProduct(id: number): Observable<Product> {
-		const url = `${this.productsUrl}${id}`;
+		const url = `${this.productsUrl}/${id}`;
 		return this.http.delete<Product>(url, this.httpOptions);
 	}
 }
