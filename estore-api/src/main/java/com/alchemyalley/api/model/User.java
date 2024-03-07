@@ -91,12 +91,12 @@ public class User {
 		this.cart = newCart;
 	}
 
-	public void updatedUser(boolean admin, int[] cart, int[] unlocked )
-	{
-		this.admin = admin;
-		this.unlocked = unlocked;
-		this.cart = cart;
-	}
+	// public void updatedUser(boolean admin, int[] cart, int[] unlocked )
+	// {
+	// 	this.admin = admin;
+	// 	this.unlocked = unlocked;
+	// 	this.cart = cart;
+	// }
 
 	/**
 	 * The string representation of a user.
