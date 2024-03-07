@@ -30,7 +30,7 @@ export class LoginComponent {
     return (this.buttonClicked && !this.isAuthenticated)
   }
 
-  //Again - not sure why the first .subscribe is crossed out but it works and is cleaner than my other solution
+ 
   onClick(username : string, password : string){
     this.buttonClicked = true;
     this.userService.authenticateUser({username,password} as User).subscribe(
