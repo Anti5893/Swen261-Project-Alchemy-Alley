@@ -35,10 +35,9 @@ export class LoginComponent {
     this.buttonClicked = true;
     this.userService.authenticateUser({username,password} as User).subscribe(
       (response) =>{
-        if(response.status === 200){
+        if(response.status == 200){
           this.isAuthenticated = true;
-          const loggedUser = response.body;
-          console.log(loggedUser?.admin);
+          const loggedUser = response.body!;
           this.credentialsService.storeCurrentUser(loggedUser);
           this.router.navigate(['/catalog']);
         }

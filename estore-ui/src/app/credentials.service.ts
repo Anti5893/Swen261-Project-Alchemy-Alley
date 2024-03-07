@@ -1,25 +1,33 @@
 import { Injectable } from '@angular/core';
 import { User } from '../user';
-import { JitEvaluator } from '@angular/compiler';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CredentialsService {
   
-  storeCurrentUser(user : User | null){
+  storeCurrentUser(user : User) : void{
     localStorage.setItem('user', JSON.stringify(user))
   }
-  removeCurrentUser(){
+  removeCurrentUser() : void{
     localStorage.removeItem('user');
   }
 
   isLoggedIn() : boolean{
    return localStorage.getItem('user') != null;
   }
+  
+  getUser() : User | null{
+    if(this.isLoggedIn()){
+      const userJson = JSON.parse(localStorage.getItem('user') || '{}')
+      return userJson;
+    }
+    return null;
+  }
 
   isAdmin() : boolean{
-    const userJson = JSON.parse(localStorage.getItem('user')||'{}');
-    return userJson.admin == true;
+    return this.getUser()!.admin == true;
   }
+
 }
