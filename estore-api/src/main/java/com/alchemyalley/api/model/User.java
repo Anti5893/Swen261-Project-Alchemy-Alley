@@ -14,9 +14,9 @@ public class User {
 
 	@JsonProperty("username") private final String username;
 	@JsonProperty("password") private final String password;
-	@JsonProperty("admin") private final boolean admin;
-	@JsonProperty("unlocked") private final int[] unlocked;
-	@JsonProperty("cart") private final int[] cart;
+	@JsonProperty("admin") private boolean admin;
+	@JsonProperty("unlocked") private int[] unlocked;
+	@JsonProperty("cart") private int[] cart;
 
 	/**
 	 * Creates a {@code User} with its given attributes.

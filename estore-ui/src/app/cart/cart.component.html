@@ -1,1 +1,9 @@
-<p>cart works!</p>
+<h1>Cart</h1>
+<h2>Current Products in Cart</h2>
+<ul>
+    <li *ngFor="let product of products">
+        <h2><span>Name: </span>{{product.name}}<span>Price: </span>{{product.price}}</h2>
+        <button (click)="removeProduct(product.id)">Remove</button>
+    </li>
+</ul>
+<h3>Total: {{getTotalPrice()}}</h3>

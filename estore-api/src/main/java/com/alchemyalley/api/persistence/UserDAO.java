@@ -30,4 +30,13 @@ public interface UserDAO {
 	 */
 	User authenticateUser(User user);
 
+	/**
+	 * Updates the user with new data.
+	 * @param user The user that is being updated
+	 * @return The updated {@link User} instance,
+	 *			or {@code null} if invalid
+	 * @throws IOException If there is an error updating
+	 */
+    User updateUser(User user) throws IOException;
+
 }
