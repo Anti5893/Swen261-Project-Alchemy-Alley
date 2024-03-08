@@ -106,9 +106,7 @@ public class UsersControllerTest {
 	@Test
 	public void testUpdateUser() throws IOException{
 		// Setup
-		User updatedUser = new User("JackFTW", "securePassword", false, new int[] {1}, new int[] {1, 2});
-	
-		// Mocking the behavior to simulate the update operation
+		User updatedUser = new User("JackFTW", "securePassword", false, new int[] { 1 }, new int[] { 1, 2 });
 		when(this.userDAO.updateUser(updatedUser)).thenReturn(updatedUser);
 	
 		// Invoke
@@ -121,7 +119,7 @@ public class UsersControllerTest {
 	@Test
 	public void testUpdateUserFailsWhenUserNotFound() throws IOException {
 		// Setup
-		User userToUpdate = new User("NonExistentUser", "password", false, new int[] {}, new int[] {});
+		User userToUpdate = new User("NonExistentUser", "password", false, new int[0], new int[0]);
 		when(userDAO.updateUser(userToUpdate)).thenReturn(null);
 
 		// Invoke
@@ -145,6 +143,5 @@ public class UsersControllerTest {
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 		assertNull(response.getBody());
 	}
-
 
 }
