@@ -65,38 +65,6 @@ public class User {
 		return this.admin;
 	}
 
-	/**
-	 * Gets all product ids that this user has unlocked.
-	 *
-	 * @return  An array of integers holding the unlocked product ids
-	 */
-	public int[] getUnlocked() {
-		return this.unlocked;
-	}
-
-	/**
-	 * Gets the product ids currently in this user's cart.
-	 *
-	 * @return  An array of integers holding the cart's product ids
-	 */
-	public int[] getCart() {
-		return this.cart;
-	}
-	/**
-	 * Sets the cart to a new cart.
-	 * 
-	 * @param newCart: Array of int's representing product ids.
-	 */
-	public void setCart(int[] newCart){
-		this.cart = newCart;
-	}
-
-	// public void updatedUser(boolean admin, int[] cart, int[] unlocked )
-	// {
-	// 	this.admin = admin;
-	// 	this.unlocked = unlocked;
-	// 	this.cart = cart;
-	// }
 
 	/**
 	 * The string representation of a user.
