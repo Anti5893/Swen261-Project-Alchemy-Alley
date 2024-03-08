@@ -26,7 +26,7 @@ export class AdminProductDetailComponent implements OnInit {
   getProduct(): void {
     const id = Number(this.route.snapshot.paramMap.get('id')!);
     this.productService.getProduct(id)
-      .subscribe(product => this.product = product);
+      .subscribe(response => this.product = response.body!);
   }
 
   goBack(): void {
