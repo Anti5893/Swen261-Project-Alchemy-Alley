@@ -50,7 +50,7 @@ export class CatalogComponent implements OnInit {
 	itemInCart(product: Product): boolean {
 		const curUser = this.credentialService.getUser();
 		const curCart = curUser?.cart;
-		return Boolean(curCart?.some((productId: number) => productId == product.id));
+		return Boolean(curCart?.includes(product.id));
 	}
 
 	maxCartSize():boolean {
@@ -66,14 +66,14 @@ export class CatalogComponent implements OnInit {
 		}
 	}
 	
-	addToCart(product: Product): void {
+	addToCart(productID: number): void {
 		let curUser = this.credentialService.getUser();
 		if (curUser) {
 			if (!curUser.cart) {
 				curUser.cart = [];
 			}
 	
-			curUser.cart.push(product.id);
+			curUser.cart.push(productID);
 	
 			this.credentialService.storeCurrentUser({...curUser});
 			this.userService.updateUser(curUser).subscribe();

@@ -9,14 +9,9 @@ import { ProductService } from '../product.service';
 
 
 @Component({
-  standalone: true,
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  imports: [
-    NgIf,
-    NgFor,
-  ]
 })
 export class CartComponent {
 	products: Product[] = [];

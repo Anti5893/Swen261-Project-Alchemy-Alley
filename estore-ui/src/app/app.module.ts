@@ -18,7 +18,7 @@ import { AdminProductDetailComponent } from './admin-product-detail/admin-produc
     LoginComponent,
     RegisterComponent,
     CatalogComponent,
-    // CartComponent,
+    CartComponent,
     AdminComponent,
     AdminProductDetailComponent,
   ],
