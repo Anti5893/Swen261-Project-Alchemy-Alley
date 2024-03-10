@@ -22,6 +22,8 @@
 						<span id="catalog-product-quantity"> quantity={{ product.quantity }} </span>
 					</div>
 				</div>
+				<button *ngIf="!itemInCart(product)" [disabled] ="maxCartSize()" (click)="addToCart(product)">Add to Cart</button>
+        		<button *ngIf="itemInCart(product)" (click)="removeFromCart(product.id)">Remove from Cart</button>
 			</div>
 		</div>
 		<ng-template id="catalog-products-empty" #elseBlock>No products found</ng-template>
