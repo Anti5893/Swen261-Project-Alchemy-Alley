@@ -7,3 +7,4 @@
     </li>
 </ul>
 <h3>Total: {{getTotalPrice()}}</h3>
+<button [disabled]="isCartEmpty()" (click) = "handlePurchase()">Purchase Cart</button>

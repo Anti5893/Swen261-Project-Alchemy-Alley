@@ -61,12 +61,22 @@ export class CartComponent {
         this.credentialService.storeCurrentUser({...curUser});
         this.products = this.products.filter(product => product.id !== productID);
        
-        this.userService.updateUser(curUser).subscribe({
-            error: (err) => console.error('Error updating user:', err),
-        });
-    } else {
-        console.error('No current user found.');
+        this.userService.updateUser(curUser).subscribe({});
     }
-}
+  }
+  handlePurchase(): void {
+    let curUser = this.credentialService.getUser();
+    if(curUser && curUser.cart)
+    {
+      curUser.cart = [];
+      curUser.unlocked // Handle new Unlocked
+      this.credentialService.storeCurrentUser({...curUser});
+      this.products = [];
+      this.userService.updateUser(curUser).subscribe({});
+    }
+  }
+  isCartEmpty(): boolean {
+    return (this.products.length == 0);
+  }
 }
 
