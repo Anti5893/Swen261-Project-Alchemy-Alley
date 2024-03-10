@@ -1,7 +1,5 @@
 import { UserService } from './../user.service';
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { NgIf, NgFor } from '@angular/common';
 
 import { Product } from '../product';
 import { CredentialsService } from '../credentials.service';

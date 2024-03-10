@@ -49,8 +49,8 @@ export class CatalogComponent implements OnInit {
 
 	itemInCart(product: Product): boolean {
 		const curUser = this.credentialService.getUser();
-		const curCart = curUser?.cart;
-		return Boolean(curCart?.includes(product.id));
+		const curCart = curUser!.cart;
+		return curCart?.includes(product.id);
 	}
 
 	maxCartSize():boolean {
