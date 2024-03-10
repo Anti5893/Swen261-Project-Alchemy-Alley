@@ -18,8 +18,8 @@
     <label for="cc-expiration">Expiration Date (MM/YY): </label>
     <input type="text" id="cc-expiration" name="cc-expiration" inputmode="numeric" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" placeholder="MM/YY" required>
     <br>
-    <label for="cc-cvv">CVV: </label>
-    <input type="text" id="cc-cvv" name="cc-cvv" inputmode="numeric" pattern="[0-9]{3,4}" placeholder="123" required>
+    <label for="cc-ccv">CCV: </label>
+    <input type="text" id="cc-ccv" name="cc-ccv" inputmode="numeric" pattern="[0-9]{3,4}" placeholder="123" required>
     <br>
     <button [disabled]="isCartEmpty()" (click) = "handlePurchase()" type="submit">Purchase Cart</button>
 </form>
