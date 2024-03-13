@@ -4,10 +4,9 @@ import { Observable } from "rxjs";
 
 import { Product } from "./product";
 
-@Injectable({
-	providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class ProductService {
+
 	private productsUrl = "http://localhost:8080/inventory/products";
 
 	httpOptions = {
@@ -43,4 +42,5 @@ export class ProductService {
 		const url = `${this.productsUrl}/${id}`;
 		return this.http.delete<Product>(url, this.httpOptions);
 	}
+  
 }
