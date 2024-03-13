@@ -26,6 +26,9 @@ export class UserService {
     const authUrl = this.usersUrl + '/auth';
     return this.http.post<User>(authUrl,user,this.httpOptionsResponse)
   }
+  updateUser(user: User) : Observable<HttpResponse<User>>{
+    return this.http.put<User>(this.usersUrl, user,this.httpOptionsResponse)
+  }
 }
 
 
