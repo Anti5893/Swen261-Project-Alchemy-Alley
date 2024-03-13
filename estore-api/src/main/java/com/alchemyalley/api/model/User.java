@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class User {
 
-	static final String STRING_FORMAT = "User [username=%s, password=%s, admin=%b, unlocked=%s, cart=%s";
+	static final String STRING_FORMAT = "User [username=%s, password=%s, admin=%b, unlocked=%s, cart=%s]";
 
 	@JsonProperty("username") private final String username;
 	@JsonProperty("password") private final String password;
