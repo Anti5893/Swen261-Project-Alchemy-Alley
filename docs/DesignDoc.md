@@ -9,12 +9,13 @@ geometry: margin=1in
 > and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: Wizards
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Jack Barter
+  * Evan Savage
+  * Joseph Skinner
+  * Garrett Tupper
+  * Shawn Broderick
 
 ## Executive Summary
 
@@ -54,12 +55,16 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model](domain-model.png)
 
-> _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+This model demonstrates what entities exist in our
+E-Store and how they interact. Based on the MVP requirements, two main types of users exist: the Owner and Buyers. There only exists one Owner (or Product Owner). On the contrary, there is no limit on the number of Buyers. Both of these types of users can log in to the site and log out of the E-Store, as shown in the Domain Model.
 
+A Buyer has many possible interactions that are unique to them. Mainly, they can search and view the Inventory. Searching provides a mean of limiting the results shown. The Inventory itself is divided into categories containing any number of Products. Each Product has descriptive information, including its name, price, quantity, and type. The Inventory may divide itself into categories based on the type of each Product, or however the Buyer wishes to view the Inventory. 
+
+In addition, the Buyer can also add or remove products to their Shopping Cart. From the Shopping Cart, all of its contents can be paid for using one of the Payment Methods shown in the Domain Model.
+
+As for the Owner, they have an important role too. The Owner is mainly responsible for updating the Inventory in various ways. This may include: adding products, removing products, or editing products. Editing a Product is considered changing a piece of its data in some way so that the Buyer can see the change made in the Inventory.
 
 ## Architecture and Design
 
@@ -148,8 +153,6 @@ This section describes the web interface flow; this is how the user views and in
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
 
 ### Acceptance Testing
 > _**[Sprint 2 & 4]** Report on the number of user stories that have passed all their
@@ -159,13 +162,30 @@ This section describes the web interface flow; this is how the user views and in
 > acceptance testing and if there are any concerns._
 
 ### Unit Testing and Code Coverage
+
+#### Unit Testing
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
->_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
-> those._
+#### Code Coverage
+
+![Overall Code Coverage](code-coverage-overall.png)
+
+Currently, we are meeting the 90% coverage requirement. The largest tier contributing to low code coverage seems to be the Persistence Tier, which is explained below.
+
+![Overall Code Coverage](code-coverage-persistence.png)
+
+Based on the report, CraftingFileDAO is not being tested enough. This is because it is a work-in-progress component and will be fully developed and tested in the next sprint.
+
+![Overall Code Coverage](code-coverage-model.png)
+
+Similar to the Persistence Tier, Recipe is not being tested enough in this tier because it is a part of a work-in-progress feature. This will be resolved in the next sprint with increased code coverage.
+
+![Overall Code Coverage](code-coverage-controller.png)
+
+Based on the results of this report, the Controller Tier is very well tested, with the exception of `InventoryController#getProducts()`. This missed method is also resulting in an increase in missed branches within this tier. Come next sprint, this could easily be resolved by the addition of 1-2 more unit tests.
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
