@@ -170,6 +170,7 @@ We will continue with this principle, keeping our code split into single respons
 
 ###### 2. Open/Closed
 After reviewing our project, we noticed that, because of the nature of our e-store, we don’t have many interfaces or abstract classes in our design. This could be something that we could improve upon, but if our project doesn’t ask for it, then why do it. Now that isn’t to say that there's no occurrences of open/closed in our project as our `ProductDAO` and `CraftingDAO` are both great examples. They’re interfaces that we used to implement the data from the files stored in the ./data directory of our repo. `ProductDAO` is used for our products (spells), and `CraftingDAO` is used for our cart (crafter). These files are both implementable and unmodifiable because they’re interfaces. The classes that use them, `ProductFileDAO` and `CraftingFileDAO` are unmodifiable as well as they only provide information on our products and recipes respectively for the rest of our api. As we only have one type of product, a spell, there really isn’t any other place to incorporate interfaces and abstract classes. Our crafting isn’t really a help either because it only deals with recipes as that can be handled with one class. If we were to add more product types like tools, we could create a `Product`, `Spell`, and `Tool` class where `Spell` and `Tool` would extend `Product`. Something like this is an improvement we could do to our api to not repeat ourselves and incorporate the Open/Closed principle.
+
 ![OOP Design Diagram 2, a class diagram depicted the above](OOD_Open_Close.png)
 
 ###### 3. Low Coupling
@@ -233,3 +234,38 @@ Based on the results of this report, the Controller Tier is very well tested, wi
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
+
+### (2024/02/08): Sprint 1
+We decided on a homogenous style to our codebase to ensure the readibility and understandability of our code.
+These decisions include:
+
+* Javadocs for fields aren't necessary
+* Include a Javadoc for each method
+* Create tab align for Javadoc Params. Exmaple -> ![Example of desired Javadoc param indentation](Javadoc-param-indentation.png)
+* Write out `return this.var` rather than `return var`
+* 4 Tab width with tabs rather than spaces
+
+### (2024/02/22): Sprint 2
+We discussed the basic layout for the site aswell as how our website would be structered internally.
+This included things like:
+
+* What our navbar would contain
+  * Catalog
+  * Admin (If applicable)
+  * Cart
+  * Logout Button
+* How our navbar items would aligned
+* That our login page should be the root-page
+* The urls for each of the pages
+  * Catalog: `/catalog`
+  * Admin: `/admin`
+  * Cart: `/cart`
+  * Login: `/login`
+  * Register: `/register`
+* What our login page would look like
+
+We decided to make the login page our root page because of one of our enhancements: the crafting system. This would make it so that the user would only be able to see the items that they had unlocked and would have to craft new items to see them in the catalog. Unlike a normal e-store, we wouldn't be able to make our root page our catalog as it now requires an account to function. This makes chosing to make the login page the root page an easy decision as it's kind of the gateway for the site to function.
+
+All of our brainstorming can be seen below on the whiteboard.
+
+![A picture of a whiteboard containing crude mockups of how our site might be laid out](ui-mockup.jpg)
