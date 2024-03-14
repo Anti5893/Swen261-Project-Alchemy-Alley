@@ -42,7 +42,22 @@ This section describes the features of the application.
 > maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
+##### Sprint 2
+For Sprint 2 our MVP was poorly defined, as the provided MVP requirements are for the U-fund project, Therefore we had to adapt these requirements for our webstore.
+Minimal Authentication
+- A user (customer or admin) can log in or out to the application.
+- An admin logs in using the reserved username admin.
+- Any other username can be assumed to be a customer.
+Shopping Experience
+- A customer should be able to search for a product.
+- A customer should be able to view the catalog in it's entirety.
+- A customer should be able to add or remove a product from their cart.
+- A customer should be able to view items currently in their cart.
+Admin Functionality
+- An admin can add, modify, and delete products.
+- An admin should not have access to a cart.
+##### Sprint 4 TBD
+
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
@@ -143,6 +158,20 @@ This section describes the web interface flow; this is how the user views and in
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
+###### 1. Single Responsibility
+With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. Even in our most basic skeleton we have our REST api split into many classes, for example:
+* Product - Holds the state of each project, only has mutators and getters.
+* ProductFileDao - Holds all the methods for interacting with, and creating, an array of products, but has no state.
+* InventoryController - A wrapper to allow the ProductFileDao to interact with HTTP, holds no unnecessary state.
+We will continue with this principle, keeping our code split into single responsibility classes and components as our REST api and front end expand.
+![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
+###### 2. Low Coupling
+Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
+* Product - Product is only directly referenced in the ProductFileDao
+* ProductFileDao - Directly references the Product class, is referenced by the Inventory Controller
+* InventoryController - Directly references ProductFileDao, only references Product as far as taking input for create and update.
+With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
+![OOP Design Diagram 2, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
 
 ## Static Code Analysis/Future Design Improvements
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
