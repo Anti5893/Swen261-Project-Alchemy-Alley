@@ -19,7 +19,7 @@ geometry: margin=1in
 
 ## Executive Summary
 
-This is a summary of the project.
+This project is an Angular-based E-Store with a special crafting feature. Users can log in in and out of the store to see a catalog of spells. Each spell can be added to the cart where they can be purchased by the user. As a user purchases spells, more spells will become unlocked to be purchased by the user. Admins may also be able to login to the site to add, remove, or edit spells in the store. The store uses REST API for its backend communication with a file-based storage system. 
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
