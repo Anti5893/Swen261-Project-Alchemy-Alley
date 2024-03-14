@@ -37,27 +37,28 @@ This is a summary of the project.
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-
 ### Definition of MVP
-##### Sprint 2
-For Sprint 2 our MVP was poorly defined, as the provided MVP requirements are for the U-fund project, Therefore we had to adapt these requirements for our webstore.
-Minimal Authentication
-- A user (customer or admin) can log in or out to the application.
-- An admin logs in using the reserved username admin.
-- Any other username can be assumed to be a customer.
-Shopping Experience
-- A customer should be able to search for a product.
-- A customer should be able to view the catalog in it's entirety.
-- A customer should be able to add or remove a product from their cart.
-- A customer should be able to view items currently in their cart.
-Admin Functionality
-- An admin can add, modify, and delete products.
-- An admin should not have access to a cart.
-##### Sprint 4 TBD
 
+#### Sprint 2
+For Sprint 2, our MVP was poorly defined, as the provided MVP requirements are for the U-fund project. Therefore we had to adapt these requirements for our webstore.
+
+Minimal Authentication
+- A user (Buyer or Owner) can log in or out to the application.
+- The Owner logs in using the reserved username "admin".
+- Any other username can be assumed to be a customer.
+
+Shopping Experience
+- A Buyer should be able to search for a product.
+- A Buyer should be able to view the catalog in it's entirety.
+- A Buyer should be able to add or remove a product from their cart.
+- A Buyer should be able to view items currently in their cart.
+
+Admin Functionality
+- An Owner can add, modify, and delete products.
+- An Owner should not have access to a cart.
+
+#### Sprint 4
+> TBD
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
@@ -158,20 +159,30 @@ This section describes the web interface flow; this is how the user views and in
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
+
 ###### 1. Single Responsibility
 With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. Even in our most basic skeleton we have our REST api split into many classes, for example:
 * Product - Holds the state of each project, only has mutators and getters.
-* ProductFileDao - Holds all the methods for interacting with, and creating, an array of products, but has no state.
-* InventoryController - A wrapper to allow the ProductFileDao to interact with HTTP, holds no unnecessary state.
-We will continue with this principle, keeping our code split into single responsibility classes and components as our REST api and front end expand.
+* ProductFileDAO - Holds all the methods for interacting with, and creating, an array of products, but has no state.
+* InventoryController - A wrapper to allow the ProductFileDAO to interact with HTTP, holds no unnecessary state.
+We will continue with this principle, keeping our code split into single responsibility classes and components as our REST API and front end expand.
 ![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
+
 ###### 2. Low Coupling
 Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
 * Product - Product is only directly referenced in the ProductFileDao
-* ProductFileDao - Directly references the Product class, is referenced by the Inventory Controller
-* InventoryController - Directly references ProductFileDao, only references Product as far as taking input for create and update.
+* ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
+* InventoryController - Directly references ProductFileDAO, only references Product as far as taking input for create and update.
 With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
 ![OOP Design Diagram 2, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
+
+###### 7. Controller
+In our project's E-Store, the concept of a Controller is implemented in many different ways. However, most obviously, explicit controller classes exist in our backend’s architecture. Specifically, controllers handle incoming HTTP requests in our Spring/Tomcat environment. They relay operations made on the frontend and update a saved version of the model on the backend. In our case, the controller classes directly interface with the persistence layer to store any changes to the model on disk. Each controller in our design is responsible for CRUD operations surrounding one part of the model (e.g., a Product). Importantly, this allows the front-end to be separated from any logic required to query/change data (e.g., renaming a product). In a sense, it exists as a means to control how requests to the backend affect the E-Store, whether it requires sanitizing input, responding with error codes, and so on. See below for an example:
+![OO Design Diagram 7, depicting the above](OO-Design-Diagram-7.png)
+
+###### 8. Pure Fabrication
+Another vial concept that we use in our design of the E-Store is Pure Fabrication. Pure Fabrication classes assist in maintaining the single responsibility of other classes in the program. Typically, they are not actors in our Domain Analysis and have a more technical responsibility, like saving data. In our E-Store, this would be how our persistence is implemented in our API. Instead of having each Product class responsible for saving its data (either by dependency injection in the Product or not), there exists data access objects (DAO) that are responsible for loading/saving pieces of the model, like a Product. This allows model classes themselves, like the Product class, to remain well-designed and are only responsible for storing datain its fields. For example, our projcet currently implements a ProductDAO interface named ProductFileDAO that stores product data to disk using JavaScript Object Notation(JSON). Even though Pure Fabrication adds a dependency between ProductDAO and Product, it helps adhere to other important design principles like single responsibility and low coupling. See below for an example:
+![OO Design Diagram 8, depicting the above](OO-Design-Diagram-8.png)
 
 ## Static Code Analysis/Future Design Improvements
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
