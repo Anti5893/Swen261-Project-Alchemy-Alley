@@ -10,7 +10,7 @@
     
     <a [routerLink]="'/login'">Back To Login</a>
     <button (click) = "registerOnClick(username,password)">Register</button>
-    <p *ngIf="showErrorMessage">Error - User Already EWxists</p>
+    <p *ngIf="showErrorMessage">Error - User Already Exists</p>
     <p *ngIf="showPasswordsDontMatch()">Error - Passwords Don't Match</p>
 </div>
 <router-outlet></router-outlet>
