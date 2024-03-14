@@ -11,14 +11,14 @@ import { UserService } from './../user.service';
 	styleUrl: "./catalog.component.css",
 })
 export class CatalogComponent implements OnInit {
+
 	products: Product[] = [];
 	searchQuery: string = "";
 
 	constructor(
 		private productService: ProductService,
 		private credentialService: CredentialsService,
-		private userService: UserService
-		) {}
+		private userService: UserService) {}
 
 	ngOnInit(): void {
 		this.getProducts();
@@ -26,7 +26,7 @@ export class CatalogComponent implements OnInit {
 
 	getProducts(): void {
 		this.productService.getProducts().subscribe((products) => {
-			if (products.body) {
+			if(products.body) {
 				this.products = products.body;
 			} else {
 				this.products = [];
@@ -37,7 +37,7 @@ export class CatalogComponent implements OnInit {
 	searchProducts(query: string): void {
 		this.productService.searchProduct(query).subscribe(
 			(response) => {
-				if (response.body) {
+				if(response.body) {
 					this.products = response.body;
 				}
 			},
@@ -53,23 +53,20 @@ export class CatalogComponent implements OnInit {
 		return curCart?.includes(product.id);
 	}
 
-	maxCartSize():boolean {
+	maxCartSize(): boolean {
 		const curUser = this.credentialService.getUser();
 		let curCart = curUser?.cart;
-		if (curCart)
-		{
-			return (curCart.length >= 2);
-		}
-		else
-		{
+		if(curCart) {
+			return curCart.length >= 2;
+		} else {
 			return false;
 		}
 	}
 	
 	addToCart(productID: number): void {
 		let curUser = this.credentialService.getUser();
-		if (curUser) {
-			if (!curUser.cart) {
+		if(curUser) {
+			if(!curUser.cart) {
 				curUser.cart = [];
 			}
 	
@@ -83,13 +80,12 @@ export class CatalogComponent implements OnInit {
 	removeFromCart(productID: number): void {
 		let curUser = this.credentialService.getUser();
 	 
-		 if (curUser && curUser.cart) {
-	 
-			 curUser.cart = curUser.cart.filter(id => id !== productID);
-			 this.credentialService.storeCurrentUser({...curUser});
-			
-			 this.userService.updateUser(curUser).subscribe({});
-		 }
-	 }
+		if(curUser && curUser.cart) {
+			curUser.cart = curUser.cart.filter(id => id !== productID);
+			this.credentialService.storeCurrentUser({...curUser});
+		   
+			this.userService.updateUser(curUser).subscribe({});
+		}
+	}
 	
 }

@@ -1,19 +1,18 @@
 <div>
-  <label for="new-product">Product name: </label>
-  <input id="new-product" #productName />
-
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
-    Add product
-  </button>
+    <label for="new-product">Product Name: </label>
+    <input id="new-product" #productName/>
+  
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
+      Add product
+    </button>
 </div>
-
+  
 <ul class="products">
-  <li *ngFor="let product of products">
-    <a routerLink="/admin/{{product.id}}">
-      <span class="badge">{{product.id}}</span> {{product.name}}
-    </a>
-    <button type="button" class="delete" title="delete product"
-      (click)="delete(product)">x</button>
-  </li>
+    <li *ngFor="let product of products">
+        <a routerLink="/admin/{{product.id}}">
+            <span class="badge">{{product.id}}</span> {{product.name}}
+        </a>
+        <button type="button" class="delete" title="delete product" (click)="delete(product)">x</button>
+    </li>
 </ul>

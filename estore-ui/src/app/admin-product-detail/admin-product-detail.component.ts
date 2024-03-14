@@ -11,13 +11,13 @@ import { ProductService } from '../products.service';
   styleUrl: './admin-product-detail.component.css'
 })
 export class AdminProductDetailComponent implements OnInit {
+
   product: Product | undefined;
 
   constructor(
-    private route: ActivatedRoute,
     private productService: ProductService,
-    private location: Location
-  ) {}
+    private route: ActivatedRoute,
+    private location: Location) {}
 
   ngOnInit(): void {
     this.getProduct();
@@ -25,8 +25,7 @@ export class AdminProductDetailComponent implements OnInit {
 
   getProduct(): void {
     const id = Number(this.route.snapshot.paramMap.get('id')!);
-    this.productService.getProduct(id)
-      .subscribe(response => this.product = response.body!);
+    this.productService.getProduct(id).subscribe((response) => this.product = response.body!);
   }
 
   goBack(): void {
@@ -34,9 +33,9 @@ export class AdminProductDetailComponent implements OnInit {
   }
 
   save(): void {
-    if (this.product) {
-      this.productService.updateProduct(this.product)
-        .subscribe(() => this.goBack());
+    if(this.product) {
+      this.productService.updateProduct(this.product).subscribe(() => this.goBack());
     }
   }
+  
 }

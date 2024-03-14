@@ -7,17 +7,7 @@ import { CredentialsService } from './credentials.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = "Alchemy Alley";
 
-  constructor(private credentialsService : CredentialsService){ }
+  constructor(public credentialsService: CredentialsService) {}
 
-  logOut(){
-    this.credentialsService.removeCurrentUser()
-  }
-  isLoggedIn(){
-    return this.credentialsService.isLoggedIn()
-  }
-  isAdmin(){
-    return this.credentialsService.isAdmin()
-  }
 }
