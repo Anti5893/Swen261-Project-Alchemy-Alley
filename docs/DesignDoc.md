@@ -76,7 +76,7 @@ This section describes the application domain.
 This model demonstrates what entities exist in our
 E-Store and how they interact. Based on the MVP requirements, two main types of users exist: the Owner and Buyers. There only exists one Owner (or Product Owner). On the contrary, there is no limit on the number of Buyers. Both of these types of users can log in to the site and log out of the E-Store, as shown in the Domain Model.
 
-A Buyer has many possible interactions that are unique to them. Mainly, they can search and view the Inventory. Searching provides a mean of limiting the results shown. The Inventory itself is divided into categories containing any number of Products. Each Product has descriptive information, including its name, price, quantity, and type. The Inventory may divide itself into categories based on the type of each Product, or however the Buyer wishes to view the Inventory. 
+A Buyer has many possible interactions that are unique to them. Mainly, they can search and view the Inventory. Searching provides a mean of limiting the results shown. The Inventory itself is divided into categories containing any number of Products. Each Product has descriptive information, including its name, price, quantity, and type. The Inventory may divide itself into categories based on the type of each Product, or however the Buyer wishes to view the Inventory.
 
 In addition, the Buyer can also add or remove products to their Shopping Cart. From the Shopping Cart, all of its contents can be paid for using one of the Payment Methods shown in the Domain Model.
 
@@ -88,15 +88,15 @@ This section describes the application architecture.
 
 ### Summary
 
-The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
+The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 **NOTE**: detailed diagrams are required in later sections of this document.
 > _**[Sprint 1]** (Augment this diagram with your **own** rendition and representations of sample system classes, placing them into the appropriate M/V/VM (orange rectangle) tier section. Focus on what is currently required to support **Sprint 1 - Demo requirements**. Make sure to describe your design choices in the corresponding _**Tier Section**_ and also in the _**OO Design Principles**_ section below.)_
 
 ![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
 
-The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
+The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern.
 
-The Model stores the application data objects including any functionality to provide persistance. 
+The Model stores the application data objects including any functionality to provide persistance.
 
 The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeScript. The ViewModel provides RESTful APIs to the client (View) as well as any logic required to manipulate the data objects from the Model.
 
@@ -116,10 +116,10 @@ This section describes the web interface flow; this is how the user views and in
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
-> of the design that you are describing.  (**For example**, in a shopping experience application you might create a 
+> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects
+> of the design that you are describing.  (**For example**, in a shopping experience application you might create a
 > sequence diagram of a customer searching for an item and adding to their cart.)
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
+> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
 > to help illustrate the end-to-end flow._
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
@@ -137,7 +137,7 @@ This section describes the web interface flow; this is how the user views and in
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
-> 
+>
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
@@ -149,7 +149,7 @@ This section describes the web interface flow; this is how the user views and in
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
-> 
+>
 ![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
 
 ## OO Design Principles
@@ -166,15 +166,19 @@ With the structure of our project it is incredibly important to be strongly adhe
 * ProductFileDAO - Holds all the methods for interacting with, and creating, an array of products, but has no state.
 * InventoryController - A wrapper to allow the ProductFileDAO to interact with HTTP, holds no unnecessary state.
 We will continue with this principle, keeping our code split into single responsibility classes and components as our REST API and front end expand.
-![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
+![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
-###### 2. Low Coupling
+###### 2. Open/Closed
+After reviewing our project, we noticed that, because of the nature of our e-store, we don’t have many interfaces or abstract classes in our design. This could be something that we could improve upon, but if our project doesn’t ask for it, then why do it. Now that isn’t to say that there's no occurrences of open/closed in our project as our `ProductDAO` and `CraftingDAO` are both great examples. They’re interfaces that we used to implement the data from the files stored in the ./data directory of our repo. `ProductDAO` is used for our products (spells), and `CraftingDAO` is used for our cart (crafter). These files are both implementable and unmodifiable because they’re interfaces. The classes that use them, `ProductFileDAO` and `CraftingFileDAO` are unmodifiable as well as they only provide information on our products and recipes respectively for the rest of our api. As we only have one type of product, a spell, there really isn’t any other place to incorporate interfaces and abstract classes. Our crafting isn’t really a help either because it only deals with recipes as that can be handled with one class. If we were to add more product types like tools, we could create a `Product`, `Spell`, and `Tool` class where `Spell` and `Tool` would extend `Product`. Something like this is an improvement we could do to our api to not repeat ourselves and incorporate the Open/Closed principle.
+![OOP Design Diagram 2, a class diagram depicted the above](OOD_Open_Close.png)
+
+###### 3. Low Coupling
 Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
 * Product - Product is only directly referenced in the ProductFileDao
 * ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
 * InventoryController - Directly references ProductFileDAO, only references Product as far as taking input for create and update.
 With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
-![OOP Design Diagram 2, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
+![OOP Design Diagram 3, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
 ###### 7. Controller
 In our project's E-Store, the concept of a Controller is implemented in many different ways. However, most obviously, explicit controller classes exist in our backend’s architecture. Specifically, controllers handle incoming HTTP requests in our Spring/Tomcat environment. They relay operations made on the frontend and update a saved version of the model on the backend. In our case, the controller classes directly interface with the persistence layer to store any changes to the model on disk. Each controller in our design is responsible for CRUD operations surrounding one part of the model (e.g., a Product). Importantly, this allows the front-end to be separated from any logic required to query/change data (e.g., renaming a product). In a sense, it exists as a means to control how requests to the backend affect the E-Store, whether it requires sanitizing input, responding with error codes, and so on. See below for an example:
@@ -185,9 +189,9 @@ Another vial concept that we use in our design of the E-Store is Pure Fabricatio
 ![OO Design Diagram 8, depicting the above](OO-Design-Diagram-8.png)
 
 ## Static Code Analysis/Future Design Improvements
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
-> **Identify 3-4** areas within your code that have been flagged by the Static Code 
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.  
+> _**[Sprint 4]** With the results from the Static Code Analysis exercise,
+> **Identify 3-4** areas within your code that have been flagged by the Static Code
+> Analysis Tool (SonarQube) and provide your analysis and recommendations.
 > Include any relevant screenshot(s) with each area._
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
