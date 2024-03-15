@@ -181,6 +181,15 @@ Our current project structure is in a great place with coupling. Each class curr
 With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
 ![OOP Design Diagram 3, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
+###### 4. Low Coupling
+The principle of information expert will be used within our design by making sure classes are
+responsible for doing calculations and editing their own attributes. One example of this would be
+our toString method within our Product class. Having the string be created by a method within
+Product instead of ussing getters outside of the Product class keeps the product utilizing it's own
+attributes improving readability and reducing unneeded complexity.
+![OOP Design Diagram 4, a class diagram depicting the above](OOP-Design-Diagram-4.png)
+
+
 ###### 7. Controller
 In our project's E-Store, the concept of a Controller is implemented in many different ways. However, most obviously, explicit controller classes exist in our backend’s architecture. Specifically, controllers handle incoming HTTP requests in our Spring/Tomcat environment. They relay operations made on the frontend and update a saved version of the model on the backend. In our case, the controller classes directly interface with the persistence layer to store any changes to the model on disk. Each controller in our design is responsible for CRUD operations surrounding one part of the model (e.g., a Product). Importantly, this allows the front-end to be separated from any logic required to query/change data (e.g., renaming a product). In a sense, it exists as a means to control how requests to the backend affect the E-Store, whether it requires sanitizing input, responding with error codes, and so on. See below for an example:
 ![OO Design Diagram 7, depicting the above](OO-Design-Diagram-7.png)
