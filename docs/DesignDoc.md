@@ -86,15 +86,13 @@ As for the Owner, they have an important role too. The Owner is mainly responsib
 
 This section describes the application architecture.
 
-### Summary
+
 The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 
 ![The Tiers & Layers of the Architecture](Tiers-Layers-Diagram.jpg)
 
-
-
-
-
+### Summary
+The majority of our architecture choices are constraints defined by our product owner. However, while using these technologies and programming languages we are maintaining best practices in all aspects of the project. Our stack is built upon the Model-ViewModel-Model design. The Client UI must communicate with the ViewModel in order to receive information from the model and send information back. In terms of our architecture that means that our UI is built as its own Angular app that connects to the backend via HTTP requests that call our REST API. The REST API then makes calls to our DAO File classes to store/update/remove information such as user credentials and product information. 
 
 
 ### Overview of User Interface
