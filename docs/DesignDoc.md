@@ -84,23 +84,12 @@ As for the Owner, they have an important role too. The Owner is mainly responsib
 
 ## Architecture and Design
 
-This section describes the application architecture.
+The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
+
+![The Tiers & Layers of the Architecture](Tiers-Layers-Diagram.jpg)
 
 ### Summary
-
-The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
-**NOTE**: detailed diagrams are required in later sections of this document.
-> _**[Sprint 1]** (Augment this diagram with your **own** rendition and representations of sample system classes, placing them into the appropriate M/V/VM (orange rectangle) tier section. Focus on what is currently required to support **Sprint 1 - Demo requirements**. Make sure to describe your design choices in the corresponding _**Tier Section**_ and also in the _**OO Design Principles**_ section below.)_
-
-![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
-
-The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
-
-The Model stores the application data objects including any functionality to provide persistance. 
-
-The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeScript. The ViewModel provides RESTful APIs to the client (View) as well as any logic required to manipulate the data objects from the Model.
-
-Both the ViewModel and Model are built using Java and Spring Framework. Details of the components within these tiers are supplied below.
+The majority of our architecture choices are constraints defined by our product owner which includes using Java Springboot, and the Angular framework. However, while using these technologies and programming languages we are maintaining best practices in all aspects of the project. Our stack is built upon the Model-ViewModel-Model design. The Client UI must communicate with the ViewModel in order to receive information from the model and send information back. In terms of our architecture that means that our UI is built as its own Angular app that connects to the backend via HTTP requests that call our REST API. The REST API then makes calls to our DAO File classes to store/update/remove information such as user credentials and product information. 
 
 
 ### Overview of User Interface
@@ -160,7 +149,7 @@ This section describes the web interface flow; this is how the user views and in
 
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
-###### 1. Single Responsibility
+#### 1. Single Responsibility
 With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. Even in our most basic skeleton we have our REST api split into many classes, for example:
 * Product - Holds the state of each project, only has mutators and getters.
 * ProductFileDAO - Holds all the methods for interacting with, and creating, an array of products, but has no state.
@@ -168,7 +157,8 @@ With the structure of our project it is incredibly important to be strongly adhe
 We will continue with this principle, keeping our code split into single responsibility classes and components as our REST API and front end expand.
 ![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
 
-###### 2. Low Coupling
+
+#### 3. Low Coupling
 Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
 * Product - Product is only directly referenced in the ProductFileDao
 * ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
@@ -176,11 +166,18 @@ Our current project structure is in a great place with coupling. Each class curr
 With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
 ![OOP Design Diagram 2, a class diagram depicting the above](OOP-Design-Diagram-1-and-2.png)
 
-###### 7. Controller
+#### 5. Law of Demeter
+The law of demeter is the object oriented programming principle that dictates the ability
+of one class to access another. Specifically, this principle states that classes should avoid interacting with and controlling the state of other classes directly unless they are dependent on each other. In terms of our REST API design this method manifests itself in the separation of responsibilities between the product controller class, the DAO class and the object mapper. It would be possible to combine all of these features into one large class where the controller class instead has the attributes of the DAO and interacts with the object mapper directly to store and retrieve products in the form of JSON objects in a file as well as make HTTP requests. However, this would be a very complex and cumbersome class to write as the nature of these features warrant the creation of separate classes to handle each of them. In maintaining the Law of Demeter in our design the product controller class can only access the product file DAO by having a product file DAO attribute. As a result the product controller class can only make calls to the product DAO which in turn makes calls to an object mapper. This process allows for each class to focus on one and only one feature - allocating more specific tasks to other classes keeping a clean chain of calls to different classes when needed. We will continue to adhere to this practice as we progress through the project by ensuring proper separation between tasks and classes properly encapsulate their data.
+
+#### 6. Dependency Injection
+Dependency Injection is the object oriented programming principle that dictates that objects should be instantiated independently from any classes they may be used in. Maintaining this design principle ensures loose coupling across the program since some objects will not have to wait for others that they are not related to to be instantiated in order to function properly. In terms of our REST API design this idea can be seen in the use of the @component tag. Upon running the program any class that is decorated with this tag is instantiated and injected into any other class that uses this class. This ensures that classes that depend on other objects that are components need not worry about instantiating new objects of the classes they need as that will all be done by REST. We will continue to adhere to this practice as we progress through this project by properly using the @component tag on component elements in the project.
+
+#### 7. Controller
 In our project's E-Store, the concept of a Controller is implemented in many different ways. However, most obviously, explicit controller classes exist in our backend’s architecture. Specifically, controllers handle incoming HTTP requests in our Spring/Tomcat environment. They relay operations made on the frontend and update a saved version of the model on the backend. In our case, the controller classes directly interface with the persistence layer to store any changes to the model on disk. Each controller in our design is responsible for CRUD operations surrounding one part of the model (e.g., a Product). Importantly, this allows the front-end to be separated from any logic required to query/change data (e.g., renaming a product). In a sense, it exists as a means to control how requests to the backend affect the E-Store, whether it requires sanitizing input, responding with error codes, and so on. See below for an example:
 ![OO Design Diagram 7, depicting the above](OO-Design-Diagram-7.png)
 
-###### 8. Pure Fabrication
+#### 8. Pure Fabrication
 Another vial concept that we use in our design of the E-Store is Pure Fabrication. Pure Fabrication classes assist in maintaining the single responsibility of other classes in the program. Typically, they are not actors in our Domain Analysis and have a more technical responsibility, like saving data. In our E-Store, this would be how our persistence is implemented in our API. Instead of having each Product class responsible for saving its data (either by dependency injection in the Product or not), there exists data access objects (DAO) that are responsible for loading/saving pieces of the model, like a Product. This allows model classes themselves, like the Product class, to remain well-designed and are only responsible for storing datain its fields. For example, our projcet currently implements a ProductDAO interface named ProductFileDAO that stores product data to disk using JavaScript Object Notation(JSON). Even though Pure Fabrication adds a dependency between ProductDAO and Product, it helps adhere to other important design principles like single responsibility and low coupling. See below for an example:
 ![OO Design Diagram 8, depicting the above](OO-Design-Diagram-8.png)
 
