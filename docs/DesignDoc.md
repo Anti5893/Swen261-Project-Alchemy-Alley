@@ -87,20 +87,14 @@ As for the Owner, they have an important role too. The Owner is mainly responsib
 This section describes the application architecture.
 
 ### Summary
-
 The following Tiers/Layers model shows a high-level view of the webapp's architecture.
-**NOTE**: detailed diagrams are required in later sections of this document.
-> _**[Sprint 1]** (Augment this diagram with your **own** rendition and representations of sample system classes, placing them into the appropriate M/V/VM (orange rectangle) tier section. Focus on what is currently required to support **Sprint 1 - Demo requirements**. Make sure to describe your design choices in the corresponding _**Tier Section**_ and also in the _**OO Design Principles**_ section below.)_
 
-![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
+![The Tiers & Layers of the Architecture](Tiers-Layers-Diagram.jpg)
 
-The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern.
 
-The Model stores the application data objects including any functionality to provide persistance.
 
-The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeScript. The ViewModel provides RESTful APIs to the client (View) as well as any logic required to manipulate the data objects from the Model.
 
-Both the ViewModel and Model are built using Java and Spring Framework. Details of the components within these tiers are supplied below.
+
 
 
 ### Overview of User Interface
@@ -168,12 +162,12 @@ With the structure of our project it is incredibly important to be strongly adhe
 We will continue with this principle, keeping our code split into single responsibility classes and components as our REST API and front end expand.
 ![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
-###### 2. Open/Closed
+#### 2. Open/Closed
 After reviewing our project, we noticed that, because of the nature of our e-store, we don’t have many interfaces or abstract classes in our design. This could be something that we could improve upon, but if our project doesn’t ask for it, then why do it. Now that isn’t to say that there's no occurrences of open/closed in our project as our `ProductDAO` and `CraftingDAO` are both great examples. They’re interfaces that we used to implement the data from the files stored in the ./data directory of our repo. `ProductDAO` is used for our products (spells), and `CraftingDAO` is used for our cart (crafter). These files are both implementable and unmodifiable because they’re interfaces. The classes that use them, `ProductFileDAO` and `CraftingFileDAO` are unmodifiable as well as they only provide information on our products and recipes respectively for the rest of our api. As we only have one type of product, a spell, there really isn’t any other place to incorporate interfaces and abstract classes. Our crafting isn’t really a help either because it only deals with recipes as that can be handled with one class. If we were to add more product types like tools, we could create a `Product`, `Spell`, and `Tool` class where `Spell` and `Tool` would extend `Product`. Something like this is an improvement we could do to our api to not repeat ourselves and incorporate the Open/Closed principle.
 
 ![OOP Design Diagram 2, a class diagram depicted the above](OOD_Open_Close.png)
 
-###### 3. Low Coupling
+#### 3. Low Coupling
 Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
 * Product - Product is only directly referenced in the ProductFileDao
 * ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
@@ -181,13 +175,21 @@ Our current project structure is in a great place with coupling. Each class curr
 With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
 ![OOP Design Diagram 3, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
-###### 4. Information Expert
+#### 4. Information Expert
 The principle of information expert will be used within our design by making sure classes are
 responsible for doing calculations and editing their own attributes. One example of this would be
 our toString method within our Product class. Having the string be created by a method within
 Product instead of ussing getters outside of the Product class keeps the product utilizing it's own
 attributes improving readability and reducing unneeded complexity.
 ![OOP Design Diagram 4, a class diagram depicting the above](OOP-Design-Diagram-4.png)
+
+#### 5. Law of Demeter
+The law of demeter is the object oriented programming principle that dictates the ability
+of one class to access another. Specifically, this principle states that classes should avoid interacting with and controlling the state of other classes directly unless they are dependent on each other. In terms of our REST API design this method manifests itself in the separation of responsibilities between the product controller class, the DAO class and the object mapper. It would be possible to combine all of these features into one large class where the controller class instead has the attributes of the DAO and interacts with the object mapper directly to store and retrieve products in the form of JSON objects in a file as well as make HTTP requests. However, this would be a very complex and cumbersome class to write as the nature of these features warrant the creation of separate classes to handle each of them. In maintaining the Law of Demeter in our design the product controller class can only access the product file DAO by having a product file DAO attribute. As a result the product controller class can only make calls to the product DAO which in turn makes calls to an object mapper. This process allows for each class to focus on one and only one feature - allocating more specific tasks to other classes keeping a clean chain of calls to different classes when needed. We will continue to adhere to this practice as we progress through the project by ensuring proper separation between tasks and classes properly encapsulate their data.
+
+#### 6. Dependency Injection
+
+Dependency Injection is the object oriented programming principle that dictates that objects should be instantiated independently from any classes they may be used in. Maintaining this design principle ensures loose coupling across the program since some objects will not have to wait for others that they are not related to to be instantiated in order to function properly. In terms of our REST API design this idea can be seen in the use of the @component tag. Upon running the program any class that is decorated with this tag is instantiated and injected into any other class that uses this class. This ensures that classes that depend on other objects that are components need not worry about instantiating new objects of the classes they need as that will all be done by REST. We will continue to adhere to this practice as we progress through this project by properly using the @component tag on component elements in the project.
 
 
 ###### 7. Controller
