@@ -1,12 +1,8 @@
----`
+---
 geometry: margin=1in
 ---
-# PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
+# PROJECT Design Documentation
 
 ## Team Information
 * Team name: Wizards
@@ -40,6 +36,7 @@ This section describes the features of the application.
 ### Definition of MVP
 
 #### Sprint 2
+
 For Sprint 2, our MVP was poorly defined, as the provided MVP requirements are for the U-fund project. Therefore we had to adapt these requirements for our webstore.
 
 Minimal Authentication
@@ -86,14 +83,13 @@ As for the Owner, they have an important role too. The Owner is mainly responsib
 
 This section describes the application architecture.
 
-
 The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 
 ![The Tiers & Layers of the Architecture](Tiers-Layers-Diagram.jpg)
 
 ### Summary
-The majority of our architecture choices are constraints defined by our product owner. However, while using these technologies and programming languages we are maintaining best practices in all aspects of the project. Our stack is built upon the Model-ViewModel-Model design. The Client UI must communicate with the ViewModel in order to receive information from the model and send information back. In terms of our architecture that means that our UI is built as its own Angular app that connects to the backend via HTTP requests that call our REST API. The REST API then makes calls to our DAO File classes to store/update/remove information such as user credentials and product information. 
 
+The majority of our architecture choices are constraints defined by our product owner. However, while using these technologies and programming languages we are maintaining best practices in all aspects of the project. Our stack is built upon the Model-ViewModel-Model design. The Client UI must communicate with the ViewModel in order to receive information from the model and send information back. In terms of our architecture that means that our UI is built as its own Angular app that connects to the backend via HTTP requests that call our REST API. The REST API then makes calls to our DAO File classes to store/update/remove information such as user credentials and product information. 
 
 ### Overview of User Interface
 
@@ -101,8 +97,8 @@ This section describes the web interface flow; this is how the user views and in
 
 > _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application._
 
-
 ### View Tier
+
 > _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
 > Describe the types of components in the tier and describe their
 > responsibilities.  This should be a narrative description, i.e. it has
@@ -121,6 +117,7 @@ This section describes the web interface flow; this is how the user views and in
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
+
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
@@ -133,6 +130,7 @@ This section describes the web interface flow; this is how the user views and in
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
+
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
 
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
@@ -146,11 +144,10 @@ This section describes the web interface flow; this is how the user views and in
 
 ## OO Design Principles
 
-> _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
-
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
 #### 1. Single Responsibility
+
 With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. Even in our most basic skeleton we have our REST api split into many classes, for example:
 * Product - Holds the state of each project, only has mutators and getters.
 * ProductFileDAO - Holds all the methods for interacting with, and creating, an array of products, but has no state.
@@ -159,11 +156,13 @@ We will continue with this principle, keeping our code split into single respons
 ![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
 #### 2. Open/Closed
+
 After reviewing our project, we noticed that, because of the nature of our e-store, we don’t have many interfaces or abstract classes in our design. This could be something that we could improve upon, but if our project doesn’t ask for it, then why do it. Now that isn’t to say that there's no occurrences of open/closed in our project as our `ProductDAO` and `CraftingDAO` are both great examples. They’re interfaces that we used to implement the data from the files stored in the ./data directory of our repo. `ProductDAO` is used for our products (spells), and `CraftingDAO` is used for our cart (crafter). These files are both implementable and unmodifiable because they’re interfaces. The classes that use them, `ProductFileDAO` and `CraftingFileDAO` are unmodifiable as well as they only provide information on our products and recipes respectively for the rest of our api. As we only have one type of product, a spell, there really isn’t any other place to incorporate interfaces and abstract classes. Our crafting isn’t really a help either because it only deals with recipes as that can be handled with one class. If we were to add more product types like tools, we could create a `Product`, `Spell`, and `Tool` class where `Spell` and `Tool` would extend `Product`. Something like this is an improvement we could do to our api to not repeat ourselves and incorporate the Open/Closed principle.
 
 ![OOP Design Diagram 2, a class diagram depicted the above](OOD_Open_Close.png)
 
 #### 3. Low Coupling
+
 Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
 * Product - Product is only directly referenced in the ProductFileDao
 * ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
@@ -172,6 +171,7 @@ With this current setup we form a chain of couples, reducing the work required i
 ![OOP Design Diagram 3, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
 #### 4. Information Expert
+
 The principle of information expert will be used within our design by making sure classes are
 responsible for doing calculations and editing their own attributes. One example of this would be
 our toString method within our Product class. Having the string be created by a method within
@@ -180,6 +180,7 @@ attributes improving readability and reducing unneeded complexity.
 ![OOP Design Diagram 4, a class diagram depicting the above](OOP-Design-Diagram-4.png)
 
 #### 5. Law of Demeter
+
 The law of demeter is the object oriented programming principle that dictates the ability
 of one class to access another. Specifically, this principle states that classes should avoid interacting with and controlling the state of other classes directly unless they are dependent on each other. In terms of our REST API design this method manifests itself in the separation of responsibilities between the product controller class, the DAO class and the object mapper. It would be possible to combine all of these features into one large class where the controller class instead has the attributes of the DAO and interacts with the object mapper directly to store and retrieve products in the form of JSON objects in a file as well as make HTTP requests. However, this would be a very complex and cumbersome class to write as the nature of these features warrant the creation of separate classes to handle each of them. In maintaining the Law of Demeter in our design the product controller class can only access the product file DAO by having a product file DAO attribute. As a result the product controller class can only make calls to the product DAO which in turn makes calls to an object mapper. This process allows for each class to focus on one and only one feature - allocating more specific tasks to other classes keeping a clean chain of calls to different classes when needed. We will continue to adhere to this practice as we progress through the project by ensuring proper separation between tasks and classes properly encapsulate their data.
 
@@ -187,16 +188,18 @@ of one class to access another. Specifically, this principle states that classes
 
 Dependency Injection is the object oriented programming principle that dictates that objects should be instantiated independently from any classes they may be used in. Maintaining this design principle ensures loose coupling across the program since some objects will not have to wait for others that they are not related to to be instantiated in order to function properly. In terms of our REST API design this idea can be seen in the use of the @component tag. Upon running the program any class that is decorated with this tag is instantiated and injected into any other class that uses this class. This ensures that classes that depend on other objects that are components need not worry about instantiating new objects of the classes they need as that will all be done by REST. We will continue to adhere to this practice as we progress through this project by properly using the @component tag on component elements in the project.
 
-
 #### 7. Controller
+
 In our project's E-Store, the concept of a Controller is implemented in many different ways. However, most obviously, explicit controller classes exist in our backend’s architecture. Specifically, controllers handle incoming HTTP requests in our Spring/Tomcat environment. They relay operations made on the frontend and update a saved version of the model on the backend. In our case, the controller classes directly interface with the persistence layer to store any changes to the model on disk. Each controller in our design is responsible for CRUD operations surrounding one part of the model (e.g., a Product). Importantly, this allows the front-end to be separated from any logic required to query/change data (e.g., renaming a product). In a sense, it exists as a means to control how requests to the backend affect the E-Store, whether it requires sanitizing input, responding with error codes, and so on. See below for an example:
 ![OO Design Diagram 7, depicting the above](OO-Design-Diagram-7.png)
 
 #### 8. Pure Fabrication
+
 Another vial concept that we use in our design of the E-Store is Pure Fabrication. Pure Fabrication classes assist in maintaining the single responsibility of other classes in the program. Typically, they are not actors in our Domain Analysis and have a more technical responsibility, like saving data. In our E-Store, this would be how our persistence is implemented in our API. Instead of having each Product class responsible for saving its data (either by dependency injection in the Product or not), there exists data access objects (DAO) that are responsible for loading/saving pieces of the model, like a Product. This allows model classes themselves, like the Product class, to remain well-designed and are only responsible for storing datain its fields. For example, our projcet currently implements a ProductDAO interface named ProductFileDAO that stores product data to disk using JavaScript Object Notation(JSON). Even though Pure Fabrication adds a dependency between ProductDAO and Product, it helps adhere to other important design principles like single responsibility and low coupling. See below for an example:
 ![OO Design Diagram 8, depicting the above](OO-Design-Diagram-8.png)
 
 ## Static Code Analysis/Future Design Improvements
+
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise,
 > **Identify 3-4** areas within your code that have been flagged by the Static Code
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.
@@ -207,15 +210,13 @@ Another vial concept that we use in our design of the E-Store is Pure Fabricatio
 ## Testing
 
 ### Acceptance Testing
-> _**[Sprint 2 & 4]** Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+
+As of Sprint 2, all acceptance criteria are passing. There were no complications verifying each, as every team member was able to pass their assigned acceptance criteria for testing without any concerns. We managed to run through our Acceptance Plan Test within the span of a day once the final merge request in the sprint was approved.
 
 ### Unit Testing and Code Coverage
 
 #### Unit Testing
+
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
 > coverage targets, why you selected those values, and how well your
@@ -240,7 +241,6 @@ Similar to the Persistence Tier, Recipe is not being tested enough in this tier 
 Based on the results of this report, the Controller Tier is very well tested, with the exception of `InventoryController#getProducts()`. This missed method is also resulting in an increase in missed branches within this tier. Come next sprint, this could easily be resolved by the addition of 1-2 more unit tests.
 
 ## Ongoing Rationale
->_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
 
 ### (2024/02/08): Sprint 1
 We decided on a homogenous style to our codebase to ensure the readibility and understandability of our code.
