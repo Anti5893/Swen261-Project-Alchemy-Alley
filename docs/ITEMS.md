@@ -34,7 +34,7 @@
   * Water
 * Black Ice
   * Slush
-  * Ice3
+  * Ice
 * Fire Rain
   * Fire
   * Rain
