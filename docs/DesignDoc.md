@@ -181,7 +181,7 @@ Our current project structure is in a great place with coupling. Each class curr
 With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
 ![OOP Design Diagram 3, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
-###### 4. Low Coupling
+###### 4. Information Expert
 The principle of information expert will be used within our design by making sure classes are
 responsible for doing calculations and editing their own attributes. One example of this would be
 our toString method within our Product class. Having the string be created by a method within
