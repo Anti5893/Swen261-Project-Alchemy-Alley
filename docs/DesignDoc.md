@@ -124,20 +124,35 @@ This section describes the web interface flow; this is how the user views and in
  >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
-### ViewModel Tier
+### ViewModel Tier  
 
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
+The classes that support the ViewModel tier are as follows:  
+-Inventory Controller  
+-Users Controller
+
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
 
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
->
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
-### Model Tier
+![View Model Image](ViewModel.jpg)  
+
+The inventory controller is responsible for keeping track of any changes made to our catalog of spells. The owner of the site can take use of these functions to maintain the list of products displayed on the site. The users controller is responsible for maintaining the list of all users that have registered to the site. It also provides functionality 
+to authenticate a user, making sure that all usernames registered to the site are unique. 
+
+### Model Tier  
+
+The classes that suport the Model Tier are as follows:  
+
+-Product  
+-Element  
+-Recipe  
+-User  
+
+A product is a representation of a spell, therefore, it has an elemental type. This comes from our element enumeration to ensure that the types are consistant throughout. 
+A recipe is a combination of exactly two spells that form to create a new spell  - this takes in the spells ID's and outputs a new ID. A user is a buyer on the site and has both a username and password that they create upon registering and need to use to login. They also have a cart which is a represenation of the products that they plan on purchasing. 
+As part of our 10% feature they have an array of unlocked spells which starts out at 4 basic spells and expands as the user unlocks more by purhcasing two spells that are valid inputs in a recipe to make a new spell. A buyer of the site can only view spells that have unlocked. 
 
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
 
@@ -145,10 +160,7 @@ This section describes the web interface flow; this is how the user views and in
 > section will follow the same instructions that are given for the View
 > Tier above._
 
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
->
-![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
+![Model Tier](Model-Diagram.jpg)
 
 ## OO Design Principles
 
