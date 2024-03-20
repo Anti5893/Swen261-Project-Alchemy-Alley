@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
-import { Product } from '../product';
+import { Product, ElementType } from '../product';
 import { ProductService } from '../products.service';
 
 @Component({
@@ -12,6 +12,8 @@ import { ProductService } from '../products.service';
 export class AdminComponent implements OnInit {
 
   products: Product[] = [];
+  types: string[] = Object.keys(ElementType).filter(k => isNaN(Number(k)));
+  showValidityError: boolean = false;
 
   constructor(private productService: ProductService) {}
 
@@ -23,18 +25,42 @@ export class AdminComponent implements OnInit {
     this.productService.getProducts().subscribe(response => this.products = response.body!);
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if(!name) return;
+  save(product: Product, name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement): void {
+    if(!price.checkValidity() || !quantity.checkValidity()) {
+      this.showValidityError = true;
+      return;
+    }
 
-    this.productService.addProduct({ name } as Product).subscribe((response) => {
-      this.products.push(response.body!);
-    });
+    product.name = name;
+    product.type = Object.keys(ElementType).filter(k => k === type)[0] as ElementType;
+    product.price = Number(price.value);
+    product.quantity = Number(quantity.value);
+    
+    this.productService.updateProduct(product).subscribe();
+    this.showValidityError = false;
   }
 
-  delete(product: Product): void {
-    this.products = this.products.filter(p => p !== product);
-    this.productService.deleteProduct(product.id).subscribe();
+  delete(id: number): void {
+    this.products = this.products.filter(p => p.id !== id);
+    this.productService.deleteProduct(id).subscribe();
+  }
+
+  create(name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement): void {
+    if(!price.checkValidity() || !quantity.checkValidity()) {
+      this.showValidityError = true;
+      return;
+    }
+
+    let product: Product = {
+      id: 0,
+      name: name,
+      type: Object.keys(ElementType).filter(k => k === type)[0] as ElementType,
+      price: Number(price.value),
+      quantity: Number(quantity.value)
+    };
+
+    this.productService.addProduct(product).subscribe(p => this.products.push(p.body!)); // TODO: Handle duplicate names
+    this.showValidityError = false;
   }
   
 }
