@@ -1,4 +1,4 @@
-<p *ngIf="showValidityError">Please enter a value price and quantity before saving this product.</p>
+<p *ngIf="showValidityError">Please enter a valid name, price, and quantity before continuing.</p>
 <table>
     <tr>
         <th>ID</th>
@@ -12,21 +12,22 @@
         <!-- Existing Products -->
         <td>{{product.id}}</td>
         <td>
-            <input type="text" placeholder="Enter Name" value={{product.name}} #name>
+            <input type="text" placeholder="Enter Name" value={{product.name}} (change)="(0)" #name>
         </td>
         <td>
-            <select #type>
+            <select (change)="(0)" #type>
                 <option *ngFor="let type of types" value={{type}} [selected]="type === product.type.toString()">{{type}}</option>
             </select>
         </td>
         <td>$
-            <input type="number" placeholder="Enter Price" min="0" step="0.01" value={{product.price}} #price>
+            <input type="number" placeholder="Enter Price" min="0" step="0.01" value={{product.price}} (change)="(0)" required #price>
         </td>
         <td>
-            <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" value={{product.quantity}} #quantity>
+            <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" value={{product.quantity}} (change)="(0)" required #quantity>
         </td>
         <td>
-            <button (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity)">Save</button>
+            <button (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity)" 
+                    [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity)">Save</button>
             <button (click)="delete(product.id)">Delete</button>
         </td>
     </tr>
@@ -42,10 +43,10 @@
             </select>
         </td>
         <td>$
-            <input type="number" placeholder="Enter Price" min="0" step="0.01" #price>
+            <input type="number" placeholder="Enter Price" min="0" step="0.01" required #price>
         </td>
         <td>
-            <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" #quantity>
+            <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" required #quantity>
         </td>
         <td>
             <button (click)="create(name.value, type.options[type.selectedIndex].text, price, quantity)">Create</button>
