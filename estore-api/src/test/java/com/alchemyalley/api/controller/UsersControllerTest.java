@@ -39,7 +39,7 @@ public class UsersControllerTest {
 	@Test
 	public void testCreateUser() throws IOException {
 		// Setup
-		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 });
+		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 }).removePassword();
 		when(this.userDAO.createUser(user)).thenReturn(user);
 
 		// Invoke
@@ -66,7 +66,7 @@ public class UsersControllerTest {
 	@Test
 	public void testCreateUserHandleException() throws IOException {
 		// Setup
-		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 });
+		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 }).removePassword();
 		doThrow(new IOException()).when(this.userDAO).createUser(user);
 
 		// Invoke
@@ -79,7 +79,7 @@ public class UsersControllerTest {
 	@Test
 	public void testAuthenticateUser() {
 		// Setup
-		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 });
+		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3}, new int[] { 1, 2 }).removePassword();
 		when(this.userDAO.authenticateUser(user)).thenReturn(user);
 
 		// Invoke
@@ -106,7 +106,7 @@ public class UsersControllerTest {
 	@Test
 	public void testUpdateUser() throws IOException{
 		// Setup
-		User updatedUser = new User("JackFTW", "securePassword", false, new int[] { 1 }, new int[] { 1, 2 });
+		User updatedUser = new User("JackFTW", "securePassword", false, new int[] { 1 }, new int[] { 1, 2 }).removePassword();
 		when(this.userDAO.updateUser(updatedUser)).thenReturn(updatedUser);
 	
 		// Invoke
@@ -131,9 +131,9 @@ public class UsersControllerTest {
 	}
 
 	@Test
-	public void testUpdateUserFailsDueToIOException() throws IOException {
+	public void testUpdateUserException() throws IOException {
 		// Setup
-		User userToUpdate = new User("Jack", "securePassword", true, new int[] {1, 2, 3}, new int[] {1, 2});
+		User userToUpdate = new User("Jack", "securePassword", true, new int[] {1, 2, 3}, new int[] {1, 2}).removePassword();
 		doThrow(IOException.class).when(userDAO).updateUser(userToUpdate);
 
 		// Invoke
