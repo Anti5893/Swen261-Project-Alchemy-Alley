@@ -1,18 +1,56 @@
-<div>
-    <label for="new-product">Product Name: </label>
-    <input id="new-product" #productName/>
-  
-    <!-- (click) passes input value to add() and then clears the input -->
-    <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
-      Add product
-    </button>
-</div>
-  
-<ul class="products">
-    <li *ngFor="let product of products">
-        <a routerLink="/admin/{{product.id}}">
-            <span class="badge">{{product.id}}</span> {{product.name}}
-        </a>
-        <button type="button" class="delete" title="delete product" (click)="delete(product)">x</button>
-    </li>
-</ul>
+<p *ngIf="showValidityError">Please enter a valid name, type, price, and quantity before continuing.</p>
+<p *ngIf="showDuplicateProductError">A product with that name already exists. Please try again.</p>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let product of products">
+        <!-- Existing Products -->
+        <td>{{product.id}}</td>
+        <td>
+            <input type="text" placeholder="Enter Name" value={{product.name}} (change)="(0)" #name>
+        </td>
+        <td>
+            <select (change)="(0)" #type>
+                <option *ngFor="let type of types" value={{type}} [selected]="type === product.type.toString()">{{type}}</option>
+            </select>
+        </td>
+        <td>$
+            <input type="number" placeholder="Enter Price" min="0" step="0.01" value={{product.price}} (change)="(0)" required #price>
+        </td>
+        <td>
+            <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" value={{product.quantity}} (change)="(0)" required #quantity>
+        </td>
+        <td>
+            <button (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity)" 
+                    [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity)">Save</button>
+            <button (click)="delete(product.id)">Delete</button>
+        </td>
+    </tr>
+    <tr>
+        <!-- Create Product -->
+        <td></td>
+        <td>
+            <input type="text" placeholder="Enter Name" #name>
+        </td>
+        <td>
+            <select #type>
+                <option *ngFor="let type of types" value={{type}} >{{type}}</option>
+            </select>
+        </td>
+        <td>$
+            <input type="number" placeholder="Enter Price" min="0" step="0.01" required #price>
+        </td>
+        <td>
+            <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" required #quantity>
+        </td>
+        <td>
+            <button (click)="create(name, type.options[type.selectedIndex].text, price, quantity)">Create</button>
+        </td>
+    </tr>
+</table>

@@ -1,6 +1,5 @@
 package com.alchemyalley.api.persistence;
 
-import com.alchemyalley.api.model.Product;
 import com.alchemyalley.api.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
