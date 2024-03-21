@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Vollkorn%20SC:700|Underdog:400');
+
+:root {
+    --text: #ffffff;
+    --background: #230b2a;
+    --primary: #791baf;
+    --secondary: #b888dd;
+    --accent: #f0bf0f;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+  font-family: 'Underdog';
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, p, small {
+  font-family: 'Vollkorn SC';
+  font-weight: 700;
+  margin: 0;
+}
+
+html {font-size: 100%;} /* 16px */
+
+h1 {font-size: 3.053rem; /* 48.8px */}
+
+h2 {font-size: 2.442rem; /* 39.04px */}
+
+h3 {font-size: 1.954rem; /* 31.2px */}
+
+h4 {font-size: 1.563rem; /* 24.96px */}
+
+h5 {font-size: 1.250rem; /* 20px */}
+
+small {font-size: 0.800rem; /* 12.8px */}
