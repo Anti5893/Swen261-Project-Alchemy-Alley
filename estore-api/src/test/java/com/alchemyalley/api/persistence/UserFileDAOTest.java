@@ -36,7 +36,7 @@ public class UserFileDAOTest {
 	public void setupUserFileDAO() throws IOException {
 		this.objectMapper = mock(ObjectMapper.class);
 		when(this.objectMapper.readValue(new File("doesnt_matter.txt"), User[].class)).thenReturn(new User[] {
-				new User("Jack", "securePassword", true, new int[] { 1, 2, 3 }, new int[] { 1, 2 })
+				new User("Jack", "$2a$10$5XZoZ1Tx0G83U/Mwbro3M.UvGo/0WGhjPIzsbk1KJHwsWi57vi7v2", true, new int[] { 1, 2, 3 }, new int[] { 1, 2 })
 		});
 		this.userFileDAO = new UserFileDAO("doesnt_matter.txt", this.objectMapper);
 	}
@@ -53,7 +53,7 @@ public class UserFileDAOTest {
 	@Test
 	public void testSaveException() throws IOException {
 		// Setup
-		User user = new User("Jacky", "securePassword", true, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		User user = new User("Jacky", "securePassword123", true, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
 		doThrow(new IOException()).when(this.objectMapper).writeValue(any(File.class), any(User[].class));
 
 		// Invoke & Analyze
@@ -63,20 +63,20 @@ public class UserFileDAOTest {
 	@Test
 	public void testCreateUser() {
 		// Setup
-		User user = new User("Jacky", "securePassword", true, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		User user = new User("Jacky", "securePassword123", false, new int[0], new int[0]);
 
 		// Invoke
 		User actual = assertDoesNotThrow(() -> this.userFileDAO.createUser(user), "Unknown exception occurred");
 
 		// Analyze
 		assertNotNull(actual);
-		assertEquals(user.getUsername(), actual.getUsername());
+		assertEquals(user, actual);
 	}
 
 	@Test
 	public void testCreateFailed() {
 		// Setup
-		User user = new User("Jack", "securePassword", true, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		User user = new User("Jack", "securePassword123", true, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
 
 		// Invoke
 		User actual = assertDoesNotThrow(() -> this.userFileDAO.createUser(user), "Unknown exception occurred");
@@ -88,7 +88,7 @@ public class UserFileDAOTest {
 	@Test
 	public void testAuthenticateUser() {
 		// Setup
-		User user = new User("Jack", "securePassword", false, null, null);
+		User user = new User("Jack", "securePassword123", false, null, null);
 
 		// Invoke
 		User actual = this.userFileDAO.authenticateUser(user);
@@ -99,7 +99,19 @@ public class UserFileDAOTest {
 	}
 
 	@Test
-	public void testAuthenticateUserFailed() {
+	public void testAuthenticateUserFailedUsername() {
+		// Setup
+		User user = new User("Jacky", "securePassword123", false, null, null);
+
+		// Invoke
+		User actual = this.userFileDAO.authenticateUser(user);
+
+		// Analyze
+		assertNull(actual);
+	}
+
+	@Test
+	public void testAuthenticateUserFailedPassword() {
 		// Setup
 		User user = new User("Jack", "wrongPassword", false, null, null);
 
@@ -113,22 +125,20 @@ public class UserFileDAOTest {
 	@Test
 	public void testUpdateUserSuccess() throws IOException {
 		// Setup
-   		User user = new User("Jack", "newSecurePassword", false, new int[] { 4, 5, 6 }, new int[] { 3, 4 });
+   		User user = new User("Jack", null, true, new int[] { 4, 5, 6 }, new int[] { 3, 4 });
 
     	// Invoke
    		User result = userFileDAO.updateUser(user);
 
    		// Analyze
     	assertNotNull(result);
-		assertEquals(user.isAdmin(), result.isAdmin());
-    	assertArrayEquals(user.getCart(), result.getCart());
-    	assertArrayEquals(user.getUnlocked(), result.getUnlocked());
+		assertEquals(user, result);
 	}
 
 	@Test
-	public void testUpdateUserFailureUserNotFound() throws IOException {
+	public void testUpdateUserNotFound() throws IOException {
 		// Setup
-		User nonExistentUser = new User("NonExistentUser", "password", false, new int[0], new int[0]);
+		User nonExistentUser = new User("NonExistentUser", null, false, new int[0], new int[0]);
 
 		// Invoke
 		User result = userFileDAO.updateUser(nonExistentUser);

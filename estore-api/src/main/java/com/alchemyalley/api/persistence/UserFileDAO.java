@@ -3,6 +3,7 @@ package com.alchemyalley.api.persistence;
 import com.alchemyalley.api.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -62,7 +63,8 @@ public class UserFileDAO implements UserDAO {
 		synchronized(this.users) {
 			if(this.users.containsKey(user.getUsername())) return null;
 
-			User newUser = new User(user.getUsername(), user.getPassword(), false, new int[] {}, new int[] {});
+			String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+			User newUser = new User(user.getUsername(), hashed, false, new int[0], new int[0]);
 			this.users.put(user.getUsername(), newUser);
 			save();
 
@@ -74,19 +76,23 @@ public class UserFileDAO implements UserDAO {
 		User storedUser = this.users.getOrDefault(user.getUsername(), null);
 		if(storedUser == null) return null;
 
-		return user.getPassword().equals(storedUser.getPassword()) ? storedUser : null;
+		return BCrypt.checkpw(user.getPassword(), storedUser.getPassword()) ? storedUser : null;
 	}
+
 	/**
 	 * Updates the given user.
 	 * @param user: user that is being altered to new data
 	 * @return The updated User.
 	 */
 	public User updateUser(User user) throws IOException {
-		synchronized (this.users){
-		if (!this.users.containsKey(user.getUsername())) return null;
-		this.users.put(user.getUsername(), user);
-		save();
-		return user;
+		synchronized(this.users) {
+			User storedUser = this.users.getOrDefault(user.getUsername(), null);
+			if(storedUser == null) return null;
+			User updatedUser = new User(storedUser.getUsername(), storedUser.getPassword(), storedUser.isAdmin(), user.getUnlocked(), user.getCart());
+			this.users.put(storedUser.getUsername(), updatedUser);
+			save();
+			return updatedUser;
 		}
 	}
+
 }

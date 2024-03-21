@@ -50,6 +50,27 @@ public class UserTest {
 	}
 
 	@Test
+	public void testRemovePassword() {
+		// Setup
+		String username = "Jack";
+		String password = "securePassword";
+		boolean admin = true;
+		int[] unlocked = { 1, 2, 3 };
+		int[] cart = { 1, 2 };
+		User user = new User(username, password, admin, unlocked, cart);
+
+		// Invoke
+		User newUser = user.removePassword();
+
+		// Analyze
+		assertEquals(user.getUsername(), newUser.getUsername());
+		assertNull(newUser.getPassword());
+		assertEquals(user.isAdmin(), newUser.isAdmin());
+		assertEquals(user.getUnlocked(), newUser.getUnlocked());
+		assertEquals(user.getCart(), newUser.getCart());
+	}
+
+	@Test
 	public void testToString() {
 		// Setup
 		String username = "Jack";
@@ -67,6 +88,36 @@ public class UserTest {
 
 		// Analyze
 		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testEquals() {
+		// Setup
+		User user1 = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		User user2 = new User("Jack", "otherPassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+
+		// Invoke & Analyze
+		assertEquals(user1, user2);
+	}
+
+	@Test
+	public void testNotEquals() {
+		// Setup
+		User user1 = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		User user2 = new User("Admin", "Admin123", true, new int[0], new int[0]);
+
+		// Invoke & Analyze
+		assertNotEquals(user1, user2);
+	}
+
+	@Test
+	public void testNotEqualsOtherObject() {
+		// Setup
+		User user = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		Object object = new Object();
+
+		// Invoke & Analyze
+		assertNotEquals(user, object);
 	}
 
 }

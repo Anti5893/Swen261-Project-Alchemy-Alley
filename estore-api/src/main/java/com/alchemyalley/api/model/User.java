@@ -84,6 +84,15 @@ public class User {
 	}
 
 	/**
+	 * Removes the password field from this user as a new instance.
+	 *
+	 * @return  A new user instance without the password set
+	 */
+	public User removePassword() {
+		return new User(this.username, null, this.admin, this.unlocked, this.cart);
+	}
+
+	/**
 	 * The string representation of a user.
 	 *
 	 * @return  Its string representation, including fields
@@ -92,6 +101,21 @@ public class User {
 	public String toString() {
 		return String.format(STRING_FORMAT, this.username, this.password, this.admin,
 				Arrays.toString(this.unlocked), Arrays.toString(this.cart));
+	}
+
+	/**
+	 * Checks whether two instances of {@link User} are the same.
+	 *
+	 * @param o The other {@link User} to check against
+	 * @return  Whether they are considered equal or not
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof User user) {
+			return this.username.equals(user.username) && this.admin == user.admin &&
+					Arrays.equals(this.unlocked, user.unlocked) && Arrays.equals(this.cart, user.cart);
+		}
+		return false;
 	}
 
 }

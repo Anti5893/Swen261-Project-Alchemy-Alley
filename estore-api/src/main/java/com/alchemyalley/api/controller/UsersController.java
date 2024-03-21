@@ -36,7 +36,7 @@ public class UsersController {
 		try {
 			User newUser = this.userDAO.createUser(user);
 			return newUser != null ?
-					new ResponseEntity<>(newUser, HttpStatus.CREATED) :
+					new ResponseEntity<>(newUser.removePassword(), HttpStatus.CREATED) :
 					new ResponseEntity<>(HttpStatus.CONFLICT);
 		} catch (IOException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,7 +49,7 @@ public class UsersController {
 
 		User storedUser = this.userDAO.authenticateUser(user);
 		return storedUser != null ?
-				new ResponseEntity<>(storedUser, HttpStatus.OK) :
+				new ResponseEntity<>(storedUser.removePassword(), HttpStatus.OK) :
 				new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
@@ -60,7 +60,7 @@ public class UsersController {
 		try {
 			User updatedUser = this.userDAO.updateUser(user);
 			return updatedUser != null ?
-					new ResponseEntity<>(updatedUser, HttpStatus.OK) :
+					new ResponseEntity<>(updatedUser.removePassword(), HttpStatus.OK) :
 					new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
