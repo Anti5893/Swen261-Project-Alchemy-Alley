@@ -1,4 +1,5 @@
-<p *ngIf="showValidityError">Please enter a valid name, price, and quantity before continuing.</p>
+<p *ngIf="showValidityError">Please enter a valid name, type, price, and quantity before continuing.</p>
+<p *ngIf="showDuplicateProductError">A product with that name already exists. Please try again.</p>
 <table>
     <tr>
         <th>ID</th>
@@ -49,7 +50,7 @@
             <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" required #quantity>
         </td>
         <td>
-            <button (click)="create(name.value, type.options[type.selectedIndex].text, price, quantity)">Create</button>
+            <button (click)="create(name, type.options[type.selectedIndex].text, price, quantity)">Create</button>
         </td>
     </tr>
 </table>

@@ -12,8 +12,9 @@ import { ProductService } from '../products.service';
 export class AdminComponent implements OnInit {
 
   products: Product[] = [];
-  types: string[] = Object.keys(ElementType).filter(k => isNaN(Number(k)));
+  types: string[] = [""].concat(Object.keys(ElementType).filter(k => isNaN(Number(k))));
   showValidityError: boolean = false;
+  showDuplicateProductError: boolean = false;
 
   constructor(private productService: ProductService) {}
 
@@ -25,9 +26,9 @@ export class AdminComponent implements OnInit {
     this.productService.getProducts().subscribe(response => this.products = response.body!);
   }
 
-  create(name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement): void {
+  create(name: HTMLInputElement, type: string, price: HTMLInputElement, quantity: HTMLInputElement): void {
     // Validate input boxes
-    if(name.trim().length == 0 || !price.checkValidity() || !quantity.checkValidity()) {
+    if(name.value.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity()) {
       this.showValidityError = true;
       return;
     }
@@ -35,20 +36,31 @@ export class AdminComponent implements OnInit {
     // Create product instance
     let product: Product = {
       id: 0,
-      name: name,
+      name: name.value,
       type: Object.keys(ElementType).filter(k => k === type)[0] as ElementType,
       price: Number(price.value),
       quantity: Number(quantity.value)
     };
 
     // Send request
-    this.productService.addProduct(product).subscribe(p => this.products.push(p.body!)); // TODO: Handle duplicate names
+    this.productService.addProduct(product).subscribe(
+      (response) => {
+        // Does not exist
+        name.value = "";
+        price.value = "";
+        quantity.value = "";
+        this.products.push(response.body!);
+        this.showDuplicateProductError = false;
+      }, (error) => {
+        // Already exists
+        this.showDuplicateProductError = true;
+    });
     this.showValidityError = false;
   }
 
   save(product: Product, name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement): void {
     // Validate input boxes
-    if(name.trim().length == 0 || !price.checkValidity() || !quantity.checkValidity()) {
+    if(name.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity()) {
       this.showValidityError = true;
       return;
     }
