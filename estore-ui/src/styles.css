@@ -54,75 +54,73 @@ img {
 
 .card {
 	position: relative;
-	width: 15vw;
+	width: 8vw;
 	min-width: 150px;
-	height: 20vw;
+	height: 12vw;
 	min-height: 200px;
 	display: inline-flex !important;
 	flex-direction: column;
-	justify-content: space-evenly;
-	cursor: pointer;
-}
-
-.card.card-locked {
-	justify-content: center;
-}
-
-.card.card-locked:hover {
+	justify-content: space-around;
 	cursor: not-allowed;
-}
 
-/* Card Color */
+    border: solid 0.25rem rgb(from lightgray r g b / 0.5);
+	background-color: rgb(from lightgray r g b / 0.25);
+}
 
 .card.card-selected {
-	border: solid 0.25rem rgb(from var(--primary) r g b / 0.5);
-	background-color: rgb(from var(--primary) r g b / 0.25);
+    border: solid 0.25rem rgb(from var(--secondary) r g b / 0.5);
+    background: linear-gradient(-45deg, rgb(from lightgray r g b / 0.25) 40%, rgb(from lightgray r g b / 0.4) 50%, rgb(from lightgray r g b / 0.25) 60%);
+    background-size: 200%;
+    background-position-x: -200%;
+    animation: card-shimmer 3s infinite linear;
+    cursor: pointer;
 }
 
-.card.card-unselected {
-	border: solid 0.25rem rgb(from lightgray r g b / 0.5);
-	background-color: rgb(from lightgray r g b / 0.25);
+@keyframes card-shimmer {
+
+    to {
+        background-position-x: 200%;
+    }
+
 }
 
-.card.card-locked {
-	border: solid 0.25rem rgb(from lightgray r g b / 0.5);
-	background-color: rgb(from lightgray r g b / 0.25);
+.card.card-unlocked {
+    cursor: pointer;
 }
+
+/* Card Glow */
 
 .card > .card-glow {
     position: absolute;
+    filter: drop-shadow(0 0rem 0.25rem black);
 }
 
 .card.card-selected > .card-glow {
-	filter: drop-shadow(0 0rem 0.25rem var(--primary));
+    filter: drop-shadow(0 0rem 0.25rem var(--secondary));
 }
 
-.card.card-unselected > .card-glow {
+.card.card-unlocked > .card-glow {
 	filter: drop-shadow(0 0rem 0.25rem lightgray);
 }
 
-.card.card-locked > .card-glow {
-	filter: drop-shadow(0 0rem 0.25rem black);
+.card > .card-glow > div {
+    background-color: darkgray;
 }
 
 .card.card-selected > .card-glow > div {
-    background-color: var(--primary);
+    background-color: var(--secondary);
 }
 
-.card.card-unselected > .card-glow > div {
+.card.card-unlocked > .card-glow > div {
     background-color: lightgray;
-}
-
-.card.card-locked > .card-glow > div {
-    background-color: darkgray;
 }
 
 /* Card Side Graphics */
 
 .card > .card-glow:has(.card-top) {
     width: 50%;
-    height: 0.75rem;
-    top: -0.75rem;
+    height: 0.5rem;
+    top: -0.5rem;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -134,10 +132,10 @@ img {
 }
 
 .card > .card-glow:has(.card-right) {
-    width: 0.75rem;
+    width: 0.5rem;
     height: 50%;
     top: 50%;
-    right: -0.75rem;
+    right: -0.5rem;
     transform: translateY(-50%);
 }
 
@@ -149,8 +147,8 @@ img {
 
 .card > .card-glow:has(.card-bottom) {
     width: 50%;
-    height: 0.75rem;
-    bottom: -0.75rem;
+    height: 0.5rem;
+    bottom: -0.5rem;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -162,10 +160,10 @@ img {
 }
 
 .card > .card-glow:has(.card-left) {
-    width: 0.75rem;
+    width: 0.5rem;
     height: 50%;
     top: 50%;
-    left: -0.75rem;
+    left: -0.5rem;
     transform: translateY(-50%);
 }
 
@@ -175,6 +173,12 @@ img {
     clip-path: polygon(100% 100%, 0% 90%, 0% 10%, 100% 0%, 100% 100%);
 }
 
+/* Card Img */
+
+.card > img {
+    max-height: 80%;
+}
+
 /* Card Info */
 
 .card > .card-info {
@@ -182,21 +186,14 @@ img {
 	align-items: center;
 	justify-content: space-evenly;
 	width: 100%;
-	height: 15%;
-	flex-grow: 1;
-	font-size: calc(10px + 0.5vw);
+    height: 20%;
+
+	font-size: 14px;
+    border-top: solid 0.25rem rgb(from lightgray r g b / 0.5);
 }
 
 .card.card-selected > .card-info {
-	border-top: solid 0.25rem rgb(from var(--primary) r g b / 0.5);
-}
-
-.card.card-unselected > .card-info {
-	border-top: solid 0.25rem rgb(from lightgray r g b / 0.5);
-}
-
-.card.card-locked > .card-info {
-	border-top: solid 0.25rem rgb(from black r g b / 0.5);
+    border-top: solid 0.25rem rgb(from var(--secondary) r g b / 0.5);
 }
 
 .card > .card-info > .card-price {
@@ -222,13 +219,13 @@ img {
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
-    transition: ease-in-out 0.25s background-color;
+    transition: ease-in-out 0.15s background-color;
 }
 
 .button.button-disabled {
     color: rgb(from var(--text) r g b / 0.5);
     background-color: rgb(from var(--secondary) r g b / 0.25);
-    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .button:not(.button-disabled):hover {
