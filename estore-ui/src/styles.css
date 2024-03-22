@@ -49,22 +49,46 @@ small {font-size: 0.800rem; /* 12.8px */}
     position: relative;
     width: 15vw;
     height: 20vw;
-    background-color: red;
+	display: inline-flex !important;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
-.card.card-selected > .card-shadow > div {
-    background-color: var(--primary);
+/* Card Color */
+
+.card.card-selected {
+	border: solid 0.25rem rgb(from var(--primary) r g b / 0.5);
+	background-color: rgb(from var(--primary) r g b / 0.25);
 }
 
-.card:not(.card-selected) > .card-shadow > div {
-    background-color: lightgray;
+.card:not(.card-selected) {
+	border: solid 0.25rem rgb(from lightgray r g b / 0.5);
+	background-color: rgb(from lightgray r g b / 0.25);
 }
 
-.card-shadow {
+.card > .card-glow {
     position: absolute;
 }
 
-.card > .card-shadow:has(.card-top) {
+.card.card-selected > .card-glow {
+	filter: drop-shadow(0 0rem 0.25rem var(--primary));
+}
+
+.card.card:not(.card-selected) > .card-glow {
+	filter: drop-shadow(0 0rem 0.25rem lightgray);
+}
+
+.card.card-selected > .card-glow > div {
+    background-color: var(--primary);
+}
+
+.card:not(.card-selected) > .card-glow > div {
+    background-color: lightgray;
+}
+
+/* Card Side Graphics */
+
+.card > .card-glow:has(.card-top) {
     width: 50%;
     height: 0.75rem;
     top: -0.75rem;
@@ -78,13 +102,12 @@ small {font-size: 0.800rem; /* 12.8px */}
     clip-path: polygon(0 100%, 10% 0%, 90% 0%, 100% 100%, 0% 100%);
 }
 
-.card > .card-shadow:has(.card-right) {
+.card > .card-glow:has(.card-right) {
     width: 0.75rem;
     height: 50%;
     top: 50%;
     right: -0.75rem;
     transform: translateY(-50%);
-    filter: drop-shadow(1rem 1rem 1rem 1rem var(--secondary));
 }
 
 .card .card-right {
@@ -93,7 +116,7 @@ small {font-size: 0.800rem; /* 12.8px */}
     clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%, 0% 0%);
 }
 
-.card > .card-shadow:has(.card-bottom) {
+.card > .card-glow:has(.card-bottom) {
     width: 50%;
     height: 0.75rem;
     bottom: -0.75rem;
@@ -107,7 +130,7 @@ small {font-size: 0.800rem; /* 12.8px */}
     clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%, 0% 0%);
 }
 
-.card > .card-shadow:has(.card-left) {
+.card > .card-glow:has(.card-left) {
     width: 0.75rem;
     height: 50%;
     top: 50%;
@@ -119,4 +142,37 @@ small {font-size: 0.800rem; /* 12.8px */}
     width: 100%;
     height: 100%;
     clip-path: polygon(100% 100%, 0% 90%, 0% 10%, 100% 0%, 100% 100%);
+}
+
+/* Card Image */
+
+.card-img {
+	max-width: 100%;
+	max-height: 85%;
+}
+
+/* Card Info */
+
+.card > .card-info {
+	font-size: 1vw;
+	width: 100%;
+	height: 15%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.card.card-selected > .card-info {
+	border-top: solid 0.25rem rgb(from var(--primary) r g b / 0.5);
+}
+
+.card:not(.card-selected) > .card-info {
+	border-top: solid 0.25rem rgb(from lightgray r g b / 0.5);
+}
+
+.card > .card-info > .card-price {
+	background-color: green;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	border-radius: 1rem;
 }
