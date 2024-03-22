@@ -43,6 +43,10 @@ h5 {font-size: 1.250rem; /* 20px */}
 
 small {font-size: 0.800rem; /* 12.8px */}
 
+img {
+	-webkit-user-drag: none;
+}
+
 /* Cards */
 
 .card {
@@ -52,7 +56,17 @@ small {font-size: 0.800rem; /* 12.8px */}
 	display: inline-flex !important;
 	flex-direction: column;
 	justify-content: space-between;
+	cursor: pointer;
 }
+
+.card.card-locked {
+	justify-content: center;
+}
+
+.card.card-locked:hover {
+	cursor: not-allowed;
+}
+
 
 /* Card Color */
 
@@ -61,9 +75,14 @@ small {font-size: 0.800rem; /* 12.8px */}
 	background-color: rgb(from var(--primary) r g b / 0.25);
 }
 
-.card:not(.card-selected) {
+.card.card-unselected {
 	border: solid 0.25rem rgb(from lightgray r g b / 0.5);
 	background-color: rgb(from lightgray r g b / 0.25);
+}
+
+.card.card-locked {
+	border: solid 0.25rem rgb(from black r g b / 0.5);
+	background-color: rgb(from black r g b / 0.25);
 }
 
 .card > .card-glow {
@@ -74,16 +93,24 @@ small {font-size: 0.800rem; /* 12.8px */}
 	filter: drop-shadow(0 0rem 0.25rem var(--primary));
 }
 
-.card.card:not(.card-selected) > .card-glow {
+.card.card-unselected > .card-glow {
 	filter: drop-shadow(0 0rem 0.25rem lightgray);
+}
+
+.card.card-locked > .card-glow {
+	filter: drop-shadow(0 0rem 0.25rem black);
 }
 
 .card.card-selected > .card-glow > div {
     background-color: var(--primary);
 }
 
-.card:not(.card-selected) > .card-glow > div {
+.card.card-unselected > .card-glow > div {
     background-color: lightgray;
+}
+
+.card.card-locked > .card-glow > div {
+    background-color: black;
 }
 
 /* Card Side Graphics */
@@ -166,13 +193,17 @@ small {font-size: 0.800rem; /* 12.8px */}
 	border-top: solid 0.25rem rgb(from var(--primary) r g b / 0.5);
 }
 
-.card:not(.card-selected) > .card-info {
+.card.card-unselected > .card-info {
 	border-top: solid 0.25rem rgb(from lightgray r g b / 0.5);
 }
 
+.card.card-locked > .card-info {
+	border-top: solid 0.25rem rgb(from black r g b / 0.5);
+}
+
 .card > .card-info > .card-price {
-	background-color: green;
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
+	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	border: solid 0.15rem var(--accent);
 	border-radius: 1rem;
+	color: var(--accent);
 }
