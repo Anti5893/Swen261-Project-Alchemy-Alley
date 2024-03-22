@@ -8,6 +8,7 @@
     --primary: #791baf;
     --secondary: #b888dd;
     --accent: #f0bf0f;
+    box-sizing: border-box;
 }
 
 html, body {
@@ -84,8 +85,8 @@ img {
 }
 
 .card.card-locked {
-	border: solid 0.25rem rgb(from black r g b / 0.5);
-	background-color: rgb(from black r g b / 0.25);
+	border: solid 0.25rem rgb(from lightgray r g b / 0.5);
+	background-color: rgb(from lightgray r g b / 0.25);
 }
 
 .card > .card-glow {
@@ -113,7 +114,7 @@ img {
 }
 
 .card.card-locked > .card-glow > div {
-    background-color: black;
+    background-color: darkgray;
 }
 
 /* Card Side Graphics */
@@ -174,13 +175,6 @@ img {
     clip-path: polygon(100% 100%, 0% 90%, 0% 10%, 100% 0%, 100% 100%);
 }
 
-/* Card Img */
-
-.card > .card-img {
-	max-height: 85%;
-	flex-grow: 2;
-}
-
 /* Card Info */
 
 .card > .card-info {
@@ -210,4 +204,41 @@ img {
 	border: solid 0.15rem var(--accent);
 	border-radius: 1rem;
 	color: var(--accent);
+}
+
+/* Buttons */
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
+	
+    color: var(--text);
+    background-color: var(--primary);
+    border: solid 0.1rem transparent;
+	border-radius: 1rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: ease-in-out 0.25s background-color;
+}
+
+.button.button-disabled {
+    color: rgb(from var(--text) r g b / 0.5);
+    background-color: rgb(from var(--secondary) r g b / 0.25);
+    cursor: not-allowed;
+}
+
+.button:not(.button-disabled):hover {
+    color: var(--secondary);
+    background-color: transparent;
+    border: solid 0.1rem var(--primary);
+}
+
+.button:not(.button-disabled):active {
+    color: var(--text);
+    background-color: rgb(from var(--secondary) r g b / 0.75);
+    border: solid 0.1rem transparent;
 }

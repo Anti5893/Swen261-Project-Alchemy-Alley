@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminComponent } from './admin/admin.component';
     RegisterComponent,
     CatalogComponent,
     CartComponent,
-    AdminComponent
+    AdminComponent,
+    TestComponent
   ],
   imports: [
     AppRoutingModule,
