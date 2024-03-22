@@ -52,10 +52,10 @@ img {
 /* Cards */
 
 .card {
-    position: relative;
-    width: 15vw;
+	position: relative;
+	width: 15vw;
 	min-width: 150px;
-    height: 20vw;
+	height: 20vw;
 	min-height: 200px;
 	display: inline-flex !important;
 	flex-direction: column;
@@ -70,7 +70,6 @@ img {
 .card.card-locked:hover {
 	cursor: not-allowed;
 }
-
 
 /* Card Color */
 
