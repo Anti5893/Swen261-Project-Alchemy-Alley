@@ -54,10 +54,12 @@ img {
 .card {
     position: relative;
     width: 15vw;
+	min-width: 150px;
     height: 20vw;
+	min-height: 200px;
 	display: inline-flex !important;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	cursor: pointer;
 }
 
@@ -173,22 +175,23 @@ img {
     clip-path: polygon(100% 100%, 0% 90%, 0% 10%, 100% 0%, 100% 100%);
 }
 
-/* Card Image */
+/* Card Img */
 
-.card-img {
-	max-width: 100%;
+.card > .card-img {
 	max-height: 85%;
+	flex-grow: 2;
 }
 
 /* Card Info */
 
 .card > .card-info {
-	font-size: 1vw;
-	width: 100%;
-	height: 15%;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	width: 100%;
+	height: 15%;
+	flex-grow: 1;
+	font-size: calc(10px + 0.5vw);
 }
 
 .card.card-selected > .card-info {
@@ -204,7 +207,7 @@ img {
 }
 
 .card > .card-info > .card-price {
-	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+	padding: calc(1px + 0.25vw) calc(3px + 0.5vw) calc(1px + 0.25vw) calc(3px + 0.5vw);
 	border: solid 0.15rem var(--accent);
 	border-radius: 1rem;
 	color: var(--accent);
