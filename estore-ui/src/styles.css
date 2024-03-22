@@ -45,6 +45,8 @@ small {font-size: 0.800rem; /* 12.8px */}
 
 img {
 	-webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 /* Cards */
