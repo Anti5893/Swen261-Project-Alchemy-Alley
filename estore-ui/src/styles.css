@@ -1,6 +1,10 @@
+/* Fonts, Palette, Type Scale */
+
 @import url("https://fonts.googleapis.com/css?family=Vollkorn%20SC:700|Underdog:400");
 
 :root {
+	box-sizing: border-box;
+
 	--text: #ffffff;
 	--background: #230b2a;
 	--primary: #791baf;
@@ -79,6 +83,7 @@ body {
 body {
 	font-family: "Underdog";
 	font-weight: 400;
+	background-color: var(--background);
 }
 
 h1,
@@ -88,9 +93,17 @@ h4,
 h5,
 p,
 small {
+	margin: 0;
+	color: var(--text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
 	font-family: "Vollkorn SC";
 	font-weight: 700;
-	margin: 0;
 }
 
 html {
@@ -120,6 +133,14 @@ h5 {
 small {
 	font-size: 0.8rem; /* 12.8px */
 }
+
+img {
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* Radio Styles */
 
 .radio-container {
 	display: flex;
@@ -154,12 +175,18 @@ small {
 	justify-content: center;
 	align-items: center;
 }
+.radio-child:active {
+	transform: translateY(0.1em);
+}
 .radio-child input[type="radio"] {
 	width: 100%;
 	height: 100%;
 	appearance: none;
 	-webkit-appearance: none;
 	margin: 0;
+}
+.radio-child input:checked {
+	background-color: var(--primary);
 }
 .radio-child span:first-of-type {
 	position: absolute;
@@ -179,12 +206,210 @@ small {
 	margin: 0;
 }
 
-/* .radio-child:hover {
-    filter: brightness(2);
-} */
-.radio-child:active {
-	transform: translateY(0.1em);
+/* Cards */
+
+.card {
+	position: relative;
+	width: 8vw;
+	min-width: 150px;
+	height: 12vw;
+	min-height: 200px;
+	display: inline-flex !important;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: not-allowed;
+
+	border: solid 0.25rem rgb(from lightgray r g b / 0.5);
+	background-color: rgb(from lightgray r g b / 0.25);
 }
-.radio-child input:checked {
+
+.card.card-selected {
+	border: solid 0.25rem rgb(from var(--secondary) r g b / 0.5);
+	background: linear-gradient(
+		-45deg,
+		rgb(from lightgray r g b / 0.25) 40%,
+		rgb(from lightgray r g b / 0.4) 50%,
+		rgb(from lightgray r g b / 0.25) 60%
+	);
+	background-size: 200%;
+	background-position-x: -200%;
+	animation: card-shimmer 3s infinite linear;
+	cursor: pointer;
+}
+
+@keyframes card-shimmer {
+	to {
+		background-position-x: 200%;
+	}
+}
+
+.card.card-unlocked {
+	cursor: pointer;
+}
+
+/* Card Glow */
+
+.card > .card-glow {
+	position: absolute;
+	filter: drop-shadow(0 0rem 0.25rem black);
+}
+
+.card.card-selected > .card-glow {
+	filter: drop-shadow(0 0rem 0.25rem var(--secondary));
+}
+
+.card.card-unlocked > .card-glow {
+	filter: drop-shadow(0 0rem 0.25rem lightgray);
+}
+
+.card > .card-glow > div {
+	background-color: darkgray;
+}
+
+.card.card-selected > .card-glow > div {
+	background-color: var(--secondary);
+}
+
+.card.card-unlocked > .card-glow > div {
+	background-color: lightgray;
+}
+
+/* Card Side Graphics */
+
+.card > .card-glow:has(.card-top) {
+	width: 50%;
+	height: 0.5rem;
+	top: -0.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.card .card-top {
+	width: 100%;
+	height: 100%;
+	clip-path: polygon(0 100%, 10% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+
+.card > .card-glow:has(.card-right) {
+	width: 0.5rem;
+	height: 50%;
+	top: 50%;
+	right: -0.5rem;
+	transform: translateY(-50%);
+}
+
+.card .card-right {
+	width: 100%;
+	height: 100%;
+	clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%, 0% 0%);
+}
+
+.card > .card-glow:has(.card-bottom) {
+	width: 50%;
+	height: 0.5rem;
+	bottom: -0.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.card .card-bottom {
+	width: 100%;
+	height: 100%;
+	clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%, 0% 0%);
+}
+
+.card > .card-glow:has(.card-left) {
+	width: 0.5rem;
+	height: 50%;
+	top: 50%;
+	left: -0.5rem;
+	transform: translateY(-50%);
+}
+
+.card .card-left {
+	width: 100%;
+	height: 100%;
+	clip-path: polygon(100% 100%, 0% 90%, 0% 10%, 100% 0%, 100% 100%);
+}
+
+/* Card Img */
+
+.card > .card-img {
+	display: flex;
+	align-items: center;
+	height: 80%;
+	z-index: -999;
+}
+
+.card > .card-img > img {
+	max-width: 100%;
+}
+
+/* Card Info */
+
+.card > .card-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 20%;
+
+	font-size: 14px;
+	border-top: solid 0.25rem rgb(from lightgray r g b / 0.5);
+}
+
+.card.card-selected > .card-info {
+	border-top: solid 0.25rem rgb(from var(--secondary) r g b / 0.5);
+}
+
+.card > .card-info > .card-price {
+	padding: calc(1px + 0.25vw) calc(3px + 0.5vw) calc(1px + 0.25vw) calc(3px + 0.5vw);
+	border: solid 0.15rem var(--accent);
+	border-radius: 1rem;
+	color: var(--accent);
+}
+
+/* Buttons */
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: max-content;
+	height: 2vh;
+	position: relative;
+	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
+
+	color: var(--text);
 	background-color: var(--primary);
+	border: solid 0.1rem transparent;
+	border-radius: 1rem;
+	cursor: pointer;
+	-webkit-user-select: none;
+	user-select: none;
+	transition: ease-in-out 0.15s background-color;
+}
+
+.button.button-disabled {
+	color: rgb(from var(--text) r g b / 0.5);
+	background-color: rgb(from var(--secondary) r g b / 0.25);
+	pointer-events: none;
+}
+
+.button:not(.button-disabled):hover {
+	color: var(--secondary);
+	background-color: transparent;
+	border: solid 0.1rem var(--primary);
+}
+
+.button:not(.button-disabled):active {
+	color: var(--text);
+	background-color: rgb(from var(--secondary) r g b / 0.75);
+	border: solid 0.1rem transparent;
+}
+
+/* Buttons with Icons */
+
+.button:has(i) {
+	column-gap: 0.75rem;
 }

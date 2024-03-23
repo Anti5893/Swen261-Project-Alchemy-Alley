@@ -8,6 +8,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
 import { CredentialsService } from './credentials.service';
+import { TestComponent } from './test/test.component';
 
 const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot, 
                                     credentialsService = inject(CredentialsService)) => {
@@ -39,7 +40,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, data: { auth: false, admin: false }, canActivate: [authGuard] },
   { path: 'catalog', component: CatalogComponent, data: { auth: true, admin: false }, canActivate: [authGuard] },
   { path: 'cart', component: CartComponent, data: { auth: true, admin: false }, canActivate: [authGuard] },
-  { path: 'admin', component: AdminComponent, data: { auth: true, admin: true }, canActivate: [authGuard] }
+  { path: 'admin', component: AdminComponent, data: { auth: true, admin: true }, canActivate: [authGuard] },
+  { path: 'test', component: TestComponent, data: { auth: false, admin: false }, canActivate: [authGuard] }
 ];
 
 @NgModule({
