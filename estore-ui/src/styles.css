@@ -1,40 +1,190 @@
-@import url('https://fonts.googleapis.com/css?family=Vollkorn%20SC:700|Underdog:400');
+@import url("https://fonts.googleapis.com/css?family=Vollkorn%20SC:700|Underdog:400");
 
 :root {
-    --text: #ffffff;
-    --background: #230b2a;
-    --primary: #791baf;
-    --secondary: #b888dd;
-    --accent: #f0bf0f;
+	--text: #ffffff;
+	--background: #230b2a;
+	--primary: #791baf;
+	--secondary: #b888dd;
+	--accent: #f0bf0f;
+
+	--text-50: #f2f2f2;
+	--text-100: #e6e6e6;
+	--text-200: #cccccc;
+	--text-300: #b3b3b3;
+	--text-400: #999999;
+	--text-500: #808080;
+	--text-600: #666666;
+	--text-700: #4d4d4d;
+	--text-800: #333333;
+	--text-900: #1a1a1a;
+	--text-950: #0d0d0d;
+
+	--background-50: #f6ebfa;
+	--background-100: #edd7f4;
+	--background-200: #dcaeea;
+	--background-300: #ca86df;
+	--background-400: #b95ed4;
+	--background-500: #a736c9;
+	--background-600: #862ba1;
+	--background-700: #642079;
+	--background-800: #431551;
+	--background-900: #210b28;
+	--background-950: #110514;
+
+	--primary-50: #f5e9fc;
+	--primary-100: #ead3f8;
+	--primary-200: #d6a7f1;
+	--primary-300: #c17bea;
+	--primary-400: #ad4fe3;
+	--primary-500: #9822dd;
+	--primary-600: #7a1cb0;
+	--primary-700: #5b1584;
+	--primary-800: #3d0e58;
+	--primary-900: #1e072c;
+	--primary-950: #0f0316;
+
+	--secondary-50: #f3ebf9;
+	--secondary-100: #e7d7f4;
+	--secondary-200: #d0afe9;
+	--secondary-300: #b888dd;
+	--secondary-400: #a160d2;
+	--secondary-500: #8938c7;
+	--secondary-600: #6e2d9f;
+	--secondary-700: #522277;
+	--secondary-800: #371650;
+	--secondary-900: #1b0b28;
+	--secondary-950: #0e0614;
+
+	--accent-50: #fdf9e7;
+	--accent-100: #fcf2cf;
+	--accent-200: #f9e59f;
+	--accent-300: #f6d96f;
+	--accent-400: #f3cc3f;
+	--accent-500: #f0bf0f;
+	--accent-600: #c0990c;
+	--accent-700: #907309;
+	--accent-800: #604c06;
+	--accent-900: #302603;
+	--accent-950: #181302;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	background-color: var(--background);
 }
 
 body {
-  font-family: 'Underdog';
-  font-weight: 400;
+	font-family: "Underdog";
+	font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, p, small {
-  font-family: 'Vollkorn SC';
-  font-weight: 700;
-  margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+small {
+	font-family: "Vollkorn SC";
+	font-weight: 700;
+	margin: 0;
 }
 
-html {font-size: 100%;} /* 16px */
+html {
+	font-size: 100%;
+} /* 16px */
 
-h1 {font-size: 3.053rem; /* 48.8px */}
+h1 {
+	font-size: 3.053rem; /* 48.8px */
+}
 
-h2 {font-size: 2.442rem; /* 39.04px */}
+h2 {
+	font-size: 2.442rem; /* 39.04px */
+}
 
-h3 {font-size: 1.954rem; /* 31.2px */}
+h3 {
+	font-size: 1.954rem; /* 31.2px */
+}
 
-h4 {font-size: 1.563rem; /* 24.96px */}
+h4 {
+	font-size: 1.563rem; /* 24.96px */
+}
 
-h5 {font-size: 1.250rem; /* 20px */}
+h5 {
+	font-size: 1.25rem; /* 20px */
+}
 
-small {font-size: 0.800rem; /* 12.8px */}
+small {
+	font-size: 0.8rem; /* 12.8px */
+}
+
+.radio-container {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem;
+}
+.radio-parent {
+	display: flex;
+	flex-direction: row;
+	width: min-content;
+	height: auto;
+}
+.radio-parent .radio-child:first-of-type {
+	border-top-left-radius: 1.25rem;
+	border-bottom-left-radius: 1.25rem;
+}
+.radio-parent .radio-child:last-of-type {
+	border-top-right-radius: 1.25rem;
+	border-bottom-right-radius: 1.25rem;
+	/* border-right: var(--text) solid 1px; */
+}
+.radio-child {
+	position: relative;
+	width: 1.25rem;
+	height: 1.25rem;
+	background-color: var(--secondary-800);
+	overflow: hidden;
+	color: var(--text);
+	transition: filter 0.1s, transform 50ms;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.radio-child input[type="radio"] {
+	width: 100%;
+	height: 100%;
+	appearance: none;
+	-webkit-appearance: none;
+	margin: 0;
+}
+.radio-child span:first-of-type {
+	position: absolute;
+	aspect-ratio: 1;
+	width: 100%;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+	line-height: 0;
+}
+.radio-child span:first-of-type p {
+	margin: 0;
+}
+
+/* .radio-child:hover {
+    filter: brightness(2);
+} */
+.radio-child:active {
+	transform: translateY(0.1em);
+}
+.radio-child input:checked {
+	background-color: var(--primary);
+}
