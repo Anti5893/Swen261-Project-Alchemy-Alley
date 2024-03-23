@@ -1,9 +1,14 @@
 <!-- Logged In -->
 <nav *ngIf="credentialsService.isLoggedIn(); else notLoggedIn" >
   <h1>Alchemy Alley</h1>
-  <a *ngIf="!credentialsService.isAdmin()" routerLink="/catalog">Catalog</a>
-  <a *ngIf="!credentialsService.isAdmin()" routerLink="/cart">Cart</a>
-  <button [routerLink]="'/login'" (click)="credentialsService.removeCurrentUser()">Logout</button>
+  <div id="nav-right">
+    <img class="nav-separator" src="https://cdn.icon-icons.com/icons2/3252/PNG/512/divider_short_regular_icon_204482.png">
+    <h2>
+      Welcome,
+      USERNAME
+    </h2>
+    <button [routerLink]="'/login'" (click)="credentialsService.removeCurrentUser()">Logout</button>
+  </div>
 </nav>
 
 <!-- Logged Out -->
