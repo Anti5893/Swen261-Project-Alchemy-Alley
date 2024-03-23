@@ -1,19 +1,19 @@
 <div class="wrapper" id="catalog">
 	<div id="catalog-options">
 		<input #searchBox id="catalog-search" (input)="searchProducts(searchBox.value)" />
-		<div>
-			<form>
-				<label>
+		<div class="radio-container">
+			<form class="radio-parent">
+				<label class="radio-child">
 					<input type="radio" name="group" checked />
 					<span><p>u</p></span>
 				</label>
-				<label>
+				<label class="radio-child">
 					<input type="radio" name="group" />
 					<span><p>t</p></span>
 				</label>
 			</form>
-			<form>
-				<label>
+			<form class="radio-parent">
+				<label class="radio-child">
 					<input
 						#sortAlphabetically
 						type="radio"
@@ -24,7 +24,7 @@
 					/>
 					<span><p>a</p></span>
 				</label>
-				<label>
+				<label class="radio-child">
 					<input
 						#sortHighToLow
 						type="radio"
@@ -34,7 +34,7 @@
 					/>
 					<span><p>h</p></span>
 				</label>
-				<label>
+				<label class="radio-child">
 					<input
 						#sortLowToHigh
 						type="radio"
@@ -45,18 +45,18 @@
 					<span><p>l</p></span>
 				</label>
 			</form>
-			<form>
-				<label>
+			<form class="radio-parent">
+				<label class="radio-child">
 					<input type="radio" name="filter" />
 					<span><p>l</p></span>
 				</label>
-				<label>
+				<label class="radio-child">
 					<input type="radio" name="filter" />
 					<span><p>u</p></span>
 				</label>
 			</form>
-			<form>
-				<label>
+			<form class="radio-parent">
+				<label class="radio-child">
 					<input type="radio" name="filter" />
 					<span><p>d</p></span>
 				</label>
