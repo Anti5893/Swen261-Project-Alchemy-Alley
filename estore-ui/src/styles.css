@@ -77,7 +77,6 @@ body {
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	background-color: var(--background);
 }
 
 body {
@@ -225,6 +224,10 @@ img {
 
 /* Cards */
 
+.card-wrapper:has(.card.card-selected) {
+	animation: card-float 3s infinite ease-in-out;
+}
+
 .card {
 	position: relative;
 	width: 12vw;
@@ -251,13 +254,28 @@ img {
 	background-size: 200%;
 	background-position-x: -200%;
 	animation: card-shimmer 3s infinite linear;
+	box-shadow: 0 0.5rem 5rem 0.1rem black;
 	cursor: pointer;
 }
 
 @keyframes card-shimmer {
+	
 	to {
 		background-position-x: 200%;
 	}
+
+}
+
+@keyframes card-float {
+	
+	50% {
+		transform: translateY(-0.5vw);
+	}
+
+	to {
+		transform: translateY(0%);
+	}
+
 }
 
 .card.card-unlocked {

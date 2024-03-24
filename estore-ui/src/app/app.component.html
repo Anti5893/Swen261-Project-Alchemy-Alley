@@ -1,9 +1,11 @@
 <!-- Logged In -->
 <nav *ngIf="credentialsService.isLoggedIn(); else notLoggedIn" >
-  <h1>Alchemy Alley</h1>
+  <div id="nav-left">
+    <h1>Alchemy Alley</h1>
+  </div>
   <div id="nav-right">
-    <img id="nav-separator" src="https://cdn.icon-icons.com/icons2/3252/PNG/512/divider_short_regular_icon_204482.png">
-    <div id="nav-welcome">
+    <img id="nav-separator" src="https://i.imgur.com/tX3jppf.png">
+    <div>
       <p>Welcome,</p>
       <p id="nav-username">{{credentialsService.getUser()!.username}}</p>
     </div>
