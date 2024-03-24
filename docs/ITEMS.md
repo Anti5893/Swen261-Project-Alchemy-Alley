@@ -2,11 +2,11 @@
 
 ## Element Types
 
-* Fire* (6)
+* Fire* (7)
 * Water* (7)
 * Air* (7)
 * Earth* (8)
-* Energy (4)
+* Energy (5)
 
 ## Products
 
@@ -17,6 +17,9 @@
 * Firebolt [**Fire**]
   * Fire
   * Fire
+* Fireball [**Fire**]
+  * Firebolt
+  * Firebolt
 * Ice [**Water**]
   * Water
   * Water
@@ -98,5 +101,8 @@
 * Gust [**Air**]
   * Wind
   * Wind
+* Explosion [**Energy**]
+  * Shock
+  * Fireball
 
 \* = Default Product
