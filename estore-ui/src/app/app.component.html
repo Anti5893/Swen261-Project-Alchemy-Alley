@@ -16,7 +16,16 @@
 <!-- Logged Out -->
 <ng-template #notLoggedIn>
   <nav>
-    <h1>Alchemy Alley</h1>
+    <div id="nav-left">
+      <h1>Alchemy Alley</h1>
+    </div>
   </nav>
 </ng-template>
+
+<div id="nav-divider">
+  <img src="assets/navbar-edge-left.png">
+  <img id="nav-middle" src="assets/navbar-middle.png">
+  <img src="assets/navbar-edge-right.png">
+</div>
+
 <router-outlet></router-outlet>

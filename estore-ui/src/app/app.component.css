@@ -12,7 +12,8 @@ nav > #nav-left {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 50vw;
+    width: 48vw;
+    margin-left: 2vw;
 }
 
 nav > #nav-left > h1 {
@@ -35,4 +36,22 @@ nav > #nav-right > #nav-separator {
 
 nav > #nav-right #nav-username {
     font-weight: bolder;
+}
+
+/* Navbar Divider */
+
+#nav-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2vh;
+    max-width: 100%;
+}
+
+#nav-divider > img {
+    height: 100%;
+}
+
+#nav-divider > #nav-middle {
+    flex-grow: 1;
 }
