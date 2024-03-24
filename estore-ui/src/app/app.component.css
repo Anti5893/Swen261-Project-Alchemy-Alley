@@ -1,0 +1,17 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 20vw;
+}
+
+#nav-separator {
+    width: 5vw;
+    height: 100%;
+}

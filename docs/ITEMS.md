@@ -1,22 +1,36 @@
 # Items
 
-## Spells
+## Element Types
 
 * Fire
-* Rock
-* Ice
 * Water
+* Air
+* Earth
+
+## Spells
+
+* Fire (Default)
+* Water (Default)
+* Air (Default)
+* Earth (Default)
+* Firebolt (Doubles)
   * Fire
-  * Ice
+  * Fire
+* Ice (Doubles)
+  * Water
+  * Water
+* Wind (Doubles)
+  * Air
+  * Air
+* Rock (Doubles)
+  * Earth
+  * Earth
 * Lava
   * Fire
   * Rock
 * Steam
   * Fire
   * Water
-* Fire bolt
-  * Fire
-  * Fire
 * Cloud
   * Steam
   * Steam
@@ -26,22 +40,27 @@
 * Hail
   * Ice
   * Rain
-* Hard Snowball
-  * Ice
-  * Rock
+* Tornado
+  * Wind
+  * Cloud
 * Slush
   * Ice
   * Water
 * Black Ice
   * Slush
   * Ice
-* Fire Rain
+* Volcano
   * Fire
   * Rain
 * Boulder
   * Rock
   * Rock
-* Fire Ball
-  * Fire
-  * Fire
+* Magma
+  * Lava
+  * Rock
+* Sand
+  * Wind
+  * Rock
+* Glass
+  * Sand
   * Fire
