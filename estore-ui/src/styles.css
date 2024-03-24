@@ -210,9 +210,9 @@ img {
 
 .card {
 	position: relative;
-	width: 8vw;
+	width: 10vw;
 	min-width: 150px;
-	height: 12vw;
+	height: 15vw;
 	min-height: 200px;
 	display: inline-flex !important;
 	flex-direction: column;
