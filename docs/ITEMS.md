@@ -1,47 +1,108 @@
 # Items
 
-## Spells
+## Element Types
 
-* Fire
-* Rock
-* Ice
-* Water
+* Fire* (7)
+* Water* (7)
+* Air* (7)
+* Earth* (8)
+* Energy (5)
+
+## Products
+
+* Fire* [**Fire**]
+* Water* [**Water**]
+* Air* [**Air**]
+* Earth* [**Earth**]
+* Firebolt [**Fire**]
   * Fire
-  * Ice
-* Lava
+  * Fire
+* Fireball [**Fire**]
+  * Firebolt
+  * Firebolt
+* Ice [**Water**]
+  * Water
+  * Water
+* Wind [**Air**]
+  * Air
+  * Air
+* Rock [**Earth**]
+  * Earth
+  * Earth
+* Lava [**Fire**]
   * Fire
   * Rock
-* Steam
+* Steam [**Air**]
   * Fire
   * Water
-* Fire bolt
-  * Fire
-  * Fire
-* Cloud
+* Cloud [**Air**]
   * Steam
   * Steam
-* Rain
+* Rain [**Water**]
   * Water
   * Cloud
-* Hail
+* Hail [**Water**]
   * Ice
   * Rain
-* Hard Snowball
-  * Ice
-  * Rock
-* Slush
+* Tornado [**Earth**]
+  * Wind
+  * Cloud
+* Slush [**Water**]
   * Ice
   * Water
-* Black Ice
+* Black Ice [**Water**]
   * Slush
   * Ice
-* Fire Rain
+* Volcano [**Fire**]
   * Fire
   * Rain
-* Boulder
+* Boulder [**Earth**]
   * Rock
   * Rock
-* Fire Ball
+* Magma [**Fire**]
+  * Lava
+  * Rock
+* Sand [**Earth**]
+  * Wind
+  * Rock
+* Glass [**Earth**]
+  * Sand
   * Fire
+* Plant [**Earth**]
+  * Earth
+  * Rain
+* Firenado [**Fire**]
   * Fire
-  * Fire
+  * Tornado
+* Typhoon [**Water**]
+  * Tornado
+  * Water
+* Metal [**Earth**]
+  * Rock
+  * Glass
+* Electricity [**Energy**]
+  * Air
+  * Metal
+* Shock [**Energy**]
+  * Electricity
+  * Electricity
+* Lightning [**Energy**]
+  * Electricity
+  * Cloud
+* Thunderstorm [**Energy**]
+  * Lightning
+  * Rain
+* Sandstorm [**Air**]
+  * Sand
+  * Wind
+* Flight [**Air**]
+  * Wind
+  * Air
+* Gust [**Air**]
+  * Wind
+  * Wind
+* Explosion [**Energy**]
+  * Shock
+  * Fireball
+
+\* = Default Product
