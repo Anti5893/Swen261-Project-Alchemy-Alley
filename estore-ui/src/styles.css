@@ -201,10 +201,15 @@ img {
 }
 
 .radio-child:active {
-	transform: translateY(calc(var(--radio-button-size) / 20));
+	/* transform: translateY(calc(var(--radio-button-size) / 20)); */
 	color: var(--text);
-	background-color: rgb(from var(--secondary) r g b / 0.75);
-	border: solid 0.1rem var(--primary);
+	background-color: var(--secondary);
+	border: solid 0.1rem var(--secondary);
+}
+.radio-child:has(input:checked):active {
+    color: var(--text);
+	background-color: var(--secondary);
+	border: solid 0.1rem var(--secondary);
 }
 
 .radio-child input[type="radio"] {
