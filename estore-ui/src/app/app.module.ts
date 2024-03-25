@@ -11,6 +11,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
 import { TestComponent } from './test/test.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TestComponent } from './test/test.component';
     CatalogComponent,
     CartComponent,
     AdminComponent,
-    TestComponent
+    TestComponent,
+    CardComponent
   ],
   imports: [
     AppRoutingModule,
