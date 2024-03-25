@@ -162,6 +162,7 @@ img {
 	border-top-left-radius: var(--radio-button-size);
 	border-bottom-left-radius: var(--radio-button-size);
 }
+
 .radio-parent .radio-child:last-of-type {
 	border-top-right-radius: var(--radio-button-size);
 	border-bottom-right-radius: var(--radio-button-size);
@@ -182,6 +183,7 @@ img {
 	justify-content: center;
 	align-items: center;
 }
+
 .radio-child:has(input:checked) {
 	background-color: var(--primary);
 	border-color: var(--primary);
@@ -191,6 +193,7 @@ img {
 	background-color: transparent;
 	color: var(--secondary);
 }
+
 .radio-child:has(input:checked):hover {
 	background-color: var(--primary-700);
 	border-color: var(--primary);
@@ -226,6 +229,7 @@ img {
 	text-align: center;
 	line-height: 0;
 }
+
 .radio-child span:first-of-type p {
 	margin: 0;
 }
@@ -247,17 +251,17 @@ img {
 	justify-content: space-between;
 	cursor: not-allowed;
 
-	border: solid 0.25rem rgb(from lightgray r g b / 0.5);
-	background-color: rgb(from lightgray r g b / 0.25);
+	border: solid 0.25rem var(--text-400);
+	background: color-mix(in srgb, var(--text-400), transparent 75%);
 }
 
 .card.card-selected {
-	border: solid 0.25rem rgb(from var(--secondary) r g b / 0.5);
+	border: solid 0.25rem var(--secondary-200);
 	background: linear-gradient(
 		-45deg,
-		rgb(from lightgray r g b / 0.25) 40%,
-		rgb(from lightgray r g b / 0.4) 50%,
-		rgb(from lightgray r g b / 0.25) 60%
+		color-mix(in srgb, var(--text), transparent 75%) 40%,
+		color-mix(in srgb, var(--text), transparent 50%) 50%,
+		color-mix(in srgb, var(--text), transparent 75%) 60%
 	);
 	background-size: 200%;
 	background-position-x: -200%;
@@ -394,11 +398,11 @@ img {
 	height: 20%;
 
 	font-size: 14px;
-	border-top: solid 0.25rem rgb(from lightgray r g b / 0.5);
+	border-top: solid 0.25rem var(--text-400);
 }
 
 .card.card-selected > .card-info {
-	border-top: solid 0.25rem rgb(from var(--secondary) r g b / 0.5);
+	border-top: solid 0.25rem var(--secondary-200);
 }
 
 .card > .card-info > .card-price {
@@ -426,12 +430,13 @@ img {
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
-	transition: ease-in-out 0.15s background-color, ease-in-out 0.15s color;
+	transition: ease-in-out 0.15s background-color, ease-in-out 0.15s color,
+		ease-in-out 0.15s border-color;
 }
 
 .button:disabled {
-	color: rgb(from var(--text) r g b / 0.5);
-	background-color: rgb(from var(--secondary) r g b / 0.25);
+	color: var(--text-300);
+	background-color: var(--primary-800);
 	pointer-events: none;
 	border-color: transparent;
 }
@@ -444,8 +449,8 @@ img {
 
 .button:enabled:active {
 	color: var(--text);
-	background-color: rgb(from var(--secondary) r g b / 0.75);
-	border: solid 0.1rem var(--primary);
+	background-color: var(--secondary);
+	border: solid 0.1rem var(--secondary);
 }
 
 /* Buttons with Icons */
@@ -481,7 +486,7 @@ img {
 }
 
 .input > input::placeholder {
-	color: rgb(from var(--text) r g b / 0.5);
+	color: var(--secondary);
 }
 
 /* ToolTip */
