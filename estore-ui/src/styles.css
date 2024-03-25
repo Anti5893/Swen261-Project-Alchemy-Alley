@@ -460,6 +460,7 @@ img {
 	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
 
 	color: var(--text);
+	font-weight: bold;
 	background-color: var(--primary);
 	border-radius: 1rem;
 }
