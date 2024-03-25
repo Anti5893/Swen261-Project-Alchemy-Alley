@@ -1,6 +1,15 @@
 <div class="wrapper" id="catalog">
 	<div id="catalog-options">
-		<input #searchBox id="catalog-search" (input)="searchProducts(searchBox.value)"/>
+		<div class="input">
+			<i class="fa-solid fa-search"></i>
+			<input
+				#searchBox
+				id="catalog-search"
+				type="text"
+				placeholder="Search for Spell"
+				(input)="searchProducts(searchBox.value)"
+			/>
+		</div>
 		<div class="radio-container">
 			<form class="radio-parent">
 				<label class="radio-child" tooltip="By Completion">
@@ -13,13 +22,23 @@
 				</label>
 			</form>
 			<form class="radio-parent">
+				<label class="radio-child" tooltip="By ID">
+					<input
+						#sortByID
+						type="radio"
+						name="sort"
+						value="byID"
+						checked
+						(change)="sortProducts(sortByID.value)"
+					/>
+					<span><i class="fa-solid fa-hashtag"></i></span>
+				</label>
 				<label class="radio-child" tooltip="Alphabetically">
 					<input
 						#sortAlphabetically
 						type="radio"
 						name="sort"
 						value="alphabetically"
-						checked
 						(change)="sortProducts(sortAlphabetically.value)"
 					/>
 					<span><i class="fa-solid fa-font"></i></span>
@@ -70,41 +89,8 @@
 	</div>
 	<div id="catalog-products">
 		<div *ngIf="products.length > 0; else elseBlock">
-			<div *ngFor="let product of products">
-				<div class="image-container" id="catalog-product-image">
-					<img src="" />
-				</div>
-				<div id="catalog-product-details">
-					<div id="catalog-product-naming">
-						<span class="header" id="catalog-product-name">
-							name={{ product.name }}
-						</span>
-						<span class="badge" id="catalog-product-type">
-							type={{ product.type }}
-						</span>
-					</div>
-					<div id="catalog-product-pricing">
-						<span id="catalog-product-price"> price={{ product.price }} </span>
-						<span id="catalog-product-quantity"> quantity={{ product.quantity }} </span>
-					</div>
-				</div>
-				<button
-					class="button"
-					*ngIf="!itemInCart(product)"
-					[disabled]="maxCartSize()"
-					(click)="addToCart(product.id)"
-                    tooltip="Button"
-				>
-					Add to Cart
-				</button>
-				<button
-					class="button"
-					*ngIf="itemInCart(product)"
-					(click)="removeFromCart(product.id)"
-				>
-					Remove from Cart
-				</button>
-				<div clas></div>
+			<div id="cards-wrapper">
+				<app-card *ngFor="let product of products" [product]="product"></app-card>
 			</div>
 		</div>
 		<ng-template id="catalog-products-empty" #elseBlock>No products found</ng-template>

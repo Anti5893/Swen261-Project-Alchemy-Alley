@@ -1,0 +1,20 @@
+<div class="card-wrapper" (click)="toggleCartStatus()">
+	<div
+		class="card"
+		[ngClass]="formClasses()"
+	>
+		<div class="card-img">
+			<img
+				src="https://static.vecteezy.com/system/resources/previews/021/698/212/original/ball-of-fire-glowing-magma-sphere-fireball-large-sphere-of-red-energy-fantasy-game-spell-icon-generative-ai-png.png"
+			/>
+		</div>
+		<div class="card-info">
+			<p>{{ product.name }}</p>
+			<div class="card-price">${{ product.price }}</div>
+		</div>
+		<div class="card-glow"><div class="card-top"></div></div>
+		<div class="card-glow"><div class="card-right"></div></div>
+		<div class="card-glow"><div class="card-bottom"></div></div>
+		<div class="card-glow"><div class="card-left"></div></div>
+	</div>
+</div>

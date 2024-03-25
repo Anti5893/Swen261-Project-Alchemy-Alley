@@ -5,6 +5,8 @@
 :root {
 	box-sizing: border-box;
 
+	--input-height: 2rem;
+
 	--text: #ffffff;
 	--background: #230b2a;
 	--primary: #791baf;
@@ -70,6 +72,17 @@
 	--accent-800: #604c06;
 	--accent-900: #302603;
 	--accent-950: #181302;
+
+	--fire: #ff4800;
+	--fire-secondary: #a32e00;
+	--water: #0099ff;
+	--water-secondary: #005791;
+	--air: #f6aeff;
+	--air-secondary: #a25eab;
+	--earth: #e58900;
+	--earth-secondary: #8a5300;
+	--energy: #e100ff;
+	--energy-secondary: #9000a3;
 }
 
 html,
@@ -141,14 +154,10 @@ img {
 
 /* Radio Styles */
 
-:root {
-	--radio-button-size: 2.5rem;
-}
-
 .radio-container {
 	display: flex;
 	flex-direction: row;
-	gap: calc(var(--radio-button-size) / 5);
+	gap: calc(var(--input-height) / 5);
 }
 
 .radio-parent {
@@ -159,20 +168,19 @@ img {
 }
 
 .radio-parent .radio-child:first-of-type {
-	border-top-left-radius: var(--radio-button-size);
-	border-bottom-left-radius: var(--radio-button-size);
+	border-top-left-radius: var(--input-height);
+	border-bottom-left-radius: var(--input-height);
 }
 
 .radio-parent .radio-child:last-of-type {
-	border-top-right-radius: var(--radio-button-size);
-	border-bottom-right-radius: var(--radio-button-size);
-	/* border-right: var(--text) solid 1px; */
+	border-top-right-radius: var(--input-height);
+	border-bottom-right-radius: var(--input-height);
 }
 
 .radio-child {
 	position: relative;
-	width: var(--radio-button-size);
-	height: var(--radio-button-size);
+	width: var(--input-height);
+	height: var(--input-height);
 	background-color: var(--secondary-800);
 	border: solid 0.1rem var(--secondary-800);
 	color: var(--text);
@@ -201,13 +209,13 @@ img {
 }
 
 .radio-child:active {
-	/* transform: translateY(calc(var(--radio-button-size) / 20)); */
+	/* transform: translateY(calc(var(--input-height) / 20)); */
 	color: var(--text);
 	background-color: var(--secondary);
 	border: solid 0.1rem var(--secondary);
 }
 .radio-child:has(input:checked):active {
-    color: var(--text);
+	color: var(--text);
 	background-color: var(--secondary);
 	border: solid 0.1rem var(--secondary);
 }
@@ -231,6 +239,7 @@ img {
 	justify-content: center;
 	align-items: center;
 
+	font-size: calc(var(--input-height) / 2);
 	text-align: center;
 	line-height: 0;
 }
@@ -258,6 +267,27 @@ img {
 
 	border: solid 0.25rem var(--text-400);
 	background: color-mix(in srgb, var(--text-400), transparent 75%);
+}
+
+.card-fire.card-unlocked {
+	border: solid 0.25rem var(--fire-secondary);
+	filter: drop-shadow(0 0rem 0.25rem var(--fire-secondary));
+}
+.card-water.card-unlocked {
+	border: solid 0.25rem var(--water-secondary);
+	filter: drop-shadow(0 0rem 0.25rem var(--water-secondary));
+}
+.card-air.card-unlocked {
+	border: solid 0.25rem var(--air-secondary);
+	filter: drop-shadow(0 0rem 0.25rem var(--air-secondary));
+}
+.card-earth.card-unlocked {
+	border: solid 0.25rem var(--earth-secondary);
+	filter: drop-shadow(0 0rem 0.25rem var(--earth-secondary));
+}
+.card-energy.card-unlocked {
+	border: solid 0.25rem var(--energy-secondary);
+	filter: drop-shadow(0 0rem 0.25rem var(--energy-secondary));
 }
 
 .card.card-selected {
@@ -291,8 +321,28 @@ img {
 	}
 }
 
+.card-fire.card-selected {
+	border: solid 0.25rem var(--fire);
+}
+.card-water.card.card-selected {
+	border: solid 0.25rem var(--water);
+}
+.card-air.card-selected {
+	border: solid 0.25rem var(--air);
+}
+.card-earth.card-selected {
+	border: solid 0.25rem var(--earth);
+}
+.card-energy.card-selected {
+	border: solid 0.25rem var(--energy);
+}
+
 .card.card-unlocked {
 	cursor: pointer;
+}
+
+.card.card-blocked {
+	cursor: not-allowed;
 }
 
 /* Card Glow */
@@ -306,10 +356,6 @@ img {
 	filter: drop-shadow(0 0rem 0.25rem var(--secondary));
 }
 
-.card.card-unlocked > .card-glow {
-	filter: drop-shadow(0 0rem 0.25rem lightgray);
-}
-
 .card > .card-glow > div {
 	background-color: darkgray;
 }
@@ -320,6 +366,37 @@ img {
 
 .card.card-unlocked > .card-glow > div {
 	background-color: lightgray;
+}
+
+.card.card-fire.card-unlocked > .card-glow {
+    filter: drop-shadow(0 0rem 0.25rem var(--fire))
+}
+.card.card-fire.card-unlocked > .card-glow > div {
+	background-color: var(--fire);
+}
+.card.card-water.card-unlocked > .card-glow {
+    filter: drop-shadow(0 0rem 0.25rem var(--water))
+}
+.card.card-water.card-unlocked > .card-glow > div {
+	background-color: var(--water);
+}
+.card.card-air.card-unlocked > .card-glow {
+    filter: drop-shadow(0 0rem 0.25rem var(--air))
+}
+.card.card-air.card-unlocked > .card-glow > div {
+	background-color: var(--air);
+}
+.card.card-earth.card-unlocked > .card-glow {
+    filter: drop-shadow(0 0rem 0.25rem var(--earth))
+}
+.card.card-earth.card-unlocked > .card-glow > div {
+	background-color: var(--earth);
+}
+.card.card-energy.card-unlocked > .card-glow {
+    filter: drop-shadow(0 0rem 0.25rem var(--energy))
+}
+.card.card-energy.card-unlocked > .card-glow > div {
+	background-color: var(--energy);
 }
 
 /* Card Side Graphics */
@@ -425,7 +502,8 @@ img {
 	align-items: center;
 	justify-content: center;
 	width: max-content;
-	height: 2vh;
+	height: var(--input-height);
+	/* box-sizing: border-box; */
 	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
 
 	color: var(--text);
@@ -467,12 +545,15 @@ img {
 /* Inputs with Icon */
 
 .input {
+	all: unset;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	column-gap: 0.75rem;
 	width: max-content;
-	height: 2vh;
+	height: var(--input-height);
+	box-sizing: border-box;
 	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
 
 	color: var(--text);
