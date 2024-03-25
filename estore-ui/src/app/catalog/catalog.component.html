@@ -5,11 +5,11 @@
 			<form class="radio-parent">
 				<label class="radio-child">
 					<input type="radio" name="group" checked />
-					<span><p>u</p></span>
+					<span><i class="fa-solid fa-lock"></i></span>
 				</label>
 				<label class="radio-child">
 					<input type="radio" name="group" />
-					<span><p>t</p></span>
+					<span><i class="fa-solid fa-palette"></i></span>
 				</label>
 			</form>
 			<form class="radio-parent">
@@ -22,7 +22,7 @@
 						checked
 						(change)="sortProducts(sortAlphabetically.value)"
 					/>
-					<span><p>a</p></span>
+					<span><i class="fa-solid fa-font"></i></span>
 				</label>
 				<label class="radio-child">
 					<input
@@ -32,7 +32,9 @@
 						value="high-low"
 						(change)="sortProducts(sortHighToLow.value)"
 					/>
-					<span><p>h</p></span>
+					<span
+						><i class="fa-solid fa-dollar-sign"></i><i class="fa-solid fa-arrow-up"></i
+					></span>
 				</label>
 				<label class="radio-child">
 					<input
@@ -42,25 +44,28 @@
 						value="low-high"
 						(change)="sortProducts(sortLowToHigh.value)"
 					/>
-					<span><p>l</p></span>
+					<span
+						><i class="fa-solid fa-dollar-sign"></i
+						><i class="fa-solid fa-arrow-down"></i
+					></span>
 				</label>
 			</form>
 			<form class="radio-parent">
 				<label class="radio-child">
 					<input type="radio" name="filter" />
-					<span><p>l</p></span>
+					<span><i class="fa-solid fa-lock"></i></span>
 				</label>
 				<label class="radio-child">
 					<input type="radio" name="filter" />
-					<span><p>u</p></span>
+					<span><i class="fa-solid fa-unlock"></i></span>
 				</label>
 			</form>
-			<form class="radio-parent">
+			<!-- <form class="radio-parent">
 				<label class="radio-child">
 					<input type="radio" name="filter" />
 					<span><p>d</p></span>
 				</label>
-			</form>
+			</form> -->
 		</div>
 	</div>
 	<div id="catalog-products">
