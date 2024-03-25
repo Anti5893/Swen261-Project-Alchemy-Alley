@@ -173,8 +173,7 @@ img {
 	width: var(--radio-button-size);
 	height: var(--radio-button-size);
 	background-color: var(--secondary-800);
-    border: solid 0.1rem var(--secondary-800);
-	overflow: hidden;
+	border: solid 0.1rem var(--secondary-800);
 	color: var(--text);
 	cursor: pointer;
 	transition: transform 150ms, background-color 150ms ease-in-out, color 150ms ease-in-out;
@@ -185,21 +184,24 @@ img {
 }
 .radio-child:has(input:checked) {
 	background-color: var(--primary);
-    border-color: var(--primary);
+	border-color: var(--primary);
 }
 
 .radio-child:hover {
-    background-color: transparent;
-    color: var(--secondary);
+	background-color: transparent;
+	color: var(--secondary);
 }
 .radio-child:has(input:checked):hover {
-    background-color: var(--primary-700);
-    border-color: var(--primary);
-    color: var(--secondary-100);
+	background-color: var(--primary-700);
+	border-color: var(--primary);
+	color: var(--secondary-100);
 }
 
 .radio-child:active {
-    transform: translateY(calc(var(--radio-button-size) / 20));
+	transform: translateY(calc(var(--radio-button-size) / 20));
+	color: var(--text);
+	background-color: rgb(from var(--secondary) r g b / 0.75);
+	border: solid 0.1rem var(--primary);
 }
 
 .radio-child input[type="radio"] {
@@ -226,13 +228,6 @@ img {
 }
 .radio-child span:first-of-type p {
 	margin: 0;
-}
-
-/* ToolTip */
-
-*[tooltip]::before {
-	position: relative;
-	content: attr(tooltip);
 }
 
 /* Cards */
@@ -272,15 +267,12 @@ img {
 }
 
 @keyframes card-shimmer {
-
 	to {
 		background-position-x: 200%;
 	}
-
 }
 
 @keyframes card-float {
-
 	50% {
 		transform: translateY(-0.5vw);
 	}
@@ -288,7 +280,6 @@ img {
 	to {
 		transform: translateY(0%);
 	}
-
 }
 
 .card.card-unlocked {
@@ -420,7 +411,7 @@ img {
 /* Buttons */
 
 .button {
-    all:unset;
+	all: unset;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -442,7 +433,7 @@ img {
 	color: rgb(from var(--text) r g b / 0.5);
 	background-color: rgb(from var(--secondary) r g b / 0.25);
 	pointer-events: none;
-    border-color: transparent;
+	border-color: transparent;
 }
 
 .button:enabled:hover {
@@ -491,4 +482,50 @@ img {
 
 .input > input::placeholder {
 	color: rgb(from var(--text) r g b / 0.5);
+}
+
+/* ToolTip */
+
+*[tooltip] {
+	position: relative;
+}
+*[tooltip]::before {
+	all: unset;
+	position: absolute;
+	display: inline-block;
+	content: attr(tooltip);
+	width: max-content;
+	top: -35px;
+	background-color: var(--secondary-800);
+	color: var(--secondary-100);
+	/* margin-left: auto;
+	margin-right: auto; */
+	font-size: 1rem;
+	border-radius: 8px;
+	padding: 0.25rem;
+	visibility: hidden;
+	z-index: 1;
+	filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
+}
+*[tooltip]:hover::before {
+	animation: show 50ms;
+	animation-delay: 0.5s;
+	animation-fill-mode: forwards;
+}
+/* *[tooltip]::after::after {
+	position: absolute;
+	bottom: 0;
+	width: 0.1rem;
+	height: 0.1rem;
+	border-left: 100% solid transparent;
+	border-right: 100% solid transparent;
+	border-bottom: 100% solid red;
+} */
+@keyframes show {
+	from {
+		visibility: hidden;
+	}
+	to {
+		visibility: visible;
+	}
 }
