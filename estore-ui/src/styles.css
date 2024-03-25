@@ -166,7 +166,6 @@ img {
 .radio-parent .radio-child:last-of-type {
 	border-top-right-radius: var(--radio-button-size);
 	border-bottom-right-radius: var(--radio-button-size);
-	/* border-right: var(--text) solid 1px; */
 }
 
 .radio-child {
@@ -201,7 +200,6 @@ img {
 }
 
 .radio-child:active {
-	/* transform: translateY(calc(var(--radio-button-size) / 20)); */
 	color: var(--text);
 	background-color: var(--secondary);
 	border: solid 0.1rem var(--secondary);
@@ -256,17 +254,16 @@ img {
 	justify-content: space-between;
 	cursor: not-allowed;
 
-	border: solid 0.25rem var(--text-400);
-	background: color-mix(in srgb, var(--text-400), transparent 75%);
+	border: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
+	background: color-mix(in srgb, var(--card-color, var(--text-500)), transparent 75%);
 }
 
 .card.card-selected {
-	border: solid 0.25rem var(--secondary-200);
 	background: linear-gradient(
 		-45deg,
-		color-mix(in srgb, var(--text), transparent 75%) 40%,
-		color-mix(in srgb, var(--text), transparent 50%) 50%,
-		color-mix(in srgb, var(--text), transparent 75%) 60%
+		color-mix(in srgb, var(--card-color, var(--text-500)), transparent 75%) 40%,
+		color-mix(in srgb, var(--text), transparent 75%) 50%,
+		color-mix(in srgb, var(--card-color, var(--text-500)), transparent 75%) 60%
 	);
 	background-size: 200%;
 	background-position-x: -200%;
@@ -299,27 +296,31 @@ img {
 
 .card > .card-glow {
 	position: absolute;
-	filter: drop-shadow(0 0rem 0.25rem black);
+	filter: drop-shadow(0 0 0.25rem black);
 }
 
 .card.card-selected > .card-glow {
-	filter: drop-shadow(0 0rem 0.25rem var(--secondary));
-}
-
-.card.card-unlocked > .card-glow {
-	filter: drop-shadow(0 0rem 0.25rem lightgray);
-}
-
-.card > .card-glow > div {
-	background-color: darkgray;
+	filter: drop-shadow(0 0 0.25rem var(--card-color));
 }
 
 .card.card-selected > .card-glow > div {
-	background-color: var(--secondary);
+	animation: glow-brighten 2s infinite linear;
 }
 
-.card.card-unlocked > .card-glow > div {
-	background-color: lightgray;
+.card > .card-glow > div {
+	background-color: var(--card-color, var(--text-500));
+}
+
+@keyframes glow-brighten {
+	from {
+		filter: brightness(1);
+	}
+	50% {
+		filter: brightness(2);
+	}
+	to {
+		filter: brightness(1);
+	}
 }
 
 /* Card Side Graphics */
@@ -403,12 +404,9 @@ img {
 	height: 20%;
 
 	font-size: 14px;
-	border-top: solid 0.25rem var(--text-400);
+	border-top: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
 }
 
-.card.card-selected > .card-info {
-	border-top: solid 0.25rem var(--secondary-200);
-}
 
 .card > .card-info > .card-price {
 	padding: calc(1px + 0.25vw) calc(3px + 0.5vw) calc(1px + 0.25vw) calc(3px + 0.5vw);
