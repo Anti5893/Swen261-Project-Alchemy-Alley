@@ -237,6 +237,10 @@ img {
 
 /* Cards */
 
+.card-wrapper:has(.card.card-selected) {
+	animation: card-float 3s infinite ease-in-out;
+}
+
 .card {
 	position: relative;
 	width: 12vw;
@@ -263,13 +267,28 @@ img {
 	background-size: 200%;
 	background-position-x: -200%;
 	animation: card-shimmer 3s infinite linear;
+	box-shadow: 0 0.5rem 5rem 0.1rem black;
 	cursor: pointer;
 }
 
 @keyframes card-shimmer {
+
 	to {
 		background-position-x: 200%;
 	}
+
+}
+
+@keyframes card-float {
+
+	50% {
+		transform: translateY(-0.5vw);
+	}
+
+	to {
+		transform: translateY(0%);
+	}
+
 }
 
 .card.card-unlocked {
@@ -407,7 +426,6 @@ img {
 	justify-content: center;
 	width: max-content;
 	height: 2vh;
-	position: relative;
 	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
 
 	color: var(--text);
@@ -443,4 +461,34 @@ img {
 
 .button:has(i) {
 	column-gap: 0.75rem;
+}
+
+/* Inputs with Icon */
+
+.input {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 0.75rem;
+	width: max-content;
+	height: 2vh;
+	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
+
+	color: var(--text);
+	font-weight: bold;
+	background-color: var(--primary);
+	border-radius: 1rem;
+}
+
+.input > input {
+	font-family: inherit;
+	color: var(--text);
+	background-color: var(--primary);
+	border: none;
+	border-bottom: solid 0.1rem var(--secondary);
+	outline: none;
+}
+
+.input > input::placeholder {
+	color: rgb(from var(--text) r g b / 0.5);
 }
