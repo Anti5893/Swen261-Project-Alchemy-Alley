@@ -252,7 +252,6 @@ img {
 	display: inline-flex !important;
 	flex-direction: column;
 	justify-content: space-between;
-	cursor: not-allowed;
 
 	border: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
 	background: color-mix(in srgb, var(--card-color, var(--text-500)), transparent 75%);
@@ -269,7 +268,11 @@ img {
 	background-position-x: -200%;
 	animation: card-shimmer 3s infinite linear;
 	box-shadow: 0 0.5rem 5rem 0.1rem black;
-	cursor: pointer;
+}
+
+.card:not(.card-selected):not(.card-unlocked) {
+	cursor: not-allowed;
+	pointer-events: none;
 }
 
 @keyframes card-shimmer {
@@ -286,10 +289,6 @@ img {
 	to {
 		transform: translateY(0%);
 	}
-}
-
-.card.card-unlocked {
-	cursor: pointer;
 }
 
 /* Card Glow */
