@@ -1,12 +1,17 @@
-<div>
-    <label for="new-user-username">Username: </label>
-    <input id="new-user-username" [(ngModel)]="username">
 
-    <label for="new-user-password">Password: </label>
-    <input type="password" id="new-user-password" [(ngModel)]="password">
-
-    <button (click)="onClick(username,password)">Login</button>
+<div class = "login-box">
+    <div class = "login-fields">
+        <label for="new-user-username">Username: </label>
+        <input id="new-user-username" [(ngModel)]="username">
+        <label for="new-user-password">Password: </label>
+        <input type="password" id="new-user-password" [(ngModel)]="password">
+    </div>
+    <div class = "login-buttons">
+        <button class = "button"(click)="onClick(username,password)">Login</button>
+        <button class = "button" routerLink="/register">Register</button> 
+    </div>
+    
     <p *ngIf="showErrorMesssage()">Error - Incorrect Username or Password</p>
+
 </div>
 
-<a routerLink="/register">Not a member? Register Here</a>
