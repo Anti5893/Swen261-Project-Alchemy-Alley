@@ -77,7 +77,6 @@ body {
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	background-color: var(--background);
 }
 
 body {
@@ -142,10 +141,14 @@ img {
 
 /* Radio Styles */
 
+:root {
+	--radio-button-size: 2.5rem;
+}
+
 .radio-container {
 	display: flex;
 	flex-direction: row;
-	gap: 0.5rem;
+	gap: calc(var(--radio-button-size) / 5);
 }
 
 .radio-parent {
@@ -156,32 +159,47 @@ img {
 }
 
 .radio-parent .radio-child:first-of-type {
-	border-top-left-radius: 1.25rem;
-	border-bottom-left-radius: 1.25rem;
+	border-top-left-radius: var(--radio-button-size);
+	border-bottom-left-radius: var(--radio-button-size);
 }
-
 .radio-parent .radio-child:last-of-type {
-	border-top-right-radius: 1.25rem;
-	border-bottom-right-radius: 1.25rem;
+	border-top-right-radius: var(--radio-button-size);
+	border-bottom-right-radius: var(--radio-button-size);
 	/* border-right: var(--text) solid 1px; */
 }
 
 .radio-child {
 	position: relative;
-	width: 1.25rem;
-	height: 1.25rem;
+	width: var(--radio-button-size);
+	height: var(--radio-button-size);
 	background-color: var(--secondary-800);
+    border: solid 0.1rem var(--secondary-800);
 	overflow: hidden;
 	color: var(--text);
-	transition: filter 0.1s, transform 50ms;
+	cursor: pointer;
+	transition: transform 150ms, background-color 150ms ease-in-out, color 150ms ease-in-out;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+.radio-child:has(input:checked) {
+	background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.radio-child:hover {
+    background-color: transparent;
+    color: var(--secondary);
+}
+.radio-child:has(input:checked):hover {
+    background-color: var(--primary-700);
+    border-color: var(--primary);
+    color: var(--secondary-100);
+}
 
 .radio-child:active {
-	transform: translateY(0.1em);
+    transform: translateY(calc(var(--radio-button-size) / 20));
 }
 
 .radio-child input[type="radio"] {
@@ -190,10 +208,6 @@ img {
 	appearance: none;
 	-webkit-appearance: none;
 	margin: 0;
-}
-
-.radio-child input:checked {
-	background-color: var(--primary);
 }
 
 .radio-child span:first-of-type {
@@ -210,9 +224,15 @@ img {
 	text-align: center;
 	line-height: 0;
 }
-
 .radio-child span:first-of-type p {
 	margin: 0;
+}
+
+/* ToolTip */
+
+*[tooltip]::before {
+	position: relative;
+	content: attr(tooltip);
 }
 
 /* Cards */
@@ -381,6 +401,7 @@ img {
 /* Buttons */
 
 .button {
+    all:unset;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -391,30 +412,31 @@ img {
 
 	color: var(--text);
 	background-color: var(--primary);
-	border: solid 0.1rem transparent;
+	border: solid 0.1rem var(--primary);
 	border-radius: 1rem;
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;
-	transition: ease-in-out 0.15s background-color;
+	transition: ease-in-out 0.15s background-color, ease-in-out 0.15s color;
 }
 
-.button.button-disabled {
+.button:disabled {
 	color: rgb(from var(--text) r g b / 0.5);
 	background-color: rgb(from var(--secondary) r g b / 0.25);
 	pointer-events: none;
+    border-color: transparent;
 }
 
-.button:not(.button-disabled):hover {
+.button:enabled:hover {
 	color: var(--secondary);
 	background-color: transparent;
 	border: solid 0.1rem var(--primary);
 }
 
-.button:not(.button-disabled):active {
+.button:enabled:active {
 	color: var(--text);
 	background-color: rgb(from var(--secondary) r g b / 0.75);
-	border: solid 0.1rem transparent;
+	border: solid 0.1rem var(--primary);
 }
 
 /* Buttons with Icons */

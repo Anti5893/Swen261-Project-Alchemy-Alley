@@ -1,6 +1,72 @@
 <div class="wrapper" id="catalog">
 	<div id="catalog-options">
 		<input #searchBox id="catalog-search" (input)="searchProducts(searchBox.value)" />
+		<div class="radio-container">
+			<form class="radio-parent">
+				<label class="radio-child">
+					<input type="radio" name="group" checked />
+					<span><i class="fa-solid fa-lock"></i></span>
+				</label>
+				<label class="radio-child">
+					<input type="radio" name="group" />
+					<span><i class="fa-solid fa-palette"></i></span>
+				</label>
+			</form>
+			<form class="radio-parent">
+				<label class="radio-child">
+					<input
+						#sortAlphabetically
+						type="radio"
+						name="sort"
+						value="alphabetically"
+						checked
+						(change)="sortProducts(sortAlphabetically.value)"
+					/>
+					<span><i class="fa-solid fa-font"></i></span>
+				</label>
+				<label class="radio-child">
+					<input
+						#sortHighToLow
+						type="radio"
+						name="sort"
+						value="high-low"
+						(change)="sortProducts(sortHighToLow.value)"
+					/>
+					<span
+						><i class="fa-solid fa-dollar-sign"></i><i class="fa-solid fa-arrow-up"></i
+					></span>
+				</label>
+				<label class="radio-child">
+					<input
+						#sortLowToHigh
+						type="radio"
+						name="sort"
+						value="low-high"
+						(change)="sortProducts(sortLowToHigh.value)"
+					/>
+					<span
+						><i class="fa-solid fa-dollar-sign"></i
+						><i class="fa-solid fa-arrow-down"></i
+					></span>
+				</label>
+			</form>
+			<form class="radio-parent">
+				<label class="radio-child">
+					<input type="radio" name="filter" />
+					<span><i class="fa-solid fa-lock"></i></span>
+				</label>
+				<label class="radio-child">
+					<input type="radio" name="filter" />
+					<span><i class="fa-solid fa-unlock"></i></span>
+				</label>
+			</form>
+			<!-- <form class="radio-parent">
+				<label class="radio-child">
+					<input type="radio" name="filter" />
+					<span><p>d</p></span>
+				</label>
+			</form> -->
+		</div>
 	</div>
 	<div id="catalog-products">
 		<div *ngIf="products.length > 0; else elseBlock">
@@ -22,8 +88,16 @@
 						<span id="catalog-product-quantity"> quantity={{ product.quantity }} </span>
 					</div>
 				</div>
-				<button *ngIf="!itemInCart(product)" [disabled] ="maxCartSize()" (click)="addToCart(product.id)">Add to Cart</button>
-        		<button *ngIf="itemInCart(product)" (click)="removeFromCart(product.id)">Remove from Cart</button>
+				<button
+					*ngIf="!itemInCart(product)"
+					[disabled]="maxCartSize()"
+					(click)="addToCart(product.id)"
+				>
+					Add to Cart
+				</button>
+				<button *ngIf="itemInCart(product)" (click)="removeFromCart(product.id)">
+					Remove from Cart
+				</button>
 			</div>
 		</div>
 		<ng-template id="catalog-products-empty" #elseBlock>No products found</ng-template>

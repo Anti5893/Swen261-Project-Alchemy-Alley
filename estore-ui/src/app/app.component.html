@@ -1,11 +1,6 @@
 <!-- Logged In -->
 <nav *ngIf="credentialsService.isLoggedIn(); else notLoggedIn" >
   <h1>Alchemy Alley</h1>
-<<<<<<< Updated upstream
-  <a *ngIf="!credentialsService.isAdmin()" routerLink="/catalog">Catalog</a>
-  <a *ngIf="!credentialsService.isAdmin()" routerLink="/cart">Cart</a>
-  <button [routerLink]="'/login'" (click)="credentialsService.removeCurrentUser()">Logout</button>
-=======
   <div id="nav-right">
     <img id="nav-separator" src="https://cdn.icon-icons.com/icons2/3252/PNG/512/divider_short_regular_icon_204482.png">
     <div id="nav-welcome">
@@ -14,7 +9,6 @@
     </div>
     <div [routerLink]="'/login'" (click)="credentialsService.removeCurrentUser()" class="button"><i class="fa-solid fa-right-from-bracket"></i>Logout</div>
   </div>
->>>>>>> Stashed changes
 </nav>
 
 <!-- Logged Out -->
