@@ -1,16 +1,17 @@
-<div>
-    <label for = 'new-user-username'>Username: </label>
-    <input id = 'new-user-username'[(ngModel)] = 'username'>
-
-    <label for = 'new-user-password'>Password: </label>
-    <input type = 'password' id = 'new-user-password'[(ngModel)] = 'password'>
-
-    <label for = 'new-user-password-confirm'>Confirm Password: </label>
-    <input type = 'password'  id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
-    
-    <a [routerLink]="'/login'">Back To Login</a>
-    <button (click) = "registerOnClick(username,password)">Register</button>
-    <p *ngIf="showErrorMessage">Error - User Already Exists</p>
-    <p *ngIf="showPasswordsDontMatch()">Error - Passwords Don't Match</p>
+<div class = "register-box">
+    <div class = "register-fields">
+        <label for = 'new-user-username'>Username: </label>
+        <input class = "register-input" id = 'new-user-username'[(ngModel)] = 'username'>
+        <label for = 'new-user-password'>Password: </label>
+        <input class = "register-input" type = 'password' id = 'new-user-password'[(ngModel)] = 'password'>
+        <label for = 'new-user-password-confirm'>Confirm Password: </label>
+        <input class = "register-input" type = 'password'  id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
+    </div>
+    <div class = "register-buttons">
+        <button class = "button" [routerLink]="'/login'">Back To Login</button>
+        <button class = "button" (click) = "registerOnClick(username,password)">Register</button>
+    </div>
+    <p *ngIf="showErrorMessage">User Already Exists</p>
+    <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
 </div>
 <router-outlet></router-outlet>

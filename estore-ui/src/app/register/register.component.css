@@ -1,0 +1,30 @@
+.register-box{
+    border: 7px solid;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    text-align: center;
+    padding-top: 50px;
+    box-shadow: 13px 18px 10px rgb(0 0 0 / 0.4);
+    min-width: 240px;
+}
+
+.register-fields{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.register-input{
+    max-width: 400px;
+    margin-bottom: 35px;
+}
+
+.register-buttons{
+    justify-content: space-between;
+    display: flex;
+}
