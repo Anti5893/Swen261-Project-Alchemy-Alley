@@ -19,6 +19,7 @@ nav > #nav-left {
 nav > #nav-left > h1 {
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 nav > #nav-right {
@@ -52,6 +53,6 @@ nav > #nav-right #nav-username {
     height: 100%;
 }
 
-#nav-divider > #nav-middle {
+#nav-divider > img:nth-child(2) {
     flex-grow: 1;
 }
