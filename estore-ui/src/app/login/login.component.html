@@ -1,3 +1,6 @@
+<!-- <div class = "background-image">
+    <img src = "https://cdn1.epicgames.com/ue/product/Screenshot/HighresScreenshot00007-1920x1080-6c4df14a1c1476c282f675c05c51ee6f.png?resize=1&w=1920">
+</div> -->
 
 <div class = "login-box">
     <div class = "login-fields">
@@ -7,11 +10,15 @@
         <input type="password" id="new-user-password" [(ngModel)]="password">
     </div>
     <div class = "login-buttons">
-        <button class = "button"(click)="onClick(username,password)">Login</button>
-        <button class = "button" routerLink="/register">Register</button> 
+        <div class = "login-button">
+            <button class = "button"(click)="onClick(username,password)">Login</button>
+        </div>
+        <div class = "register-button">
+            <button class = "button" routerLink="/register">Register</button> 
+        </div>
     </div>
     
-    <p *ngIf="showErrorMesssage()">Error - Incorrect Username or Password</p>
+    <h6 *ngIf="showErrorMesssage()">Error: Incorrect Username or Password</h6>
 
 </div>
 
