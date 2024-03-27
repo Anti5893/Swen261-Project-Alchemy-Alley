@@ -23,7 +23,7 @@ public class ProductTest {
 		int quantity = 50;
 
         // Invoke
-        Product product = new Product(id, name, type, price, quantity);
+        Product product = new Product(id, name, type, price, quantity,"fake/url");
 
         // Analyze
         assertEquals(id, product.getId());
@@ -41,10 +41,11 @@ public class ProductTest {
 		ElementType type = ElementType.AIR;
 		double price = 19.99;
 		int quantity = 50;
+		String imageURL = "fake/url";
 
 		// Invoke & Analyze
 		assertThrows(IllegalArgumentException.class,
-				() -> new Product(id, name, type, price, quantity),
+				() -> new Product(id, name, type, price, quantity, imageURL),
 				"IllegalStateException not thrown");
 	}
 
@@ -56,8 +57,9 @@ public class ProductTest {
 	    ElementType type = ElementType.AIR;
 	    double price = 19.99;
 	    int quantity = 50;
+		String URL = "fake/url";
 
-	    Product product = new Product(id, name, type, price, quantity);
+	    Product product = new Product(id, name, type, price, quantity, URL);
         String expected = String.format(Product.STRING_FORMAT, id, name, type, price, quantity);
 
         // Invoke

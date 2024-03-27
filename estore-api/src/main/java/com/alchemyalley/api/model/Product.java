@@ -15,6 +15,7 @@ public class Product {
     @JsonProperty("type") private final ElementType type;
     @JsonProperty("price") private double price;
     @JsonProperty("quantity") private int quantity;
+    @JsonProperty("imageURL") private String imageURL;
 
     /**
      * Creates a {@code Product} with its given attributes.
@@ -24,16 +25,18 @@ public class Product {
      * @param type      The {@link ElementType} of the product
      * @param price     The price of the product
      * @param quantity  The quantity of the product
+     * @param imageURL  The URL for displaying the product.
      */
     public Product(@JsonProperty("id") int id, @JsonProperty("name") String name,
                    @JsonProperty("type") ElementType type, @JsonProperty("price") double price,
-                   @JsonProperty("quantity") int quantity) throws IllegalArgumentException {
+                   @JsonProperty("quantity") int quantity, @JsonProperty("imageURL") String imageURL) throws IllegalArgumentException {
         if(id < 0) throw new IllegalArgumentException("Product ID cannot be < 0");
         this.id = id;
         this.name = name;
         this.type = type;
         this.price = price;
         this.quantity = quantity;
+        this.imageURL = imageURL;
     }
 
     /**
@@ -79,6 +82,14 @@ public class Product {
      */
     public int getQuantity() {
         return this.quantity;
+    }
+    
+    /**
+     * Gets the image URL for this product.
+     * @return  The imageURL for the product. 
+     */
+    public String getURL(){
+        return this.imageURL;
     }
 
     /**

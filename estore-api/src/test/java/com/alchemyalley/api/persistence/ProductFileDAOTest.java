@@ -43,9 +43,9 @@ public class ProductFileDAOTest {
 	public void setupProductFileDAO() throws IOException {
 		mockObjectMapper = mock(ObjectMapper.class);
 		testProducts = new Product[3];
-		testProducts[0] = new Product(1, "Steam", ElementType.AIR, 10.99, 20);
-		testProducts[1] = new Product(2, "Flint", ElementType.EARTH, 12.99, 15);
-		testProducts[2] = new Product(3, "Ice", ElementType.WATER, 8.99, 35);
+		testProducts[0] = new Product(1, "Steam", ElementType.AIR, 10.99, 20,"fake/url");
+		testProducts[1] = new Product(2, "Flint", ElementType.EARTH, 12.99, 15,"fake/url");
+		testProducts[2] = new Product(3, "Ice", ElementType.WATER, 8.99, 35,"fake/url");
 
 		when(mockObjectMapper
 				.readValue(new File("doesnt_matter.txt"), Product[].class))
@@ -97,7 +97,7 @@ public class ProductFileDAOTest {
 	@Test
 	public void testCreateProduct() {
 		// Setup
-		Product product = new Product(99, "Magma", ElementType.FIRE, 14.99, 4);
+		Product product = new Product(99, "Magma", ElementType.FIRE, 14.99, 4,"fake/url");
 
 		// Invoke
 		Product result = Assertions.assertDoesNotThrow(() -> productFileDAO.createProduct(product), "Unexpected exception thrown");
@@ -110,7 +110,7 @@ public class ProductFileDAOTest {
 	@Test
 	public void testUpdateProduct() {
 		// Setup
-		Product product = new Product(1, "Steam", ElementType.AIR, 10.99, 25);
+		Product product = new Product(1, "Steam", ElementType.AIR, 10.99, 25,"fake/url");
 
 		// Invoke
 		Product result = Assertions.assertDoesNotThrow(() -> productFileDAO.updateProduct(product), "Unexpected exception thrown");
@@ -127,7 +127,7 @@ public class ProductFileDAOTest {
 				.when(mockObjectMapper)
 				.writeValue(any(File.class), any(Product[].class));
 
-		Product product = new Product(99, "Magma", ElementType.FIRE, 14.99, 4);
+		Product product = new Product(99, "Magma", ElementType.FIRE, 14.99, 4,"fake/url");
 
 		assertThrows(IOException.class, () -> productFileDAO.createProduct(product), "IOException not thrown");
 	}
@@ -154,7 +154,7 @@ public class ProductFileDAOTest {
 	@Test
 	public void testUpdateProductNotFound() {
 		// Setup
-		Product product = new Product(99, "Magma", ElementType.FIRE, 14.99, 4);
+		Product product = new Product(99, "Magma", ElementType.FIRE, 14.99, 4,"fake/url");
 
 		// Invoke
 		Product result = Assertions.assertDoesNotThrow(() -> productFileDAO.updateProduct(product), "Unexpected exception thrown");
