@@ -1,17 +1,58 @@
+/* Navbar */
+
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-height: 10vh;
+    width: 100%;
 }
 
-#nav-right {
+nav > #nav-left {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 20vw;
+    justify-content: flex-start;
+    width: 48vw;
+    margin-left: 2vw;
 }
 
-#nav-separator {
-    width: 5vw;
+nav > #nav-left > h1 {
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+nav > #nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 46vw;
+    column-gap: 1vw;
+    margin-right: 2vw;
+}
+
+nav > #nav-right > #nav-separator {
+    height: 10vh;
+}
+
+nav > #nav-right #nav-username {
+    font-weight: bolder;
+}
+
+/* Navbar Divider */
+
+#nav-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2vh;
+    max-width: 100%;
+}
+
+#nav-divider > img {
     height: 100%;
+}
+
+#nav-divider > img:nth-child(2) {
+    flex-grow: 1;
 }
