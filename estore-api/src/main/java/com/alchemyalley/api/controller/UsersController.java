@@ -94,6 +94,7 @@ public class UsersController {
         }
         userDAO.updateUser(storedUser.clearCart());
         if(result != null) {
+			userDAO.updateUser(storedUser.addToUnlocked(result.getId()));
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

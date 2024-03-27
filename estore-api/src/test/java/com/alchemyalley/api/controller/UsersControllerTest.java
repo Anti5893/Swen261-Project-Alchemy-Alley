@@ -1,7 +1,10 @@
 package com.alchemyalley.api.controller;
 
 import com.alchemyalley.api.model.User;
+import com.alchemyalley.api.model.Product;
+import com.alchemyalley.api.persistence.ProductDAO;
 import com.alchemyalley.api.persistence.UserDAO;
+import com.alchemyalley.api.persistence.CraftingDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -25,6 +28,8 @@ public class UsersControllerTest {
 
 	private UserDAO userDAO;
 	private UsersController usersController;
+	private ProductDAO productDAO;
+	private CraftingDAO craftingDAO;
 
 	/**
 	 * Creates a mock {@link UserDAO} class and injects it into
@@ -33,7 +38,9 @@ public class UsersControllerTest {
 	@BeforeEach
 	public void setupUsersController() {
 		this.userDAO = mock(UserDAO.class);
-		this.usersController = new UsersController(this.userDAO);
+		this.craftingDAO = mock(CraftingDAO.class);
+		this.productDAO = mock(ProductDAO.class);
+		this.usersController = new UsersController(this.userDAO, this.productDAO, this.craftingDAO);
 	}
 
 	@Test
@@ -143,5 +150,4 @@ public class UsersControllerTest {
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 		assertNull(response.getBody());
 	}
-
 }

@@ -102,6 +102,20 @@ public class User {
 	}
 
 	/**
+	 * Adds a product to unlocked
+	 * @param id The id of the product to add
+	 * @return  A new user instance with the new unlocked array or this if the id is already in the unlokced array
+	 */
+	public User addToUnlocked(int id) {
+		if(Arrays.stream(this.unlocked).anyMatch(i -> i == id)){
+			return this;
+		}
+		int[] newUnlocked = Arrays.copyOf(this.unlocked, this.unlocked.length + 1);
+		newUnlocked[this.unlocked.length] = id;
+		return new User(this.username, this.password, this.admin, newUnlocked, this.cart);
+	}
+
+	/**
 	 * The string representation of a user.
 	 *
 	 * @return  Its string representation, including fields
