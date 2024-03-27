@@ -82,6 +82,13 @@ public class Product {
     }
 
     /**
+     * Decrements the quantity of the product by 1.
+     */
+    public void decrementStock() {
+        this.quantity--;
+    }
+
+    /**
      * The string representation of a product.
      *
      * @return  Its string representation, including fields

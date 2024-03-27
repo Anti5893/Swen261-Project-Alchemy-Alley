@@ -93,6 +93,15 @@ public class User {
 	}
 
 	/**
+	 * Empties cart from this user as a new instance.
+	 *
+	 * @return  A new user instance with an empty cart
+	 */
+	public User clearCart() {
+		return new User(this.username, this.password, this.admin, this.unlocked, new int[2]);
+	}
+
+	/**
 	 * The string representation of a user.
 	 *
 	 * @return  Its string representation, including fields
