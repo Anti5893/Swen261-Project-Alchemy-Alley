@@ -72,17 +72,6 @@
 	--accent-800: #604c06;
 	--accent-900: #302603;
 	--accent-950: #181302;
-
-	--fire: #ff4800;
-	--fire-secondary: #a32e00;
-	--water: #0099ff;
-	--water-secondary: #005791;
-	--air: #f6aeff;
-	--air-secondary: #a25eab;
-	--earth: #e58900;
-	--earth-secondary: #8a5300;
-	--energy: #e100ff;
-	--energy-secondary: #9000a3;
 }
 
 html,
@@ -209,6 +198,7 @@ img {
 }
 
 .radio-child:active {
+	/* transform: translateY(calc(var(--input-height) / 20)); */
 	color: var(--text);
 	background-color: var(--secondary);
 	border: solid 0.1rem var(--secondary);
@@ -264,8 +254,8 @@ img {
 	justify-content: space-between;
 	cursor: not-allowed;
 
-	border: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
-	background: color-mix(in srgb, var(--card-color, var(--text-500)), transparent 75%);
+	border: solid 0.25rem var(--text-400);
+	background: color-mix(in srgb, var(--text-400), transparent 75%);
 }
 
 .card.card-selected {
@@ -302,8 +292,28 @@ img {
 	}
 }
 
+.card-fire.card-selected {
+	border: solid 0.25rem var(--fire);
+}
+.card-water.card.card-selected {
+	border: solid 0.25rem var(--water);
+}
+.card-air.card-selected {
+	border: solid 0.25rem var(--air);
+}
+.card-earth.card-selected {
+	border: solid 0.25rem var(--earth);
+}
+.card-energy.card-selected {
+	border: solid 0.25rem var(--energy);
+}
+
 .card.card-unlocked {
 	cursor: pointer;
+}
+
+.card.card-blocked {
+	cursor: not-allowed;
 }
 
 /* Card Glow */
@@ -426,9 +436,9 @@ img {
 	height: 20%;
 
 	font-size: 14px;
-	border-top: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
+	border-top: solid 0.25rem
+		color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
 }
-
 
 .card > .card-info > .card-price {
 	padding: calc(1px + 0.25vw) calc(3px + 0.5vw) calc(1px + 0.25vw) calc(3px + 0.5vw);
@@ -581,15 +591,27 @@ img {
 	height: 2vh;
 	width: 100%;
 	background-color: var(--accent);
-	clip-path: polygon(-2vh 0, 0 0, 0 40%,
-					   calc(100% + 1px) 40%, calc(100% + 1px) 0%, calc(100% + 2vh) 0%, calc(100% + 2vh) 100%, calc(100% + 1px) 100%, calc(100% + 1px) 60%,
-					   0% 60%, 0% 100%, -2vh 100%, -2vh 0);
+	clip-path: polygon(
+		-2vh 0,
+		0 0,
+		0 40%,
+		calc(100% + 1px) 40%,
+		calc(100% + 1px) 0%,
+		calc(100% + 2vh) 0%,
+		calc(100% + 2vh) 100%,
+		calc(100% + 1px) 100%,
+		calc(100% + 1px) 60%,
+		0% 60%,
+		0% 100%,
+		-2vh 100%,
+		-2vh 0
+	);
 }
 
 .heading > .underline::before {
 	position: absolute;
-	content: '';
-	background-image: url('/assets/underline-side.png');
+	content: "";
+	background-image: url("/assets/underline-side.png");
 	background-size: cover;
 	top: 0%;
 	left: -2vh;
@@ -599,8 +621,8 @@ img {
 
 .heading > .underline::after {
 	position: absolute;
-	content: '';
-	background-image: url('/assets/underline-side.png');
+	content: "";
+	background-image: url("/assets/underline-side.png");
 	background-size: cover;
 	top: 0%;
 	right: -2vh;
@@ -625,15 +647,27 @@ img {
 	height: 2vh;
 	width: 100%;
 	background-color: var(--accent);
-	clip-path: polygon(-2vh 0, 0 0, 0 40%,
-					   calc(100% + 1px) 40%, calc(100% + 1px) 0%, calc(100% + 2vh) 0%, calc(100% + 2vh) 100%, calc(100% + 1px) 100%, calc(100% + 1px) 60%,
-					   0% 60%, 0% 100%, -2vh 100%, -2vh 0);
+	clip-path: polygon(
+		-2vh 0,
+		0 0,
+		0 40%,
+		calc(100% + 1px) 40%,
+		calc(100% + 1px) 0%,
+		calc(100% + 2vh) 0%,
+		calc(100% + 2vh) 100%,
+		calc(100% + 1px) 100%,
+		calc(100% + 1px) 60%,
+		0% 60%,
+		0% 100%,
+		-2vh 100%,
+		-2vh 0
+	);
 }
 
 .heading > .underline::before {
 	position: absolute;
-	content: '';
-	background-image: url('/assets/underline-side.png');
+	content: "";
+	background-image: url("/assets/underline-side.png");
 	background-size: cover;
 	top: 0%;
 	left: -2vh;
@@ -643,8 +677,8 @@ img {
 
 .heading > .underline::after {
 	position: absolute;
-	content: '';
-	background-image: url('/assets/underline-side.png');
+	content: "";
+	background-image: url("/assets/underline-side.png");
 	background-size: cover;
 	top: 0%;
 	right: -2vh;
