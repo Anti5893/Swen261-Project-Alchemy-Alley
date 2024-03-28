@@ -28,8 +28,8 @@
         </div>
         <p *ngIf="showErrorMessage">User Already Exists</p>
         <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
-        <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1
-            Digit, 1 Symbol</p>
+        <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1Digit, 1 Symbol</p>
+        <p *ngIf="!fieldsFull() && this.buttonClicked">All Fields Required</p>
     </div>
 </div>
 
