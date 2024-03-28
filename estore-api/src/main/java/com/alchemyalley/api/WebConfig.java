@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Specifies web rules that Spring must follow at runtime.
+ * 
  * @author Group 2
  */
 @Configuration

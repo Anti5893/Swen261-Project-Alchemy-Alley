@@ -70,7 +70,7 @@ public class ProductFileDAOTest {
 		Product[] products = productFileDAO.findProducts("i");
 
 		// Analyze
-		assertEquals(products.length, 2);
+		assertEquals(2, products.length);
 		assertEquals(products[0], testProducts[1]);
 		assertEquals(products[1], testProducts[2]);
 	}
