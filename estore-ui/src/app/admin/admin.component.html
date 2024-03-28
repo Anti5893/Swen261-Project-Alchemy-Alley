@@ -7,6 +7,7 @@
         <th>Type</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Image URL</th>
         <th></th>
     </tr>
     <tr *ngFor="let product of products">
@@ -27,8 +28,11 @@
             <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" value={{product.quantity}} (change)="(0)" required #quantity>
         </td>
         <td>
-            <button (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity)" 
-                    [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity)">Save</button>
+            <input type="text" placeholder="Enter Image URL" value={{product.imageURL}} (change)="(0)" #imageURL>
+        </td>
+        <td>
+            <button (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity, imageURL.value)" 
+                    [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity, imageURL.value)">Save</button>
             <button (click)="delete(product.id)">Delete</button>
         </td>
     </tr>
@@ -43,14 +47,17 @@
                 <option *ngFor="let type of types" value={{type}} >{{type}}</option>
             </select>
         </td>
-        <td>$
+        <td>
             <input type="number" placeholder="Enter Price" min="0" step="0.01" required #price>
         </td>
         <td>
             <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" required #quantity>
         </td>
         <td>
-            <button (click)="create(name, type.options[type.selectedIndex].text, price, quantity)">Create</button>
+            <input type="text" placeholder="Enter ImageURl" #imageURL>
+        </td>
+        <td>
+            <button (click)="create(name, type.options[type.selectedIndex].text, price, quantity, imageURL)">Create</button>
         </td>
     </tr>
 </table>
