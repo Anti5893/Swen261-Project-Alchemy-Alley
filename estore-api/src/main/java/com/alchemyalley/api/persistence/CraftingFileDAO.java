@@ -49,7 +49,11 @@ public class CraftingFileDAO implements CraftingDAO {
 			this.recipes.put(recipe.getIds(), recipe);
 		}
 	}
-
+	/**
+	 * Gets the recipe for the given inputs.
+	 * @param inputs  The product ids to check
+	 * @return  The recipe, or null if none exists
+	 */
 	@Override
 	public Recipe getRecipe(Integer[] inputs) {
 		for(Map.Entry<Integer[], Recipe> entry : this.recipes.entrySet()) {
@@ -60,7 +64,10 @@ public class CraftingFileDAO implements CraftingDAO {
 
 		return null;
 	}
-
+	/**
+	 * Gets all recipes.
+	 * @return  An array of all recipes
+	 */
 	@Override
 	public Recipe[] getAllRecipes() {
 		return this.recipes.values().toArray(new Recipe[0]);

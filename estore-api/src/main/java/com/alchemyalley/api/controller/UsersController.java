@@ -36,7 +36,11 @@ public class UsersController {
 		this.productDAO = productDAO;
 		this.craftingDAO = craftingDAO;
 	}
-
+	/**
+	 * Creates a user, returns user with password stripped
+	 * @param user
+	 * @return
+	 */
 	@PostMapping("")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		LOG.info("POST /users " + user);
@@ -50,7 +54,11 @@ public class UsersController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	/**
+	 * Authenticates a user, removes password and returns authenticated user
+	 * @param user
+	 * @return
+	 */
 	@PostMapping("/auth")
 	public ResponseEntity<User> authenticateUser(@RequestBody User user) {
 		LOG.info("POST /users/auth " + user);
@@ -60,7 +68,11 @@ public class UsersController {
 				new ResponseEntity<>(storedUser.removePassword(), HttpStatus.OK) :
 				new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-
+	/**
+	 * Updates a user with the same name
+	 * @param user
+	 * @return
+	 */
 	@PutMapping("")
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		LOG.info("PUT /users " + user);
@@ -75,6 +87,12 @@ public class UsersController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	/**
+	 * Handles the checkout process for a user, unlocking new products and decrementing stock
+	 * @param user
+	 * @return
+	 * @throws IOException
+	 */
 	@PostMapping("users/checkout")
     public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
         LOG.info("POST /users/checkout");

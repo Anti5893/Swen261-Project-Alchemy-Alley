@@ -58,7 +58,12 @@ public class UserFileDAO implements UserDAO {
 		User[] users = this.users.values().toArray(new User[0]);
 		this.objectMapper.writeValue(new File(this.fileName), users);
 	}
-
+	/**
+	 * Gets the user with the given username.
+	 * @param username: username of the user
+	 * @return The User with the given username.
+	 * @throws IOException If there is an error saving to disk
+	 */
 	public User createUser(User user) throws IOException {
 		synchronized(this.users) {
 			if(this.users.containsKey(user.getUsername())) return null;
@@ -71,7 +76,12 @@ public class UserFileDAO implements UserDAO {
 			return newUser;
 		}
 	}
-
+	/**
+	 * Authenticates a user.
+	 * @param user: user that is being authenticated
+	 * @return The authenticated User.
+	 * @throws IOException If there is an error saving to disk
+	 */
 	public User authenticateUser(User user) {
 		User storedUser = this.users.getOrDefault(user.getUsername(), null);
 		if(storedUser == null) return null;

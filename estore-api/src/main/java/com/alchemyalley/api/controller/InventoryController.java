@@ -33,7 +33,11 @@ public class InventoryController {
 	public InventoryController(ProductDAO productDAO) {
 		this.productDAO = productDAO;
 	}
-
+	/**
+	 * Returns a product with the given id
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/products/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable int id) {
 		LOG.info("GET /inventory/products/" + id);
@@ -43,7 +47,10 @@ public class InventoryController {
 				new ResponseEntity<>(product, HttpStatus.OK) :
 				new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
+	/**
+	 * Returns an array of products
+	 * @return ResponseEntity<Product[]>
+	 */
 	@GetMapping("/products/")
 	public ResponseEntity<Product[]> getProducts() {
 		LOG.info("GET /inventory/products");
@@ -51,7 +58,11 @@ public class InventoryController {
 		Product[] products = this.productDAO.getProducts();
 		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
-
+	/**
+	 * Returns an array of products containing the name
+	 * @param name
+	 * @return ResponseEntity<Product[]>
+	 */
 	@GetMapping("/products")
 	public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
 		LOG.info("GET /inventory/products?name=" + name);
@@ -63,7 +74,11 @@ public class InventoryController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	/**
+	 * Returns the created product
+	 * @param product
+	 * @return ResponseEntity<Product>
+	 */
 	@PostMapping("/products")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         LOG.info("POST /inventory/products " + product);
@@ -79,7 +94,11 @@ public class InventoryController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+	/**
+	 * Returns the updated product
+	 * @param product
+	 * @return ResponseEntity<Product>
+	 */
 	@PutMapping("/products")
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
 		LOG.info("PUT /inventory/products " + product);
@@ -95,7 +114,11 @@ public class InventoryController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	/**
+	 * Returns the deleted product, deletes it from inventory
+	 * @param id
+	 * @return ResponseEntity<Product>
+	 */
 	@DeleteMapping("/products/{id}")
 	public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
 		LOG.info("DELETE /inventory/products/" + id);

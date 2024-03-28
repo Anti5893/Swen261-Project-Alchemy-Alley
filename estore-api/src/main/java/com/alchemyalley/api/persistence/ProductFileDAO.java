@@ -38,17 +38,27 @@ public class ProductFileDAO implements ProductDAO {
         this.objectMapper = objectMapper;
         load();
     }
-
+    /**
+     * Returns the next available ID.
+     * @return int for the next available ID
+     */
     private synchronized static int nextId() {
         int id = nextId;
         ++nextId;
         return id;
     }
-
+    /**
+     * Returns an array of the products
+     * @return Product[]
+     */
     private Product[] getProductsArray() {
         return getProductsArray(null);
     }
-
+    /**
+     * Returns an array of the products containing the text
+     * @param containsText
+     * @return
+     */
     private Product[] getProductsArray(String containsText) {
         ArrayList<Product> productArrayList = new ArrayList<>();
 
@@ -89,28 +99,44 @@ public class ProductFileDAO implements ProductDAO {
         Product[] productArray = getProductsArray();
         this.objectMapper.writeValue(new File(this.fileName), productArray);
     }
-
+    /**
+     * Returns an array of the products
+     * @return Product[]
+     */
     @Override
     public Product[] getProducts() {
         synchronized(this.products) {
             return getProductsArray();
         }
     }
-
+    /**
+     * Returns an array of the products containing the text
+     * @param containsText
+     * @return Product[]
+     */
     @Override
     public Product[] findProducts(String containsText) {
         synchronized(this.products) {
             return getProductsArray(containsText);
         }
     }
-
+    /**
+     * Returns the product with the given ID
+     * @param id
+     * @return Product
+     */
     @Override
     public Product getProduct(int id) {
         synchronized(this.products) {
             return this.products.getOrDefault(id, null);
         }
     }
-
+    /**
+     * Creates a product with the given attributes, returns the created product
+     * @param product 
+     * @return Product
+     * @throws IOException
+     */
     @Override
     public Product createProduct(Product product) throws IOException {
         synchronized(this.products) {
@@ -125,7 +151,12 @@ public class ProductFileDAO implements ProductDAO {
             return newProduct;
         }
     }
-
+    /**
+     * Updates the product with the given attributes, returns the updated product
+     * @param product
+     * @return Product
+     * @throws IOException
+     */
     @Override
     public Product updateProduct(Product product) throws IOException {
         synchronized(this.products) {
@@ -136,7 +167,12 @@ public class ProductFileDAO implements ProductDAO {
             return product;
         }
     }
-
+    /**
+     * Deletes the product with the given ID, returns true if successful, false otherwise
+     * @param id
+     * @return boolean
+     * @throws IOException
+     */
     @Override
     public boolean deleteProduct(int id) throws IOException {
         synchronized(this.products) {
