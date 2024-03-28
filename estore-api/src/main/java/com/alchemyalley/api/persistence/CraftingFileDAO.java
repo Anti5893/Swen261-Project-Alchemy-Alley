@@ -64,7 +64,6 @@ public class CraftingFileDAO implements CraftingDAO {
 				return entry.getValue();
 			}
 		}
-
 		return null;
 	}
 
