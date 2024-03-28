@@ -1,20 +1,32 @@
 <!-- Logged In -->
 <nav *ngIf="credentialsService.isLoggedIn(); else notLoggedIn" >
-  <h1>Alchemy Alley</h1>
+  <div id="nav-left">
+    <h1 [routerLink]="'/catalog'">Alchemy Alley</h1>
+  </div>
   <div id="nav-right">
-    <img id="nav-separator" src="https://cdn.icon-icons.com/icons2/3252/PNG/512/divider_short_regular_icon_204482.png">
-    <div id="nav-welcome">
+    <img id="nav-separator" src="https://i.imgur.com/tX3jppf.png">
+    <button *ngIf="!credentialsService.isAdmin()" [routerLink]="'/cart'" class="button"><i class="fa-solid fa-cart-shopping"></i></button>
+    <div>
       <p>Welcome,</p>
       <p id="nav-username">{{credentialsService.getUser()!.username}}</p>
     </div>
-    <div [routerLink]="'/login'" (click)="credentialsService.removeCurrentUser()" class="button"><i class="fa-solid fa-right-from-bracket"></i>Logout</div>
+    <button [routerLink]="'/login'" (click)="credentialsService.removeCurrentUser()" class="button"><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
   </div>
 </nav>
 
 <!-- Logged Out -->
 <ng-template #notLoggedIn>
   <nav>
-    <h1>Alchemy Alley</h1>
+    <div id="nav-left">
+      <h1>Alchemy Alley</h1>
+    </div>
   </nav>
 </ng-template>
+
+<div id="nav-divider">
+  <img src="assets/navbar-edge-left.png">
+  <img src="assets/navbar-middle.png">
+  <img src="assets/navbar-edge-right.png">
+</div>
+
 <router-outlet></router-outlet>
