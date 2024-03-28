@@ -129,7 +129,7 @@ public class UserTest {
 
 		// Analyze
 		assertEquals(2, user.getCart().length);
-		assertNotEquals(user.getCart(), new int[] { 1, 2 });
+		assertNotEquals(new int[] { 1, 2 }, user.getCart());
 	}
 	@Test
 	public void testaddToUnlockedGood() {
