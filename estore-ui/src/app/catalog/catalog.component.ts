@@ -2,8 +2,6 @@ import { Component, OnInit } from "@angular/core";
 
 import { ProductService } from "../product.service";
 import { Product } from "../product";
-import { CredentialsService } from "../credentials.service";
-import { UserService } from "./../user.service";
 
 @Component({
 	selector: "app-catalog",
@@ -16,14 +14,12 @@ export class CatalogComponent implements OnInit {
 	sortBy: string = "none";
 
 	constructor(
-		private productService: ProductService,
-		private credentialService: CredentialsService,
-		private userService: UserService
+		private productService: ProductService
 	) {}
 
 	ngOnInit(): void {
 		this.getProducts();
-		this.sortProducts("alphabetically");
+		this.sortProducts("byID");
 	}
 
 	getProducts(): void {
@@ -35,6 +31,15 @@ export class CatalogComponent implements OnInit {
 				this.products = [];
 			}
 		});
+	}
+
+	compareID(product1: Product, product2: Product, reverse: boolean = false): boolean {
+		// 0 -> ...
+		if (reverse) {
+			return product1.id > product2.id;
+		}
+		// ... -> 0
+		return product1.id < product2.id;
 	}
 
 	compareAlphabeticalPosition(
@@ -94,6 +99,10 @@ export class CatalogComponent implements OnInit {
 		return left_side;
 	}
 
+	sortProductById(reverse: boolean = false): void {
+		this.products = this.quickSort(this.products, this.compareID, reverse);
+	}
+
 	sortProductsAlphabetically(reverse: boolean = false): void {
 		this.products = this.quickSort(this.products, this.compareAlphabeticalPosition, reverse);
 	}
@@ -105,6 +114,9 @@ export class CatalogComponent implements OnInit {
 	sortProducts(value: string): void {
 		this.sortBy = value;
 		switch (value) {
+			case "byID":
+				this.sortProductById();
+				break;
 			case "alphabetically":
 				this.sortProductsAlphabetically();
 				break;
@@ -134,46 +146,5 @@ export class CatalogComponent implements OnInit {
 				this.products = [];
 			}
 		);
-	}
-
-	itemInCart(product: Product): boolean {
-		const curUser = this.credentialService.getUser();
-		const curCart = curUser!.cart;
-		return curCart?.includes(product.id);
-	}
-
-	maxCartSize(): boolean {
-		const curUser = this.credentialService.getUser();
-		let curCart = curUser?.cart;
-		if (curCart) {
-			return curCart.length >= 2;
-		} else {
-			return false;
-		}
-	}
-
-	addToCart(productID: number): void {
-		let curUser = this.credentialService.getUser();
-		if (curUser) {
-			if (!curUser.cart) {
-				curUser.cart = [];
-			}
-
-			curUser.cart.push(productID);
-
-			this.credentialService.storeCurrentUser({ ...curUser });
-			this.userService.updateUser(curUser).subscribe();
-		}
-	}
-
-	removeFromCart(productID: number): void {
-		let curUser = this.credentialService.getUser();
-
-		if (curUser && curUser.cart) {
-			curUser.cart = curUser.cart.filter((id) => id !== productID);
-			this.credentialService.storeCurrentUser({ ...curUser });
-
-			this.userService.updateUser(curUser).subscribe({});
-		}
 	}
 }

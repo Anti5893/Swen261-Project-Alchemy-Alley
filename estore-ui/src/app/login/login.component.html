@@ -1,12 +1,12 @@
-<div>
-    <label for="new-user-username">Username: </label>
-    <input id="new-user-username" [(ngModel)]="username">
+<form (submit)="onClick(username.value, password.value)">
+	<label for="new-user-username">Username: </label>
+	<input #username id="new-user-username" name="login" [(ngModel)]="usernameValue" />
 
-    <label for="new-user-password">Password: </label>
-    <input type="password" id="new-user-password" [(ngModel)]="password">
+	<label for="new-user-password">Password: </label>
+	<input #password type="password" id="new-user-password" name="login" [(ngModel)]="passwordValue" />
 
-    <button (click)="onClick(username,password)">Login</button>
-    <p *ngIf="showErrorMesssage()">Error - Incorrect Username or Password</p>
-</div>
+	<button name="login" (click)="onClick(username.value, password.value)">Login</button>
+	<p *ngIf="showErrorMesssage()">Error - Incorrect Username or Password</p>
+</form>
 
 <a routerLink="/register">Not a member? Register Here</a>
