@@ -8,7 +8,8 @@
     text-align: center;
     padding-top: 50px;
     box-shadow: 13px 18px 10px rgb(0 0 0 / 0.4);
-    min-width: 240px;
+    min-width: 550px;
+    min-height:400px;
 }
 
 .register-fields{

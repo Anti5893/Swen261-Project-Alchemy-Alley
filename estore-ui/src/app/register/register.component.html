@@ -9,16 +9,16 @@
             Username:
             <input type="text" placeholder="Enter Username" [(ngModel)] = 'username' >
             </div>
-          <div class="input">
+        <div class="input">
             <i class="fa-solid fa-lock"></i>
             Password:
             <input type="password" placeholder="Enter Password" [(ngModel)] = 'password'>
           </div>
-          <div class="input">
+        <div class="input">
             <i class="fa-solid fa-lock"></i>
             Confirm Password:
             <input type="password" placeholder="Enter Password" [(ngModel)] = 'passwordConfirm'>
-          </div>
+        </div>
     </div>
     <div class = "register-buttons">
         <button class = "button" [routerLink]="'/login'">Back To Login</button>
@@ -26,5 +26,6 @@
     </div>
     <p *ngIf="showErrorMessage">User Already Exists</p>
     <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
+    <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1 Digit, 1 Symbol</p>
 </div>
 <router-outlet></router-outlet>

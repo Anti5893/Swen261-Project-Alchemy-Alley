@@ -19,6 +19,8 @@ export class RegisterComponent {
   buttonClicked = false;
   showErrorMessage = false;
   passwordsMatch = true;
+  notStrongPassword = false
+  
 
   constructor(private userService: UserService, private router: Router) {}
 
