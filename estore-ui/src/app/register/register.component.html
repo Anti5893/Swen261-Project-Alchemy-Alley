@@ -1,11 +1,24 @@
 <div class = "register-box">
+    <div class="heading">
+        <h3>Registration</h3>
+        <div class="underline"></div>
+      </div>
     <div class = "register-fields">
-        <label for = 'new-user-username'>Username: </label>
-        <input class = "register-input" id = 'new-user-username'[(ngModel)] = 'username'>
-        <label for = 'new-user-password'>Password: </label>
-        <input class = "register-input" type = 'password' id = 'new-user-password'[(ngModel)] = 'password'>
-        <label for = 'new-user-password-confirm'>Confirm Password: </label>
-        <input class = "register-input" type = 'password'  id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
+        <div class="input">
+            <i class="fa-solid fa-user"></i>
+            Username:
+            <input type="text" placeholder="Enter Username" [(ngModel)] = 'username' >
+            </div>
+          <div class="input">
+            <i class="fa-solid fa-lock"></i>
+            Password:
+            <input type="password" placeholder="Enter Password" [(ngModel)] = 'password'>
+          </div>
+          <div class="input">
+            <i class="fa-solid fa-lock"></i>
+            Confirm Password:
+            <input type="password" placeholder="Enter Password" [(ngModel)] = 'passwordConfirm'>
+          </div>
     </div>
     <div class = "register-buttons">
         <button class = "button" [routerLink]="'/login'">Back To Login</button>

@@ -27,4 +27,13 @@
 .register-buttons{
     justify-content: space-between;
     display: flex;
+    margin-bottom: 20px;
+}
+
+.input{
+    margin-bottom: 40px;
+}
+
+.heading{
+    margin-bottom: 40px;
 }

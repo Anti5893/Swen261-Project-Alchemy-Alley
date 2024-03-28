@@ -1,10 +1,20 @@
 
 <div class = "login-box">
+    <div class="heading">
+        <h3>Login</h3>
+        <div class="underline"></div>
+      </div>
     <div class = "login-fields">
-        <label for="new-user-username">Username: </label>
-        <input id="new-user-username" [(ngModel)]="username">
-        <label for="new-user-password">Password: </label>
-        <input type="password" id="new-user-password" [(ngModel)]="password">
+        <div class="input">
+            <i class="fa-solid fa-user"></i>
+            Username:
+            <input type="text" placeholder="Enter Username" [(ngModel)] = 'username' >
+            </div>
+          <div class="input">
+            <i class="fa-solid fa-lock"></i>
+            Password:
+            <input type="password" placeholder="Enter Password" [(ngModel)] = 'password'>
+          </div>
     </div>
     <div class = "login-buttons">
         <div class = "login-button">
