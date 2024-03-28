@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
-
+import { CredentialsService } from '../credentials.service';
 
 @Component({
   selector: 'app-register',
