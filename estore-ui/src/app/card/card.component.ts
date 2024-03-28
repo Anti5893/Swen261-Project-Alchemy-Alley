@@ -13,11 +13,23 @@ export class CardComponent {
 	@Input({ required: true }) product!: Product;
 	@Input() ignoreClick: boolean = false;
 
+    private colorMap = {
+        "FIRE": "#ff4800",
+        "WATER": "#0099ff",
+        "AIR": "#f6aeff",
+        "EARTH": "#e58900",
+        "ENERGY": "#e100ff"
+    }
+
 	constructor(private credentialsService: CredentialsService, private userService: UserService) {}
 
-	ngOnInit(): void {
-		this.formClasses();
-	}
+    getColor(): string {
+        const color = this.colorMap[this.product.type];
+        if (color === undefined) {
+            return "lightgrey";
+        }
+        return color;
+    }
 
 	formClasses(): string {
 		var classes = "";
