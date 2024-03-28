@@ -1,25 +1,68 @@
 <h1>Cart</h1>
-<h2>Current Products in Cart</h2>
-<ul>
-    <li *ngFor="let product of products">
-        <h2><span>Name: </span>{{product.name}}<span>Price: </span>{{product.price}}</h2>
-        <button (click)="removeProduct(product.id)">Remove</button>
-    </li>
-</ul>
-<p *ngIf = "isCartEmpty()">No Products In Cart</p>
-<h3>Total: {{getTotalPrice()}}</h3>
-<form>
-    <label for="name">Name on Card: </label>
-    <input type="text" id="name" name="name" maxlength="19" placeholder="Wizard Wizardington" required>
-    <br>
-    <label for="cc-number">Credit Card Number: </label>
-    <input type="text" id="cc-number" name="cc-number" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="1234 5678 9012 3456" required>
-    <br>
-    <label for="cc-expiration">Expiration Date (MM/YY): </label>
-    <input type="text" id="cc-expiration" name="cc-expiration" inputmode="numeric" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" placeholder="MM/YY" required>
-    <br>
-    <label for="cc-ccv">CCV: </label>
-    <input type="text" id="cc-ccv" name="cc-ccv" inputmode="numeric" pattern="[0-9]{3,4}" placeholder="123" required>
-    <br>
-    <button [disabled]="isCartEmpty()" (click) = "handlePurchase()" type="submit">Purchase Cart</button>
-</form>
+<div class="layout-container">
+    <div class="couldron-continaer">
+      <div class="cauldron">
+        <img class="swirl" src="/assets/Swirl.png">
+        <p *ngIf = "isCartEmpty()">No Products In Cart</p>
+        <ul>
+            <li (click)="removeProduct(product.id)" *ngFor="let product of products">
+                  <!-- <img [src] = product.imageURL>
+                  <h2>{{product.name}}</h2> -->
+                  <div class="card-wrapper">
+                  <div class="card card-selected" style="--card-color: #8f1e1e; margin: 50px; display: inline-block">
+                    <div class="card-img">
+                      <img src= {{product.imageURL}}>
+                    </div>
+                    <div class="card-info">
+                      <p>{{product.name}}</p>
+                      <div class="card-price">{{product.price}}</div>
+                    </div>
+                    <div class="card-glow"><div class="card-top"></div></div>
+                    <div class="card-glow"><div class="card-right"></div></div>
+                    <div class="card-glow"><div class="card-bottom"></div></div>
+                    <div class="card-glow"><div class="card-left"></div></div>
+                  </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+  </div>
+  <div class="card-information">
+    <h3>Total: ${{getTotalPrice()}}</h3>
+    <form>
+      <label for="name"><h4>Name on Card:</h4> </label>
+      <div class="input" >
+        <input type="text" id="name" name="name" maxlength="19" placeholder="Wizard Wizardington" required>
+      </div>
+      <br>
+      <label for="cc-number"><h4>Credit Card Number:</h4> </label>
+      <div class="input" >
+        <input  type="text" id="cc-number" name="cc-number" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="1234 5678 9012 3456" required>
+      </div>
+      <br>
+      <label for="cc-expiration"><h4>Expiration Date (MM/YY):</h4> </label>
+      <div class="input" >
+        <input type="text" id="cc-expiration" name="cc-expiration" inputmode="numeric" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" placeholder="MM/YY" required>
+      </div>
+      <br>
+      <label for="cc-ccv"><h4>CCV:</h4> </label>
+      <div class="input" >
+        <input type="text" id="cc-ccv" name="cc-ccv" inputmode="numeric" pattern="[0-9]{3,4}" placeholder="123" required>
+
+      </div>
+      <br>
+      <button class="button" [disabled]="isCartEmpty()" (click) = "handlePurchase()" type="submit">Purchase Cart</button>
+    </form>
+  </div>
+  <!-- <div class="extra-product-info">
+    <ul>
+      <li  *ngFor="let product of products">
+          <h3>Name: {{product.name}}</h3>
+          <h3>Type: {{product.type}}</h3>
+          <h3>Price: {{product.price}}</h3>
+          <br>
+      </li>
+    </ul>
+  </div> -->
+</div>
+

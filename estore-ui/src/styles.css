@@ -252,6 +252,7 @@ img {
 	display: inline-flex !important;
 	flex-direction: column;
 	justify-content: space-between;
+	cursor:pointer;
 
 	border: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
 	background: color-mix(in srgb, var(--card-color, var(--text-500)), transparent 75%);
@@ -271,7 +272,6 @@ img {
 }
 
 .card:not(.card-selected):not(.card-unlocked) {
-	cursor: not-allowed;
 	pointer-events: none;
 }
 
