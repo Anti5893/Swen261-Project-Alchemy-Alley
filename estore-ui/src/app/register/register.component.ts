@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { NONE_TYPE } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-register',

@@ -3,29 +3,32 @@
         <h3>Registration</h3>
         <div class="underline"></div>
       </div>
-    <div class = "register-fields">
-        <div class="input">
-            <i class="fa-solid fa-user"></i>
-            Username:
-            <input type="text" placeholder="Enter Username" [(ngModel)] = 'username' >
+      <div class = register-elements>
+        <div class = "register-fields">
+            <div class="input">
+                <i class="fa-solid fa-user"></i>
+                <P>Username:</P>
+                <input type="text" placeholder="Enter Username" [(ngModel)] = 'username' >
+                </div>
+            <div class="input">
+                <i class="fa-solid fa-lock"></i>
+                <p>Password:</p>
+                <input type="password" placeholder="Enter Password" [(ngModel)] = 'password'>
+              </div>
+            <div class="input">
+                <i class="fa-solid fa-lock"></i>
+                <p>Confirm Password:</p>
+                <input type="password" placeholder="Enter Password" [(ngModel)] = 'passwordConfirm'>
             </div>
-        <div class="input">
-            <i class="fa-solid fa-lock"></i>
-            Password:
-            <input type="password" placeholder="Enter Password" [(ngModel)] = 'password'>
-          </div>
-        <div class="input">
-            <i class="fa-solid fa-lock"></i>
-            Confirm Password:
-            <input type="password" placeholder="Enter Password" [(ngModel)] = 'passwordConfirm'>
         </div>
+        <div class = "register-buttons">
+            <button class = "button" [routerLink]="'/login'"><i class="fa-solid fa-arrow-left"></i>Back To Login</button>
+            <button class = "button" (click) = "registerOnClick(username,password)">Register<i class="fa-solid fa-check"></i></button>
+        </div>
+        <p *ngIf="showErrorMessage">User Already Exists</p>
+        <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
+        <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1 Digit, 1 Symbol</p>
     </div>
-    <div class = "register-buttons">
-        <button class = "button" [routerLink]="'/login'">Back To Login</button>
-        <button class = "button" (click) = "registerOnClick(username,password)">Register</button>
-    </div>
-    <p *ngIf="showErrorMessage">User Already Exists</p>
-    <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
-    <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1 Digit, 1 Symbol</p>
-</div>
+      </div>
+    
 <router-outlet></router-outlet>

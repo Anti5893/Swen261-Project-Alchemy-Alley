@@ -1,5 +1,4 @@
 .register-box{
-    border: 7px solid;
     position: absolute;
     top: 45%;
     left: 50%;
@@ -7,7 +6,6 @@
     padding: 10px;
     text-align: center;
     padding-top: 50px;
-    box-shadow: 13px 18px 10px rgb(0 0 0 / 0.4);
     min-width: 550px;
     min-height:400px;
 }
@@ -20,21 +18,25 @@
     margin-bottom: 20px;
 }
 
-.register-input{
-    max-width: 400px;
-    margin-bottom: 35px;
+.input{
+    min-width: 59%;
+    justify-content:flex-start;
+    margin-bottom: 40px;
 }
 
 .register-buttons{
-    justify-content: space-between;
+    justify-content: space-around;
     display: flex;
     margin-bottom: 20px;
 }
 
-.input{
-    margin-bottom: 40px;
+.heading{
+    margin-bottom: 20px
 }
 
-.heading{
-    margin-bottom: 40px;
+.register-elements{
+    padding-top: 50px;
+    border: 7px solid;
+    border-radius: 10px;
+    box-shadow: 5px 18px 10px 10px rgb(0 0 0 / 0.4);
 }
