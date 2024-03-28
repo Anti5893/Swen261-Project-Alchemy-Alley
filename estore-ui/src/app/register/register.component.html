@@ -23,7 +23,7 @@
         </div>
         <div class = "register-buttons">
             <button class = "button" [routerLink]="'/login'"><i class="fa-solid fa-arrow-left"></i>Back To Login</button>
-            <button class = "button" (click) = "registerOnClick(username,password)">Register<i class="fa-solid fa-check"></i></button>
+            <button class = "button" (click) = "registerOnClick(username,password)">Register<i class="fa-solid fa-scroll"></i></button>
         </div>
         <p *ngIf="showErrorMessage">User Already Exists</p>
         <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
