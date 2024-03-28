@@ -18,8 +18,10 @@ import java.util.logging.Logger;
 
 import com.alchemyalley.api.persistence.CraftingDAO;
 import com.alchemyalley.api.persistence.ProductDAO;
+
 /**
  * Controller responsible for requests beginning with /users
+ * 
  * @author Group 2
  */
 @RestController
@@ -36,8 +38,10 @@ public class UsersController {
 		this.productDAO = productDAO;
 		this.craftingDAO = craftingDAO;
 	}
+
 	/**
 	 * Creates a user, returns user with password stripped
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -47,15 +51,16 @@ public class UsersController {
 
 		try {
 			User newUser = this.userDAO.createUser(user);
-			return newUser != null ?
-					new ResponseEntity<>(newUser.removePassword(), HttpStatus.CREATED) :
-					new ResponseEntity<>(HttpStatus.CONFLICT);
+			return newUser != null ? new ResponseEntity<>(newUser.removePassword(), HttpStatus.CREATED)
+					: new ResponseEntity<>(HttpStatus.CONFLICT);
 		} catch (IOException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
 	/**
 	 * Authenticates a user, removes password and returns authenticated user
+	 * 
 	 * @param user
 	 * @return
 	 */
@@ -64,59 +69,63 @@ public class UsersController {
 		LOG.info("POST /users/auth " + user);
 
 		User storedUser = this.userDAO.authenticateUser(user);
-		return storedUser != null ?
-				new ResponseEntity<>(storedUser.removePassword(), HttpStatus.OK) :
-				new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		return storedUser != null ? new ResponseEntity<>(storedUser.removePassword(), HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
+
 	/**
 	 * Updates a user with the same name
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@PutMapping("")
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		LOG.info("PUT /users " + user);
-		
+
 		try {
 			User updatedUser = this.userDAO.updateUser(user);
-			return updatedUser != null ?
-					new ResponseEntity<>(updatedUser.removePassword(), HttpStatus.OK) :
-					new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return updatedUser != null ? new ResponseEntity<>(updatedUser.removePassword(), HttpStatus.OK)
+					: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
 	/**
-	 * Handles the checkout process for a user, unlocking new products and decrementing stock
+	 * Handles the checkout process for a user, unlocking new products and
+	 * decrementing stock
+	 * 
 	 * @param user
 	 * @return
 	 * @throws IOException
 	 */
 	@PostMapping("users/checkout")
-    public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
-        LOG.info("POST /users/checkout");
+	public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
+		LOG.info("POST /users/checkout");
 		User storedUser = user;
-        if(storedUser.getCart().length !=2) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        int[] cart = storedUser.getCart();
-        Integer[] cartBoxed = Arrays.stream(cart).boxed().toArray(Integer[]::new); // hack to box an array, from stackoverflow
-        Product result = productDAO.getProduct(craftingDAO.getRecipe(cartBoxed).getResult());
-        for (int i : cart) {
-            Product temp = productDAO.getProduct(i);
-            if(temp.getQuantity() < 1){
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-            temp.decrementStock();
-        }
-        userDAO.updateUser(storedUser.clearCart());
-        if(result != null) {
+		if (storedUser.getCart().length != 2) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		int[] cart = storedUser.getCart();
+		Integer[] cartBoxed = Arrays.stream(cart).boxed().toArray(Integer[]::new); // hack to box an array, from
+																					// stackoverflow
+		Product result = productDAO.getProduct(craftingDAO.getRecipe(cartBoxed).getResult());
+		for (int i : cart) {
+			Product temp = productDAO.getProduct(i);
+			if (temp.getQuantity() < 1) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			temp.decrementStock();
+		}
+		userDAO.updateUser(storedUser.clearCart());
+		if (result != null) {
 			userDAO.updateUser(storedUser.addToUnlocked(result.getId()));
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

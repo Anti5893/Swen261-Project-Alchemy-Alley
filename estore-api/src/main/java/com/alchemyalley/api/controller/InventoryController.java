@@ -21,6 +21,7 @@ import com.alchemyalley.api.model.Product;
 
 /**
  * Controller responsible for requests beginning with /inventory
+ * 
  * @author Group 2
  */
 @RestController
@@ -33,8 +34,10 @@ public class InventoryController {
 	public InventoryController(ProductDAO productDAO) {
 		this.productDAO = productDAO;
 	}
+
 	/**
 	 * Returns a product with the given id
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -43,12 +46,13 @@ public class InventoryController {
 		LOG.info("GET /inventory/products/" + id);
 
 		Product product = this.productDAO.getProduct(id);
-		return product != null ?
-				new ResponseEntity<>(product, HttpStatus.OK) :
-				new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return product != null ? new ResponseEntity<>(product, HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+
 	/**
 	 * Returns an array of products
+	 * 
 	 * @return ResponseEntity<Product[]>
 	 */
 	@GetMapping("/products/")
@@ -58,8 +62,10 @@ public class InventoryController {
 		Product[] products = this.productDAO.getProducts();
 		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
+
 	/**
 	 * Returns an array of products containing the name
+	 * 
 	 * @param name
 	 * @return ResponseEntity<Product[]>
 	 */
@@ -68,34 +74,37 @@ public class InventoryController {
 		LOG.info("GET /inventory/products?name=" + name);
 
 		Product[] products = this.productDAO.findProducts(name);
-		if(products.length > 0) {
+		if (products.length > 0) {
 			return new ResponseEntity<>(products, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
 	/**
 	 * Returns the created product
+	 * 
 	 * @param product
 	 * @return ResponseEntity<Product>
 	 */
 	@PostMapping("/products")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        LOG.info("POST /inventory/products " + product);
+	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+		LOG.info("POST /inventory/products " + product);
 
-        try {
-            Product created = this.productDAO.createProduct(product);
+		try {
+			Product created = this.productDAO.createProduct(product);
 
-			return created == null ?
-					new ResponseEntity<>(HttpStatus.CONFLICT) :
-					new ResponseEntity<>(created,HttpStatus.CREATED);
-        } catch (IOException e) {
-            LOG.log(Level.SEVERE, e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+			return created == null ? new ResponseEntity<>(HttpStatus.CONFLICT)
+					: new ResponseEntity<>(created, HttpStatus.CREATED);
+		} catch (IOException e) {
+			LOG.log(Level.SEVERE, e.getLocalizedMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	/**
 	 * Returns the updated product
+	 * 
 	 * @param product
 	 * @return ResponseEntity<Product>
 	 */
@@ -106,16 +115,17 @@ public class InventoryController {
 		try {
 			Product updated = this.productDAO.updateProduct(product);
 
-			return updated != null ?
-					new ResponseEntity<>(updated, HttpStatus.OK) :
-					new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return updated != null ? new ResponseEntity<>(updated, HttpStatus.OK)
+					: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
 	/**
 	 * Returns the deleted product, deletes it from inventory
+	 * 
 	 * @param id
 	 * @return ResponseEntity<Product>
 	 */
