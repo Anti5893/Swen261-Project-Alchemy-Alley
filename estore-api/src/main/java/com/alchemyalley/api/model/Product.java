@@ -91,8 +91,9 @@ public class Product {
     /**
      * Decrements the quantity of the product by 1.
      */
-    public void decrementStock() {
+    public Product decrementStock() {
         this.quantity--;
+        return this;
     }
 
     /**

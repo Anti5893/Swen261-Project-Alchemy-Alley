@@ -117,7 +117,7 @@ public class UsersController {
 			if (temp.getQuantity() < 1) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			temp.decrementStock();
+			else{productDAO.updateProduct(temp.decrementStock());}
 		}
 		userDAO.updateUser(storedUser.clearCart());
 		if (result != null) {
