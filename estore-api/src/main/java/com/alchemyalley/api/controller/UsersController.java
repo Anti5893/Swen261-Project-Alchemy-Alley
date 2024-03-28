@@ -76,9 +76,9 @@ public class UsersController {
 		}
 	}
 	@PostMapping("users/checkout")
-     public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
+    public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
         LOG.info("POST /users/checkout");
-		User storedUser = this.userDAO.authenticateUser(user);
+		User storedUser = user;
         if(storedUser.getCart().length !=2) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

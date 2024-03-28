@@ -98,4 +98,17 @@ public class Product {
         return String.format(STRING_FORMAT, this.id, this.name, this.type, this.price, this.quantity);
     }
 
+    /**
+     * Checks whether two instances of {@link Product} are the same.
+     *
+     * @param o  The object to compare to
+     * @return   Whether the two instances are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id && Double.compare(product.price, price) == 0 && quantity == product.quantity && name.equals(product.name) && type == product.type;
+    }
 }

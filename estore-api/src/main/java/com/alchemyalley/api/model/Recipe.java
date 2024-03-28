@@ -16,6 +16,16 @@ public class Recipe {
 	@JsonProperty("result") private int result;
 
 	/**
+	 * Creates a {@code Recipe} with its given attributes.
+	 *
+	 * @param inputs  The product ids required as input
+	 * @param result  The resulting product id
+	 */
+	public Recipe(@JsonProperty("inputs") Integer[] inputs, @JsonProperty("result") int result) {
+		this.inputs = inputs;
+		this.result = result;
+	}
+	/**
 	 * Gets the first product id for this recipe.
 	 *
 	 * @return  The first product id
