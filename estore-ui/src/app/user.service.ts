@@ -28,4 +28,7 @@ export class UserService {
     return this.http.put<User>(this.usersUrl, user, this.httpOptionsResponse);
   }
 
+  doCraft(user: User): Observable<HttpResponse<User>> {
+    return this.http.post<User>(`${this.usersUrl}/checkout`, user, this.httpOptionsResponse);
+  }
 }
