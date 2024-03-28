@@ -1,31 +1,30 @@
-
-<div class = "login-box">
+<div class="login-box">
     <div class="heading">
         <h3>Login</h3>
         <div class="underline"></div>
-      </div>
-      <div class = "login-elements">
-        <div class = "login-fields">
+    </div>
+    <div class="login-elements">
+        <div class="login-fields">
             <div class="input">
                 <i class="fa-solid fa-user"></i>
                 Username:
-                <input type="text" placeholder="Enter Username" [(ngModel)] = 'username' >
-                </div>
-              <div class="input">
+                <input type="text" placeholder="Enter Username" [(ngModel)]='username'>
+            </div>
+            <div class="input">
                 <i class="fa-solid fa-lock"></i>
                 Password:
-                <input type="password" placeholder="Enter Password" [(ngModel)] = 'password'>
-              </div>
-        </div>
-        <div class = "login-buttons">
-            <div class = "login-button">
-                <button class = "button"(click)="onClick(username,password)">Login<i class="fa-solid fa-door-open"></i></button>
+                <input type="password" placeholder="Enter Password" [(ngModel)]='password'>
             </div>
-            <div class = "register-button">
-                <button class = "button" routerLink="/register">Register<i class="fa-solid fa-arrow-right"></i></button> 
+        </div>
+        <div class="login-buttons">
+            <div class="login-button">
+                <button class="button" (click)="onClick(username,password)">Login<i
+                        class="fa-solid fa-door-open"></i></button>
+            </div>
+            <div class="register-button">
+                <button class="button" routerLink="/register">Register<i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
         <p *ngIf="showErrorMesssage()">Incorrect Username or Password</p>
-      </div>
+    </div>
 </div>
-

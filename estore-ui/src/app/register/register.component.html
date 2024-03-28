@@ -1,34 +1,36 @@
-<div class = "register-box">
+<div class="register-box">
     <div class="heading">
         <h3>Registration</h3>
         <div class="underline"></div>
-      </div>
-      <div class = register-elements>
-        <div class = "register-fields">
+    </div>
+    <div class=register-elements>
+        <div class="register-fields">
             <div class="input">
                 <i class="fa-solid fa-user"></i>
                 <P>Username:</P>
-                <input type="text" placeholder="Enter Username" [(ngModel)] = 'username' >
-                </div>
+                <input type="text" placeholder="Enter Username" [(ngModel)]='username'>
+            </div>
             <div class="input">
                 <i class="fa-solid fa-lock"></i>
                 <p>Password:</p>
-                <input type="password" placeholder="Enter Password" [(ngModel)] = 'password'>
-              </div>
+                <input type="password" placeholder="Enter Password" [(ngModel)]='password'>
+            </div>
             <div class="input">
                 <i class="fa-solid fa-lock"></i>
                 <p>Confirm Password:</p>
-                <input type="password" placeholder="Enter Password" [(ngModel)] = 'passwordConfirm'>
+                <input type="password" placeholder="Enter Password" [(ngModel)]='passwordConfirm'>
             </div>
         </div>
-        <div class = "register-buttons">
-            <button class = "button" [routerLink]="'/login'"><i class="fa-solid fa-arrow-left"></i>Back To Login</button>
-            <button class = "button" (click) = "registerOnClick(username,password)">Register<i class="fa-solid fa-scroll"></i></button>
+        <div class="register-buttons">
+            <button class="button" [routerLink]="'/login'"><i class="fa-solid fa-arrow-left"></i>Back To Login</button>
+            <button class="button" (click)="registerOnClick(username,password)">Register<i
+                    class="fa-solid fa-scroll"></i></button>
         </div>
         <p *ngIf="showErrorMessage">User Already Exists</p>
         <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
-        <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1 Digit, 1 Symbol</p>
+        <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1
+            Digit, 1 Symbol</p>
     </div>
-      </div>
-    
+</div>
+
 <router-outlet></router-outlet>
