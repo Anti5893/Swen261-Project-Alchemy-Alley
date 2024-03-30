@@ -28,7 +28,7 @@ export class LoginComponent {
     return this.requestSent && !this.isAuthenticated;
   }
 
-  animateLoginBox(){
+  animateLogin(route: string[]): void{
     const loginBox = document.getElementById('login-box')
     if(loginBox){
       loginBox.animate(
@@ -41,7 +41,7 @@ export class LoginComponent {
           fill : 'forwards'
         }
       ).onfinish = ()=>{
-        this.router.navigate(['/admin']);
+        this.router.navigate(route);
         const navRight = document.getElementById('nav-right');
         if(navRight){
           navRight.animate(
@@ -59,6 +59,10 @@ export class LoginComponent {
       }
     }
   }
+
+  
+
+
   
 
   onClick(username: string, password: string): void {
@@ -69,9 +73,9 @@ export class LoginComponent {
           const loggedUser = response.body!;
           this.credentialsService.storeCurrentUser(loggedUser);
           if(loggedUser.admin) {
-           this.animateLoginBox()
+           this.animateLogin(['/admin'])
           } else {
-            this.router.navigate(['/catalog']);
+            this.animateLogin(['/catalog']);
           }
         }
         this.requestSent = true;
