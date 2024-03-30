@@ -42,6 +42,20 @@ export class LoginComponent {
         }
       ).onfinish = ()=>{
         this.router.navigate(['/admin']);
+        const navRight = document.getElementById('nav-right');
+        if(navRight){
+          navRight.animate(
+            [
+              {visibility : 'visible'},
+              {opacity : '1'}
+            ],
+            {
+              duration: 1000,
+              easing: 'ease-in',
+              fill : 'forwards'
+            }
+          )
+        }
       }
     }
   }

@@ -29,6 +29,8 @@ nav > #nav-right {
     width: 46vw;
     column-gap: 1vw;
     margin-right: 2vw;
+    visibility: visible;
+    opacity: 0;
 }
 
 nav > #nav-right > #nav-separator {
