@@ -28,6 +28,25 @@ export class LoginComponent {
     return this.requestSent && !this.isAuthenticated;
   }
 
+  animateLoginBox(){
+    const loginBox = document.getElementById('login-box')
+    if(loginBox){
+      loginBox.animate(
+        [
+          {transform : 'translate(-50%, 100%)'}
+        ],
+        {
+          duration: 1000,
+          easing: 'ease-out',
+          fill : 'forwards'
+        }
+      ).onfinish = ()=>{
+        this.router.navigate(['/admin']);
+      }
+    }
+  }
+  
+
   onClick(username: string, password: string): void {
     this.userService.authenticateUser({username,password} as User).subscribe(
       (response) => {
@@ -36,7 +55,7 @@ export class LoginComponent {
           const loggedUser = response.body!;
           this.credentialsService.storeCurrentUser(loggedUser);
           if(loggedUser.admin) {
-            this.router.navigate(['/admin']);
+           this.animateLoginBox()
           } else {
             this.router.navigate(['/catalog']);
           }

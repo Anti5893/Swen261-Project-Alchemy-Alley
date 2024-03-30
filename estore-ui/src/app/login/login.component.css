@@ -1,3 +1,15 @@
+
+/* @keyframes login-animation {
+    0%{transform: translate(-50%,-50%);}
+    100%{transform: translate(-50%,1000%);}
+} */
+
+
+
+body{
+    overflow-y: hidden;
+}
+
 .login-box{
     position: absolute;
     top: 45%;
@@ -6,7 +18,11 @@
     padding: 10px;
     text-align: center;
     padding-top: 50px;
-    width: 400px;;
+    width: 400px;
+    /* animation-name: login-animation;
+    animation-duration: 10s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards; */
 }
 .login-buttons{
     padding: 10px;
