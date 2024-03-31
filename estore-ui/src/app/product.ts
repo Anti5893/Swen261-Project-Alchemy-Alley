@@ -2,10 +2,8 @@ export enum ElementType {
     EARTH = "EARTH",
     FIRE = "FIRE",
     WATER = "WATER",
+    ENERGY = "ENERGY",
     AIR = "AIR",
-    ENERGY = "ENERGY"
-    AIR = "AIR",
-    ENERGY = "ENERGY"
 }
 
 export interface Product {

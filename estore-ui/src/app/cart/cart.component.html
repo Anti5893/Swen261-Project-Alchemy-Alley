@@ -8,7 +8,7 @@
             <li (click)="removeProduct(product.id)" *ngFor="let product of products">
                   <!-- <img [src] = product.imageURL>
                   <h2>{{product.name}}</h2> -->
-                  <div class="card-wrapper">
+                  <!-- <div class="card-wrapper">
                   <div class="card card-selected" style="--card-color: #8f1e1e; margin: 50px; display: inline-block">
                     <div class="card-img">
                       <img src= {{product.imageURL}}>
@@ -22,7 +22,10 @@
                     <div class="card-glow"><div class="card-bottom"></div></div>
                     <div class="card-glow"><div class="card-left"></div></div>
                   </div>
-                </div>
+                </div> -->
+                <app-card [product]=product >
+
+                </app-card>
             </li>
         </ul>
     </div>

@@ -105,10 +105,6 @@
 	}
 }
 
-.card.card-selected > .card-glow > div {
-	background-color: var(--secondary);
-}
-
 .card.card-unlocked > .card-glow > div {
 	/* background-color: lightgray; */
 	background-color: var(--card-color);
