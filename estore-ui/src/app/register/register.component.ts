@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { CredentialsService } from '../credentials.service';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,8 @@ export class RegisterComponent {
   buttonClicked = false;
   showErrorMessage = false;
   passwordsMatch = true;
+  notStrongPassword = false
+  
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -29,6 +32,11 @@ export class RegisterComponent {
     return !this.passwordsMatch && this.buttonClicked;
   }
 
+  isStrongPassword(){
+    let match = this.password.match(/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/);
+    return match != null
+  }
+
   registerOnClick(username: string, password: string): void {
     this.buttonClicked = true;
 
@@ -37,7 +45,7 @@ export class RegisterComponent {
       return;
     }
 
-    if(this.fieldsFull()) {
+    if(this.fieldsFull() && this.isStrongPassword()) {
       this.userService.addUser({username,password} as User).subscribe(
         (response) => {
           if(response.status == 201) {

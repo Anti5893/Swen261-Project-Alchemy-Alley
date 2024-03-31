@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from './user';
+import { Product } from './product';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -28,4 +29,7 @@ export class UserService {
     return this.http.put<User>(this.usersUrl, user, this.httpOptionsResponse);
   }
 
+  doCraft(user: User): Observable<HttpResponse<Product>> {
+    return this.http.post<Product>(`${this.usersUrl}/checkout`, user, this.httpOptionsResponse);
+  }
 }

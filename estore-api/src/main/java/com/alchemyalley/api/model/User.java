@@ -6,31 +6,38 @@ import java.util.Arrays;
 
 /**
  * Represents a User entity.
+ * 
  * @author Group 2
  */
 public class User {
 
 	static final String STRING_FORMAT = "User [username=%s, password=%s, admin=%b, unlocked=%s, cart=%s]";
 
-	@JsonProperty("username") private final String username;
-	@JsonProperty("password") private final String password;
-	@JsonProperty("admin") private boolean admin;
-	@JsonProperty("unlocked") private int[] unlocked;
-	@JsonProperty("cart") private int[] cart;
+	@JsonProperty("username")
+	private final String username;
+	@JsonProperty("password")
+	private final String password;
+	@JsonProperty("admin")
+	private boolean admin;
+	@JsonProperty("unlocked")
+	private int[] unlocked;
+	@JsonProperty("cart")
+	private int[] cart;
 
 	/**
 	 * Creates a {@code User} with its given attributes.
 	 *
-	 * @param username  The username of the user
-	 * @param password  The password of the user
-	 * @param admin     Whether the user is an admin or not
-	 * @param unlocked  The product ids the user has unlocked
-	 * @param cart      The product ids that are in the user's cart
+	 * @param username The username of the user
+	 * @param password The password of the user
+	 * @param admin    Whether the user is an admin or not
+	 * @param unlocked The product ids the user has unlocked
+	 * @param cart     The product ids that are in the user's cart
 	 */
 	public User(@JsonProperty("username") String username, @JsonProperty("password") String password,
-	            @JsonProperty("admin") boolean admin, @JsonProperty("unlocked") int[] unlocked,
-	            @JsonProperty("cart") int[] cart) throws IllegalArgumentException {
-		if(username.isEmpty()) throw new IllegalArgumentException("Username cannot be empty");
+			@JsonProperty("admin") boolean admin, @JsonProperty("unlocked") int[] unlocked,
+			@JsonProperty("cart") int[] cart) throws IllegalArgumentException {
+		if (username.isEmpty())
+			throw new IllegalArgumentException("Username cannot be empty");
 		this.username = username;
 		this.password = password;
 		this.admin = admin;
@@ -41,7 +48,7 @@ public class User {
 	/**
 	 * Gets the username of this user.
 	 *
-	 * @return  The username of the user
+	 * @return The username of the user
 	 */
 	public String getUsername() {
 		return this.username;
@@ -50,7 +57,7 @@ public class User {
 	/**
 	 * Gets the password of this user.
 	 *
-	 * @return  The password of the user
+	 * @return The password of the user
 	 */
 	public String getPassword() {
 		return this.password;
@@ -59,7 +66,7 @@ public class User {
 	/**
 	 * Gets whether this user is an admin or not.
 	 *
-	 * @return  The administrator flag of the user
+	 * @return The administrator flag of the user
 	 */
 	public boolean isAdmin() {
 		return this.admin;
@@ -68,7 +75,7 @@ public class User {
 	/**
 	 * Gets all product ids that this user has unlocked.
 	 *
-	 * @return  An array of integers holding the unlocked product ids
+	 * @return An array of integers holding the unlocked product ids
 	 */
 	public int[] getUnlocked() {
 		return this.unlocked;
@@ -77,7 +84,7 @@ public class User {
 	/**
 	 * Gets the product ids currently in this user's cart.
 	 *
-	 * @return  An array of integers holding the cart's product ids
+	 * @return An array of integers holding the cart's product ids
 	 */
 	public int[] getCart() {
 		return this.cart;
@@ -86,16 +93,41 @@ public class User {
 	/**
 	 * Removes the password field from this user as a new instance.
 	 *
-	 * @return  A new user instance without the password set
+	 * @return A new user instance without the password set
 	 */
 	public User removePassword() {
 		return new User(this.username, null, this.admin, this.unlocked, this.cart);
 	}
 
 	/**
+	 * Empties cart from this user as a new instance.
+	 *
+	 * @return A new user instance with an empty cart
+	 */
+	public User clearCart() {
+		return new User(this.username, this.password, this.admin, this.unlocked, new int[2]);
+	}
+
+	/**
+	 * Adds a product to unlocked
+	 * 
+	 * @param id The id of the product to add
+	 * @return A new user instance with the new unlocked array or this if the id is
+	 *         already in the unlocked array
+	 */
+	public User addToUnlocked(int id) {
+		if (Arrays.stream(this.unlocked).anyMatch(i -> i == id)) {
+			return this;
+		}
+		int[] newUnlocked = Arrays.copyOf(this.unlocked, this.unlocked.length + 1);
+		newUnlocked[this.unlocked.length] = id;
+		return new User(this.username, this.password, this.admin, newUnlocked, this.cart);
+	}
+
+	/**
 	 * The string representation of a user.
 	 *
-	 * @return  Its string representation, including fields
+	 * @return Its string representation, including fields
 	 */
 	@Override
 	public String toString() {
@@ -107,11 +139,11 @@ public class User {
 	 * Checks whether two instances of {@link User} are the same.
 	 *
 	 * @param o The other {@link User} to check against
-	 * @return  Whether they are considered equal or not
+	 * @return Whether they are considered equal or not
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if(o instanceof User user) {
+		if (o instanceof User user) {
 			return this.username.equals(user.username) && this.admin == user.admin &&
 					Arrays.equals(this.unlocked, user.unlocked) && Arrays.equals(this.cart, user.cart);
 		}

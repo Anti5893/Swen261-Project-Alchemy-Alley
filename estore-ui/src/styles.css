@@ -329,6 +329,10 @@ img {
 	color: var(--secondary);
 }
 
+.input > p{
+	flex-grow: 1;
+}
+
 /* ToolTip */
 
 *[tooltip] {
