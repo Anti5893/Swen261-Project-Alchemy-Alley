@@ -1,0 +1,68 @@
+@import url(../../styles.css);
+
+table {
+    table-layout: auto;
+    width: 100%;
+    place-content: center
+    /* border-collapse: collapse; */
+
+}
+/* Hide arrows on number inputs */
+/* Most Browsers */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+th, td {
+    color: var(--text);
+    padding: 8px;
+    text-align: center;
+    vertical-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary);
+}
+/* Override to Center */
+.input {
+    display: inline-block; 
+	align-items: center;
+	justify-content: center;
+    text-align: center;
+	column-gap: 0.75rem;
+    width: 8vw;
+	height: max-content;
+	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
+
+	color: var(--text);
+	font-weight: bold;
+	background-color: var(--primary);
+	border-radius: 1rem;
+}
+.wide {
+    width: 16vw;
+}
+.slim {
+    width: 4vw;
+}
+.dropdown {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    align-items: center;
+	justify-content: center;
+    width: 8vw;
+    height: max-content;
+    padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
+    color: var(--text);
+    font-weight: bold;
+    background-color: var(--primary);
+    border-radius: 1rem;
+}
+

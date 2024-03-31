@@ -396,11 +396,7 @@ img {
 /* Card Info */
 
 .card > .card-info {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	width: 100%;
-	height: 20%;
+    border-bottom: 1px solid #ddd;
 
 	font-size: 14px;
 	border-top: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
