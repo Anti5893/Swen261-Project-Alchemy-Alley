@@ -10,15 +10,6 @@ import { UserService } from '../user.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
-  animations: [
-    trigger('slideIn',[
-      transition(':enter',[
-        style({left: '50%'}),
-        animate('1000ms ease-in',style({left:'150%'}))
-      ]),
-      state('final',style({left:"150%"}))
-    ])
-  ]  
 })
 export class RegisterComponent{
   
