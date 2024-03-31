@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { animate, transition, trigger, style,state} from '@angular/animations';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { CredentialsService } from '../credentials.service';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export class RegisterComponent{
   
   username: string = '';
   password: string = '';
@@ -23,6 +24,24 @@ export class RegisterComponent {
   
 
   constructor(private userService: UserService, private router: Router) {}
+
+  animateRegister(route: string[], transformString : string = 'translate(250%,-50%)'): void{
+    const registerBox = document.getElementById('registerBox');
+    if(registerBox){
+      registerBox.animate(
+        [
+          {transform : transformString}
+        ],
+        {
+          duration : 1000,
+          easing : 'ease-out',
+          fill : 'forwards'
+        }
+      ).onfinish = () =>{
+        this.router.navigate(route)
+      }
+    }
+  }
 
   fieldsFull(): boolean {
     return this.password != '' && this.username != '' && this.passwordConfirm != '';
@@ -49,7 +68,7 @@ export class RegisterComponent {
       this.userService.addUser({username,password} as User).subscribe(
         (response) => {
           if(response.status == 201) {
-            this.router.navigate(['/login']);
+            this.animateRegister(['/login'])
           }
         },
         (error) => {

@@ -1,4 +1,4 @@
-<div class="register-box">
+<div id = "registerBox" class="register-box">
     <div class="heading">
         <h3>Registration</h3>
         <div class="underline"></div>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="register-buttons">
-            <button class="button" [routerLink]="'/login'"><i class="fa-solid fa-arrow-left"></i>Back To Login</button>
+            <button class="button" (click) = "animateRegister(['/login'])"><i class="fa-solid fa-arrow-left"></i>Back To Login</button>
             <button class="button" (click)="registerOnClick(username,password)">Register<i
                     class="fa-solid fa-scroll"></i></button>
         </div>

@@ -62,7 +62,7 @@ export class AdminComponent implements OnInit {
 
   save(product: Product, name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement, imageURL: string): void {
     // Validate input boxes
-    if(name.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity() || imageURL.trim.length == 0) {
+    if(name.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity() || imageURL.trim().length == 0) {
       this.showValidityError = true;
       return;
     }
