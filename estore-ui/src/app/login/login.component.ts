@@ -42,24 +42,10 @@ export class LoginComponent {
         }
       ).onfinish = ()=>{
         this.router.navigate(route);
-        // const navRight = document.getElementById('nav-right');
-        // if(navRight){
-        //   navRight.animate(
-        //     [
-        //       {visibility : 'visible'},
-        //       {opacity : '1'}
-        //     ],
-        //     {
-        //       duration: 1000,
-        //       easing: 'ease-in',
-        //       fill : 'forwards'
-        //     }
-        //   )
-        // }
       }
     }
   }
-  
+
   onClick(username: string, password: string): void {
     this.userService.authenticateUser({username,password} as User).subscribe(
       (response) => {
