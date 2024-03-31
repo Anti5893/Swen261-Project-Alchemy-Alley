@@ -17,6 +17,7 @@ public enum ElementType {
     WATER,
     @JsonProperty("AIR")
     AIR,
-    @JsonProperty("ENERGY") ENERGY
+    @JsonProperty("ENERGY")
+    ENERGY
 
 }

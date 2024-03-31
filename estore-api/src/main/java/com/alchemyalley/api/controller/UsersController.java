@@ -103,12 +103,11 @@ public class UsersController {
 	 */
 	@PostMapping("/checkout")
 	public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
-		LOG.info("POST /checkout");
-		User storedUser = user;
-		if (storedUser.getCart().length != 2) {
+		LOG.info("POST /users/checkout" + user);
+		if (user.getCart().length != 2) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		int[] cart = storedUser.getCart();
+		int[] cart = user.getCart();
 		Integer[] cartBoxed = Arrays.stream(cart).boxed().toArray(Integer[]::new); // hack to box an array, from
 																					// stackoverflow
 		Product result = productDAO.getProduct(craftingDAO.getRecipe(cartBoxed).getResult());
@@ -119,9 +118,9 @@ public class UsersController {
 			}
 			else{productDAO.updateProduct(temp.decrementStock());}
 		}
-		userDAO.updateUser(storedUser.clearCart());
+		userDAO.updateUser(user.clearCart());
 		if (result != null) {
-			userDAO.updateUser(storedUser.addToUnlocked(result.getId()));
+			userDAO.updateUser(user.addToUnlocked(result.getId()));
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

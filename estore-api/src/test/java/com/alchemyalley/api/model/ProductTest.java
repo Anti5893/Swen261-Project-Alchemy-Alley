@@ -1,9 +1,9 @@
 package com.alchemyalley.api.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.beans.Transient;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -70,42 +70,47 @@ public class ProductTest {
         // Analyze
         assertEquals(expected, actual);
     }
+
 	@Test
-	public void testEqualsEqual(){
+	public void testEquals(){
 		// Setup
 	    int id = 99;
 	    String name = "Steam";
 	    ElementType type = ElementType.AIR;
 	    double price = 19.99;
 	    int quantity = 50;
+		String imageURL = "url";
 
-	    Product product = new Product(id, name, type, price, quantity);
-		Product product2 = new Product(id, name, type, price, quantity);
+	    Product product = new Product(id, name, type, price, quantity, imageURL);
+		Product product2 = new Product(id, name, type, price, quantity, imageURL);
 
 		// Invoke
 		boolean actual = product.equals(product2);
 
-		//Analyze
-		assertEquals(true, actual);
+		// Analyze
+		assertTrue(actual);
 	}
+
 	@Test
-	public void testEqualsNotEqual(){
+	public void testNotEqual(){
 		// Setup
 	    int id = 99;
 	    String name = "Steam";
 	    ElementType type = ElementType.AIR;
 	    double price = 19.99;
 	    int quantity = 50;
+		String imageURL = "url";
 
-	    Product product = new Product(id, name, type, price+2, quantity);
-		Product product2 = new Product(id, name, type, price, quantity);
+	    Product product = new Product(id, name, type, price + 2, quantity, imageURL);
+		Product product2 = new Product(id, name, type, price, quantity, imageURL);
 
 		// Invoke
 		boolean actual = product.equals(product2);
 
-		//Analyze
-		assertEquals(false, actual);
+		// Analyze
+		assertFalse(actual);
 	}
+
 	@Test
 	public void testDecrementStock(){
 		// Setup
@@ -114,13 +119,15 @@ public class ProductTest {
 	    ElementType type = ElementType.AIR;
 	    double price = 19.99;
 	    int quantity = 50;
+		String imageURL = "url";
 
-	    Product product = new Product(id, name, type, price, quantity);
+	    Product product = new Product(id, name, type, price, quantity, imageURL);
 
 		// Invoke
 		Product actual = product.decrementStock();
 
-		//Analyze
-		assertEquals(quantity-1, actual.getQuantity());
+		// Analyze
+		assertEquals(quantity - 1, actual.getQuantity());
 	}
+
 }
