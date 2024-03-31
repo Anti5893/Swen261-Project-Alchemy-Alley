@@ -1,13 +1,20 @@
+
+@keyframes register-box-animation {
+    100%{left: 50%}
+}
+
+
 .register-box{
     position: absolute;
     top: 45%;
-    left: 50%;
+    left: -150%;
     transform: translate(-50%, -50%);
     padding: 10px;
     text-align: center;
     padding-top: 50px;
     min-width: 550px;
     min-height:400px;
+    animation: register-box-animation 1s ease-out forwards
 }
 
 .register-fields{
