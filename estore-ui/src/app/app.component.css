@@ -21,7 +21,10 @@ nav > #nav-left > h1 {
     vertical-align: middle;
     cursor: pointer;
 }
-
+/* Nav Right Animation To Pan In */
+@keyframes nav-right-animation {
+    100%{opacity: 1;}
+}
 nav > #nav-right {
     display: flex;
     align-items: center;
@@ -29,8 +32,8 @@ nav > #nav-right {
     width: 46vw;
     column-gap: 1vw;
     margin-right: 2vw;
-    visibility: visible;
     opacity: 0;
+    animation: nav-right-animation 1s ease-in forwards;
 }
 
 nav > #nav-right > #nav-separator {

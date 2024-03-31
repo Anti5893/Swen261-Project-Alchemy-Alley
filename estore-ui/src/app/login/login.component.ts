@@ -33,7 +33,7 @@ export class LoginComponent {
     if(loginBox){
       loginBox.animate(
         [
-          {transform : 'translate(-50%, 100%)'}
+          {transform : 'translate(100%, -50%)'}
         ],
         {
           duration: 1000,
@@ -42,20 +42,20 @@ export class LoginComponent {
         }
       ).onfinish = ()=>{
         this.router.navigate(route);
-        const navRight = document.getElementById('nav-right');
-        if(navRight){
-          navRight.animate(
-            [
-              {visibility : 'visible'},
-              {opacity : '1'}
-            ],
-            {
-              duration: 1000,
-              easing: 'ease-in',
-              fill : 'forwards'
-            }
-          )
-        }
+        // const navRight = document.getElementById('nav-right');
+        // if(navRight){
+        //   navRight.animate(
+        //     [
+        //       {visibility : 'visible'},
+        //       {opacity : '1'}
+        //     ],
+        //     {
+        //       duration: 1000,
+        //       easing: 'ease-in',
+        //       fill : 'forwards'
+        //     }
+        //   )
+        // }
       }
     }
   }
@@ -74,7 +74,6 @@ export class LoginComponent {
         }
       ).onfinish = ()=>{
         this.router.navigate(['/register'])
-        const registerBox = document.getElementById('register-box');
       }
     }
   }

@@ -14,7 +14,7 @@ import { UserService } from '../user.service';
     trigger('slideIn',[
       transition(':enter',[
         style({left: '50%'}),
-        animate('1000ms ease-in',style({left:'150%',fill:"forwards"}))
+        animate('1000ms ease-in',style({left:'150%'}))
       ]),
       state('final',style({left:"150%"}))
     ])
