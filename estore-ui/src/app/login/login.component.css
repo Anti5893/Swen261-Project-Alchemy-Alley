@@ -1,7 +1,7 @@
 body{
     overflow-y: hidden;
 }
-
+/* Animation To Fade In Login Box */
 @keyframes login-animation {
     100%{opacity: 1;}
 }
