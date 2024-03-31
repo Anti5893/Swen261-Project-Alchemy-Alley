@@ -162,7 +162,7 @@ public class ProductFileDAO implements ProductDAO {
                 }
             }
             Product newProduct = new Product(nextId(), product.getName(), product.getType(), product.getPrice(),
-                    product.getQuantity(), product.getURL());
+                    product.getQuantity(), product.getImageURL());
             this.products.put(newProduct.getId(), newProduct);
             save();
             return newProduct;

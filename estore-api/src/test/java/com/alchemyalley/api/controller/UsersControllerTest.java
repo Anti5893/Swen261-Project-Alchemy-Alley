@@ -160,12 +160,12 @@ public class UsersControllerTest {
 		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1, "url"));
 		when(productDAO.getProduct(3)).thenReturn(new Product(3, "Water", ElementType.WATER, 10.0, 1, "url"));
 		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
-		doThrow(IOException.class).when(userDAO).updateUser(user);
+		when(userDAO.updateUser(user.clearCart())).thenReturn(user.clearCart());
 
-		//Invoke
+		// Invoke
 		ResponseEntity<Product> response = usersController.doCraft(user);
 
-		//Analyze
+		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(new Product(3, "Water", ElementType.WATER, 10.0, 1, "url"), response.getBody());
 	}

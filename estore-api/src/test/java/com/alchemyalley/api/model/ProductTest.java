@@ -59,10 +59,10 @@ public class ProductTest {
 	    ElementType type = ElementType.AIR;
 	    double price = 19.99;
 	    int quantity = 50;
-		String URL = "fake/url";
+		String imageURL = "fake/url";
 
-	    Product product = new Product(id, name, type, price, quantity, URL);
-        String expected = String.format(Product.STRING_FORMAT, id, name, type, price, quantity);
+	    Product product = new Product(id, name, type, price, quantity, imageURL);
+        String expected = String.format(Product.STRING_FORMAT, id, name, type, price, quantity, imageURL);
 
         // Invoke
         String actual = product.toString();

@@ -118,7 +118,7 @@ public class UsersController {
 			}
 			else{productDAO.updateProduct(temp.decrementStock());}
 		}
-		userDAO.updateUser(user.clearCart());
+		user = userDAO.updateUser(user.clearCart());
 		if (result != null) {
 			userDAO.updateUser(user.addToUnlocked(result.getId()));
 			return new ResponseEntity<>(result, HttpStatus.OK);

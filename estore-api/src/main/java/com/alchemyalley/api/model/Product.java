@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Product {
 
-    static final String STRING_FORMAT = "Product [id=%d, name=%s, type=%s, price=%f, quantity=%d]";
+    static final String STRING_FORMAT = "Product [id=%d, name=%s, type=%s, price=%f, quantity=%d, imageURL=%s]";
 
     @JsonProperty("id")
     private final int id;
@@ -18,10 +18,11 @@ public class Product {
     @JsonProperty("type")
     private final ElementType type;
     @JsonProperty("price")
-    private double price;
+    private final double price;
     @JsonProperty("quantity")
     private int quantity;
-    @JsonProperty("imageURL") private String imageURL;
+    @JsonProperty("imageURL")
+    private final String imageURL;
 
     /**
      * Creates a {@code Product} with its given attributes.
@@ -102,7 +103,7 @@ public class Product {
      * Gets the image URL for this product.
      * @return  The imageURL for the product. 
      */
-    public String getURL(){
+    public String getImageURL(){
         return this.imageURL;
     }
 
@@ -113,7 +114,7 @@ public class Product {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, this.id, this.name, this.type, this.price, this.quantity);
+        return String.format(STRING_FORMAT, this.id, this.name, this.type, this.price, this.quantity, this.imageURL);
     }
 
     /**
@@ -124,12 +125,11 @@ public class Product {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Product product = (Product) o;
-        return id == product.id && Double.compare(product.price, price) == 0 && quantity == product.quantity
-                && name.equals(product.name) && type == product.type;
+        if (o instanceof Product product) {
+            return id == product.id && Double.compare(product.price, price) == 0 && quantity == product.quantity &&
+                    name.equals(product.name) && type == product.type && imageURL.equals(product.imageURL);
+        }
+        return false;
     }
+
 }
