@@ -33,7 +33,7 @@ export class LoginComponent {
     if(loginBox){
       loginBox.animate(
         [
-          {transform : 'translate(100%, -50%)'}
+          {transform : 'translate(250%, -50%)'}
         ],
         {
           duration: 1000,
@@ -59,28 +59,7 @@ export class LoginComponent {
       }
     }
   }
-
-  animateRegister(): void{
-    const loginBox = document.getElementById('login-box');
-    if(loginBox){
-      loginBox.animate(
-        [
-          {transform : 'translate(150%,-50%)'}
-        ],
-        {
-        duration: 1000,
-        easing: 'ease-in',
-        fill : 'forwards'
-        }
-      ).onfinish = ()=>{
-        this.router.navigate(['/register'])
-      }
-    }
-  }
-
-
   
-
   onClick(username: string, password: string): void {
     this.userService.authenticateUser({username,password} as User).subscribe(
       (response) => {

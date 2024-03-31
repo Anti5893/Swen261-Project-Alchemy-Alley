@@ -22,7 +22,7 @@
                         class="fa-solid fa-door-open"></i></button>
             </div>
             <div class="register-button">
-                <button class="button" (click) = "animateRegister()">Register<i class="fa-solid fa-arrow-right"></i></button>
+                <button class="button" (click) = "animateLogin(['/register'])">Register<i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
         <p *ngIf="showErrorMesssage()">Incorrect Username or Password</p>
