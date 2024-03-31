@@ -1,4 +1,4 @@
-<div class="login-box">
+<div id = 'login-box'class="login-box">
     <div class="heading">
         <h3>Login</h3>
         <div class="underline"></div>
@@ -22,7 +22,7 @@
                         class="fa-solid fa-door-open"></i></button>
             </div>
             <div class="register-button">
-                <button class="button" routerLink="/register">Register<i class="fa-solid fa-arrow-right"></i></button>
+                <button class="button" (click) = "animateLogin(['/register'])">Register<i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
         <p *ngIf="showErrorMesssage()">Incorrect Username or Password</p>
