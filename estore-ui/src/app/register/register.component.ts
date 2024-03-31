@@ -1,16 +1,26 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { animate, transition, trigger, style,state} from '@angular/animations';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { CredentialsService } from '../credentials.service';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
+  animations: [
+    trigger('slideIn',[
+      transition(':enter',[
+        style({left: '50%'}),
+        animate('1000ms ease-in',style({left:'150%',fill:"forwards"}))
+      ]),
+      state('final',style({left:"150%"}))
+    ])
+  ]  
 })
-export class RegisterComponent {
+export class RegisterComponent{
   
   username: string = '';
   password: string = '';
@@ -23,6 +33,8 @@ export class RegisterComponent {
   
 
   constructor(private userService: UserService, private router: Router) {}
+
+  
 
   fieldsFull(): boolean {
     return this.password != '' && this.username != '' && this.passwordConfirm != '';

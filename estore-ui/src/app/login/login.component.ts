@@ -8,7 +8,7 @@ import { CredentialsService } from '../credentials.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
 
@@ -60,7 +60,24 @@ export class LoginComponent {
     }
   }
 
-  
+  animateRegister(): void{
+    const loginBox = document.getElementById('login-box');
+    if(loginBox){
+      loginBox.animate(
+        [
+          {transform : 'translate(150%,-50%)'}
+        ],
+        {
+        duration: 1000,
+        easing: 'ease-in',
+        fill : 'forwards'
+        }
+      ).onfinish = ()=>{
+        this.router.navigate(['/register'])
+        const registerBox = document.getElementById('register-box');
+      }
+    }
+  }
 
 
   
