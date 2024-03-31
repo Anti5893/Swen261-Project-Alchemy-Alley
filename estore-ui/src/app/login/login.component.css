@@ -2,6 +2,9 @@ body{
     overflow-y: hidden;
 }
 
+@keyframes login-animation {
+    100%{opacity: 1;}
+}
 .login-box{
     position: absolute;
     top: 45%;
@@ -11,6 +14,8 @@ body{
     text-align: center;
     padding-top: 50px;
     width: 400px;
+    opacity: 0;
+    animation: login-animation 1s ease-in forwards;
 }
 .login-buttons{
     padding: 10px;
