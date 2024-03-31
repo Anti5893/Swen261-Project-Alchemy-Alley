@@ -1,60 +1,78 @@
-<p *ngIf="showValidityError">Please enter a valid name, type, price, and quantity before continuing.</p>
-<p *ngIf="showDuplicateProductError">A product with that name already exists. Please try again.</p>
-<div class="heading center">
-    <h3>Admin</h3>
-    <div class="underline"></div>
+<div id="admin">
+    <div class="heading">
+        <h3>Admin</h3>
+        <div class="underline"></div>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let product of products">
+            <!-- Existing Products -->
+            <td>{{product.id}}</td>
+            <td>
+                <div class="input">
+                    <input type="text" placeholder="Enter Name" value={{product.name}} (change)="(0)" #name>
+                </div>
+            </td>
+            <td>
+                <select class="dropdown" (change)="(0)" #type>
+                    <option *ngFor="let type of types" value={{type}} [selected]="type === product.type.toString()">{{type}}</option>
+                </select>
+            </td>
+            <td>
+                <div class="input">
+                    <i class="fa-solid fa-dollar-sign fa-lg"></i>
+                    <input type="number" placeholder="Enter Price" min="0" step="0.01" value={{product.price}} (change)="(0)" required #price>
+                </div>
+            </td>
+            <td>
+                <div class="input">
+                    <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" value={{product.quantity}} (change)="(0)" required #quantity>
+                </div>
+            </td>
+            <td>
+                <button class="button" tooltip="Save" (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity)" 
+                        [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity)"><i class="fa-solid fa-floppy-disk"></i></button>
+                <button class="button" tooltip="Delete" (click)="delete(product.id)"><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+        <tr>
+            <!-- Create Product -->
+            <td>
+                #
+            </td>
+            <td>
+                <div class="input">
+                    <input type="text" placeholder="Enter Name" #name>
+                </div>
+            </td>
+            <td>
+                <select class="dropdown" #type>
+                    <option *ngFor="let type of types" value={{type}} >{{type}}</option>
+                </select>
+            </td>
+            <td>
+                <div class="input">
+                    <i class="fa-solid fa-dollar-sign fa-lg"></i>
+                    <input type="number" placeholder="Enter Price" min="0" step="0.01" required #price>
+                </div>
+            </td>
+            <td>
+                <div class="input">
+                    <input type="number" placeholder="Enter Quantity" min="0" pattern="\d+" required #quantity>
+                </div>
+            </td>
+            <td>
+                <button class="button" tooltip="Create" (click)="create(name, type.options[type.selectedIndex].text, price, quantity)"><i class="fa-solid fa-plus"></i></button>
+            </td>
+        </tr>
+    </table>
 </div>
-<table class="center">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th></th>
-    </tr>
-    <tr *ngFor="let product of products">
-        <!-- Existing Products -->
-        <td>{{product.id}}</td>
-        <td>
-            <input class="input wide" type="text" placeholder="Enter Name" value={{product.name}} (change)="(0)" #name>
-        </td>
-        <td>
-            <select class = "dropdown" (change)="(0)" #type>
-                <option  *ngFor="let type of types" value={{type}} [selected]="type === product.type.toString()">{{type}}</option>
-            </select>
-        </td>
-        <td>
-            <i class="fa-solid fa-dollar-sign fa-lg"></i><input class="input slim" type="number" placeholder="Enter Price" min="0" step="0.01" value={{product.price}} (change)="(0)" required #price>
-        </td>
-        <td>
-            <input class="input slim" type="number" placeholder="Enter Quantity" min="0" pattern="\d+" value={{product.quantity}} (change)="(0)" required #quantity>
-        </td>
-        <td>
-            <button class="button" (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity)" 
-                    [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity)">Save<i class="fa-solid fa-floppy-disk"></i></button>
-            <button class="button" (click)="delete(product.id)">Delete<i class="fa-solid fa-trash"></i></button>
-        </td>
-    </tr>
-    <tr>
-        <!-- Create Product -->
-        <td></td>
-        <td>
-            <input class="input wide" type="text" placeholder="Enter Name" #name>
-        </td>
-        <td>
-            <select class = "dropdown" #type>
-                <option *ngFor="let type of types" value={{type}} >{{type}}</option>
-            </select>
-        </td>
-        <td><i class="fa-solid fa-dollar-sign fa-lg"></i>
-            <input class="input" type="number" placeholder="Enter Price" min="0" step="0.01" required #price>
-        </td>
-        <td>
-            <input class="input" type="number" placeholder="Enter Quantity" min="0" pattern="\d+" required #quantity>
-        </td>
-        <td>
-            <button class="button" (click)="create(name, type.options[type.selectedIndex].text, price, quantity)">Create<i class="fa-solid fa-plus"></i></button>
-        </td>
-    </tr>
-</table>
+<p class="error" *ngIf="showValidityError">Please enter a valid name, type, price, and quantity before continuing.</p>
+<p class="error" *ngIf="showDuplicateProductError">A product with that name already exists. Please try again.</p>

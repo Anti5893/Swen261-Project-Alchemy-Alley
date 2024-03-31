@@ -1,65 +1,29 @@
-@import url(../../styles.css);
-.center {
-    margin-left: auto;
-    margin-right: auto;
+#admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
 }
-table {
-    table-layout: auto;
-    width: 75%;
-    place-content: center
-    /* border-collapse: collapse; */
 
+#admin > * {
+    width: 60vw;
 }
-/* Hide arrows on number inputs */
-/* Most Browsers */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox */
-input[type=number] {
-    -moz-appearance: textfield;
-}
+
 th, td {
-    color: var(--text);
     padding: 8px;
+    color: var(--text);
     text-align: center;
-    vertical-align: center;
+    width: 17%;
     border-bottom: 1px solid #ddd;
 }
 
 th {
     background-color: var(--primary);
 }
-/* Override to Center */
-.input {
-    display: inline-block; 
-	align-items: center;
-	justify-content: center;
-    text-align: center;
-	column-gap: 0.75rem;
-    width: 8vw;
-	height: max-content;
-	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
 
-	color: var(--text);
-	font-weight: bold;
-	background-color: var(--primary);
-	border-radius: 1rem;
-}
-.wide {
-    width: 16vw;
-}
-.slim {
-    width: 4vw;
-}
 .dropdown {
-    display: inline-block;
-    position: relative;
     text-align: center;
-    align-items: center;
-	justify-content: center;
     width: 8vw;
     height: max-content;
     padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
@@ -67,24 +31,45 @@ th {
     font-weight: bold;
     background-color: var(--primary);
     border-radius: 1rem;
+    outline: none;
+    border: none;
 }
-/* Override */
-.heading {
-    margin-top: 5vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+
+/* Hide arrows on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
 }
-.heading > .underline {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 2vh;
-	width: 75%;
-	background-color: var(--accent);
-	clip-path: polygon(-2vh 0, 0 0, 0 40%, 
-					   calc(100% + 1px) 40%, calc(100% + 1px) 0%, calc(100% + 2vh) 0%, calc(100% + 2vh) 100%, calc(100% + 1px) 100%, calc(100% + 1px) 60%,
-					   0% 60%, 0% 100%, -2vh 100%, -2vh 0);
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Override to Center */
+.input {
+    margin: auto;
+}
+
+.button {
+    display: inline-block;
+    margin: auto;
+}
+
+/* Error Msgs */
+.error {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    max-width: 15vw;
+
+    background-color: var(--primary);
+    border-top-left-radius: 1rem;
+    font-weight: bold;
+    text-align: center;
+    pointer-events: none;
 }
