@@ -101,9 +101,9 @@ public class UsersController {
 	 * @return
 	 * @throws IOException
 	 */
-	@PostMapping("users/checkout")
+	@PostMapping("/checkout")
 	public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
-		LOG.info("POST /users/checkout");
+		LOG.info("POST /checkout");
 		User storedUser = user;
 		if (storedUser.getCart().length != 2) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

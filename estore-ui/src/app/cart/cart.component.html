@@ -3,29 +3,13 @@
     <div class="couldron-continaer">
       <div class="cauldron">
         <img class="swirl" src="/assets/Swirl.png">
-        <p *ngIf = "isCartEmpty()">No Products In Cart</p>
         <ul>
             <li (click)="removeProduct(product.id)" *ngFor="let product of products">
-                  <!-- <img [src] = product.imageURL>
-                  <h2>{{product.name}}</h2> -->
-                  <!-- <div class="card-wrapper">
-                  <div class="card card-selected" style="--card-color: #8f1e1e; margin: 50px; display: inline-block">
-                    <div class="card-img">
-                      <img src= {{product.imageURL}}>
-                    </div>
-                    <div class="card-info">
-                      <p>{{product.name}}</p>
-                      <div class="card-price">{{product.price}}</div>
-                    </div>
-                    <div class="card-glow"><div class="card-top"></div></div>
-                    <div class="card-glow"><div class="card-right"></div></div>
-                    <div class="card-glow"><div class="card-bottom"></div></div>
-                    <div class="card-glow"><div class="card-left"></div></div>
-                  </div>
-                </div> -->
-                <app-card [product]=product >
-
-                </app-card>
+                <app-card  [product]=product > </app-card>
+            </li>
+            <li *ngIf="isPurchased() && getUnlocked()">
+              <h3>NEW PRODUCT CRAFTED</h3>
+              <app-card [product]="getUnlocked()"></app-card>
             </li>
         </ul>
     </div>

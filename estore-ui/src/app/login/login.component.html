@@ -8,17 +8,17 @@
             <div class="input">
                 <i class="fa-solid fa-user"></i>
                 Username:
-                <input type="text" placeholder="Enter Username" [(ngModel)]='username'>
+                <input type="text" placeholder="Enter Username" [(ngModel)]='usernameValue'>
             </div>
             <div class="input">
                 <i class="fa-solid fa-lock"></i>
                 Password:
-                <input type="password" placeholder="Enter Password" [(ngModel)]='password'>
+                <input type="password" placeholder="Enter Password" [(ngModel)]='passwordValue'>
             </div>
         </div>
         <div class="login-buttons">
             <div class="login-button">
-                <button class="button" (click)="onClick(username,password)">Login<i
+                <button class="button" (click)="onClick(usernameValue,passwordValue)">Login<i
                         class="fa-solid fa-door-open"></i></button>
             </div>
             <div class="register-button">

@@ -1,7 +1,7 @@
+import { Product } from './../product';
 import { UserService } from './../user.service';
 import { Component } from '@angular/core';
 
-import { Product } from '../product';
 import { CredentialsService } from '../credentials.service';
 import { ProductService } from '../product.service';
 
@@ -18,6 +18,8 @@ export class CartComponent {
 		private credentialService: CredentialsService,
     private productService: ProductService,
     private userService: UserService) {}
+    private purchased: boolean = false;
+    private unlocked: Product | null = null
 
 	ngOnInit(): void {
 		this.getProducts();
@@ -38,6 +40,9 @@ export class CartComponent {
       );
     });
 	}
+  getUnlocked(): Product | null{
+      return this.unlocked;
+  }
 
   getTotalPrice(): number {
     return this.products.reduce((total, product) => total + product.price, 0);
@@ -57,17 +62,34 @@ export class CartComponent {
 
   handlePurchase(): void {
     let curUser = this.credentialService.getUser();
-    if(curUser && curUser.cart) {
-      curUser.cart = [];
-      curUser.unlocked; // TODO: Handle new Unlocked
-      this.credentialService.storeCurrentUser({...curUser});
-      this.products = [];
-      this.userService.updateUser(curUser).subscribe({});
+    if (curUser && curUser.cart) {
+        this.userService.doCraft(curUser).subscribe(
+            (product) => {
+                this.unlocked = product.body;
+                this.purchased = true;
+            },
+            (error) => {
+              this.unlocked = null
+            }
+        );
+        curUser.cart = [];
+        if (curUser.unlocked && this.unlocked?.id) {
+            curUser.unlocked.push(this.unlocked.id);
+        }
+        this.credentialService.storeCurrentUser({...curUser});
+        this.products = [];
+        this.purchased = true;
+        this.userService.updateUser(curUser).subscribe({});
     }
-  }
+}
+
 
   isCartEmpty(): boolean {
     return this.products.length == 0;
+  }
+
+  isPurchased(): boolean{
+    return this.purchased;
   }
 
 }
