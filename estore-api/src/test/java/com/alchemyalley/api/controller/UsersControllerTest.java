@@ -176,14 +176,12 @@ public class UsersControllerTest {
 		User user = new User("Jack", "securePassword", true, new int[] {1, 2}, new int[] {1, 2});
 		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 1, "url"));
 		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1, "url"));
-		when(productDAO.getProduct(3)).thenReturn(null);
-		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
-		doThrow(IOException.class).when(userDAO).updateUser(user);
+		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(null);
 
-		//Invoke
+		// Invoke
 		ResponseEntity<Product> response = usersController.doCraft(user);
 
-		//Analyze
+		// Analyze
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 		assertNull(response.getBody());
 	}
