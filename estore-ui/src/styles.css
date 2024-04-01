@@ -76,8 +76,8 @@
 
 html,
 body {
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	margin: 0;
 }
 
@@ -150,7 +150,7 @@ img {
 }
 
 .radio-container .radio-parent {
-	margin-right: auto;
+	margin-right: calc(var(--input-height) / 2);
 }
 .radio-container .radio-parent:last-of-type {
 	margin-right: 0;
@@ -179,6 +179,7 @@ img {
 	height: var(--input-height);
 	background-color: var(--secondary-800);
 	border: solid 0.1rem var(--secondary-800);
+    box-sizing: border-box;
 	color: var(--text);
 	cursor: pointer;
 	transition: transform 150ms, background-color 150ms ease-in-out, color 150ms ease-in-out;
@@ -308,7 +309,8 @@ img {
 
 	color: var(--text);
 	font-weight: bold;
-	background-color: var(--primary);
+	background-color: var(--secondary-800);
+    /* border: solid var(--secondary) 0.1rem; */
 	border-radius: 1rem;
 }
 .input.fill-width {
@@ -318,11 +320,12 @@ img {
 .input > input {
 	font-family: inherit;
 	color: var(--text);
-	background-color: var(--primary);
+	background-color: transparent;
 	border: none;
 	border-bottom: solid 0.1rem var(--secondary);
 	outline: none;
     width: 100%;
+    height: 100%;
 }
 
 .input > input::placeholder {
@@ -390,7 +393,7 @@ img {
 	align-items: center;
 	justify-content: center;
 	height: 2vh;
-	width: 100%;
+	width: calc(100% - 2.5vw);
 	background-color: var(--accent);
 	clip-path: polygon(
 		-2vh 0,

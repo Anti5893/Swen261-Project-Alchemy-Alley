@@ -1,17 +1,15 @@
 <div class="card-wrapper" (click)="toggleCartStatus()">
 	<div
-		class="card"
+		class="card {{ fitToSize ? 'fit-to-size' : '' }}"
 		[ngClass]="formClasses()"
-        style="--card-color: {{getColor()}};"
+		[style.--card-color]="getColor()"
 	>
 		<div class="card-img">
-			<img
-				src="https://static.vecteezy.com/system/resources/previews/021/698/212/original/ball-of-fire-glowing-magma-sphere-fireball-large-sphere-of-red-energy-fantasy-game-spell-icon-generative-ai-png.png"
-			/>
+			<img src="{{ isUnlocked() ? placeholderFireballImageUrl : lockedImageUrl }}" />
 		</div>
 		<div class="card-info">
-			<p>{{ product.name }}</p>
-			<div class="card-price">${{ product.price }}</div>
+			<p>{{ isUnlocked() ? product.name : "???" }}</p>
+			<div class="card-price">${{ isUnlocked() ? product.price : "???" }}</div>
 		</div>
 		<div class="card-glow"><div class="card-top"></div></div>
 		<div class="card-glow"><div class="card-right"></div></div>

@@ -1,23 +1,55 @@
 .wrapper {
-	max-width: 1000px;
+	width: 800px;
+    height: 100%;
 
-	margin-left: auto;
-	margin-right: auto;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
-#catalog-options {
-	display: flex;
-	gap: 2rem;
+#catalog-option-container {
+	display: grid;
+	grid-template-columns: auto min-content;
+	grid-template-rows: var(--input-height) var(--input-height) / 2;
+	gap: 1rem;
 
-	padding: 0.5rem;
+	width: 100%;
+	height: min-content;
+}
+#catalog-option {
+	width: 100%;
+}
+#catalog-option:first-of-type {
+	grid-column-start: 1;
+	grid-column-end: 3;
+
+	width: 100%;
 }
 
-#cards-wrapper {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 2rem;
+#catalog-cart-view {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-color: var(--secondary-800);
+
+	width: 25rem;
+	height: 15rem;
+
+	border-left: solid var(--secondary) 0.2rem;
+	border-top: solid var(--secondary) 0.2rem;
+	border-top-left-radius: 2rem;
+	overflow: hidden;
+	filter: drop-shadow(0px 0px 10px var(--primary));
+    margin-bottom: -25rem;
+    transition: margin-bottom 0.5s ease-out;
+}
+
+#catalog-cart-view.catalog-cart-view-active {
+    margin-bottom: 0rem;
 }
