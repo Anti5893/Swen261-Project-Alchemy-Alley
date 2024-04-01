@@ -5,12 +5,12 @@
         <img class="swirl" src="/assets/Swirl.png">
         <ul>
             <li (click)="removeProduct(product.id)" *ngFor="let product of products">
-                <app-card  [product]=product > </app-card>
+                <app-card id = 'craftComponent' [product]=product > </app-card>
             </li>
-            <li *ngIf="isPurchased() && getUnlocked()">
+            <li  *ngIf="isPurchased() && getUnlocked()">
               <h3>NEW PRODUCT CRAFTED</h3>
               <app-card [product]="getUnlocked()"></app-card>
-            </li>
+            </li>            
         </ul>
     </div>
   </div>
@@ -41,15 +41,5 @@
       <button class="button" [disabled]="isCartEmpty()" (click) = "handlePurchase()" type="submit">Purchase Cart</button>
     </form>
   </div>
-  <!-- <div class="extra-product-info">
-    <ul>
-      <li  *ngFor="let product of products">
-          <h3>Name: {{product.name}}</h3>
-          <h3>Type: {{product.type}}</h3>
-          <h3>Price: {{product.price}}</h3>
-          <br>
-      </li>
-    </ul>
-  </div> -->
 </div>
 

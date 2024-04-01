@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 
 import { CredentialsService } from '../credentials.service';
 import { ProductService } from '../product.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -40,8 +41,8 @@ export class CartComponent {
       );
     });
 	}
-  getUnlocked(): Product | null{
-      return this.unlocked;
+  getUnlocked(): Product{
+      return this.unlocked!;
   }
 
   getTotalPrice(): number {
@@ -62,11 +63,26 @@ export class CartComponent {
 
   handlePurchase(): void {
     let curUser = this.credentialService.getUser();
+    this.purchased = true;
     if (curUser && curUser.cart) {
         this.userService.doCraft(curUser).subscribe(
             (product) => {
                 this.unlocked = product.body;
                 this.purchased = true;
+                const craftComponent = document.getElementById('craftComponent');
+                console.log(craftComponent)
+                if(craftComponent) {
+                  craftComponent.animate(
+                    [
+                      { 
+                        transform: 'translate(-50%, -50%) rotate(0deg)'
+                      }
+                    ],
+                    {
+                        duration: 500,
+                    }
+                  )
+                }
             },
             (error) => {
               this.unlocked = null
@@ -78,10 +94,10 @@ export class CartComponent {
         }
         this.credentialService.storeCurrentUser({...curUser});
         this.products = [];
-        this.purchased = true;
         this.userService.updateUser(curUser).subscribe({});
     }
 }
+
 
 
   isCartEmpty(): boolean {
