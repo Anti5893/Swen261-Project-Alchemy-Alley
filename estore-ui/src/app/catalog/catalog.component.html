@@ -105,11 +105,11 @@
 					</label>
 				</form>
 				<!-- <form class="radio-parent">
-                    <label class="radio-child">
-                        <input type="radio" name="filter" />
-                        <span><p>d</p></span>
-                    </label>
-                </form> -->
+					<label class="radio-child">
+						<input type="radio" name="filter" />
+						<span><p>d</p></span>
+					</label>
+				</form> -->
 			</div>
 		</div>
 	</div>
@@ -127,6 +127,16 @@
 		id="catalog-cart-view"
 		class="{{ getCurrentUserCart().length > 0 ? 'catalog-cart-view-active' : '' }}"
 	>
-		<app-card-group [title]="'Cart View'" [products]="getCurrentUserObjectCart()"></app-card-group>
+		<h3 class="heading">
+			Cart View
+			<div class="underline"></div>
+		</h3>
+		<div id="catalog-cart-view-cards">
+			<app-card
+				*ngFor="let product of getCurrentUserObjectCart()"
+				[product]="product"
+				[fitToSize]="true"
+			></app-card>
+		</div>
 	</div>
 </div>

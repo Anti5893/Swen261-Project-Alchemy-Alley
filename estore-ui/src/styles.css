@@ -393,7 +393,7 @@ img {
 	align-items: center;
 	justify-content: center;
 	height: 2vh;
-	width: calc(100% - 2.5vw);
+	width: 100%;
 	background-color: var(--accent);
 	clip-path: polygon(
 		-2vh 0,

@@ -1,4 +1,7 @@
-<div class="card-wrapper" (click)="toggleCartStatus()">
+<div class="card-wrapper" (click)="addToCart()" (contextmenu)="removeFromCart($event)">
+	<div class="card-in-cart-indicator" *ngIf="amountOfTimesInCart() >= 2">
+		{{ amountOfTimesInCart() }}
+	</div>
 	<div
 		class="card {{ fitToSize ? 'fit-to-size' : '' }}"
 		[ngClass]="formClasses()"

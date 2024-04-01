@@ -17,7 +17,6 @@ export class ProgressBarComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.udpateProgress();
-		console.log("progress is now", this.progress);
 	}
 
 	udpateProgress(): void {
@@ -29,5 +28,9 @@ export class ProgressBarComponent implements OnInit {
 				this.progress = 0;
 			}
 		});
+	}
+
+	parsedProgress(): string {
+		return parseFloat(this.progress.toString()).toFixed(2);
 	}
 }

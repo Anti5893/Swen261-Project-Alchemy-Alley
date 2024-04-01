@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, HostListener, Input } from "@angular/core";
 
 import { Product } from "../product";
 import { CredentialsService } from "../credentials.service";
@@ -38,18 +38,6 @@ export class CardComponent {
 		return "";
 	}
 
-	// getColorStyle(): object {
-	// 	if (this.isUnlocked()) {
-	// 		const color = this.colorMap[this.product.type];
-	// 		if (color !== undefined) {
-	// 			return {
-	// 				"--card-color": color,
-	// 			};
-	// 		}
-	// 	}
-	// 	return {};
-	// }
-
 	formClasses(): string {
 		var classes = "";
 		if (this.isInCart()) {
@@ -62,7 +50,6 @@ export class CardComponent {
 		if (!this.ignoreClick && this.maxCartSize() && !this.isInCart() && this.isUnlocked()) {
 			classes += "card-blocked ";
 		}
-		console.log(`${this.product.name}'s classes are going to include ${classes}`);
 		return classes;
 	}
 
@@ -80,6 +67,22 @@ export class CardComponent {
 		return curCart?.includes(this.product.id);
 	}
 
+	amountOfTimesInCart(): number {
+		if (this.isInCart()) {
+			const cart = this.credentialsService.getUser()?.cart;
+			if (cart) {
+				var count = 0;
+				cart.forEach((productID) => {
+					if (productID == this.product.id) {
+						count += 1;
+					}
+				});
+				return count;
+			}
+		}
+		return 0;
+	}
+
 	maxCartSize(): boolean {
 		const curUser = this.credentialsService.getUser();
 		let curCart = curUser?.cart;
@@ -90,21 +93,24 @@ export class CardComponent {
 		}
 	}
 
-	toggleCartStatus(): void {
-		if (this.ignoreClick || !this.isUnlocked()) {
-			return;
-		}
-		if (this.isInCart()) {
-			this.removeFromCart();
-			return;
-		}
-		if (this.maxCartSize()) {
-			return;
-		}
-		this.addToCart();
-	}
+	// toggleCartStatus(): void {
+	// 	if (this.ignoreClick || !this.isUnlocked()) {
+	// 		return;
+	// 	}
+	// 	if (this.isInCart()) {
+	// 		this.removeFromCart();
+	// 		return;
+	// 	}
+	// 	if (this.maxCartSize()) {
+	// 		return;
+	// 	}
+	// 	this.addToCart();
+	// }
 
 	addToCart(): void {
+		if (this.maxCartSize() || !this.isUnlocked()) {
+			return;
+		}
 		let curUser = this.credentialsService.getUser();
 		if (curUser) {
 			if (!curUser.cart) {
@@ -118,11 +124,13 @@ export class CardComponent {
 		}
 	}
 
-	removeFromCart(): void {
+	removeFromCart(event: any): void {
+		event.preventDefault();
 		let curUser = this.credentialsService.getUser();
 
 		if (curUser && curUser.cart) {
-			curUser.cart = curUser.cart.filter((id) => id !== this.product.id);
+			const indexOfProduct = curUser.cart.indexOf(this.product.id);
+			curUser.cart.splice(indexOfProduct, 1);
 			this.credentialsService.storeCurrentUser({ ...curUser });
 
 			this.userService.updateUser(curUser).subscribe({});
