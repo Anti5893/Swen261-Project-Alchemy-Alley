@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgZone } from '@angular/core';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -19,7 +20,7 @@ export class RegisterComponent {
   showErrorMessage = false;
   passwordsMatch = true;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private ngZone : NgZone) {}
 
   animateRegister(route: string[], transformString : string = 'translate(250%,-50%)'): void {
     const registerBox = document.getElementById('registerBox');
@@ -36,7 +37,9 @@ export class RegisterComponent {
           fill : 'forwards'
         }
       ).onfinish = () => {
-        this.router.navigate(route)
+        this.ngZone.run(()=>{
+          this.router.navigate(route)
+        })
       }
     }
   }

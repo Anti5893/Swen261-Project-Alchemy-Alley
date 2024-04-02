@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgZone } from "@angular/core";
 
 import { User } from "../user";
 import { UserService } from "../user.service";
@@ -20,7 +21,8 @@ export class LoginComponent {
 	constructor(
 		private userService: UserService,
 		private credentialsService: CredentialsService,
-		private router: Router
+		private router: Router,
+		private ngZone : NgZone
 	) {}
 
 	fieldsFull(): boolean {
@@ -46,7 +48,10 @@ export class LoginComponent {
 			  		fill: 'forwards'
 				}
 		  	).onfinish = () => {
-				this.router.navigate(route);
+				this.ngZone.run(()=>{
+					this.router.navigate(route);
+				})
+				
 		  	};
 		}
 	}
