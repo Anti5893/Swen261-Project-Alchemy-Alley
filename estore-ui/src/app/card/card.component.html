@@ -1,0 +1,22 @@
+<div class="card-wrapper" (click)="addToCart()" (contextmenu)="removeFromCart($event)">
+	<div class="card-in-cart-indicator" *ngIf="amountOfTimesInCart() >= 2">
+		{{ amountOfTimesInCart() }}
+	</div>
+	<div
+		class="card {{ fitToSize ? 'fit-to-size' : '' }}"
+		[ngClass]="formClasses()"
+		[style.--card-color]="getColor()"
+	>
+		<div class="card-img">
+			<img src="{{ isUnlocked() ? placeholderFireballImageUrl : lockedImageUrl }}" />
+		</div>
+		<div class="card-info">
+			<p>{{ isUnlocked() ? product.name : "???" }}</p>
+			<div class="card-price">${{ isUnlocked() ? product.price : "???" }}</div>
+		</div>
+		<div class="card-glow"><div class="card-top"></div></div>
+		<div class="card-glow"><div class="card-right"></div></div>
+		<div class="card-glow"><div class="card-bottom"></div></div>
+		<div class="card-glow"><div class="card-left"></div></div>
+	</div>
+</div>

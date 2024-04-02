@@ -1,1 +1,9 @@
-[{"id":1,"name":"Steam","type":"AIR","price":10.99,"quantity":20},{"id":2,"name":"Flint","type":"EARTH","price":12.99,"quantity":15},{"id":3,"name":"Ice","type":"WATER","price":8.99,"quantity":35}]
+[
+	{ "id": 1, "name": "Steam", "type": "AIR", "price": 10.99, "quantity": 20 },
+	{ "id": 2, "name": "Flint", "type": "EARTH", "price": 12.99, "quantity": 15 },
+	{ "id": 3, "name": "Ice", "type": "WATER", "price": 8.99, "quantity": 35 },
+	{ "id": 4, "name": "Firebolt", "type": "FIRE", "price": 13.99, "quantity": 10 },
+	{ "id": 5, "name": "Spark", "type": "ENERGY", "price": 11.99, "quantity": 40 },
+	{ "id": 6, "name": "Locked1", "type": "FIRE",  "price": 14.99,  "quantity": 20 },
+	{ "id": 7, "name": "Locked2", "type": "AIR", "price": 13.20, "quantity": 70 }
+]

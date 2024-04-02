@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
-import { Router} from '@angular/router';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { User } from '../user';
-import { UserService } from '../user.service';
-import { CredentialsService } from '../credentials.service';
+import { User } from "../user";
+import { UserService } from "../user.service";
+import { CredentialsService } from "../credentials.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  
+	username: string = "";
+	password: string = "";
+	isAuthenticated = false;
+	requestSent = false;
 
-  username: string = '';
-  password: string = '';
-  users: User[] = [];
-  isAuthenticated = false;
-  requestSent = false;
+	constructor(
+		private userService: UserService,
+		private credentialsService: CredentialsService,
+		private router: Router
+	) {}
 
-  constructor(private userService: UserService, private credentialsService: CredentialsService, private router: Router) {}
+	fieldsFull(): boolean {
+		return this.password !== "" && this.username !== "";
+	}
 
-  fieldsFull(): boolean {
-    return this.password != '' && this.username != '';
-  }
- 
-  showErrorMesssage(): boolean {
-    return this.requestSent && !this.isAuthenticated;
-  }
+	showErrorMesssage(): boolean {
+		return this.requestSent && !this.isAuthenticated;
+	}
 
   animateLogin(route: string[]): void{
     const loginBox = document.getElementById('login-box')

@@ -1,112 +1,142 @@
 <div class="wrapper" id="catalog">
-	<div id="catalog-options">
-		<input #searchBox id="catalog-search" (input)="searchProducts(searchBox.value)"/>
-		<div class="radio-container">
-			<form class="radio-parent">
-				<label class="radio-child" tooltip="By Completion">
-					<input type="radio" name="group" checked />
-					<span><i class="fa-solid fa-lock"></i></span>
-				</label>
-				<label class="radio-child" tooltip="By Type">
-					<input type="radio" name="group" />
-					<span><i class="fa-solid fa-shapes"></i></span>
-				</label>
-			</form>
-			<form class="radio-parent">
-				<label class="radio-child" tooltip="Alphabetically">
-					<input
-						#sortAlphabetically
-						type="radio"
-						name="sort"
-						value="alphabetically"
-						checked
-						(change)="sortProducts(sortAlphabetically.value)"
-					/>
-					<span><i class="fa-solid fa-font"></i></span>
-				</label>
-				<label class="radio-child" tooltip="High to Low">
-					<input
-						#sortHighToLow
-						type="radio"
-						name="sort"
-						value="high-low"
-						(change)="sortProducts(sortHighToLow.value)"
-					/>
-					<span
-						><i class="fa-solid fa-dollar-sign"></i><i class="fa-solid fa-arrow-up"></i
-					></span>
-				</label>
-				<label class="radio-child" tooltip="Low to High">
-					<input
-						#sortLowToHigh
-						type="radio"
-						name="sort"
-						value="low-high"
-						(change)="sortProducts(sortLowToHigh.value)"
-					/>
-					<span
-						><i class="fa-solid fa-dollar-sign"></i
-						><i class="fa-solid fa-arrow-down"></i
-					></span>
-				</label>
-			</form>
-			<form class="radio-parent">
-				<label class="radio-child" tooltip="Filter Locked">
-					<input type="radio" name="filter" />
-					<span><i class="fa-solid fa-lock"></i></span>
-				</label>
-				<label class="radio-child" tooltip="Filter Unlocked">
-					<input type="radio" name="filter" />
-					<span><i class="fa-solid fa-unlock"></i></span>
-				</label>
-			</form>
-			<!-- <form class="radio-parent">
-				<label class="radio-child">
-					<input type="radio" name="filter" />
-					<span><p>d</p></span>
-				</label>
-			</form> -->
+	<div id="catalog-option-container">
+		<div id="catalog-option">
+			<app-progress-bar></app-progress-bar>
+		</div>
+		<div id="catalog-option">
+			<div class="input fill-width">
+				<i class="fa-solid fa-search"></i>
+				<input
+					#searchBox
+					id="catalog-search"
+					type="text"
+					placeholder="Search for Spell"
+					(input)="searchProducts(searchBox.value)"
+				/>
+			</div>
+		</div>
+		<div id="catalog-option">
+			<div class="radio-container">
+				<form class="radio-parent">
+					<label class="radio-child" tooltip="By Completion">
+						<input
+							type="radio"
+							name="group"
+							checked
+							(change)="updateProducts((groupBy = 'completion'))"
+						/>
+						<span><i class="fa-solid fa-lock"></i></span>
+					</label>
+					<label class="radio-child" tooltip="By Type">
+						<input
+							type="radio"
+							name="group"
+							(change)="updateProducts((groupBy = 'type'))"
+						/>
+						<span><i class="fa-solid fa-shapes"></i></span>
+					</label>
+				</form>
+				<form class="radio-parent">
+					<label class="radio-child" tooltip="By ID">
+						<input
+							type="radio"
+							name="sort"
+							checked
+							(change)="updateProducts((sortBy = 'byID'))"
+						/>
+						<span><i class="fa-solid fa-hashtag"></i></span>
+					</label>
+					<label class="radio-child" tooltip="Alphabetically">
+						<input
+							type="radio"
+							name="sort"
+							(change)="updateProducts((sortBy = 'alphabetically'))"
+						/>
+						<span><i class="fa-solid fa-font"></i></span>
+					</label>
+					<label class="radio-child" tooltip="High to Low">
+						<input
+							type="radio"
+							name="sort"
+							(change)="updateProducts((sortBy = 'high-low'))"
+						/>
+						<span
+							><i class="fa-solid fa-dollar-sign"></i
+							><i class="fa-solid fa-arrow-up"></i
+						></span>
+					</label>
+					<label class="radio-child" tooltip="Low to High">
+						<input
+							type="radio"
+							name="sort"
+							(change)="updateProducts((sortBy = 'low-high'))"
+						/>
+						<span
+							><i class="fa-solid fa-dollar-sign"></i
+							><i class="fa-solid fa-arrow-down"></i
+						></span>
+					</label>
+				</form>
+				<form class="radio-parent">
+					<label class="radio-child" tooltip="Filter Nothing">
+						<input
+							type="radio"
+							name="filter"
+							checked
+							(change)="updateProducts((filter = 'none'))"
+						/>
+						<span><i class="fa-solid fa-ban"></i></span>
+					</label>
+					<label class="radio-child" tooltip="Filter Locked">
+						<input
+							type="radio"
+							name="filter"
+							(change)="updateProducts((filter = 'locked'))"
+						/>
+						<span><i class="fa-solid fa-lock"></i></span>
+					</label>
+					<label class="radio-child" tooltip="Filter Unlocked">
+						<input
+							type="radio"
+							name="filter"
+							(change)="updateProducts((filter = 'unlocked'))"
+						/>
+						<span><i class="fa-solid fa-unlock"></i></span>
+					</label>
+				</form>
+				<!-- <form class="radio-parent">
+					<label class="radio-child">
+						<input type="radio" name="filter" />
+						<span><p>d</p></span>
+					</label>
+				</form> -->
+			</div>
 		</div>
 	</div>
 	<div id="catalog-products">
-		<div *ngIf="products.length > 0; else elseBlock">
-			<div *ngFor="let product of products">
-				<div class="image-container" id="catalog-product-image">
-					<img src="" />
-				</div>
-				<div id="catalog-product-details">
-					<div id="catalog-product-naming">
-						<span class="header" id="catalog-product-name">
-							name={{ product.name }}
-						</span>
-						<span class="badge" id="catalog-product-type">
-							type={{ product.type }}
-						</span>
-					</div>
-					<div id="catalog-product-pricing">
-						<span id="catalog-product-price"> price={{ product.price }} </span>
-						<span id="catalog-product-quantity"> quantity={{ product.quantity }} </span>
-					</div>
-				</div>
-				<button
-					class="button"
-					*ngIf="!itemInCart(product)"
-					[disabled]="maxCartSize()"
-					(click)="addToCart(product.id)"
-                    tooltip="Button"
-				>
-					Add to Cart
-				</button>
-				<button
-					class="button"
-					*ngIf="itemInCart(product)"
-					(click)="removeFromCart(product.id)"
-				>
-					Remove from Cart
-				</button>
-				<div clas></div>
-			</div>
+		<div *ngIf="allProducts.length > 0; else elseBlock">
+			<app-card-group
+				*ngFor="let productGroup of groupsKeys()"
+				[title]="productGroup"
+				[products]="groups[productGroup]"
+			></app-card-group>
 		</div>
 		<ng-template id="catalog-products-empty" #elseBlock>No products found</ng-template>
+	</div>
+	<div
+		id="catalog-cart-view"
+		class="{{ getCurrentUserCart().length > 0 ? 'catalog-cart-view-active' : '' }}"
+	>
+		<h3 class="heading">
+			Cart View
+			<div class="underline"></div>
+		</h3>
+		<div id="catalog-cart-view-cards">
+			<app-card
+				*ngFor="let product of getCurrentUserObjectCart()"
+				[product]="product"
+				[fitToSize]="true"
+			></app-card>
+		</div>
 	</div>
 </div>

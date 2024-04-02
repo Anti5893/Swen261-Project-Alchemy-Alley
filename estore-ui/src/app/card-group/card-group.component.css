@@ -1,0 +1,19 @@
+#card-group {
+	position: relative;
+	margin-bottom: 2rem;
+	width: 100%;
+}
+
+#card-group-content {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin-top: 1rem;
+	gap: 2rem;
+}
+
+.card-group-child {
+	flex-basis: calc(25% - 1.5rem);
+	flex-grow: auto;
+}
