@@ -295,24 +295,18 @@ img {
 /* Inputs with Icon */
 
 .input {
-	all: unset;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	column-gap: 0.75rem;
 	width: max-content;
-	height: var(--input-height);
-	box-sizing: border-box;
+	height: 2vh;
 	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
 
 	color: var(--text);
 	font-weight: bold;
 	background-color: var(--primary);
 	border-radius: 1rem;
-}
-.input.fill-width {
-    width: 100%;
 }
 
 .input > input {
@@ -322,7 +316,6 @@ img {
 	border: none;
 	border-bottom: solid 0.1rem var(--secondary);
 	outline: none;
-    width: 100%;
 }
 
 .input > input::placeholder {

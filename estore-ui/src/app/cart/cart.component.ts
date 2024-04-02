@@ -62,43 +62,34 @@ export class CartComponent {
   }
 
   handlePurchase(): void {
-    let curUser = this.credentialService.getUser();
-    this.purchased = true;
-    if (curUser && curUser.cart) {
+    // Apply animation to fade out
+    let cartProducts = document.getElementsByClassName("card-product") as HTMLCollectionOf<HTMLElement>;
+    for(let i = 0; i < cartProducts.length; i++) {
+      cartProducts[i].style.animation = "craft-fade-out 2s ease-in-out forwards";
+    }
+
+    // Call backend after they fade
+    setTimeout(() => {
+      let curUser = this.credentialService.getUser();
+      this.purchased = true;
+      if (curUser && curUser.cart) {
         this.userService.doCraft(curUser).subscribe(
-            (product) => {
-                this.unlocked = product.body;
-                this.purchased = true;
-                const craftComponent = document.getElementById('craftComponent');
-                console.log(craftComponent)
-                if(craftComponent) {
-                  craftComponent.animate(
-                    [
-                      { 
-                        transform: 'translate(-50%, -50%) rotate(0deg)'
-                      }
-                    ],
-                    {
-                        duration: 500,
-                    }
-                  )
-                }
-            },
-            (error) => {
-              this.unlocked = null
-            }
+          (response) => {
+            this.unlocked = response.body;
+          },
+          (error) => {
+            this.unlocked = null;
+          }
         );
         curUser.cart = [];
         if (curUser.unlocked && this.unlocked?.id) {
-            curUser.unlocked.push(this.unlocked.id);
+          curUser.unlocked.push(this.unlocked.id);
         }
         this.credentialService.storeCurrentUser({...curUser});
         this.products = [];
-        this.userService.updateUser(curUser).subscribe({});
-    }
-}
-
-
+      }
+    }, 2000);
+  }
 
   isCartEmpty(): boolean {
     return this.products.length == 0;
@@ -106,6 +97,10 @@ export class CartComponent {
 
   isPurchased(): boolean{
     return this.purchased;
+  }
+  
+  hasInvalidFields(name: HTMLInputElement, card: HTMLInputElement, exp: HTMLInputElement, ccv: HTMLInputElement): boolean {
+    return name.value.trim().length === 0 || card.value.trim().length === 0 || exp.value.trim().length === 0 || ccv.value.trim().length === 0;
   }
 
 }
