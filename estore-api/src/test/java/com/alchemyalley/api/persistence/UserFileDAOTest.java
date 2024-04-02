@@ -63,7 +63,7 @@ public class UserFileDAOTest {
 	@Test
 	public void testCreateUser() {
 		// Setup
-		User user = new User("Jacky", "securePassword123", false, new int[0], new int[0]);
+		User user = new User("Jacky", "securePassword123", false, UserFileDAO.DEFAULT_UNLOCKED, new int[0]);
 
 		// Invoke
 		User actual = assertDoesNotThrow(() -> this.userFileDAO.createUser(user), "Unknown exception occurred");

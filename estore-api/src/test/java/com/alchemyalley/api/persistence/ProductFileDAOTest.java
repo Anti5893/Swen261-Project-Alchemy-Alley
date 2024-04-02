@@ -122,13 +122,14 @@ public class ProductFileDAOTest {
 	}
 
 	@Test
-	public void testSaveException() throws IOException{
+	public void testSaveException() throws IOException {
+		// Setup
 		doThrow(new IOException())
 				.when(mockObjectMapper)
 				.writeValue(any(File.class), any(Product[].class));
-
 		Product product = new Product(99, "Magma", ElementType.FIRE, 14.99, 4,"fake/url");
 
+		// Invoke & Analyze
 		assertThrows(IOException.class, () -> productFileDAO.createProduct(product), "IOException not thrown");
 	}
 

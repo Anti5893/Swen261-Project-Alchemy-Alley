@@ -19,6 +19,8 @@ import java.util.Map;
 @Component
 public class UserFileDAO implements UserDAO {
 
+	static final int[] DEFAULT_UNLOCKED = new int[] { 1, 2, 3, 4 };
+
 	private final Map<String, User> users;
 	private final String fileName;
 	private final ObjectMapper objectMapper;
@@ -60,20 +62,13 @@ public class UserFileDAO implements UserDAO {
 		this.objectMapper.writeValue(new File(this.fileName), users);
 	}
 
-	/**
-	 * Gets the user with the given username.
-	 * 
-	 * @param username: username of the user
-	 * @return The User with the given username.
-	 * @throws IOException If there is an error saving to disk
-	 */
 	public User createUser(User user) throws IOException {
 		synchronized (this.users) {
 			if (this.users.containsKey(user.getUsername()))
 				return null;
 
 			String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-			User newUser = new User(user.getUsername(), hashed, false, new int[0], new int[0]);
+			User newUser = new User(user.getUsername(), hashed, false, DEFAULT_UNLOCKED, new int[0]);
 			this.users.put(user.getUsername(), newUser);
 			save();
 
@@ -81,13 +76,6 @@ public class UserFileDAO implements UserDAO {
 		}
 	}
 
-	/**
-	 * Authenticates a user.
-	 * 
-	 * @param user: user that is being authenticated
-	 * @return The authenticated User.
-	 * @throws IOException If there is an error saving to disk
-	 */
 	public User authenticateUser(User user) {
 		User storedUser = this.users.getOrDefault(user.getUsername(), null);
 		if (storedUser == null)
@@ -96,12 +84,6 @@ public class UserFileDAO implements UserDAO {
 		return BCrypt.checkpw(user.getPassword(), storedUser.getPassword()) ? storedUser : null;
 	}
 
-	/**
-	 * Updates the given user.
-	 * 
-	 * @param user: user that is being altered to new data
-	 * @return The updated User.
-	 */
 	public User updateUser(User user) throws IOException {
 		synchronized (this.users) {
 			User storedUser = this.users.getOrDefault(user.getUsername(), null);

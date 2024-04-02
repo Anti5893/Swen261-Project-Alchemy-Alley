@@ -36,10 +36,10 @@ public class InventoryController {
 	}
 
 	/**
-	 * Returns a product with the given id
+	 * Retrieves a product with the given id.
 	 * 
-	 * @param id
-	 * @return
+	 * @param id    The ID of the product to retrieve
+	 * @return      The response that might contain a {@link Product}
 	 */
 	@GetMapping("/products/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable int id) {
@@ -51,9 +51,9 @@ public class InventoryController {
 	}
 
 	/**
-	 * Returns an array of products
+	 * Retrieves all stored products.
 	 * 
-	 * @return ResponseEntity<Product[]>
+	 * @return ResponseEntity<Product[]>    The response that contains all products
 	 */
 	@GetMapping("/products/")
 	public ResponseEntity<Product[]> getProducts() {
@@ -64,10 +64,10 @@ public class InventoryController {
 	}
 
 	/**
-	 * Returns an array of products containing the name
+	 * Retrieves all products whose name partially matches the input.
 	 * 
-	 * @param name
-	 * @return ResponseEntity<Product[]>
+	 * @param name                          The search query
+	 * @return ResponseEntity<Product[]>    The response that may contain number of products
 	 */
 	@GetMapping("/products")
 	public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
@@ -82,10 +82,10 @@ public class InventoryController {
 	}
 
 	/**
-	 * Returns the created product
+	 * Creates a new product and stores it.
 	 * 
-	 * @param product
-	 * @return ResponseEntity<Product>
+	 * @param product                   The new product to create
+	 * @return ResponseEntity<Product>  THe response that may contain the newly created product
 	 */
 	@PostMapping("/products")
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
@@ -103,10 +103,10 @@ public class InventoryController {
 	}
 
 	/**
-	 * Returns the updated product
+	 * Updates an existing product's stored data.
 	 * 
-	 * @param product
-	 * @return ResponseEntity<Product>
+	 * @param product                   The {@link Product} to update, specifically, its name
+	 * @return ResponseEntity<Product>  The response that may contain the updated product
 	 */
 	@PutMapping("/products")
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
@@ -124,10 +124,10 @@ public class InventoryController {
 	}
 
 	/**
-	 * Returns the deleted product, deletes it from inventory
+	 * Deletes a product in the inventory by its ID.
 	 * 
-	 * @param id
-	 * @return ResponseEntity<Product>
+	 * @param id                        The ID of the product to delete
+	 * @return ResponseEntity<Product>  The response that may contain the deleted product
 	 */
 	@DeleteMapping("/products/{id}")
 	public ResponseEntity<Product> deleteProduct(@PathVariable int id) {

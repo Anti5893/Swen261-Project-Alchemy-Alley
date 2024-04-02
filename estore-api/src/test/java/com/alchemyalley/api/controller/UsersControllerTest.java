@@ -125,6 +125,7 @@ public class UsersControllerTest {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(updatedUser, response.getBody());
 	}
+
 	@Test
 	public void testUpdateUserFailsWhenUserNotFound() throws IOException {
 		// Setup
@@ -196,10 +197,10 @@ public class UsersControllerTest {
 		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
 		doThrow(IOException.class).when(userDAO).updateUser(user);
 
-		//Invoke
+		// Invoke
 		ResponseEntity<Product> response = usersController.doCraft(user);
 
-		//Analyze
+		// Analyze
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 		assertNull(response.getBody());
 	}
@@ -214,10 +215,10 @@ public class UsersControllerTest {
 		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
 		doThrow(IOException.class).when(userDAO).updateUser(user);
 
-		//Invoke
+		// Invoke
 		ResponseEntity<Product> response = usersController.doCraft(user);
 
-		//Analyze
+		// Analyze
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 		assertNull(response.getBody());
 	}

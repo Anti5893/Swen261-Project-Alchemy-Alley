@@ -20,7 +20,7 @@
     "result": 9
   },
   {
-    "inputs": [1,9],
+    "inputs": [1, 9],
     "result": 10
   },
   {
@@ -28,7 +28,7 @@
     "result": 11
   },
   {
-    "inputs": [11,11],
+    "inputs": [11, 11],
     "result": 12
   },
   {
@@ -52,43 +52,43 @@
     "result": 17
   },
   {
-    "inputs": [1,13 ],
+    "inputs": [1, 13],
     "result": 18
   },
   {
-    "inputs": [9,9],
+    "inputs": [9, 9],
     "result": 19
   },
   {
-    "inputs": [9,10 ],
+    "inputs": [9, 10],
     "result": 20
   },
   {
-    "inputs": [8,9 ],
+    "inputs": [8, 9],
     "result": 21
   },
   {
-    "inputs": [1,21 ],
+    "inputs": [1, 21],
     "result": 22
   },
   {
-    "inputs": [4,13],
+    "inputs": [4, 13],
     "result": 23
   },
   {
-    "inputs": [1,15 ],
+    "inputs": [1, 15],
     "result": 24
   },
   {
-    "inputs": [2,15 ],
+    "inputs": [2, 15],
     "result": 25
   },
   {
-    "inputs": [9,22 ],
+    "inputs": [9, 22],
     "result": 26
   },
   {
-    "inputs": [3,26],
+    "inputs": [3, 26],
     "result": 27
   },
   {
@@ -96,15 +96,15 @@
     "result": 28
   },
   {
-    "inputs": [12,28 ],
+    "inputs": [12, 27],
     "result": 29
   },
   {
-    "inputs": [13,29 ],
+    "inputs": [13, 29],
     "result": 30
   },
   {
-    "inputs": [8,21 ],
+    "inputs": [8, 21],
     "result": 31
   },
   {
@@ -112,11 +112,11 @@
     "result": 32
   },
   {
-    "inputs": [8,8 ],
+    "inputs": [8, 8],
     "result": 33
   },
   {
-    "inputs": [6,28 ],
+    "inputs": [6, 28],
     "result": 34
   }
 ]

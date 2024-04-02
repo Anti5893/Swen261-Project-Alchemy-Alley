@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * An implementation of {@link CraftingDAO} that uses JSON files.
@@ -60,7 +61,8 @@ public class CraftingFileDAO implements CraftingDAO {
 	@Override
 	public Recipe getRecipe(Integer[] inputs) {
 		for (Map.Entry<Integer[], Recipe> entry : this.recipes.entrySet()) {
-			if (Arrays.equals(entry.getKey(), inputs)) {
+			if((entry.getKey()[0].equals(inputs[0]) && entry.getKey()[1].equals(inputs[1])) ||
+					(entry.getKey()[0].equals(inputs[1]) && entry.getKey()[1].equals(inputs[0]))) {
 				return entry.getValue();
 			}
 		}

@@ -41,10 +41,10 @@ public class UsersController {
 	}
 
 	/**
-	 * Creates a user, returns user with password stripped
+	 * Creates a new user to be stored.
 	 * 
-	 * @param user
-	 * @return
+	 * @param user  The {@link User} to create
+	 * @return      The response that may contain the newly created user
 	 */
 	@PostMapping("")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -60,10 +60,12 @@ public class UsersController {
 	}
 
 	/**
-	 * Authenticates a user, removes password and returns authenticated user
+	 * Attempts to authenticate a {@link User} using its
+	 * username and password by checking against its hash.
 	 * 
-	 * @param user
-	 * @return
+	 * @param user  A {@link User} whose username and password
+	 *              will be used as input
+	 * @return      The response that may contain the stored user's data
 	 */
 	@PostMapping("/auth")
 	public ResponseEntity<User> authenticateUser(@RequestBody User user) {
@@ -75,10 +77,10 @@ public class UsersController {
 	}
 
 	/**
-	 * Updates a user with the same name
+	 * Updates a {@link User} in the database.
 	 * 
-	 * @param user
-	 * @return
+	 * @param user  The {@link User} to update
+	 * @return      The response that may contain the updated user
 	 */
 	@PutMapping("")
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
@@ -95,12 +97,12 @@ public class UsersController {
 	}
 
 	/**
-	 * Handles the checkout process for a user, unlocking new products and
-	 * decrementing stock
+	 * Attempts to proceed for checkout with a {@link User},
+	 * unlocking any new products and decrementing the stock.
 	 * 
-	 * @param user
-	 * @return
-	 * @throws IOException
+	 * @param user          The {@link User} who is checking out
+	 * @return              The response that may contain an unlocked {@link Product}
+	 * @throws IOException  If there was an error updating products or the user
 	 */
 	@PostMapping("/checkout")
 	public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
