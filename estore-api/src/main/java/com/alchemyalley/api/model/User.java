@@ -105,7 +105,7 @@ public class User {
 	 * @return A new user instance with an empty cart
 	 */
 	public User clearCart() {
-		return new User(this.username, this.password, this.admin, this.unlocked, new int[2]);
+		return new User(this.username, this.password, this.admin, this.unlocked, new int[0]);
 	}
 
 	/**

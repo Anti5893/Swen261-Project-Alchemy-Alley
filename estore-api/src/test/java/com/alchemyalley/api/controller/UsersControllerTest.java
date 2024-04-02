@@ -117,10 +117,10 @@ public class UsersControllerTest {
 		// Setup
 		User updatedUser = new User("JackFTW", "securePassword", false, new int[] { 1 }, new int[] { 1, 2 }).removePassword();
 		when(this.userDAO.updateUser(updatedUser)).thenReturn(updatedUser);
-	
+
 		// Invoke
 		ResponseEntity<User> response = this.usersController.updateUser(updatedUser);
-	
+
 		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(updatedUser, response.getBody());
@@ -156,34 +156,32 @@ public class UsersControllerTest {
 	public void testDoCraftGood() throws IOException {
 		// Setup
 		User user = new User("Jack", "securePassword", true, new int[] {1, 2}, new int[] {1, 2});
-		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 1));
-		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1));
-		when(productDAO.getProduct(3)).thenReturn(new Product(3, "Water", ElementType.WATER, 10.0, 1));
+		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 1, "url"));
+		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1, "url"));
+		when(productDAO.getProduct(3)).thenReturn(new Product(3, "Water", ElementType.WATER, 10.0, 1, "url"));
 		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
-		doThrow(IOException.class).when(userDAO).updateUser(user);
+		when(userDAO.updateUser(user.clearCart())).thenReturn(user.clearCart());
 
-		//Invoke
+		// Invoke
 		ResponseEntity<Product> response = usersController.doCraft(user);
 
-		//Analyze
+		// Analyze
 		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals(new Product(3, "Water", ElementType.WATER, 10.0, 1), response.getBody());
+		assertEquals(new Product(3, "Water", ElementType.WATER, 10.0, 1, "url"), response.getBody());
 	}
 
 	@Test
 	public void testDoCraftBad() throws IOException {
 		// Setup
 		User user = new User("Jack", "securePassword", true, new int[] {1, 2}, new int[] {1, 2});
-		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 1));
-		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1));
-		when(productDAO.getProduct(3)).thenReturn(null);
-		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
-		doThrow(IOException.class).when(userDAO).updateUser(user);
+		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 1, "url"));
+		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1, "url"));
+		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(null);
 
-		//Invoke
+		// Invoke
 		ResponseEntity<Product> response = usersController.doCraft(user);
 
-		//Analyze
+		// Analyze
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 		assertNull(response.getBody());
 	}
@@ -192,8 +190,8 @@ public class UsersControllerTest {
 	public void testDoCraftOutOfStock() throws IOException {
 		// Setup
 		User user = new User("Jack", "securePassword", true, new int[] {1, 2}, new int[] {1, 2});
-		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 0));
-		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1));
+		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 0, "url"));
+		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1, "url"));
 		when(productDAO.getProduct(3)).thenReturn(null);
 		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
 		doThrow(IOException.class).when(userDAO).updateUser(user);
@@ -210,8 +208,8 @@ public class UsersControllerTest {
 	public void testDoCraftTooFewItems() throws IOException {
 		// Setup
 		User user = new User("Jack", "securePassword", true, new int[] {1, 2}, new int[] {1});
-		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 1));
-		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1));
+		when(productDAO.getProduct(1)).thenReturn(new Product(1, "Fire", ElementType.FIRE, 10.0, 1, "url"));
+		when(productDAO.getProduct(2)).thenReturn(new Product(2, "Fire", ElementType.FIRE, 10.0, 1, "url"));
 		when(productDAO.getProduct(3)).thenReturn(null);
 		when(craftingDAO.getRecipe(new Integer[]{1, 2})).thenReturn(new Recipe(new Integer[]{1, 2}, 3));
 		doThrow(IOException.class).when(userDAO).updateUser(user);
@@ -223,4 +221,5 @@ public class UsersControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 		assertNull(response.getBody());
 	}
+
 }

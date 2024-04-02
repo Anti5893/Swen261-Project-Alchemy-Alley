@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 import { Product } from "../product";
 import { CredentialsService } from "../credentials.service";
@@ -121,4 +121,5 @@ export class CardComponent {
 			this.userService.updateUser(curUser).subscribe({});
 		}
 	}
+  
 }

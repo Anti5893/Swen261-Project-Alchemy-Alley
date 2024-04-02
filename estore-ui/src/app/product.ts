@@ -11,5 +11,6 @@ export interface Product {
     name: string,
     type: ElementType,
     price: number,
-    quantity: number
+    quantity: number,
+    imageURL: string
 }

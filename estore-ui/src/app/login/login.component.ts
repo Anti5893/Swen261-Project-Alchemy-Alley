@@ -31,46 +31,52 @@ export class LoginComponent {
 		return this.requestSent && !this.isAuthenticated;
 	}
 
-  animateLogin(route: string[]): void{
-    const loginBox = document.getElementById('login-box')
-    if(loginBox){
-      loginBox.animate(
-        [
-          {transform : 'translate(250%, -50%)'}
-        ],
-        {
-          duration: 1000,
-          easing: 'ease-out',
-          fill : 'forwards'
-        }
-      ).onfinish = ()=>{
-        this.router.navigate(route);
-      }
-    }
-  }
+	showErrorMesssage(): boolean {
+		return this.requestSent && !this.isAuthenticated;
+	}
 
-  onClick(username: string, password: string): void {
-    this.userService.authenticateUser({username,password} as User).subscribe(
-      (response) => {
-        if(response.status == 200) {
-          this.isAuthenticated = true;
-          const loggedUser = response.body!;
-          this.credentialsService.storeCurrentUser(loggedUser);
-          if(loggedUser.admin) {
-           this.animateLogin(['/admin'])
-          } else {
-            this.animateLogin(['/catalog']);
-          }
-        }
-        this.requestSent = true;
-      },
-      (error) => {
-        if(this.fieldsFull()) {
-          this.isAuthenticated = false;
-        }
-        this.requestSent = true;
-      }
-    );
-  }
-  
+	animateLogin(route: string[]): void{
+		const loginBox = document.getElementById('login-box');
+		if(loginBox) {
+			loginBox.animate(
+				[
+			  		{ 
+						transform: 'translate(250%, -50%)'
+					}
+				],
+				{
+			  		duration: 1000,
+			  		easing: 'ease-out',
+			  		fill: 'forwards'
+				}
+		  	).onfinish = () => {
+				this.router.navigate(route);
+		  	};
+		}
+	}
+	
+	onClick(username: string, password: string): void {
+		this.userService.authenticateUser({username,password} as User).subscribe(
+			(response) => {
+				if(response.status == 200) {
+			  		this.isAuthenticated = true;
+			  		const loggedUser = response.body!;
+			  		this.credentialsService.storeCurrentUser(loggedUser);
+			  		if(loggedUser.admin) {
+			   			this.animateLogin(['/admin']);
+			  		} else {
+						this.animateLogin(['/catalog']);
+			  		}
+				}
+				this.requestSent = true;
+		  	},
+		  	(error) => {
+				if(this.fieldsFull()) {
+			  		this.isAuthenticated = false;
+				}
+				this.requestSent = true;
+		  	}
+		);
+	}
+
 }

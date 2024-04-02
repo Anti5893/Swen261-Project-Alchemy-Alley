@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Product {
 
-    static final String STRING_FORMAT = "Product [id=%d, name=%s, type=%s, price=%f, quantity=%d]";
+    static final String STRING_FORMAT = "Product [id=%d, name=%s, type=%s, price=%f, quantity=%d, imageURL=%s]";
 
     @JsonProperty("id")
     private final int id;
@@ -18,29 +18,32 @@ public class Product {
     @JsonProperty("type")
     private final ElementType type;
     @JsonProperty("price")
-    private double price;
+    private final double price;
     @JsonProperty("quantity")
     private int quantity;
+    @JsonProperty("imageURL")
+    private final String imageURL;
 
     /**
      * Creates a {@code Product} with its given attributes.
      *
-     * @param id       The id of the product
-     * @param name     The name of the product
-     * @param type     The {@link ElementType} of the product
-     * @param price    The price of the product
-     * @param quantity The quantity of the product
+     * @param id        The id of the product
+     * @param name      The name of the product
+     * @param type      The {@link ElementType} of the product
+     * @param price     The price of the product
+     * @param quantity  The quantity of the product
+     * @param imageURL  The URL for displaying the product.
      */
     public Product(@JsonProperty("id") int id, @JsonProperty("name") String name,
-            @JsonProperty("type") ElementType type, @JsonProperty("price") double price,
-            @JsonProperty("quantity") int quantity) throws IllegalArgumentException {
-        if (id < 0)
-            throw new IllegalArgumentException("Product ID cannot be < 0");
+                   @JsonProperty("type") ElementType type, @JsonProperty("price") double price,
+                   @JsonProperty("quantity") int quantity, @JsonProperty("imageURL") String imageURL) throws IllegalArgumentException {
+        if(id < 0) throw new IllegalArgumentException("Product ID cannot be < 0");
         this.id = id;
         this.name = name;
         this.type = type;
         this.price = price;
         this.quantity = quantity;
+        this.imageURL = imageURL;
     }
 
     /**
@@ -95,6 +98,14 @@ public class Product {
         this.quantity--;
         return this;
     }
+    
+    /**
+     * Gets the image URL for this product.
+     * @return  The imageURL for the product. 
+     */
+    public String getImageURL(){
+        return this.imageURL;
+    }
 
     /**
      * The string representation of a product.
@@ -103,7 +114,7 @@ public class Product {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, this.id, this.name, this.type, this.price, this.quantity);
+        return String.format(STRING_FORMAT, this.id, this.name, this.type, this.price, this.quantity, this.imageURL);
     }
 
     /**
@@ -114,12 +125,11 @@ public class Product {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Product product = (Product) o;
-        return id == product.id && Double.compare(product.price, price) == 0 && quantity == product.quantity
-                && name.equals(product.name) && type == product.type;
+        if (o instanceof Product product) {
+            return id == product.id && Double.compare(product.price, price) == 0 && quantity == product.quantity &&
+                    name.equals(product.name) && type == product.type && imageURL.equals(product.imageURL);
+        }
+        return false;
     }
+
 }

@@ -1,9 +1,10 @@
+import { Product } from './../product';
 import { UserService } from './../user.service';
 import { Component } from '@angular/core';
 
-import { Product } from '../product';
 import { CredentialsService } from '../credentials.service';
 import { ProductService } from '../product.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -18,6 +19,8 @@ export class CartComponent {
 		private credentialService: CredentialsService,
     private productService: ProductService,
     private userService: UserService) {}
+    private purchased: boolean = false;
+    private unlocked: Product | null = null
 
 	ngOnInit(): void {
 		this.getProducts();
@@ -38,6 +41,9 @@ export class CartComponent {
       );
     });
 	}
+  getUnlocked(): Product{
+      return this.unlocked!;
+  }
 
   getTotalPrice(): number {
     return this.products.reduce((total, product) => total + product.price, 0);
@@ -56,18 +62,45 @@ export class CartComponent {
   }
 
   handlePurchase(): void {
-    let curUser = this.credentialService.getUser();
-    if(curUser && curUser.cart) {
-      curUser.cart = [];
-      curUser.unlocked; // TODO: Handle new Unlocked
-      this.credentialService.storeCurrentUser({...curUser});
-      this.products = [];
-      this.userService.updateUser(curUser).subscribe({});
+    // Apply animation to fade out
+    let cartProducts = document.getElementsByClassName("card-product") as HTMLCollectionOf<HTMLElement>;
+    for(let i = 0; i < cartProducts.length; i++) {
+      cartProducts[i].style.animation = "craft-fade-out 2s ease-in-out forwards";
     }
+
+    // Call backend after they fade
+    setTimeout(() => {
+      let curUser = this.credentialService.getUser();
+      this.purchased = true;
+      if (curUser && curUser.cart) {
+        this.userService.doCraft(curUser).subscribe(
+          (response) => {
+            this.unlocked = response.body;
+          },
+          (error) => {
+            this.unlocked = null;
+          }
+        );
+        curUser.cart = [];
+        if (curUser.unlocked && this.unlocked?.id) {
+          curUser.unlocked.push(this.unlocked.id);
+        }
+        this.credentialService.storeCurrentUser({...curUser});
+        this.products = [];
+      }
+    }, 2000);
   }
 
   isCartEmpty(): boolean {
     return this.products.length == 0;
+  }
+
+  isPurchased(): boolean{
+    return this.purchased;
+  }
+  
+  hasInvalidFields(name: HTMLInputElement, card: HTMLInputElement, exp: HTMLInputElement, ccv: HTMLInputElement): boolean {
+    return name.value.trim().length === 0 || card.value.trim().length === 0 || exp.value.trim().length === 0 || ccv.value.trim().length === 0;
   }
 
 }

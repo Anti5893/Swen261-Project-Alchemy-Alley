@@ -152,6 +152,7 @@ img {
 .radio-container .radio-parent {
 	margin-right: calc(var(--input-height) / 2);
 }
+
 .radio-container .radio-parent:last-of-type {
 	margin-right: 0;
 }

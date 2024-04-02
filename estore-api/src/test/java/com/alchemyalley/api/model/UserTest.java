@@ -128,11 +128,11 @@ public class UserTest {
 		user = user.clearCart();
 
 		// Analyze
-		assertEquals(2, user.getCart().length);
+		assertEquals(0, user.getCart().length);
 		assertNotEquals(new int[] { 1, 2 }, user.getCart());
 	}
 	@Test
-	public void testaddToUnlockedGood() {
+	public void testAddToUnlockedGood() {
 		// Setup
 		User user = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
 		
@@ -145,7 +145,7 @@ public class UserTest {
 		assertArrayEquals(new int[] {1, 2, 3, 4 }, user.getUnlocked());
 	}
 	@Test
-	public void testaddToUnlockedDuplicate() {
+	public void testAddToUnlockedDuplicate() {
 		// Setup
 		User user = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
 		
@@ -156,4 +156,5 @@ public class UserTest {
 		assertEquals(3, user.getUnlocked().length);
 		assertArrayEquals(new int[] {1, 2, 3}, user.getUnlocked());
 	}
+
 }

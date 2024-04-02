@@ -26,9 +26,9 @@ export class AdminComponent implements OnInit {
     this.productService.getProducts().subscribe(response => this.products = response.body!);
   }
 
-  create(name: HTMLInputElement, type: string, price: HTMLInputElement, quantity: HTMLInputElement): void {
+  create(name: HTMLInputElement, type: string, price: HTMLInputElement, quantity: HTMLInputElement, imageURL: HTMLInputElement): void {
     // Validate input boxes
-    if(name.value.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity()) {
+    if(name.value.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity() || !imageURL.checkValidity()) {
       this.showValidityError = true;
       return;
     }
@@ -39,7 +39,8 @@ export class AdminComponent implements OnInit {
       name: name.value,
       type: Object.keys(ElementType).filter(k => k === type)[0] as ElementType,
       price: Number(price.value),
-      quantity: Number(quantity.value)
+      quantity: Number(quantity.value),
+      imageURL: ""
     };
 
     // Send request
@@ -49,6 +50,7 @@ export class AdminComponent implements OnInit {
         name.value = "";
         price.value = "";
         quantity.value = "";
+        imageURL.value = "";
         this.products.push(response.body!);
         this.showDuplicateProductError = false;
       }, (error) => {
@@ -58,9 +60,9 @@ export class AdminComponent implements OnInit {
     this.showValidityError = false;
   }
 
-  save(product: Product, name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement): void {
+  save(product: Product, name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement, imageURL: string): void {
     // Validate input boxes
-    if(name.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity()) {
+    if(name.trim().length == 0 || type.length === 0 || !price.checkValidity() || !quantity.checkValidity() || imageURL.trim().length == 0) {
       this.showValidityError = true;
       return;
     }
@@ -70,6 +72,7 @@ export class AdminComponent implements OnInit {
     product.type = Object.keys(ElementType).filter(k => k === type)[0] as ElementType;
     product.price = Number(price.value);
     product.quantity = Number(quantity.value);
+    product.imageURL = imageURL;
     
     // Send request
     this.productService.updateProduct(product).subscribe();
@@ -81,10 +84,10 @@ export class AdminComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe();
   }
 
-  hasChanged(product: Product, name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement): boolean {
+  hasChanged(product: Product, name: string, type: string, price: HTMLInputElement, quantity: HTMLInputElement, imageURL: string): boolean {
     // Check if any field has changed at all
     return product.name !== name || product.type !== type || 
-           product.price !== Number(price.value) || product.quantity !== Number(quantity.value);
+           product.price !== Number(price.value) || product.quantity !== Number(quantity.value) || product.imageURL !== imageURL;
   }
   
 }

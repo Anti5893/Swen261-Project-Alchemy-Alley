@@ -10,98 +10,98 @@
 
 ## Products
 
-* Fire* [**Fire**]
-* Water* [**Water**]
-* Air* [**Air**]
-* Earth* [**Earth**]
-* Firebolt [**Fire**]
+* Fire* [**Fire**](1)
+* Water* [**Water**](2)
+* Air* [**Air**](3)
+* Earth* [**Earth**](4)
+* Firebolt [**Fire**](5)
   * Fire
   * Fire
-* Fireball [**Fire**]
+* Fireball [**Fire**](6)
   * Firebolt
   * Firebolt
-* Ice [**Water**]
+* Ice [**Water**](7)
   * Water
   * Water
-* Wind [**Air**]
+* Wind [**Air**](8)
   * Air
   * Air
-* Rock [**Earth**]
+* Rock [**Earth**](9)
   * Earth
   * Earth
-* Lava [**Fire**]
+* Lava [**Fire**](10)
   * Fire
   * Rock
-* Steam [**Air**]
+* Steam [**Air**](11)
   * Fire
   * Water
-* Cloud [**Air**]
+* Cloud [**Air**](12)
   * Steam
   * Steam
-* Rain [**Water**]
+* Rain [**Water**](13)
   * Water
   * Cloud
-* Hail [**Water**]
+* Hail [**Water**](14)
   * Ice
   * Rain
-* Tornado [**Earth**]
+* Tornado [**Earth**](15)
   * Wind
   * Cloud
-* Slush [**Water**]
+* Slush [**Water**](16)
   * Ice
   * Water
-* Black Ice [**Water**]
+* Black Ice [**Water**](17)
   * Slush
   * Ice
-* Volcano [**Fire**]
+* Volcano [**Fire**](18)
   * Fire
   * Rain
-* Boulder [**Earth**]
+* Boulder [**Earth**](19)
   * Rock
   * Rock
-* Magma [**Fire**]
+* Magma [**Fire**](20)
   * Lava
   * Rock
-* Sand [**Earth**]
+* Sand [**Earth**](21)
   * Wind
   * Rock
-* Glass [**Earth**]
+* Glass [**Earth**](22)
   * Sand
   * Fire
-* Plant [**Earth**]
+* Plant [**Earth**](23)
   * Earth
   * Rain
-* Firenado [**Fire**]
+* Firenado [**Fire**](24)
   * Fire
   * Tornado
-* Typhoon [**Water**]
+* Typhoon [**Water**](25)
   * Tornado
   * Water
-* Metal [**Earth**]
+* Metal [**Earth**](26)
   * Rock
   * Glass
-* Electricity [**Energy**]
+* Electricity [**Energy**](27)
   * Air
   * Metal
-* Shock [**Energy**]
+* Shock [**Energy**](28)
   * Electricity
   * Electricity
-* Lightning [**Energy**]
+* Lightning [**Energy**](29)
   * Electricity
   * Cloud
-* Thunderstorm [**Energy**]
+* Thunderstorm [**Energy**](30)
   * Lightning
   * Rain
-* Sandstorm [**Air**]
+* Sandstorm [**Air**](31)
   * Sand
   * Wind
-* Flight [**Air**]
+* Flight [**Air**](32)
   * Wind
   * Air
-* Gust [**Air**]
+* Gust [**Air**](33)
   * Wind
   * Wind
-* Explosion [**Energy**]
+* Explosion [**Energy**](34)
   * Shock
   * Fireball
 

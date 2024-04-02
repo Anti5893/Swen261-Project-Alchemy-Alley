@@ -21,9 +21,11 @@
 
     margin-bottom: 2rem;
 }
+
 #catalog-option {
 	width: 100%;
 }
+
 #catalog-option:first-of-type {
 	grid-column-start: 1;
 	grid-column-end: 3;

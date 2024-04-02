@@ -40,7 +40,7 @@ public class InventoryControllerTest {
     @Test
     public void testGetProduct() {
         // Setup
-        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50, "fake/url");
         when(this.mockProductDAO.getProduct(product.getId())).thenReturn(product);
 
         // Invoke
@@ -69,9 +69,9 @@ public class InventoryControllerTest {
         // Setup
         String searchString = "fire";
         Product[] products = new Product[3];
-        products[0] = new Product(0, "Fire", ElementType.AIR, 1.5, 50);
-        products[1] = new Product(6, "Fire Bolt", ElementType.AIR, 1.5, 50);
-        products[2] = new Product(13, "Fire Rain", ElementType.AIR, 1.5, 50);
+        products[0] = new Product(0, "Fire", ElementType.AIR, 1.5, 50,"fake/url");
+        products[1] = new Product(6, "Fire Bolt", ElementType.AIR, 1.5, 50,"fake/url");
+        products[2] = new Product(13, "Fire Rain", ElementType.AIR, 1.5, 50,"fake/url");
         when(this.mockProductDAO.findProducts(searchString)).thenReturn(products);
 
         // Invoke
@@ -85,7 +85,7 @@ public class InventoryControllerTest {
     @Test
     public void testCreateProduct() throws IOException {
         // Setup
-        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50,"fake/url");
         when(this.mockProductDAO.createProduct(product)).thenReturn(product);
 
         // Invoke
@@ -99,7 +99,7 @@ public class InventoryControllerTest {
     @Test
     public void testCreateProductFailed() throws IOException {
         // Setup
-        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50,"fake/url");
         when(this.mockProductDAO.createProduct(product)).thenReturn(null);
 
         // Invoke
@@ -112,7 +112,7 @@ public class InventoryControllerTest {
     @Test
     public void testCreateProductHandleException() throws IOException {
         // Setup
-        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50,"fake/url");
         doThrow(new IOException()).when(this.mockProductDAO).createProduct(product);
 
         // Invoke
@@ -125,7 +125,7 @@ public class InventoryControllerTest {
     @Test
     public void testUpdateProduct() throws IOException {
         // Setup
-        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50,"fake/url");
         when(this.mockProductDAO.updateProduct(product)).thenReturn(product);
 
         // Invoke
@@ -139,7 +139,7 @@ public class InventoryControllerTest {
     @Test
     public void testUpdateProductFailed() throws IOException {
         // Setup
-        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50,"fake/url");
         when(this.mockProductDAO.updateProduct(product)).thenReturn(null);
 
         // Invoke
@@ -152,7 +152,7 @@ public class InventoryControllerTest {
     @Test
     public void testUpdateProductHandleException() throws IOException {
         // Setup
-        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50);
+        Product product = new Product(99, "Steam", ElementType.AIR, 19.99, 50,"fake/url" );
         doThrow(new IOException()).when(this.mockProductDAO).updateProduct(product);
 
         // Invoke

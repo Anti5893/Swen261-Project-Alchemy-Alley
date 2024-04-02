@@ -10,6 +10,7 @@
             <th>Type</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Image URL</th>
             <th></th>
         </tr>
         <tr *ngFor="let product of products">
@@ -37,9 +38,18 @@
                 </div>
             </td>
             <td>
-                <button class="button" tooltip="Save" (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity)" 
-                        [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity)"><i class="fa-solid fa-floppy-disk"></i></button>
-                <button class="button" tooltip="Delete" (click)="delete(product.id)"><i class="fa-solid fa-trash"></i></button>
+                <div class="input">
+                    <input type="text" placeholder="Enter Image URL" value={{product.imageURL}} (change)="(0)" required #imageURL>
+                </div>
+            </td>
+            <td>
+                <button class="button" tooltip="Save" (click)="save(product, name.value, type.options[type.selectedIndex].text, price, quantity, imageURL.value)" 
+                        [disabled]="!hasChanged(product, name.value, type.options[type.selectedIndex].text, price, quantity, imageURL.value)">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                </button>
+                <button class="button" tooltip="Delete" (click)="delete(product.id)">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
             </td>
         </tr>
         <tr>
@@ -69,7 +79,14 @@
                 </div>
             </td>
             <td>
-                <button class="button" tooltip="Create" (click)="create(name, type.options[type.selectedIndex].text, price, quantity)"><i class="fa-solid fa-plus"></i></button>
+                <div class="input">
+                    <input type="text" placeholder="Enter Image URL" (change)="(0)" required #imageURL>
+                </div>
+            </td>
+            <td>
+                <button class="button" tooltip="Create" (click)="create(name, type.options[type.selectedIndex].text, price, quantity, imageURL)">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </td>
         </tr>
     </table>
