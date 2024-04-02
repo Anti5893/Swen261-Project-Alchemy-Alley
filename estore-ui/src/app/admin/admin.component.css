@@ -1,0 +1,75 @@
+#admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+#admin > * {
+    width: 60vw;
+}
+
+th, td {
+    padding: 8px;
+    color: var(--text);
+    text-align: center;
+    width: 17%;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary);
+}
+
+.dropdown {
+    text-align: center;
+    width: 8vw;
+    height: max-content;
+    padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
+    color: var(--text);
+    font-weight: bold;
+    background-color: var(--primary);
+    border-radius: 1rem;
+    outline: none;
+    border: none;
+}
+
+/* Hide arrows on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Override to Center */
+.input {
+    margin: auto;
+}
+
+.button {
+    display: inline-block;
+    margin: auto;
+}
+
+/* Error Msgs */
+.error {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    max-width: 15vw;
+
+    background-color: var(--primary);
+    border-top-left-radius: 1rem;
+    font-weight: bold;
+    text-align: center;
+    pointer-events: none;
+}

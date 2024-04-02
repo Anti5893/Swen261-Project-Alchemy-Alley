@@ -1,12 +1,33 @@
-<form (submit)="onClick(username.value, password.value)">
-	<label for="new-user-username">Username: </label>
-	<input #username id="new-user-username" name="login" [(ngModel)]="usernameValue" />
-
-	<label for="new-user-password">Password: </label>
-	<input #password type="password" id="new-user-password" name="login" [(ngModel)]="passwordValue" />
-
-	<button name="login" (click)="onClick(username.value, password.value)">Login</button>
-	<p *ngIf="showErrorMesssage()">Error - Incorrect Username or Password</p>
-</form>
-
-<a routerLink="/register">Not a member? Register Here</a>
+<div id ="login-box" class="login-box">
+    <div class="heading">
+        <h3>Login</h3>
+        <div class="underline"></div>
+    </div>
+    <div class="login-elements">
+        <div class="login-fields">
+            <div class="input">
+                <i class="fa-solid fa-user"></i>
+                Username:
+                <input type="text" placeholder="Enter Username" [(ngModel)]="username">
+            </div>
+            <div class="input">
+                <i class="fa-solid fa-lock"></i>
+                Password:
+                <input type="password" placeholder="Enter Password" [(ngModel)]="password">
+            </div>
+        </div>
+        <div class="login-buttons">
+            <div class="login-button">
+                <button class="button" (click)="onClick(username,password)">
+                    Login<i class="fa-solid fa-door-open"></i>
+                </button>
+            </div>
+            <div class="register-button">
+                <button class="button" (click) = "animateLogin(['/register'])">
+                    Register<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <p *ngIf="showErrorMesssage()">Incorrect Username or Password</p>
+    </div>
+</div>

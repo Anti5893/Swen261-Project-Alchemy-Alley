@@ -6,14 +6,14 @@ import { UserService } from "../user.service";
 import { CredentialsService } from "../credentials.service";
 
 @Component({
-	selector: "app-login",
-	templateUrl: "./login.component.html",
-	styleUrl: "./login.component.css",
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
-	usernameValue: string = "";
-	passwordValue: string = "";
-	users: User[] = [];
+  
+	username: string = "";
+	password: string = "";
 	isAuthenticated = false;
 	requestSent = false;
 
@@ -24,34 +24,53 @@ export class LoginComponent {
 	) {}
 
 	fieldsFull(): boolean {
-		return this.passwordValue != "" && this.usernameValue != "";
+		return this.password !== "" && this.username !== "";
 	}
 
 	showErrorMesssage(): boolean {
 		return this.requestSent && !this.isAuthenticated;
 	}
 
-	onClick(username: string, password: string): void {
-		this.userService.authenticateUser({ username, password } as User).subscribe(
-			(response) => {
-				if (response.status == 200) {
-					this.isAuthenticated = true;
-					const loggedUser = response.body!;
-					this.credentialsService.storeCurrentUser(loggedUser);
-					if (loggedUser.admin) {
-						this.router.navigate(["/admin"]);
-					} else {
-						this.router.navigate(["/catalog"]);
-					}
-				}
-				this.requestSent = true;
-			},
-			(error) => {
-				if (this.fieldsFull()) {
-					this.isAuthenticated = false;
-				}
-				this.requestSent = true;
-			}
-		);
-	}
+  animateLogin(route: string[]): void{
+    const loginBox = document.getElementById('login-box')
+    if(loginBox){
+      loginBox.animate(
+        [
+          {transform : 'translate(250%, -50%)'}
+        ],
+        {
+          duration: 1000,
+          easing: 'ease-out',
+          fill : 'forwards'
+        }
+      ).onfinish = ()=>{
+        this.router.navigate(route);
+      }
+    }
+  }
+
+  onClick(username: string, password: string): void {
+    this.userService.authenticateUser({username,password} as User).subscribe(
+      (response) => {
+        if(response.status == 200) {
+          this.isAuthenticated = true;
+          const loggedUser = response.body!;
+          this.credentialsService.storeCurrentUser(loggedUser);
+          if(loggedUser.admin) {
+           this.animateLogin(['/admin'])
+          } else {
+            this.animateLogin(['/catalog']);
+          }
+        }
+        this.requestSent = true;
+      },
+      (error) => {
+        if(this.fieldsFull()) {
+          this.isAuthenticated = false;
+        }
+        this.requestSent = true;
+      }
+    );
+  }
+  
 }

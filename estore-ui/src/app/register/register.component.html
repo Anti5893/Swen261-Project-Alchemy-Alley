@@ -1,16 +1,36 @@
-<div>
-    <label for = 'new-user-username'>Username: </label>
-    <input id = 'new-user-username'[(ngModel)] = 'username'>
-
-    <label for = 'new-user-password'>Password: </label>
-    <input type = 'password' id = 'new-user-password'[(ngModel)] = 'password'>
-
-    <label for = 'new-user-password-confirm'>Confirm Password: </label>
-    <input type = 'password'  id = 'new-user-password-confirm' [(ngModel)] = 'passwordConfirm'>
-    
-    <a [routerLink]="'/login'">Back To Login</a>
-    <button (click) = "registerOnClick(username,password)">Register</button>
-    <p *ngIf="showErrorMessage">Error - User Already Exists</p>
-    <p *ngIf="showPasswordsDontMatch()">Error - Passwords Don't Match</p>
+<div id = "registerBox" class="register-box">
+    <div class="heading">
+        <h3>Registration</h3>
+        <div class="underline"></div>
+    </div>
+    <div class=register-elements>
+        <div class="register-fields">
+            <div class="input">
+                <i class="fa-solid fa-user"></i>
+                <P>Username:</P>
+                <input type="text" placeholder="Enter Username" [(ngModel)]='username'>
+            </div>
+            <div class="input">
+                <i class="fa-solid fa-lock"></i>
+                <p>Password:</p>
+                <input type="password" placeholder="Enter Password" [(ngModel)]='password'>
+            </div>
+            <div class="input">
+                <i class="fa-solid fa-lock"></i>
+                <p>Confirm Password:</p>
+                <input type="password" placeholder="Enter Password" [(ngModel)]='passwordConfirm'>
+            </div>
+        </div>
+        <div class="register-buttons">
+            <button class="button" (click) = "animateRegister(['/login'])"><i class="fa-solid fa-arrow-left"></i>Back To Login</button>
+            <button class="button" (click)="registerOnClick(username,password)">Register<i
+                    class="fa-solid fa-scroll"></i></button>
+        </div>
+        <p *ngIf="showErrorMessage">User Already Exists</p>
+        <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
+        <p *ngIf="isStrongPassword() != true && password != ''">Password Must Contain At Least 8 Letters, 1 Uppercase, 1 Digit, 1 Symbol</p>
+        <p *ngIf="!fieldsFull() && this.buttonClicked">All Fields Required</p>
+    </div>
 </div>
+
 <router-outlet></router-outlet>

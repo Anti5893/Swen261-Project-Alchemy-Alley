@@ -45,5 +45,5 @@ Thumbs.db
 # Nixshell
 shell.nix
 
-# SonarQube
-.scannerwork
+# SonarScanner
+.scannerwork/

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents the category for a specific {@link Product}.
+ * 
  * @author Group 2
  */
 public enum ElementType {

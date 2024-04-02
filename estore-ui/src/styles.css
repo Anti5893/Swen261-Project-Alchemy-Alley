@@ -310,9 +310,9 @@ img {
 	color: var(--text);
 	font-weight: bold;
 	background-color: var(--secondary-800);
-    /* border: solid var(--secondary) 0.1rem; */
 	border-radius: 1rem;
 }
+
 .input.fill-width {
     width: 100%;
 }
@@ -332,11 +332,16 @@ img {
 	color: var(--secondary);
 }
 
+.input > p {
+	flex-grow: 1;
+}
+
 /* ToolTip */
 
 *[tooltip] {
 	position: relative;
 }
+
 *[tooltip]::before {
 	all: unset;
 	position: absolute;
@@ -346,8 +351,6 @@ img {
 	top: -35px;
 	background-color: var(--secondary-800);
 	color: var(--secondary-100);
-	/* margin-left: auto;
-	margin-right: auto; */
 	font-size: 1rem;
 	border-radius: 8px;
 	padding: 0.25rem;
@@ -355,20 +358,13 @@ img {
 	z-index: 1;
 	filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
 }
+
 *[tooltip]:hover::before {
 	animation: show 50ms;
 	animation-delay: 0.5s;
 	animation-fill-mode: forwards;
 }
-/* *[tooltip]::after::after {
-	position: absolute;
-	bottom: 0;
-	width: 0.1rem;
-	height: 0.1rem;
-	border-left: 100% solid transparent;
-	border-right: 100% solid transparent;
-	border-bottom: 100% solid red;
-} */
+
 @keyframes show {
 	from {
 		visibility: hidden;

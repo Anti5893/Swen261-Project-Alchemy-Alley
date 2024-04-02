@@ -13,6 +13,7 @@ import java.util.Map;
 
 /**
  * An implementation of {@link UserDAO} that uses JSON.
+ * 
  * @author Group 2
  */
 @Component
@@ -25,9 +26,9 @@ public class UserFileDAO implements UserDAO {
 	/**
 	 * Creates an instance of this DAO over a JSON file.
 	 *
-	 * @param fileName      The file to load.
-	 * @param objectMapper  The object mapper.
-	 * @throws IOException  If there is an error reading from disk
+	 * @param fileName     The file to load.
+	 * @param objectMapper The object mapper.
+	 * @throws IOException If there is an error reading from disk
 	 */
 	public UserFileDAO(@Value("${users.file}") String fileName, ObjectMapper objectMapper) throws IOException {
 		this.users = new HashMap<>();
@@ -39,12 +40,12 @@ public class UserFileDAO implements UserDAO {
 	/**
 	 * Loads the JSON file on disk and stores it in a map.
 	 *
-	 * @throws IOException  If there is an error reading from disk
+	 * @throws IOException If there is an error reading from disk
 	 */
 	private void load() throws IOException {
 		User[] users = this.objectMapper.readValue(new File(this.fileName), User[].class);
 
-		for(User user : users) {
+		for (User user : users) {
 			this.users.put(user.getUsername(), user);
 		}
 	}
@@ -52,16 +53,24 @@ public class UserFileDAO implements UserDAO {
 	/**
 	 * Saves the map to disk as a JSON file.
 	 *
-	 * @throws IOException  If there is an error saving to disk
+	 * @throws IOException If there is an error saving to disk
 	 */
 	private void save() throws IOException {
 		User[] users = this.users.values().toArray(new User[0]);
 		this.objectMapper.writeValue(new File(this.fileName), users);
 	}
 
+	/**
+	 * Gets the user with the given username.
+	 * 
+	 * @param username: username of the user
+	 * @return The User with the given username.
+	 * @throws IOException If there is an error saving to disk
+	 */
 	public User createUser(User user) throws IOException {
-		synchronized(this.users) {
-			if(this.users.containsKey(user.getUsername())) return null;
+		synchronized (this.users) {
+			if (this.users.containsKey(user.getUsername()))
+				return null;
 
 			String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 			User newUser = new User(user.getUsername(), hashed, false, new int[0], new int[0]);
@@ -72,23 +81,34 @@ public class UserFileDAO implements UserDAO {
 		}
 	}
 
+	/**
+	 * Authenticates a user.
+	 * 
+	 * @param user: user that is being authenticated
+	 * @return The authenticated User.
+	 * @throws IOException If there is an error saving to disk
+	 */
 	public User authenticateUser(User user) {
 		User storedUser = this.users.getOrDefault(user.getUsername(), null);
-		if(storedUser == null) return null;
+		if (storedUser == null)
+			return null;
 
 		return BCrypt.checkpw(user.getPassword(), storedUser.getPassword()) ? storedUser : null;
 	}
 
 	/**
 	 * Updates the given user.
+	 * 
 	 * @param user: user that is being altered to new data
 	 * @return The updated User.
 	 */
 	public User updateUser(User user) throws IOException {
-		synchronized(this.users) {
+		synchronized (this.users) {
 			User storedUser = this.users.getOrDefault(user.getUsername(), null);
-			if(storedUser == null) return null;
-			User updatedUser = new User(storedUser.getUsername(), storedUser.getPassword(), storedUser.isAdmin(), user.getUnlocked(), user.getCart());
+			if (storedUser == null)
+				return null;
+			User updatedUser = new User(storedUser.getUsername(), storedUser.getPassword(), storedUser.isAdmin(),
+					user.getUnlocked(), user.getCart());
 			this.users.put(storedUser.getUsername(), updatedUser);
 			save();
 			return updatedUser;

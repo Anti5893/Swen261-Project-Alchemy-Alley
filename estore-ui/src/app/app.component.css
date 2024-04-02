@@ -20,6 +20,30 @@ nav > #nav-left > h1 {
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+    transition: transform 0.25s ease-in-out;
+}
+
+nav > #nav-left > h1::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 20%;
+    left: -100%;
+    width: 100%;
+    height: 0.25rem;
+    background-color: var(--text-400);
+    border-radius: 0.125rem;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+}
+
+nav > #nav-left > h1:hover {
+    transform: scale(110%);
+}
+
+nav > #nav-left > h1:hover::after {
+    transform: translateX(100%);
+    opacity: 1;
 }
 
 nav > #nav-right {
@@ -29,6 +53,14 @@ nav > #nav-right {
     width: 46vw;
     column-gap: 1vw;
     margin-right: 2vw;
+    opacity: 0;
+    animation: nav-right-render 1s ease-in forwards;
+}
+
+@keyframes nav-right-render {
+    to{
+        opacity: 1;
+    }
 }
 
 nav > #nav-right > #nav-separator {

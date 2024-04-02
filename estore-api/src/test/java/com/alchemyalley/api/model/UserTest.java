@@ -119,5 +119,41 @@ public class UserTest {
 		// Invoke & Analyze
 		assertNotEquals(user, object);
 	}
+	@Test
+	public void testClearCart() {
+		// Setup
+		User user = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		
+		// Invoke
+		user = user.clearCart();
 
+		// Analyze
+		assertEquals(2, user.getCart().length);
+		assertNotEquals(new int[] { 1, 2 }, user.getCart());
+	}
+	@Test
+	public void testaddToUnlockedGood() {
+		// Setup
+		User user = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		
+		// Invoke
+		user = user.addToUnlocked(4);
+
+		// Analyze
+		assertEquals(4, user.getUnlocked().length);
+		assertNotEquals(new int[] { 1, 2, 3 }, user.getUnlocked());
+		assertArrayEquals(new int[] {1, 2, 3, 4 }, user.getUnlocked());
+	}
+	@Test
+	public void testaddToUnlockedDuplicate() {
+		// Setup
+		User user = new User("Jack", "securePassword", false, new int[] { 1, 2, 3 }, new int[] { 1, 2 });
+		
+		// Invoke
+		user = user.addToUnlocked(3);
+
+		// Analyze
+		assertEquals(3, user.getUnlocked().length);
+		assertArrayEquals(new int[] {1, 2, 3}, user.getUnlocked());
+	}
 }
