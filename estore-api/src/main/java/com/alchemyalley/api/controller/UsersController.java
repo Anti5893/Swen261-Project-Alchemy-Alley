@@ -1,6 +1,7 @@
 package com.alchemyalley.api.controller;
 
 import com.alchemyalley.api.model.Product;
+import com.alchemyalley.api.model.Recipe;
 import com.alchemyalley.api.model.User;
 import com.alchemyalley.api.persistence.UserDAO;
 import org.springframework.http.HttpStatus;
@@ -103,28 +104,28 @@ public class UsersController {
 	 */
 	@PostMapping("/checkout")
 	public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
-		LOG.info("POST /users/checkout" + user);
-		if (user.getCart().length != 2) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+		LOG.info("POST /users/checkout " + user);
+
+		if (user.getCart().length != 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		int[] cart = user.getCart();
-		Integer[] cartBoxed = Arrays.stream(cart).boxed().toArray(Integer[]::new); // hack to box an array, from
-																					// stackoverflow
-		Product result = productDAO.getProduct(craftingDAO.getRecipe(cartBoxed).getResult());
+		Integer[] cartBoxed = Arrays.stream(cart).boxed().toArray(Integer[]::new);
+
+		Recipe recipe = craftingDAO.getRecipe(cartBoxed);
+		if(recipe == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		Product result = productDAO.getProduct(recipe.getResult());
+
 		for (int i : cart) {
 			Product temp = productDAO.getProduct(i);
 			if (temp.getQuantity() < 1) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			} else {
+				productDAO.updateProduct(temp.decrementStock());
 			}
-			else{productDAO.updateProduct(temp.decrementStock());}
 		}
-		user = userDAO.updateUser(user.clearCart());
-		if (result != null) {
-			userDAO.updateUser(user.addToUnlocked(result.getId()));
-			return new ResponseEntity<>(result, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+
+		user = user.clearCart().addToUnlocked(result.getId());
+		userDAO.updateUser(user);
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
 }
