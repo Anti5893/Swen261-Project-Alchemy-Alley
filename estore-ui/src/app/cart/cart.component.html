@@ -10,6 +10,9 @@
               		<h3>PRODUCT UNLOCKED</h3>
               		<app-card [product]="getUnlocked()"></app-card>
             	</li>
+				<li *ngIf="isPurchased() && !getUnlocked()">
+					<h3>BETTER LUCK NEXT TIME</h3>
+				</li>
         	</ul>
     	</div>
   	</div>
