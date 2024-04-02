@@ -45,9 +45,8 @@ export class CardComponent {
 		}
 		if (this.isUnlocked()) {
 			classes += "card-unlocked ";
-			// classes += "card-" + this.product.type.toLowerCase() + " ";
 		}
-		if (!this.ignoreClick && this.maxCartSize() && !this.isInCart() && this.isUnlocked()) {
+		if (!this.ignoreClick && this.maxCartSize() && !this.isInCart()) {
 			classes += "card-blocked ";
 		}
 		return classes;
@@ -93,20 +92,6 @@ export class CardComponent {
 		}
 	}
 
-	// toggleCartStatus(): void {
-	// 	if (this.ignoreClick || !this.isUnlocked()) {
-	// 		return;
-	// 	}
-	// 	if (this.isInCart()) {
-	// 		this.removeFromCart();
-	// 		return;
-	// 	}
-	// 	if (this.maxCartSize()) {
-	// 		return;
-	// 	}
-	// 	this.addToCart();
-	// }
-
 	addToCart(): void {
 		if (this.maxCartSize() || !this.isUnlocked()) {
 			return;
@@ -128,11 +113,11 @@ export class CardComponent {
 		event.preventDefault();
 		let curUser = this.credentialsService.getUser();
 
-		if (curUser && curUser.cart) {
+		if (curUser && curUser.cart && this.formClasses().includes("selected")) {
 			const indexOfProduct = curUser.cart.indexOf(this.product.id);
 			curUser.cart.splice(indexOfProduct, 1);
+			
 			this.credentialsService.storeCurrentUser({ ...curUser });
-
 			this.userService.updateUser(curUser).subscribe({});
 		}
 	}
