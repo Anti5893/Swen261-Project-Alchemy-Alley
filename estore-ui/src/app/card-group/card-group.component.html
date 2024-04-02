@@ -1,0 +1,12 @@
+<div id="card-group" *ngIf="products.length > 0; elseBlock">
+	<div id="card-group-title" class="heading" *ngIf="title !== undefined">
+		<h2>{{ title }}</h2>
+		<div class="underline"></div>
+	</div>
+	<div id="card-group-content">
+		<div class="card-group-child" *ngFor="let product of products">
+			<app-card [product]="product" [fitToSize]="true"></app-card>
+		</div>
+	</div>
+</div>
+<ng-component #elseBlock></ng-component>

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 import { Product } from "../product";
 import { CredentialsService } from "../credentials.service";
@@ -12,24 +12,31 @@ import { UserService } from "../user.service";
 export class CardComponent {
 	@Input({ required: true }) product!: Product;
 	@Input() ignoreClick: boolean = false;
+	@Input() fitToSize: boolean = false;
 
-    private colorMap = {
-        "FIRE": "#ff4800",
-        "WATER": "#0099ff",
-        "AIR": "#f6aeff",
-        "EARTH": "#e58900",
-        "ENERGY": "#e100ff"
-    }
+	private colorMap = {
+		FIRE: "#ff4800",
+		WATER: "#0099ff",
+		AIR: "#f6aeff",
+		EARTH: "#e58900",
+		ENERGY: "#e100ff",
+	};
+	lockedImageUrl = "https://i.imgur.com/qPuLjji.png";
+	placeholderFireballImageUrl =
+		"https://static.vecteezy.com/system/resources/previews/021/698/212/original/ball-of-fire-glowing-magma-sphere-fireball-large-sphere-of-red-energy-fantasy-game-spell-icon-generative-ai-png.png";
 
 	constructor(private credentialsService: CredentialsService, private userService: UserService) {}
 
-    getColor(): string {
-        const color = this.colorMap[this.product.type];
-        if (color === undefined) {
-            return "lightgrey";
-        }
-        return color;
-    }
+	getColor(): string {
+		if (this.isUnlocked()) {
+			const color = this.colorMap[this.product.type];
+			if (color !== undefined) {
+				return color;
+			}
+			return "lightgrey";
+		}
+		return "";
+	}
 
 	formClasses(): string {
 		var classes = "";
@@ -42,7 +49,6 @@ export class CardComponent {
 		if (!this.ignoreClick && this.maxCartSize() && !this.isInCart()) {
 			classes += "card-blocked ";
 		}
-		classes += "card-" + this.product.type.toLowerCase();
 		return classes;
 	}
 
@@ -60,6 +66,22 @@ export class CardComponent {
 		return curCart?.includes(this.product.id);
 	}
 
+	amountOfTimesInCart(): number {
+		if (this.isInCart()) {
+			const cart = this.credentialsService.getUser()?.cart;
+			if (cart) {
+				var count = 0;
+				cart.forEach((productID) => {
+					if (productID == this.product.id) {
+						count += 1;
+					}
+				});
+				return count;
+			}
+		}
+		return 0;
+	}
+
 	maxCartSize(): boolean {
 		const curUser = this.credentialsService.getUser();
 		let curCart = curUser?.cart;
@@ -70,21 +92,10 @@ export class CardComponent {
 		}
 	}
 
-	toggleCartStatus(): void {
-		if (this.ignoreClick) {
-			return;
-		}
-		if (this.isInCart()) {
-			this.removeFromCart();
-			return;
-		}
-		if (this.maxCartSize()) {
-			return;
-		}
-		this.addToCart();
-	}
-
 	addToCart(): void {
+		if (this.maxCartSize() || !this.isUnlocked()) {
+			return;
+		}
 		let curUser = this.credentialsService.getUser();
 		if (curUser) {
 			if (!curUser.cart) {
@@ -98,14 +109,17 @@ export class CardComponent {
 		}
 	}
 
-	removeFromCart(): void {
+	removeFromCart(event: any): void {
+		event.preventDefault();
 		let curUser = this.credentialsService.getUser();
 
-		if (curUser && curUser.cart) {
-			curUser.cart = curUser.cart.filter((id) => id !== this.product.id);
+		if (curUser && curUser.cart && this.formClasses().includes("selected")) {
+			const indexOfProduct = curUser.cart.indexOf(this.product.id);
+			curUser.cart.splice(indexOfProduct, 1);
+			
 			this.credentialsService.storeCurrentUser({ ...curUser });
-
 			this.userService.updateUser(curUser).subscribe({});
 		}
 	}
+  
 }

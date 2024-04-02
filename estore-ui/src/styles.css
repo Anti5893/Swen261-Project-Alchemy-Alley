@@ -76,8 +76,8 @@
 
 html,
 body {
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	margin: 0;
 }
 
@@ -150,8 +150,9 @@ img {
 }
 
 .radio-container .radio-parent {
-	margin-right: auto;
+	margin-right: calc(var(--input-height) / 2);
 }
+
 .radio-container .radio-parent:last-of-type {
 	margin-right: 0;
 }
@@ -179,6 +180,7 @@ img {
 	height: var(--input-height);
 	background-color: var(--secondary-800);
 	border: solid 0.1rem var(--secondary-800);
+    box-sizing: border-box;
 	color: var(--text);
 	cursor: pointer;
 	transition: transform 150ms, background-color 150ms ease-in-out, color 150ms ease-in-out;
@@ -295,34 +297,43 @@ img {
 /* Inputs with Icon */
 
 .input {
+	all: unset;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	column-gap: 0.75rem;
 	width: max-content;
-	height: 2vh;
+	height: var(--input-height);
+	box-sizing: border-box;
 	padding: calc(4px + 0.25vw) calc(8px + 0.5vw) calc(4px + 0.25vw) calc(8px + 0.5vw);
 
 	color: var(--text);
 	font-weight: bold;
-	background-color: var(--primary);
+	background-color: var(--secondary-800);
 	border-radius: 1rem;
+}
+
+.input.fill-width {
+    width: 100%;
 }
 
 .input > input {
 	font-family: inherit;
 	color: var(--text);
-	background-color: var(--primary);
+	background-color: transparent;
 	border: none;
 	border-bottom: solid 0.1rem var(--secondary);
 	outline: none;
+    width: 100%;
+    height: 100%;
 }
 
 .input > input::placeholder {
 	color: var(--secondary);
 }
 
-.input > p{
+.input > p {
 	flex-grow: 1;
 }
 
@@ -331,6 +342,7 @@ img {
 *[tooltip] {
 	position: relative;
 }
+
 *[tooltip]::before {
 	all: unset;
 	position: absolute;
@@ -340,8 +352,6 @@ img {
 	top: -35px;
 	background-color: var(--secondary-800);
 	color: var(--secondary-100);
-	/* margin-left: auto;
-	margin-right: auto; */
 	font-size: 1rem;
 	border-radius: 8px;
 	padding: 0.25rem;
@@ -349,20 +359,13 @@ img {
 	z-index: 1;
 	filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
 }
+
 *[tooltip]:hover::before {
 	animation: show 50ms;
 	animation-delay: 0.5s;
 	animation-fill-mode: forwards;
 }
-/* *[tooltip]::after::after {
-	position: absolute;
-	bottom: 0;
-	width: 0.1rem;
-	height: 0.1rem;
-	border-left: 100% solid transparent;
-	border-right: 100% solid transparent;
-	border-bottom: 100% solid red;
-} */
+
 @keyframes show {
 	from {
 		visibility: hidden;

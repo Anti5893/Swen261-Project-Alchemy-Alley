@@ -6,12 +6,12 @@ import { UserService } from "../user.service";
 import { CredentialsService } from "../credentials.service";
 
 @Component({
-	selector: "app-login",
-	templateUrl: "./login.component.html",
-	styleUrl: "./login.component.css"
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+  
 	username: string = "";
 	password: string = "";
 	isAuthenticated = false;
@@ -25,6 +25,10 @@ export class LoginComponent {
 
 	fieldsFull(): boolean {
 		return this.password !== "" && this.username !== "";
+	}
+
+	showErrorMesssage(): boolean {
+		return this.requestSent && !this.isAuthenticated;
 	}
 
 	showErrorMesssage(): boolean {
