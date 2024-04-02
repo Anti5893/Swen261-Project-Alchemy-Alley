@@ -10,6 +10,7 @@ import { CredentialsService } from "../credentials.service";
 	styleUrl: "./catalog.component.css",
 })
 export class CatalogComponent implements OnInit {
+	
 	allProducts: Product[] = [];
 	searchQuery: string = "";
 	groupBy: string = "completion";
@@ -199,10 +200,10 @@ export class CatalogComponent implements OnInit {
 				var filter: boolean | undefined;
 				switch (value) {
 					case "locked":
-						filter = this.isUnlocked(product);
+						filter = !this.isUnlocked(product);
 						break;
 					case "unlocked":
-						filter = !this.isUnlocked(product);
+						filter = this.isUnlocked(product);
 						break;
 					case "none":
 						filter = true;

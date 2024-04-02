@@ -1,5 +1,5 @@
 <div class="card-wrapper" (click)="addToCart()" (contextmenu)="removeFromCart($event)">
-	<div class="card-in-cart-indicator" *ngIf="amountOfTimesInCart() >= 2">
+	<div class="card-in-cart-indicator" *ngIf="showQuantity && amountOfTimesInCart() >= 2">
 		{{ amountOfTimesInCart() }}
 	</div>
 	<div
@@ -8,7 +8,7 @@
 		[style.--card-color]="getColor()"
 	>
 		<div class="card-img">
-			<img src="{{ isUnlocked() ? placeholderFireballImageUrl : lockedImageUrl }}" />
+			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />
 		</div>
 		<div class="card-info">
 			<p>{{ isUnlocked() ? product.name : "???" }}</p>

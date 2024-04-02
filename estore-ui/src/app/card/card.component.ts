@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 import { Product } from "../product";
 import { CredentialsService } from "../credentials.service";
@@ -10,9 +10,11 @@ import { UserService } from "../user.service";
 	styleUrl: "./card.component.css",
 })
 export class CardComponent {
+
 	@Input({ required: true }) product!: Product;
-	@Input() ignoreClick: boolean = false;
 	@Input() fitToSize: boolean = false;
+	@Input() showQuantity: boolean = true;
+	@Output() removedEvent: EventEmitter<Product> = new EventEmitter<Product>();
 
 	private colorMap = {
 		FIRE: "#ff4800",
@@ -22,9 +24,7 @@ export class CardComponent {
 		ENERGY: "#e100ff",
 	};
 	lockedImageUrl = "https://i.imgur.com/qPuLjji.png";
-	placeholderFireballImageUrl =
-		"https://static.vecteezy.com/system/resources/previews/021/698/212/original/ball-of-fire-glowing-magma-sphere-fireball-large-sphere-of-red-energy-fantasy-game-spell-icon-generative-ai-png.png";
-
+	
 	constructor(private credentialsService: CredentialsService, private userService: UserService) {}
 
 	getColor(): string {
@@ -46,7 +46,7 @@ export class CardComponent {
 		if (this.isUnlocked()) {
 			classes += "card-unlocked ";
 		}
-		if (!this.ignoreClick && this.maxCartSize() && !this.isInCart()) {
+		if (this.maxCartSize() && !this.isInCart()) {
 			classes += "card-blocked ";
 		}
 		return classes;
@@ -119,6 +119,8 @@ export class CardComponent {
 			
 			this.credentialsService.storeCurrentUser({ ...curUser });
 			this.userService.updateUser(curUser).subscribe({});
+
+			this.removedEvent.emit(this.product);
 		}
 	}
   

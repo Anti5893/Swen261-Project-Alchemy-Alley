@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { animate, transition, trigger, style,state} from '@angular/animations';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
-
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent{
+export class RegisterComponent {
   
   username: string = '';
   password: string = '';
@@ -20,40 +18,40 @@ export class RegisterComponent{
   buttonClicked = false;
   showErrorMessage = false;
   passwordsMatch = true;
-  notStrongPassword = false
-  
 
   constructor(private userService: UserService, private router: Router) {}
 
-  animateRegister(route: string[], transformString : string = 'translate(250%,-50%)'): void{
+  animateRegister(route: string[], transformString : string = 'translate(250%,-50%)'): void {
     const registerBox = document.getElementById('registerBox');
-    if(registerBox){
+    if(registerBox) {
       registerBox.animate(
         [
-          {transform : transformString}
+          {
+            transform: transformString
+          }
         ],
         {
           duration : 1000,
           easing : 'ease-out',
           fill : 'forwards'
         }
-      ).onfinish = () =>{
+      ).onfinish = () => {
         this.router.navigate(route)
       }
     }
   }
 
   fieldsFull(): boolean {
-    return this.password != '' && this.username != '' && this.passwordConfirm != '';
+    return this.password !== "" && this.username !== "" && this.passwordConfirm !== "";
   }
 
   showPasswordsDontMatch(): boolean {
     return !this.passwordsMatch && this.buttonClicked;
   }
 
-  isStrongPassword(){
+  isStrongPassword() {
     let match = this.password.match(/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/);
-    return match != null
+    return match !== null;
   }
 
   registerOnClick(username: string, password: string): void {

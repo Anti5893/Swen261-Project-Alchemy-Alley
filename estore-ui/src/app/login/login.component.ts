@@ -24,11 +24,7 @@ export class LoginComponent {
 	) {}
 
 	fieldsFull(): boolean {
-		return this.password !== "" && this.username !== "";
-	}
-
-	showErrorMesssage(): boolean {
-		return this.requestSent && !this.isAuthenticated;
+		return this.username !== "" && this.password !== "";
 	}
 
 	showErrorMesssage(): boolean {

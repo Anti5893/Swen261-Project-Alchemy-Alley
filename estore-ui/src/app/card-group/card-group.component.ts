@@ -7,6 +7,8 @@ import { Product } from "../product";
 	styleUrl: "./card-group.component.css",
 })
 export class CardGroupComponent {
+
 	@Input({ required: true }) products!: Product[];
     @Input() title!: string;
+	
 }

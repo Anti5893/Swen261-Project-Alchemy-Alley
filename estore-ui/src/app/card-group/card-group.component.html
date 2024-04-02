@@ -1,4 +1,4 @@
-<div id="card-group" *ngIf="products.length > 0; elseBlock">
+<div id="card-group" *ngIf="products.length > 0">
 	<div id="card-group-title" class="heading" *ngIf="title !== undefined">
 		<h2>{{ title }}</h2>
 		<div class="underline"></div>
@@ -9,4 +9,3 @@
 		</div>
 	</div>
 </div>
-<ng-component #elseBlock></ng-component>

@@ -1,32 +1,13 @@
-.layout-container {
+:host {
   display: flex;
   justify-content: space-evenly;
-  align-items: center; 
   padding-top: 20px;
-}
-  
-.card-information {
-  flex-basis: 30%; /* Adjust based on your preference */
-  max-width: 30%; /* Prevents the form from stretching too wide */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.card-img {
-  z-index: -1;
 }
 
 .cauldron-container {
-  flex-basis: 40%; /* Adjust based on your preference */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the cauldron vertically */
-}
-
-.extra-product-info {
-  flex-basis: 30%; /* Adjust based on your preference */
+  align-items: center;
 }
 
 .cauldron {
@@ -43,9 +24,9 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 100%; /* Adjust based on your design preference */
-  height: auto; /* Maintain aspect ratio */
-  transform: translate(-50%, -50%); /* Center the image */
+  width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%);
   animation: rotateSwirl 20s linear infinite;
   z-index: -2;
 }
@@ -64,14 +45,14 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center; /* Align items vertically */
+  align-items: center;
   padding: 0;
   list-style: none;
 }
 
 .cauldron ul li {
   width: 50%;
-  height: auto; /* Adjusted to auto to accommodate content */
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,21 +67,9 @@
   object-fit: cover;
 }
 
-.cauldron h2 {
-  font-size: smaller;
-}
-
-.card-product {
-  opacity: 1;
-}
-
-#card-crafted {
+.craft-result {
   opacity: 0;
   animation: craft-fade-in 2s ease-in-out forwards;
-}
-.card-product {
-  animation: craft-fade-out;
-  animation-play-state: paused;
 }
 
 @keyframes craft-fade-in {
@@ -109,19 +78,28 @@
   }
 }
 
-@keyframes craft-fade-out {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-    opacity: 0;
-  }
+.card-information {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 30vw;
+  row-gap: 1vh;
+}
+
+/* Global Overrides */
+
+.card-img {
+  z-index: -1;
 }
 
 .input {
   width: 100%;
+  justify-content: flex-start;
+}
+
+.input > p {
+  flex-shrink: 0;
 }
 
 .heading {

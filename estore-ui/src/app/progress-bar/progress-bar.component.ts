@@ -8,6 +8,7 @@ import { ProductService } from "../product.service";
 	styleUrl: "./progress-bar.component.css",
 })
 export class ProgressBarComponent implements OnInit {
+
 	progress: number = 0;
 
 	constructor(
@@ -16,10 +17,10 @@ export class ProgressBarComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.udpateProgress();
+		this.updateProgress();
 	}
 
-	udpateProgress(): void {
+	updateProgress(): void {
 		const unlocked = this.credentialsService.getUser()?.unlocked;
 		this.productService.getProducts().subscribe((productsResponse) => {
 			if (productsResponse.body && unlocked !== undefined) {
@@ -33,4 +34,5 @@ export class ProgressBarComponent implements OnInit {
 	parsedProgress(): string {
 		return parseFloat(this.progress.toString()).toFixed(2);
 	}
+
 }

@@ -1,11 +1,8 @@
-body{
+body {
     overflow-y: hidden;
 }
-/* Animation To Fade In Login Box */
-@keyframes login-animation {
-    100%{opacity: 1;}
-}
-.login-box{
+
+.login-box {
     position: absolute;
     top: 45%;
     left: 50%;
@@ -17,7 +14,14 @@ body{
     opacity: 0;
     animation: login-animation 1s ease-in forwards;
 }
-.login-buttons{
+
+@keyframes login-animation {
+    to {
+        opacity: 1;
+    }
+}
+
+.login-buttons {
     padding: 10px;
     display: flex;
     justify-content:center;
@@ -28,7 +32,7 @@ body{
 }
 
 
-.heading{
+.heading {
     display: flex;
     align-items: center;
     text-align: center;
@@ -36,7 +40,7 @@ body{
     margin-bottom: 10%;
 }
 
-.login-fields{
+.login-fields {
     width: 100%;
     align-items: center;
     text-align: center;
@@ -45,13 +49,13 @@ body{
     margin-top: 20px;
 }
 
-.input{
+.input {
     min-width: 59%;
     justify-content:flex-start;
     margin-bottom: 40px;
 }
 
-.login-elements{
+.login-elements {
     padding-top: 50px;
     border: 7px solid;
     border-radius: 10px;

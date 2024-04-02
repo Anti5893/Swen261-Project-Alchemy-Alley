@@ -197,8 +197,11 @@
 	height: 20%;
 
 	font-size: 14px;
-	border-top: solid 0.25rem
-		color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
+	border-top: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
+}
+
+.card > .card-info > p {
+	text-align: center;
 }
 
 .card > .card-info > .card-price {

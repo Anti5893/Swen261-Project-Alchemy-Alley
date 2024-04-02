@@ -32,4 +32,5 @@ export class UserService {
   doCraft(user: User): Observable<HttpResponse<Product>> {
     return this.http.post<Product>(`${this.usersUrl}/checkout`, user, this.httpOptionsResponse);
   }
+  
 }
