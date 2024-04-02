@@ -15,20 +15,19 @@ export class RegisterComponent {
   username: string = '';
   password: string = '';
   passwordConfirm: string = '';
-  users: User[] = [];
   buttonClicked = false;
   showErrorMessage = false;
   passwordsMatch = true;
 
   constructor(private userService: UserService, private router: Router, private ngZone : NgZone) {}
 
-  animateRegister(route: string[], transformString : string = 'translate(250%,-50%)'): void {
+  animateRegister(route: string[]): void {
     const registerBox = document.getElementById('registerBox');
     if(registerBox) {
       registerBox.animate(
         [
           {
-            transform: transformString
+            transform: 'translate(250%,-50%)'
           }
         ],
         {
