@@ -14,20 +14,19 @@ export class RegisterComponent {
   username: string = '';
   password: string = '';
   passwordConfirm: string = '';
-  users: User[] = [];
   buttonClicked = false;
   showErrorMessage = false;
   passwordsMatch = true;
 
   constructor(private userService: UserService, private router: Router) {}
 
-  animateRegister(route: string[], transformString : string = 'translate(250%,-50%)'): void {
+  animateRegister(route: string[]): void {
     const registerBox = document.getElementById('registerBox');
     if(registerBox) {
       registerBox.animate(
         [
           {
-            transform: transformString
+            transform: 'translate(250%,-50%)'
           }
         ],
         {
@@ -36,7 +35,7 @@ export class RegisterComponent {
           fill : 'forwards'
         }
       ).onfinish = () => {
-        this.router.navigate(route)
+        this.router.navigate(route);
       }
     }
   }
