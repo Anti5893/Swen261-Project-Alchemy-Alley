@@ -70,6 +70,7 @@
 .craft-result {
   opacity: 0;
   animation: craft-fade-in 2s ease-in-out forwards;
+  pointer-events: none;
 }
 
 @keyframes craft-fade-in {
