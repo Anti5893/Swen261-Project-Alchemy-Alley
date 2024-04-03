@@ -10,7 +10,6 @@ import { UserService } from "../user.service";
 	styleUrl: "./card.component.css",
 })
 export class CardComponent {
-
 	@Input({ required: true }) product!: Product;
 	@Input() fitToSize: boolean = false;
 	@Input() showQuantity: boolean = true;
@@ -24,7 +23,7 @@ export class CardComponent {
 		ENERGY: "#e100ff",
 	};
 	lockedImageUrl = "https://i.imgur.com/qPuLjji.png";
-	
+
 	constructor(private credentialsService: CredentialsService, private userService: UserService) {}
 
 	getColor(): string {
@@ -34,6 +33,13 @@ export class CardComponent {
 				return color;
 			}
 			return "lightgrey";
+		}
+		return "";
+	}
+
+	getBackground(): string {
+		if (this.isUnlocked()) {
+			return `/assets/${this.product.type.toLowerCase()}-repeating-background.png`;
 		}
 		return "";
 	}
@@ -116,12 +122,11 @@ export class CardComponent {
 		if (curUser && curUser.cart && this.formClasses().includes("selected")) {
 			const indexOfProduct = curUser.cart.indexOf(this.product.id);
 			curUser.cart.splice(indexOfProduct, 1);
-			
+
 			this.credentialsService.storeCurrentUser({ ...curUser });
 			this.userService.updateUser(curUser).subscribe({});
 
 			this.removedEvent.emit(this.product);
 		}
 	}
-  
 }
