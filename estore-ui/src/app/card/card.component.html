@@ -6,6 +6,9 @@
 		class="card {{ fitToSize ? 'fit-to-size' : '' }}"
 		[ngClass]="formClasses()"
 		[style.--card-color]="getColor()"
+		[style.background-image]="
+			'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'
+		"
 	>
 		<div class="card-img">
 			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />

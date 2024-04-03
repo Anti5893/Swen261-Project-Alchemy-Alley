@@ -24,8 +24,8 @@
 	cursor: not-allowed;
 
 	box-sizing: border-box;
-	border: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 25%);
-	background: color-mix(in srgb, var(--card-color), transparent 75%);
+	border: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), black 25%);
+	background-size: 35px;
 }
 
 .card.card-selected {
@@ -185,6 +185,7 @@
 
 .card > .card-img > img {
 	max-width: 100%;
+	filter: drop-shadow(0px 3px 5px rgb(0, 0, 0));
 }
 
 /* Card Info */
@@ -197,7 +198,8 @@
 	height: 20%;
 
 	font-size: 14px;
-	border-top: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), transparent 50%);
+	border-top: solid 0.25rem color-mix(in srgb, var(--card-color, var(--text-500)), black 50%);
+	background: color-mix(in srgb, var(--card-color), black 75%);
 }
 
 .card > .card-info > p {
@@ -213,14 +215,14 @@
 
 /* Card in Cart Indicator */
 .card-in-cart-indicator {
-    all: unset;
+	all: unset;
 
 	position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    margin-top: -1.25rem;
-    margin-right: -1.25rem;
+	top: 0;
+	right: 0;
+	z-index: 2;
+	margin-top: -1.25rem;
+	margin-right: -1.25rem;
 
 	width: 2.5rem;
 	height: 2.5rem;
@@ -228,12 +230,12 @@
 	border-radius: 50%;
 	background-color: var(--accent);
 	border: solid var(--accent-900) 0.2rem;
-    color: var(--accent-900);
-    font-size: 2rem;
-    font-weight: bold;
+	color: var(--accent-900);
+	font-size: 2rem;
+	font-weight: bold;
 	filter: drop-shadow(0px 0px 4px var(--accent));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 1;
 }
