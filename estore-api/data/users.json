@@ -1,1 +1,1 @@
-[{"username":"Admin","password":"$2a$10$2i2GGFZJRqPyhejsHgpBQ.25CJmf/So26a1GYKbupW2WirK83UR7S","admin":true,"unlocked":[],"cart":[]}]
+[{"username":"NewUser123","password":"$2a$10$EKcNc/aG8r6r0/sY/A6MQuCloahSNAAUsNzOBJdHc5h4qvAzvQnf.","admin":false,"unlocked":[1,2,3,4,11,11],"cart":[]},{"username":"Admin","password":"$2a$10$2i2GGFZJRqPyhejsHgpBQ.25CJmf/So26a1GYKbupW2WirK83UR7S","admin":true,"unlocked":[],"cart":[]}]
