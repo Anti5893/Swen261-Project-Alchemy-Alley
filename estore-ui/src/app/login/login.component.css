@@ -12,7 +12,7 @@ body {
     padding-top: 50px;
     width: 400px;
     opacity: 0;
-    animation: login-animation 1s ease-in forwards;
+    animation: login-animation 750ms ease-in forwards;
 }
 
 @keyframes login-animation {
@@ -20,6 +20,7 @@ body {
         opacity: 1;
     }
 }
+
 
 .login-buttons {
     padding: 10px;

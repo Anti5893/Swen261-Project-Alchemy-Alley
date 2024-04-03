@@ -51,7 +51,7 @@ export class LoginComponent {
 					}
 				],
 				{
-			  		duration: 1000,
+			  		duration: 750,
 			  		easing: 'ease-out',
 			  		fill: 'forwards'
 				}
@@ -61,6 +61,25 @@ export class LoginComponent {
 				})
 				
 		  	};
+		}
+	}
+
+	animateFailedLogin(): void{
+		const loginBox = document.getElementById('login-box');
+		if(loginBox){
+			loginBox.animate(
+				[
+    				{transform: 'translate(-50%, -50%) rotate(0deg)'},
+					{transform: 'translate(-50%,-50%) rotate(-10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(-10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(0deg)'},
+				],
+				{
+					duration: 600,
+				}
+			)
 		}
 	}
 	
@@ -80,6 +99,7 @@ export class LoginComponent {
 				this.requestSent = true;
 		  	},
 		  	(error) => {
+				this.animateFailedLogin()
 				if(this.fieldsFull()) {
 			  		this.isAuthenticated = false;
 				}

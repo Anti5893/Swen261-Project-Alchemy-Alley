@@ -3,7 +3,6 @@
     100%{left: 50%}
 }
 
-
 .register-box{
     position: absolute;
     top: 45%;
@@ -14,7 +13,7 @@
     padding-top: 50px;
     min-width: 550px;
     min-height:400px;
-    animation: register-box-animation 1s ease-out forwards
+    animation: register-box-animation 500ms ease-out forwards
 }
 
 .register-fields{

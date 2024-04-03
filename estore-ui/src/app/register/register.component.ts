@@ -31,7 +31,7 @@ export class RegisterComponent {
           }
         ],
         {
-          duration : 1000,
+          duration : 750,
           easing : 'ease-out',
           fill : 'forwards'
         }
@@ -42,6 +42,26 @@ export class RegisterComponent {
       }
     }
   }
+
+  animateFailedRegister(): void{
+		const registerBox = document.getElementById('registerBox');
+    console.log("GOT HERE")
+		if(registerBox){
+			registerBox.animate(
+				[
+    			{transform: 'translate(-50%, -50%) rotate(0deg)'},
+					{transform: 'translate(-50%,-50%) rotate(-10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(-10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(0deg)'},
+				],
+				{
+					duration: 600,
+				}
+			)
+		}
+	}
 
   fieldsFull(): boolean {
     return this.password !== "" && this.username !== "" && this.passwordConfirm !== "";
@@ -58,10 +78,10 @@ export class RegisterComponent {
 
   registerOnClick(username: string, password: string): void {
     this.buttonClicked = true;
+    
 
     if(this.password != this.passwordConfirm) {
       this.passwordsMatch = false;
-      return;
     }
 
     if(this.fieldsFull() && this.isStrongPassword()) {
@@ -77,6 +97,8 @@ export class RegisterComponent {
           }
         }
       );
+    }else{
+      this.animateFailedRegister()
     }
   }
 }
