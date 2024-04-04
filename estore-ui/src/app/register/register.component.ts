@@ -82,6 +82,7 @@ export class RegisterComponent {
 
     if(this.password != this.passwordConfirm) {
       this.passwordsMatch = false;
+      return;
     }
 
     if(this.fieldsFull() && this.isStrongPassword()) {
