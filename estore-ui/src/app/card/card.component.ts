@@ -11,6 +11,7 @@ import { UserService } from "../user.service";
 })
 export class CardComponent {
 	@Input({ required: true }) product!: Product;
+    @Input() inCart: boolean = false;
 	@Input() fitToSize: boolean = false;
 	@Input() showQuantity: boolean = true;
 	@Output() removedEvent: EventEmitter<Product> = new EventEmitter<Product>();

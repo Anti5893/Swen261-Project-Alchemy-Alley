@@ -3,7 +3,7 @@
 		<img class="swirl" src="/assets/Swirl.png">
 		<ul>
 			<li *ngFor="let product of products">
-				<app-card [product]="product" [showQuantity]="false" (removedEvent)="this.getProducts()"></app-card>
+				<app-card [product]="product" [showQuantity]="false" (removedEvent)="this.getProducts()" [inCart]="true"></app-card>
 			</li>
 			<li class="craft-result" *ngIf="isPurchased() && getUnlocked()">
 				<h3>PRODUCT UNLOCKED</h3>
@@ -46,4 +46,3 @@
 		Purchase Cart
 	</button>
 </div>
-

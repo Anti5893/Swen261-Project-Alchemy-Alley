@@ -1,9 +1,19 @@
 /* Cards */
 
 .card-wrapper {
+	position: relative;
 	width: 14rem;
-	height: auto;
+	height: 18.66rem;
 	aspect-ratio: 3/4;
+}
+
+.card-wrapper:has(.card-second) > .card-first {
+	transform: translateX(-0.7rem) rotate(-3deg);
+}
+
+.card-second {
+	top: -100%;
+	transform: translate(0.7rem) rotate(3deg);
 }
 
 .card-wrapper:has(.card.card-selected) {
@@ -12,6 +22,7 @@
 
 .card-wrapper:has(.fit-to-size) {
 	width: 100%;
+	height: auto;
 }
 
 .card {
@@ -209,6 +220,31 @@
 	color: var(--accent);
 }
 
+.card-in-stock-indicator {
+	all: unset;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	margin-top: -0.5rem;
+	margin-left: -0.5rem;
+
+	width: 2.5rem;
+	height: 2.5rem;
+
+	border-radius: 50%;
+	background-color: var(--card-color);
+	border: solid var(--accent-900) 0.2rem;
+	font-size: 1.5rem;
+	font-weight: bold;
+	filter: drop-shadow(0px 0px 4px var(--card-color));
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 1;
+}
+
 /* Card in Cart Indicator */
 
 .card-in-cart-indicator {
@@ -218,8 +254,8 @@
 	top: 0;
 	right: 0;
 	z-index: 2;
-	margin-top: -1.25rem;
-	margin-right: -1.25rem;
+	margin-top: -0.5rem;
+	margin-right: -0.5rem;
 
 	width: 2.5rem;
 	height: 2.5rem;
@@ -228,13 +264,14 @@
 	background-color: var(--accent);
 	border: solid var(--accent-900) 0.2rem;
 	color: var(--accent-900);
-	font-size: 2rem;
+	font-size: 1.5rem;
 	font-weight: bold;
 	filter: drop-shadow(0px 0px 4px var(--accent));
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	opacity: 1;
+	visibility: hidden;
 }
 
 /* Card Out of Stock */
