@@ -53,8 +53,11 @@ export class CardComponent {
 		if (this.isUnlocked()) {
 			classes += "card-unlocked ";
 		}
-		if (this.maxCartSize() && !this.isInCart()) {
+		if ((this.maxCartSize() && !this.isInCart()) || !this.hasEnoughInStock()) {
 			classes += "card-blocked ";
+		}
+		if (!this.hasEnoughInStock()) {
+			classes += "card-out-of-stock ";
 		}
 		return classes;
 	}
@@ -99,8 +102,12 @@ export class CardComponent {
 		}
 	}
 
+	hasEnoughInStock(): boolean {
+		return this.amountOfTimesInCart() + 1 <= this.product.quantity;
+	}
+
 	addToCart(): void {
-		if (this.maxCartSize() || !this.isUnlocked()) {
+		if ((this.maxCartSize() || !this.isUnlocked()) || !this.hasEnoughInStock()) {
 			return;
 		}
 		let curUser = this.credentialsService.getUser();

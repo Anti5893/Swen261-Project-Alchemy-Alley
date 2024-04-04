@@ -64,9 +64,12 @@
 	animation: card-shimmer 3s infinite linear;
 }
 
-.card:not(.card-selected):not(.card-unlocked) {
+.card.card-unlocked {
+	cursor: pointer;
+}
+
+.card.card-blocked {
 	cursor: not-allowed;
-	pointer-events: none;
 }
 
 @keyframes card-shimmer {
@@ -83,14 +86,6 @@
 	to {
 		transform: translateY(0%);
 	}
-}
-
-.card.card-unlocked {
-	cursor: pointer;
-}
-
-.card.card-blocked {
-	cursor: not-allowed;
 }
 
 /* Card Glow */
@@ -189,6 +184,7 @@
 /* Card Img */
 
 .card > .card-img {
+	position: relative;
 	display: flex;
 	align-items: center;
 	height: 80%;
@@ -250,6 +246,7 @@
 }
 
 /* Card in Cart Indicator */
+
 .card-in-cart-indicator {
 	all: unset;
 
@@ -275,4 +272,31 @@
 	align-items: center;
 	opacity: 1;
 	visibility: hidden;
+}
+
+/* Card Out of Stock */
+
+.card:not(.card-out-of-stock) > .card-img > .out-of-stock {
+	display: none;
+}
+
+.card.card-out-of-stock {
+	filter: brightness(0.25);
+}
+
+.card.card-out-of-stock > .card-img > .out-of-stock {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotateZ(-45deg);
+}
+
+.card.card-out-of-stock > .card-img > .out-of-stock > h1 {
+	-webkit-text-stroke: 1px black;
+	text-align: center;
+	user-select: none;
+	font-size: 2.5rem;
+	color: var(--card-color);
+	text-shadow: 0 0 5rem white;
 }

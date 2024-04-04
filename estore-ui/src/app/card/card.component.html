@@ -19,7 +19,10 @@
 		"
 	>
 		<div class="card-img">
-			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />
+			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}"/>
+			<div class="out-of-stock">
+				<h1>OUT OF STOCK</h1>
+			</div>
 		</div>
 		<div class="card-info">
 			<p>{{ isUnlocked() ? product.name : "???" }}</p>
