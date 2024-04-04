@@ -4,7 +4,7 @@
     "name": "Fire Fizzle",
     "type": "FIRE",
     "price": 10,
-    "quantity": 1,
+    "quantity": 2,
     "imageURL": "/assets/spell_images/fire.png"
   },
   {
