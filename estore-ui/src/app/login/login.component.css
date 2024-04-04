@@ -21,6 +21,20 @@ body {
     }
 }
 
+@keyframes arrow-animation {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+
+
+.register-button:hover{
+    .fa-solid{
+        animation: arrow-animation 750ms linear infinite;
+    }
+}
+
 
 .login-buttons {
     padding: 10px;
