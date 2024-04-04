@@ -86,4 +86,23 @@ export class CartComponent {
     return name.value.trim().length === 0 || card.value.trim().length === 0 || exp.value.trim().length === 0 || ccv.value.trim().length === 0;
   }
 
+  isInStock(product: Product) {
+    if (this.products.at(0)?.id === this.products.at(1)?.id)
+    {
+      return product.quantity > 1;
+    }
+    else
+    {
+      return product.quantity > 0;
+    }
+  }
+
+  isCartInStock() {
+      for (const product of this.products) {
+          if (!this.isInStock(product)) {
+              return false;
+          }
+      }
+      return true;
+  }
 }
