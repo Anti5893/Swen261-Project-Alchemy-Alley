@@ -4,8 +4,8 @@
 		<div class="underline"></div>
 	</div>
 	<div id="card-group-content">
-		<div class="card-group-child" *ngFor="let product of products">
-			<app-card [product]="product"></app-card>
+		<div class="card-group-child" *ngFor="let product of products; let i = index">
+			<app-card [product]="product" [index]="i"></app-card>
 		</div>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, Directive, OnInit } from "@angular/core";
 
 import { Product } from "../product";
 import { CredentialsService } from "../credentials.service";
@@ -9,10 +9,10 @@ import { UserService } from "../user.service";
 	templateUrl: "./card.component.html",
 	styleUrl: "./card.component.css",
 })
-export class CardComponent {
-	
+export class CardComponent implements OnInit {
 	@Input({ required: true }) product!: Product;
-    @Input() enableStacking: boolean = true;
+	@Input({ required: true }) index: number = 0;
+	@Input() enableStacking: boolean = true;
 	@Input() showQuantity: boolean = true;
 	@Input() showOutOfStock: boolean = true;
 	@Input() fitToSize: boolean = false;
@@ -28,6 +28,35 @@ export class CardComponent {
 	lockedImageUrl = "https://i.imgur.com/qPuLjji.png";
 
 	constructor(private credentialsService: CredentialsService, private userService: UserService) {}
+
+	ngOnInit(): void {
+		// if (this.index != -1) {
+		// 	console.log("testing");
+		// 	const query = ".index-" + this.index.toString();
+		// 	console.log(query);
+		// 	const card = document.querySelectorAll(query);
+		// 	card.forEach((element) => {
+		// 		element.animate(
+		// 			[
+		// 				{
+		// 					transform: "translateY(40px)",
+		// 					opacity: "0%",
+		// 				},
+		// 				{
+		// 					transform: "translateY(0px)",
+		// 					opacity: "100%",
+		// 				},
+		// 			],
+		// 			{
+		// 				duration: 500,
+		// 				delay: 100 * this.index,
+		// 				easing: "ease-out",
+		// 				fill: "forwards",
+		// 			}
+		// 		);
+		// 	});
+		// }
+	}
 
 	getColor(): string {
 		if (this.isUnlocked()) {
@@ -109,7 +138,7 @@ export class CardComponent {
 	}
 
 	addToCart(): void {
-		if ((this.maxCartSize() || !this.isUnlocked()) || !this.hasEnoughInStock()) {
+		if (this.maxCartSize() || !this.isUnlocked() || !this.hasEnoughInStock()) {
 			return;
 		}
 		let curUser = this.credentialsService.getUser();

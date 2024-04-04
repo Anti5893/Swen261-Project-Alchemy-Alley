@@ -5,6 +5,32 @@
 	width: 14rem;
 	height: 18.66rem;
 	aspect-ratio: 3/4;
+	opacity: 0%;
+
+	animation-name: fadeIn;
+	animation-duration: 500ms;
+	animation-fill-mode: forwards;
+	animation-delay: var(--card-delay);
+}
+
+.card-wrapper.is_animating {
+    animation-name: fadeIn, card-float;
+    animation-duration: 500ms, 3s;
+    animation-fill-mode: forwards, none;
+    animation-iteration-count: unset, infinite;
+	/* animation: fadeIn 500ms forwards ease-out, card-float 3s infinite ease-in-out; */
+	animation-delay: var(--card-delay), 0ms;
+}
+
+@keyframes fadeIn {
+	from {
+		transform: translateY(20px);
+		opacity: 0%;
+	}
+	to {
+		transform: translateY(0px);
+		opacity: 100%;
+	}
 }
 
 .card-wrapper:has(.card-second) > .card-first {
@@ -14,10 +40,6 @@
 .card-second {
 	top: -100%;
 	transform: translate(0.7rem) rotate(3deg);
-}
-
-.card-wrapper:has(.card.card-selected) {
-	animation: card-float 3s infinite ease-in-out;
 }
 
 .card-wrapper:has(.fit-to-size) {
@@ -45,6 +67,7 @@
 	justify-content: center;
 	align-items: center;
 	box-shadow: 0 0.5rem 5rem 0.1rem black;
+	/* animation: card-float 3s infinite ease-in-out; */
 }
 
 .card.card-selected::after {
@@ -244,6 +267,10 @@
 	align-items: center;
 	opacity: 1;
 }
+
+/* .card:has(.card-selected) .card-in-stock-indicator {
+	animation: card-float 3s infinite ease-in-out;
+} */
 
 /* Card Out of Stock */
 

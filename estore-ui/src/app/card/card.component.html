@@ -1,20 +1,27 @@
 <div
-	class="card-wrapper noselect"
+	class="card-wrapper noselect {{ isInCart() ? 'is_animating' : '' }}"
 	(click)="addToCart()"
 	(contextmenu)="removeFromCart($event)"
 	[style.--card-color]="getColor()"
+	[style.--card-delay]="(index * 100).toString() + 'ms'"
 >
-	<div class="card-in-stock-indicator" tooltip="Quantity" *ngIf="showQuantity && isUnlocked() && hasEnoughInStock()">
+	<div
+		class="card-in-stock-indicator"
+		tooltip="Quantity"
+		*ngIf="showQuantity && isUnlocked() && hasEnoughInStock()"
+	>
 		{{ product.quantity }}
 	</div>
 	<div
 		class="card card-first {{ fitToSize ? 'fit-to-size' : '' }}"
 		[ngClass]="formClasses()"
 		[style.--card-color]="getColor()"
-		[style.background-image]="'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'"
+		[style.background-image]="
+			'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'
+		"
 	>
 		<div class="card-img">
-			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}"/>
+			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />
 			<div *ngIf="showOutOfStock && isUnlocked()" class="out-of-stock">
 				<h1>OUT OF STOCK</h1>
 			</div>

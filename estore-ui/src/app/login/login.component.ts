@@ -5,7 +5,6 @@ import { NgZone } from "@angular/core";
 import { User } from "../user";
 import { UserService } from "../user.service";
 import { CredentialsService } from "../credentials.service";
-import { HtmlParser } from "@angular/compiler";
 
 @Component({
   selector: 'app-login',
@@ -13,12 +12,12 @@ import { HtmlParser } from "@angular/compiler";
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  
+
 	username: string = "";
 	password: string = "";
 	isAuthenticated = false;
 	requestSent = false;
-	
+
 	constructor(
 		private userService: UserService,
 		private credentialsService: CredentialsService,
@@ -46,7 +45,7 @@ export class LoginComponent {
 		if(loginBox) {
 			loginBox.animate(
 				[
-			  		{ 
+			  		{
 						transform: 'translate(250%, -50%)'
 					}
 				],
@@ -59,7 +58,7 @@ export class LoginComponent {
 				this.ngZone.run(()=>{
 					this.router.navigate(route);
 				})
-				
+
 		  	};
 		}
 	}
@@ -82,7 +81,7 @@ export class LoginComponent {
 			)
 		}
 	}
-	
+
 	onClick(username: string, password: string): void {
 		this.userService.authenticateUser({username,password} as User).subscribe(
 			(response) => {
