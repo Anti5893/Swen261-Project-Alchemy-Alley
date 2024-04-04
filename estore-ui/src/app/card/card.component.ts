@@ -139,4 +139,5 @@ export class CardComponent {
 			this.removedEvent.emit(this.product);
 		}
 	}
+	
 }
