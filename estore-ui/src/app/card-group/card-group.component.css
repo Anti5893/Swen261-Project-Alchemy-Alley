@@ -10,7 +10,12 @@
 	flex-wrap: wrap;
 	justify-content: space-around;
 	margin-top: 1rem;
-	gap: 2rem;
+	/* gap: 2rem; */
+
+    display: grid;
+    grid-template-columns: minmax(0, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto);
+    gap: 2rem;
+    align-content: space-around;
 }
 
 .card-group-child {

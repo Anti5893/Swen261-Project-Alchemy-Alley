@@ -10,10 +10,12 @@ import { UserService } from "../user.service";
 	styleUrl: "./card.component.css",
 })
 export class CardComponent {
-
+	
 	@Input({ required: true }) product!: Product;
-	@Input() fitToSize: boolean = false;
+    @Input() enableStacking: boolean = true;
 	@Input() showQuantity: boolean = true;
+	@Input() showOutOfStock: boolean = true;
+	@Input() fitToSize: boolean = false;
 	@Output() removedEvent: EventEmitter<Product> = new EventEmitter<Product>();
 
 	private colorMap = {
@@ -24,7 +26,7 @@ export class CardComponent {
 		ENERGY: "#e100ff",
 	};
 	lockedImageUrl = "https://i.imgur.com/qPuLjji.png";
-	
+
 	constructor(private credentialsService: CredentialsService, private userService: UserService) {}
 
 	getColor(): string {
@@ -38,6 +40,13 @@ export class CardComponent {
 		return "";
 	}
 
+	getBackground(): string {
+		if (this.isUnlocked()) {
+			return `/assets/${this.product.type.toLowerCase()}-repeating-background.png`;
+		}
+		return "";
+	}
+
 	formClasses(): string {
 		var classes = "";
 		if (this.isInCart()) {
@@ -46,8 +55,11 @@ export class CardComponent {
 		if (this.isUnlocked()) {
 			classes += "card-unlocked ";
 		}
-		if (this.maxCartSize() && !this.isInCart()) {
+		if ((this.maxCartSize() && !this.isInCart()) || !this.hasEnoughInStock()) {
 			classes += "card-blocked ";
+		}
+		if (!this.hasEnoughInStock() && this.showOutOfStock) {
+			classes += "card-out-of-stock ";
 		}
 		return classes;
 	}
@@ -92,8 +104,12 @@ export class CardComponent {
 		}
 	}
 
+	hasEnoughInStock(): boolean {
+		return this.amountOfTimesInCart() + 1 <= this.product.quantity;
+	}
+
 	addToCart(): void {
-		if (this.maxCartSize() || !this.isUnlocked()) {
+		if ((this.maxCartSize() || !this.isUnlocked()) || !this.hasEnoughInStock()) {
 			return;
 		}
 		let curUser = this.credentialsService.getUser();
@@ -116,12 +132,11 @@ export class CardComponent {
 		if (curUser && curUser.cart && this.formClasses().includes("selected")) {
 			const indexOfProduct = curUser.cart.indexOf(this.product.id);
 			curUser.cart.splice(indexOfProduct, 1);
-			
+
 			this.credentialsService.storeCurrentUser({ ...curUser });
 			this.userService.updateUser(curUser).subscribe({});
 
 			this.removedEvent.emit(this.product);
 		}
 	}
-  
 }
