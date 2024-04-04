@@ -74,10 +74,6 @@ export class CartComponent {
     }
   }
 
-  isCartFull(): boolean {
-    return this.products.length == 2;
-  }
-
   isPurchased(): boolean{
     return this.purchased;
   }
