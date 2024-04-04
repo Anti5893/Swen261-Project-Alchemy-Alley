@@ -3,7 +3,6 @@
 		<img class="swirl" src="/assets/Swirl.png">
 		<ul>
 			<li *ngFor="let product of products">
-				<h4 *ngIf="!isInStock(product)">OUT OF STOCK!</h4>
 				<app-card [product]="product" [showQuantity]="false" (removedEvent)="this.getProducts()">
 				</app-card>
 			</li>
