@@ -181,7 +181,7 @@ img {
 	height: var(--input-height);
 	background-color: var(--secondary-800);
 	border: solid 0.1rem var(--secondary-800);
-    box-sizing: border-box;
+	box-sizing: border-box;
 	color: var(--text);
 	cursor: pointer;
 	transition: transform 150ms, background-color 150ms ease-in-out, color 150ms ease-in-out;
@@ -316,7 +316,7 @@ img {
 }
 
 .input.fill-width {
-    width: 100%;
+	width: 100%;
 }
 
 .input > input {
@@ -326,8 +326,8 @@ img {
 	border: none;
 	border-bottom: solid 0.1rem var(--secondary);
 	outline: none;
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .input > input::placeholder {
@@ -430,4 +430,13 @@ img {
 	right: -2vh;
 	width: 2vh;
 	height: 2vh;
+}
+
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
