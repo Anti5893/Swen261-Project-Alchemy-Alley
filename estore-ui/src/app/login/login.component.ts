@@ -5,6 +5,7 @@ import { NgZone } from "@angular/core";
 import { User } from "../user";
 import { UserService } from "../user.service";
 import { CredentialsService } from "../credentials.service";
+import { HtmlParser } from "@angular/compiler";
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,20 @@ export class LoginComponent {
 	password: string = "";
 	isAuthenticated = false;
 	requestSent = false;
-
+	
 	constructor(
 		private userService: UserService,
 		private credentialsService: CredentialsService,
 		private router: Router,
 		private ngZone : NgZone
 	) {}
+
+	onMouseEnter(buttonName : HTMLElement): void{
+		buttonName.innerHTML = 'Login<i class="fa-solid fa-door-open"></i>'
+	}
+	onMouseLeave(buttonName : HTMLElement): void{
+		buttonName.innerHTML = 'Login<i class="fa-solid fa-door-closed"></i>'
+	}
 
 	fieldsFull(): boolean {
 		return this.username !== "" && this.password !== "";
@@ -43,7 +51,7 @@ export class LoginComponent {
 					}
 				],
 				{
-			  		duration: 1000,
+			  		duration: 750,
 			  		easing: 'ease-out',
 			  		fill: 'forwards'
 				}
@@ -53,6 +61,25 @@ export class LoginComponent {
 				})
 				
 		  	};
+		}
+	}
+
+	animateFailedLogin(): void{
+		const loginBox = document.getElementById('login-box');
+		if(loginBox){
+			loginBox.animate(
+				[
+    				{transform: 'translate(-50%, -50%) rotate(0deg)'},
+					{transform: 'translate(-50%,-50%) rotate(-10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(-10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(10deg)'},
+					{transform: 'translate(-50%,-50%) rotate(0deg)'},
+				],
+				{
+					duration: 600,
+				}
+			)
 		}
 	}
 	
@@ -72,6 +99,7 @@ export class LoginComponent {
 				this.requestSent = true;
 		  	},
 		  	(error) => {
+				this.animateFailedLogin()
 				if(this.fieldsFull()) {
 			  		this.isAuthenticated = false;
 				}
@@ -79,5 +107,4 @@ export class LoginComponent {
 		  	}
 		);
 	}
-
 }

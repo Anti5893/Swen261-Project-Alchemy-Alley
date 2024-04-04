@@ -17,14 +17,14 @@
             </div>
         </div>
         <div class="login-buttons">
-            <div class="login-button">
-                <button class="button" (click)="onClick(username,password)">
-                    Login<i class="fa-solid fa-door-open"></i>
-                </button>
-            </div>
             <div class="register-button">
                 <button class="button" (click) = "animateLogin(['/register'])">
                     Register<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="login-button">
+                <button class="button" (click)="onClick(username,password)" #loginButton (mouseenter)="onMouseEnter(loginButton)" (mouseleave)="onMouseLeave(loginButton)">
+                    Login<i class="fa-solid fa-door-closed"></i>
                 </button>
             </div>
         </div>

@@ -8,9 +8,12 @@
 		{{ product.quantity }}
 	</div>
 	<div
-		class="card-in-cart-indicator"
-		*ngIf="showQuantity && amountOfTimesInCart() >= 2"
-		tooltip="Amount in Cart"
+		class="card {{ fitToSize ? 'fit-to-size' : '' }}"
+		[ngClass]="formClasses()"
+		[style.--card-color]="getColor()"
+		[style.background-image]="
+			'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'
+		"
 	>
 		{{ amountOfTimesInCart() }}
 	</div>

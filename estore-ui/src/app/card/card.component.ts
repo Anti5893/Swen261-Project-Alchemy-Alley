@@ -10,7 +10,6 @@ import { UserService } from "../user.service";
 	styleUrl: "./card.component.css",
 })
 export class CardComponent {
-
 	@Input({ required: true }) product!: Product;
     @Input() inCart: boolean = false;
 	@Input() fitToSize: boolean = false;
@@ -35,6 +34,13 @@ export class CardComponent {
 				return color;
 			}
 			return "lightgrey";
+		}
+		return "";
+	}
+
+	getBackground(): string {
+		if (this.isUnlocked()) {
+			return `/assets/${this.product.type.toLowerCase()}-repeating-background.png`;
 		}
 		return "";
 	}
@@ -124,5 +130,4 @@ export class CardComponent {
 			this.removedEvent.emit(this.product);
 		}
 	}
-
 }
