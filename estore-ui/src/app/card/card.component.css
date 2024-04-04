@@ -16,19 +16,18 @@
 .card-wrapper.is_animating {
     animation-name: fadeIn, card-float;
     animation-duration: 500ms, 3s;
-    animation-fill-mode: forwards, none;
-    animation-iteration-count: unset, infinite;
-	/* animation: fadeIn 500ms forwards ease-out, card-float 3s infinite ease-in-out; */
+    animation-fill-mode: forwards, unset;
+    animation-iteration-count: 1, infinite;
 	animation-delay: var(--card-delay), 0ms;
 }
 
 @keyframes fadeIn {
 	from {
-		transform: translateY(20px);
+		transform: translate(0, 20px);
 		opacity: 0%;
 	}
 	to {
-		transform: translateY(0px);
+		transform: translate(0, 0px);
 		opacity: 100%;
 	}
 }
