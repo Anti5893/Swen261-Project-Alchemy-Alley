@@ -47,7 +47,7 @@
 		<input type="text" id="cc-ccv" name="cc-ccv" inputmode="numeric" pattern="[0-9]{3,4}" placeholder="123" (change)="(0)" required #ccv>
 	</div>
 	<br>
-	<button class="button" [disabled]="!isCartFull() || hasInvalidFields(name, card, exp, ccv)" (click) = "handlePurchase()" type="submit">
+	<button class="button" [disabled]="this.products.length == 0 || hasInvalidFields(name, card, exp, ccv)" (click) = "handlePurchase()" type="submit">
 		<i class="fa-solid fa-wand-magic-sparkles"></i>
 		Purchase Cart
 	</button>
