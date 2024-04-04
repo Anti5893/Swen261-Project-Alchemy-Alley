@@ -18,6 +18,7 @@
     animation-duration: 500ms, 3s;
     animation-fill-mode: forwards, unset;
     animation-iteration-count: 1, infinite;
+    animation-timing-function: ease-out, ease-in-out;
 	animation-delay: var(--card-delay), 0ms;
 }
 
