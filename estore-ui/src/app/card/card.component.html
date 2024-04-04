@@ -7,17 +7,17 @@
 	<div class="card-in-stock-indicator" tooltip="Quantity" *ngIf="isUnlocked()">
 		{{ product.quantity }}
 	</div>
+	<div class="card-in-card-indicator">
+		{{ amountOfTimesInCart() }}
+	</div>
 	<div
-		class="card {{ fitToSize ? 'fit-to-size' : '' }}"
+		class="card card-first {{ fitToSize ? 'fit-to-size' : '' }}"
 		[ngClass]="formClasses()"
 		[style.--card-color]="getColor()"
 		[style.background-image]="
 			'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'
 		"
 	>
-		{{ amountOfTimesInCart() }}
-	</div>
-    <div class="card card-first {{ fitToSize ? 'fit-to-size' : '' }}" [ngClass]="formClasses()">
 		<div class="card-img">
 			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />
 		</div>
@@ -30,7 +30,14 @@
 		<div class="card-glow"><div class="card-bottom"></div></div>
 		<div class="card-glow"><div class="card-left"></div></div>
 	</div>
-	<div class="card card-second {{ fitToSize ? 'fit-to-size' : '' }}" [ngClass]="formClasses()" *ngIf="amountOfTimesInCart() >= 2 && !inCart">
+	<div
+		class="card card-second {{ fitToSize ? 'fit-to-size' : '' }}"
+		[ngClass]="formClasses()"
+		[style.background-image]="
+			'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'
+		"
+		*ngIf="amountOfTimesInCart() >= 2 && !inCart"
+	>
 		<div class="card-img">
 			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />
 		</div>
