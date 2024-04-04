@@ -14,7 +14,13 @@
 			</li>
 			<li class="craft-result" *ngIf="isPurchased() && getUnlocked()">
 				<h3>PRODUCT UNLOCKED</h3>
-				<app-card [product]="getUnlocked()" [index]="0"></app-card>
+				<app-card
+					[product]="getUnlocked()"
+					[enableStacking]="false"
+					[showQuantity]="false"
+					[showOutOfStock]="false"
+                    [index]="0"
+				></app-card>
 			</li>
 			<li class="craft-result" *ngIf="isPurchased() && !getUnlocked()">
 				<h3>BETTER LUCK NEXT TIME</h3>

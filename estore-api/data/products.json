@@ -4,22 +4,22 @@
     "name": "Fire Fizzle",
     "type": "FIRE",
     "price": 10,
-    "quantity": 50,
+    "quantity": 2,
     "imageURL": "/assets/spell_images/fire.png"
   },
   {
     "id": 2,
     "name": "Water Fizzle",
     "type": "WATER",
-    "price": 10,
-    "quantity": 50,
+    "price": 15,
+    "quantity": 1,
     "imageURL": "/assets/spell_images/water.png"
   },
   {
     "id": 3,
     "name": "Air Fizzle",
     "type": "AIR",
-    "price": 10,
+    "price": 1,
     "quantity": 50,
     "imageURL": "/assets/spell_images/air.png"
   },
@@ -27,7 +27,7 @@
     "id": 4,
     "name": "Earth Fizzle",
     "type": "EARTH",
-    "price": 10,
+    "price": 5,
     "quantity": 50,
     "imageURL": "/assets/spell_images/earth.png"
   },

@@ -82,6 +82,8 @@ export class RegisterComponent {
 
     if(this.password != this.passwordConfirm) {
       this.passwordsMatch = false;
+      this.animateFailedRegister()
+      return;
     }
 
     if(this.fieldsFull() && this.isStrongPassword()) {
@@ -93,6 +95,7 @@ export class RegisterComponent {
         },
         (error) => {
           if(error.status == 409) {
+            this.animateFailedRegister()
             this.showErrorMessage = true;
           }
         }

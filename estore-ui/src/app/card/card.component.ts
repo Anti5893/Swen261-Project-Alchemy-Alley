@@ -168,4 +168,5 @@ export class CardComponent implements OnInit {
 			this.removedEvent.emit(this.product);
 		}
 	}
+	
 }

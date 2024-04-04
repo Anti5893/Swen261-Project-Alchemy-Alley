@@ -108,13 +108,8 @@ public class UsersController {
 	public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
 		LOG.info("POST /users/checkout " + user);
 
-		if (user.getCart().length != 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		int[] cart = user.getCart();
 		Integer[] cartBoxed = Arrays.stream(cart).boxed().toArray(Integer[]::new);
-
-		Recipe recipe = craftingDAO.getRecipe(cartBoxed);
-		if(recipe == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		Product result = productDAO.getProduct(recipe.getResult());
 
 		for (int i : cart) {
 			Product temp = productDAO.getProduct(i);
@@ -124,6 +119,11 @@ public class UsersController {
 				productDAO.updateProduct(temp.decrementStock());
 			}
 		}
+
+		if (user.getCart().length != 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		Recipe recipe = craftingDAO.getRecipe(cartBoxed);
+		if(recipe == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		Product result = productDAO.getProduct(recipe.getResult());
 
 		user = user.clearCart().addToUnlocked(result.getId());
 		userDAO.updateUser(user);
