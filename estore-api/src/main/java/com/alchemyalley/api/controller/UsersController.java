@@ -108,7 +108,6 @@ public class UsersController {
 	public ResponseEntity<Product> doCraft(@RequestBody User user) throws IOException {
 		LOG.info("POST /users/checkout " + user);
 
-		if (user.getCart().length != 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		int[] cart = user.getCart();
 		Integer[] cartBoxed = Arrays.stream(cart).boxed().toArray(Integer[]::new);
 
@@ -124,6 +123,7 @@ public class UsersController {
 				productDAO.updateProduct(temp.decrementStock());
 			}
 		}
+		if (user.getCart().length != 2) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 		user = user.clearCart().addToUnlocked(result.getId());
 		userDAO.updateUser(user);
