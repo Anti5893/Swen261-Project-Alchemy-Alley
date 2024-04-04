@@ -10,10 +10,12 @@ import { UserService } from "../user.service";
 	styleUrl: "./card.component.css",
 })
 export class CardComponent {
+	
 	@Input({ required: true }) product!: Product;
-    @Input() inCart: boolean = false;
-	@Input() fitToSize: boolean = false;
+    @Input() enableStacking: boolean = true;
 	@Input() showQuantity: boolean = true;
+	@Input() showOutOfStock: boolean = true;
+	@Input() fitToSize: boolean = false;
 	@Output() removedEvent: EventEmitter<Product> = new EventEmitter<Product>();
 
 	private colorMap = {
@@ -56,7 +58,7 @@ export class CardComponent {
 		if ((this.maxCartSize() && !this.isInCart()) || !this.hasEnoughInStock()) {
 			classes += "card-blocked ";
 		}
-		if (!this.hasEnoughInStock()) {
+		if (!this.hasEnoughInStock() && this.showOutOfStock) {
 			classes += "card-out-of-stock ";
 		}
 		return classes;

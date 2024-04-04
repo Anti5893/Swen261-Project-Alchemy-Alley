@@ -68,7 +68,7 @@
 	cursor: pointer;
 }
 
-.card.card-blocked {
+.card:not(.card-selected).card-blocked {
 	cursor: not-allowed;
 }
 
@@ -243,35 +243,6 @@
 	justify-content: center;
 	align-items: center;
 	opacity: 1;
-}
-
-/* Card in Cart Indicator */
-
-.card-in-cart-indicator {
-	all: unset;
-
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 2;
-	margin-top: -0.5rem;
-	margin-right: -0.5rem;
-
-	width: 2.5rem;
-	height: 2.5rem;
-
-	border-radius: 50%;
-	background-color: var(--accent);
-	border: solid var(--accent-900) 0.2rem;
-	color: var(--accent-900);
-	font-size: 1.5rem;
-	font-weight: bold;
-	filter: drop-shadow(0px 0px 4px var(--accent));
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	opacity: 1;
-	visibility: hidden;
 }
 
 /* Card Out of Stock */

@@ -4,23 +4,18 @@
 	(contextmenu)="removeFromCart($event)"
 	[style.--card-color]="getColor()"
 >
-	<div class="card-in-stock-indicator" tooltip="Quantity" *ngIf="isUnlocked()">
+	<div class="card-in-stock-indicator" tooltip="Quantity" *ngIf="showQuantity && isUnlocked() && hasEnoughInStock()">
 		{{ product.quantity }}
-	</div>
-	<div class="card-in-card-indicator">
-		{{ amountOfTimesInCart() }}
 	</div>
 	<div
 		class="card card-first {{ fitToSize ? 'fit-to-size' : '' }}"
 		[ngClass]="formClasses()"
 		[style.--card-color]="getColor()"
-		[style.background-image]="
-			'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'
-		"
+		[style.background-image]="'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'"
 	>
 		<div class="card-img">
 			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}"/>
-			<div class="out-of-stock">
+			<div *ngIf="showOutOfStock && isUnlocked()" class="out-of-stock">
 				<h1>OUT OF STOCK</h1>
 			</div>
 		</div>
@@ -39,7 +34,7 @@
 		[style.background-image]="
 			'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + getBackground() + ')'
 		"
-		*ngIf="amountOfTimesInCart() >= 2 && !inCart"
+		*ngIf="amountOfTimesInCart() >= 2 && enableStacking"
 	>
 		<div class="card-img">
 			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />

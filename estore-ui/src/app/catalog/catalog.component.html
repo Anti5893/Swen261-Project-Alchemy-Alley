@@ -129,6 +129,7 @@
 			<app-card
 				*ngFor="let product of getCurrentUserObjectCart()"
 				[product]="product"
+				[showOutOfStock]="false"
                 [fitToSize]="true"
 			></app-card>
 		</div>
