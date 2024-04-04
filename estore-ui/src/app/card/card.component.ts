@@ -12,6 +12,7 @@ import { UserService } from "../user.service";
 export class CardComponent {
 
 	@Input({ required: true }) product!: Product;
+    @Input() inCart: boolean = false;
 	@Input() fitToSize: boolean = false;
 	@Input() showQuantity: boolean = true;
 	@Output() removedEvent: EventEmitter<Product> = new EventEmitter<Product>();
@@ -24,7 +25,7 @@ export class CardComponent {
 		ENERGY: "#e100ff",
 	};
 	lockedImageUrl = "https://i.imgur.com/qPuLjji.png";
-	
+
 	constructor(private credentialsService: CredentialsService, private userService: UserService) {}
 
 	getColor(): string {
@@ -116,12 +117,12 @@ export class CardComponent {
 		if (curUser && curUser.cart && this.formClasses().includes("selected")) {
 			const indexOfProduct = curUser.cart.indexOf(this.product.id);
 			curUser.cart.splice(indexOfProduct, 1);
-			
+
 			this.credentialsService.storeCurrentUser({ ...curUser });
 			this.userService.updateUser(curUser).subscribe({});
 
 			this.removedEvent.emit(this.product);
 		}
 	}
-  
+
 }

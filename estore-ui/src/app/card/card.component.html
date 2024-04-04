@@ -1,12 +1,33 @@
-<div class="card-wrapper" (click)="addToCart()" (contextmenu)="removeFromCart($event)">
-	<div class="card-in-cart-indicator" *ngIf="showQuantity && amountOfTimesInCart() >= 2">
-		{{ amountOfTimesInCart() }}
+<div
+	class="card-wrapper noselect"
+	(click)="addToCart()"
+	(contextmenu)="removeFromCart($event)"
+	[style.--card-color]="getColor()"
+>
+	<div class="card-in-stock-indicator" tooltip="Quantity" *ngIf="isUnlocked()">
+		{{ product.quantity }}
 	</div>
 	<div
-		class="card {{ fitToSize ? 'fit-to-size' : '' }}"
-		[ngClass]="formClasses()"
-		[style.--card-color]="getColor()"
+		class="card-in-cart-indicator"
+		*ngIf="showQuantity && amountOfTimesInCart() >= 2"
+		tooltip="Amount in Cart"
 	>
+		{{ amountOfTimesInCart() }}
+	</div>
+    <div class="card card-first {{ fitToSize ? 'fit-to-size' : '' }}" [ngClass]="formClasses()">
+		<div class="card-img">
+			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />
+		</div>
+		<div class="card-info">
+			<p>{{ isUnlocked() ? product.name : "???" }}</p>
+			<div class="card-price">${{ isUnlocked() ? product.price : "???" }}</div>
+		</div>
+		<div class="card-glow"><div class="card-top"></div></div>
+		<div class="card-glow"><div class="card-right"></div></div>
+		<div class="card-glow"><div class="card-bottom"></div></div>
+		<div class="card-glow"><div class="card-left"></div></div>
+	</div>
+	<div class="card card-second {{ fitToSize ? 'fit-to-size' : '' }}" [ngClass]="formClasses()" *ngIf="amountOfTimesInCart() >= 2 && !inCart">
 		<div class="card-img">
 			<img src="{{ isUnlocked() ? product.imageURL : lockedImageUrl }}" />
 		</div>
