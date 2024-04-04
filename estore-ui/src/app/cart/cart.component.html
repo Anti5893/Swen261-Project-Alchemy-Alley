@@ -48,7 +48,7 @@
 	</div>
 	<br>
 	<button class="button" [disabled]="this.products.length == 0 || hasInvalidFields(name, card, exp, ccv)" (click) = "handlePurchase()" type="submit">
-		<i class="fa-solid fa-wand-magic-sparkles"></i>
-		Purchase Cart
+		<i class="fa-solid fa-wand-magic-sparkles"></i>Purchase Cart
 	</button>
+	<p *ngIf="!isCartInStock()">Can't Purchase: One of your spells is out of stock.</p>
 </div>
