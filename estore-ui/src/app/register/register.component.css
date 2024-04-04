@@ -3,6 +3,31 @@
     100%{left: 50%}
 }
 
+@keyframes arrow-animation {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes register-icon-animation {
+    25%{transform: translateY(3px);}
+    50%{transform: translateY(0px);}
+    75%{transform: translateY(-3px);}
+    100%{transform: translateY(0px);}
+}
+
+.back-button:hover{
+    .fa-solid{
+        animation: arrow-animation 750ms linear infinite;
+    }
+}
+
+.register-button:hover{
+    .fa-solid{
+        animation: register-icon-animation 750ms linear infinite;
+    }
+}
+
 .register-box{
     position: absolute;
     top: 45%;

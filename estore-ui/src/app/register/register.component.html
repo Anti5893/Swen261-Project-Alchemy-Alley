@@ -22,13 +22,17 @@
             </div>
         </div>
         <div class="register-buttons">
-            <button class="button" (click)="animateRegister(['/login'])">
-                <i class="fa-solid fa-arrow-left"></i>
-                Back To Login
-            </button>
-            <button class="button" (click)="registerOnClick(username,password)">
-                Register<i class="fa-solid fa-scroll"></i>
-            </button>
+            <div class = "back-button">
+                <button class="button" (click)="animateRegister(['/login'])">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back To Login
+                </button>
+            </div>
+            <div class = "register-button">
+                <button class="button" (click)="registerOnClick(username,password)">
+                    Register<i class="fa-solid fa-scroll"></i>
+                </button>
+            </div>
         </div>
         <p *ngIf="showErrorMessage">User Already Exists</p>
         <p *ngIf="showPasswordsDontMatch()">Passwords Don't Match</p>
