@@ -115,7 +115,7 @@
 				[products]="groups[productGroup]"
 			></app-card-group>
 		</div>
-		<ng-template id="catalog-products-empty" #elseBlock>No products found</ng-template>
+		<ng-template #elseBlock><div id="catalog-products-empty"><h2 id="products-empty-message">No products found</h2><div id="products-empty-frown"><p>😔</p></div></div></ng-template>
 	</div>
 	<div
 		id="catalog-cart-view"

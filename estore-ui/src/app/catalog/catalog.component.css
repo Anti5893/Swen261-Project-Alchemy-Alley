@@ -76,3 +76,25 @@
 	flex-basis: calc(50% - 1rem);
 	flex-grow: auto;
 }
+
+#catalog-products-empty {
+    width: 100%;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-sizing: border-box;
+}
+#products-empty-message {
+    width: 100%;
+    text-align: center;
+}
+#products-empty-frown {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#products-empty-frown > p {
+    width: auto;
+    height: auto;
+    margin-top: 4rem;
+    transform: scale(8);
+}

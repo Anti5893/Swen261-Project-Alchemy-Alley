@@ -10,7 +10,6 @@ import { CredentialsService } from "../credentials.service";
 	styleUrl: "./catalog.component.css",
 })
 export class CatalogComponent implements OnInit {
-	
 	allProducts: Product[] = [];
 	searchQuery: string = "";
 	groupBy: string = "completion";
@@ -264,5 +263,4 @@ export class CatalogComponent implements OnInit {
 		}
 		return [];
 	}
-
 }
