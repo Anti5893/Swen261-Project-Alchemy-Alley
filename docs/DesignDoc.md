@@ -63,13 +63,24 @@ Admin Functionality
 - An Owner should not have access to a cart.
 
 #### Sprint 4
-> TBD
 
 ### MVP Features
->  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
-
+- A user (customer or e-store owner) can login or out to the application-minimal
+authentication
+- An e-store owner logs in using the reserved username admin
+- Any other username can be assumed to be a customer
+- Customer should be able to see a list of products
+- A customer should be able to search for a product
+- A customer should be able to add or remove a product from their shopping cart
+- A customer that has items in their shopping cart should be able to log out and log
+back in with the items retained in their shopping cart
+- A customer should be able to proceed to check out their items for purchase
+- An e-store owner can add, remove, and edit the product data in the inventory
+- An e-store owner should not have access to a shopping cart
+- All of the pages and components required for the above should have an appealing and consistent style.
 ### Enhancements
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+- Newly registered users should require a strong password, including a symbol, number, capital, and minimum 8 characters; This password should be hashed to prevent it being read from plain text.
+- Assuming correct conditions, when a customer checks out with 2 items in their cart which have a recipe defined by the system, they unlock the ability to purchase a new product.
 
 
 ## Application Domain
