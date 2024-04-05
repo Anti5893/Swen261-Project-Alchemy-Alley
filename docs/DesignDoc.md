@@ -246,12 +246,10 @@ As of Sprint 2, all acceptance criteria are passing. There were no complications
 
 #### Unit Testing
 
-> _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets._
-
+#### Strategy
+> TODO, not sure what to say here - Evan
 #### Code Coverage
+We targetted 90% as our requirement for code coverage, mostly informed by the rubric for the project marking 90% as the metric for full credit. We didn't target any higher, because while coverage is a useful metric for tests, it is not the full picture, and targeting 100% would likely have ended up with us writing poor quality tests that, although covering every line, would not be terribly valuable.
 
 ![Overall Code Coverage](code-coverage-overall.png)
 
@@ -259,15 +257,15 @@ Currently, we are meeting the 90% coverage requirement. The largest tier contrib
 
 ![Overall Code Coverage](code-coverage-persistence.png)
 
-Based on the report, CraftingFileDAO is not being tested enough. This is because it is a work-in-progress component and will be fully developed and tested in the next sprint.
+Based on the report, CraftingFileDAO is not being tested enough. This file was implemented without sufficient tests, and it's coverage was not viewed frequently enough for this to be caught, more focus on testing during sprint 3, rather than almost entirely focusing on the front end, would likely have prevented this file from becoming an issue.
 
 ![Overall Code Coverage](code-coverage-model.png)
 
-Similar to the Persistence Tier, Recipe is not being tested enough in this tier because it is a part of a work-in-progress feature. This will be resolved in the next sprint with increased code coverage.
+Model tier is well covered, as most of it was completed in sprint 2, but our lack of focus on testing in sprint 3 has really hurt the coverage of the recipe class, which, as part of 10% enhancement, was added in sprint 3. Regardless, because the recipe is a small part of the code base, our overall coverage for the tier is still solid.
 
 ![Overall Code Coverage](code-coverage-controller.png)
 
-Based on the results of this report, the Controller Tier is very well tested, with the exception of `InventoryController#getProducts()`. This missed method is also resulting in an increase in missed branches within this tier. Come next sprint, this could easily be resolved by the addition of 1-2 more unit tests.
+Our controller tier is excellently tested, but as noted in our sprint 2 design doc, one method `InventoryController.getProducts()` is entirely untested, and we never revisited existing methods for unit testing, definitely needed to put more focus on testing in our sprint 3 planning.
 
 ## Ongoing Rationale
 
