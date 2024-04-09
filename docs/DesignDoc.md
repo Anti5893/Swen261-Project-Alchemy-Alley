@@ -280,7 +280,7 @@ These decisions include:
 * 4 Tab width with tabs rather than spaces
 
 ### (2024/02/22): Sprint 2
-We discussed the basic layout for the site aswell as how our website would be structered internally.
+We discussed the basic layout for the site as well as how our website would be structured internally.
 This included things like:
 
 * What our navbar would contain
@@ -303,3 +303,18 @@ We decided to make the login page our root page because of one of our enhancemen
 All of our brainstorming can be seen below on the whiteboard.
 
 ![A picture of a whiteboard containing crude mockups of how our site might be laid out](ui-mockup.jpg)
+
+### (2024/03/24): Sprint 3
+We discussed a consistent look and color scheming for the styling of the site. Our team utilized https://www.realtimecolors.com to propose different styling options for our site and decided on a final set of colors and fonts.
+Decisions Included
+Color:
+* Background: #230b2a
+* Text: #FFFFFF
+* Primary: #791BAF
+* Secondary: #B888DD
+* Accent: #F0BF0F
+Fonts:
+* Headings: Vollkorn SC
+* Paragraphs: Underdog
+
+We also decided on the admin page being displayed and edited as a spread-sheet like setup. 
