@@ -255,7 +255,7 @@ As of Sprint 2, all acceptance criteria are passing. There were no complications
 
 #### Strategy
 
-> TODO, not sure what to say here - Evan
+Our strategy when writing tests was to write tests confirming functionality as a part of the solution tasks for a given story. This meant that the same person writing the tests was writing the code, which we doubt is ideal. We likely would have had a better, and easier time adhering to a strategy such as pair or ping-pong programming. It also meant that we did not have a final pass to correct or update unit tests for old methods, that were not added by sprint 3 stories.
 
 #### Code Coverage
 
