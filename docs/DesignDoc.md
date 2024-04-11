@@ -154,6 +154,12 @@ Whether an admin or buyer is logged in, a logout button conveniently sits at the
 > - _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
 > - _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
+![Sequence Diagram 1](Sequence-Diagram-Logging-In.png)
+![Sequence Diagram 1](Sequence-Diagram-Adding-Product.png)
+
+
+
+
 ### ViewModel Tier
 
 The classes that support the ViewModel tier are as follows:
