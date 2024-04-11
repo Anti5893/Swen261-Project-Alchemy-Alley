@@ -258,8 +258,8 @@ There are multiple cases, mainly with logs, that SonarQube tells us that we coul
 Somethings that we could've improved on, if we had more time, includes:
 
 - Fixing all the little SonarQube issues
-- Replacing `sortByID` with `sortByDateUnlocked`
-  - As it would be a quality of life improvement to the user over sorting by a product's ID.
+- Saving the date a user unlocked a spell
+  - As it would allow us to sort products by "date unlocked". This would be a quality of life improvement to the user over sorting by a product's ID.
 - More tests
   - To increase code coverage
 - Saving the user's credit card data
