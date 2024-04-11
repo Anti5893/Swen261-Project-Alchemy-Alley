@@ -109,7 +109,7 @@ This section describes the application architecture.
 
 The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 
-![The Tiers & Layers of the Architecture](Tiers-Layers-Diagram.jpg)
+![The Tiers & Layers of the Architecture](Tiers-Layers-Diagram.png)
 
 ### Summary
 
@@ -117,9 +117,7 @@ The majority of our architecture choices are constraints defined by our product 
 
 ### Overview of User Interface
 
-This section describes the web interface flow; this is how the user views and interacts with the web application.
-
-> _Provide a summary of the application's user interface. Describe, from the user's perspective, the flow of the pages in the web application._
+This section describes the web interface flow; this is how the user views and interacts with the web application.  
 
 ### View Tier
 
@@ -127,12 +125,27 @@ This section describes the web interface flow; this is how the user views and in
 > Describe the types of components in the tier and describe their
 > responsibilities. This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
+
+Upon entering the site a user is first met with the login component which offers them the ability to either login to an existing account
+or register for a new account. A user can begin the registration process by click the "register" button on the login page. From there 
+they must enter a unique username and strong password to be able to finalize their registration by clicking the "register" button on the register
+component. After registering a new account they can then return to the login component and login to enter the site. They are then automatically routed to the 
+catalog page component which displays our available spell products as color coated cards that display all relevant product information such as name, price and spell element 
+type. A user has the option to select one or two spells to buy as per the 10% feature that enhances the buying experience into a crafting mechanism. Their selected cards will highlight and shimmer on the catalog page to indicate that they are currently selected as well a sticky menu appears in the bottom right corner to indicate while they continue to browse products which spells they have in their cart. During browsing, a user can search for a spell by name, filter by locked/unlocked, and sort by alphabetical, product ID, and element type. When a user is ready to checkout they can click the cart button that has a shopping cart icon in the top nav bar. They are then routed to the cart component page where they can see the spells that they currently have in their cart on the left side of the screen in the same card style as the catalog page. On the right side of the screen they must enter payment credentials such as their name and credit card information in order to be able to purchase what is in their cart. If the combination of the two products that they bough craft a new product then a message will display showing them the card of the product they have now unlocked and can access to combine with other products. If no such product can be crafted from what a user just bought then they will be notified via a message informing them to try again.   
+
+An admin can enter the admin page in the same way in which a buyer enters the site however, they will use the admin credentials to login. Upon entering the admin component page the admin is met with a spreadsheet view of all of the products currently in inventory. They can elect to modify/update any piece of product information they wish and conveniently save via a save button that is attached to every product entry in the spreadsheet view. If the admin wishes to remove a product they can do so by clicking the delete button on the specific product which will remove the product entirely from the catalog page.  
+  
+Whether an admin or buyer is logged in, a logout button conveniently sits at the top right of the navbar to allow users to return to the login page. 
+
+
 >
 > _**[Sprint 4]** You must provide at least **2 sequence diagrams** as is relevant to a particular aspects
 > of the design that you are describing. (**For example**, in a shopping experience application you might create a
 > sequence diagram of a customer searching for an item and adding to their cart.)
 > As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
 > to help illustrate the end-to-end flow._
+
+## 
 >
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
 >
