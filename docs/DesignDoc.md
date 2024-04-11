@@ -26,16 +26,16 @@ The purpose of this project is to become familiar with the Agile software develo
 
 | Term        | Definition                                                        |
 | ----------- | ----------------------------------------------------------------- |
-| SPA         | Single Page                                                       |
-| Crafting    | Process of how users unlock new products                          |
-| DAO         | Data Access Object                                                |
+| SPA         | Single Page Application |
+| Crafting    | Process of how users unlock new products |
+| DAO         | Data Access Object |
 | Service     | Implements data / Business Logic not directly related to the view |
-| Routing     | Angular component for changing the view of the page               |
-| UI          | User Interface                                                    |
-| API         | Application Program Interface                                     |
-| Controller  | Acts as a communication point between the model and view          |
-| Model       | Acts as the data structure of the application                     |
-| Persistence | Acts as the data storage mechanism for the application            |
+| Routing     | Angular component for changing the view of the page |
+| UI          | User Interface |
+| API         | Application Program Interface |
+| Controller  | Acts as a communication point between the model and view |
+| Model       | Acts as the data structure of the application |
+| Persistence | Acts as the data storage mechanism for the application |
 
 ## Requirements
 
@@ -43,9 +43,7 @@ This section describes the features of the application.
 
 ### Definition of MVP
 
-#### Sprint 2
-
-For Sprint 2, our MVP was poorly defined, as the provided MVP requirements are for the U-fund project. Therefore we had to adapt these requirements for our webstore.
+There are several different categories for the Minimal Viable Product (MVP) that must be delivered. This does not include enhancements that we chose for our E-Store.
 
 Minimal Authentication
 
@@ -64,8 +62,6 @@ Admin Functionality
 
 - An Owner can add, modify, and delete products.
 - An Owner should not have access to a cart.
-
-#### Sprint 4
 
 ### MVP Features
 
