@@ -26,16 +26,16 @@ The purpose of this project is to become familiar with the Agile software develo
 
 | Term        | Definition                                                        |
 | ----------- | ----------------------------------------------------------------- |
-| SPA         | Single Page                                                       |
-| Crafting    | Process of how users unlock new products                          |
-| DAO         | Data Access Object                                                |
+| SPA         | Single Page Application |
+| Crafting    | Process of how users unlock new products |
+| DAO         | Data Access Object |
 | Service     | Implements data / Business Logic not directly related to the view |
-| Routing     | Angular component for changing the view of the page               |
-| UI          | User Interface                                                    |
-| API         | Application Program Interface                                     |
-| Controller  | Acts as a communication point between the model and view          |
-| Model       | Acts as the data structure of the application                     |
-| Persistence | Acts as the data storage mechanism for the application            |
+| Routing     | Angular component for changing the view of the page |
+| UI          | User Interface |
+| API         | Application Program Interface |
+| Controller  | Acts as a communication point between the model and view |
+| Model       | Acts as the data structure of the application |
+| Persistence | Acts as the data storage mechanism for the application |
 
 ## Requirements
 
@@ -43,9 +43,7 @@ This section describes the features of the application.
 
 ### Definition of MVP
 
-#### Sprint 2
-
-For Sprint 2, our MVP was poorly defined, as the provided MVP requirements are for the U-fund project. Therefore we had to adapt these requirements for our webstore.
+There are several different categories for the Minimal Viable Product (MVP) that must be delivered. This does not include enhancements that we chose for our E-Store.
 
 Minimal Authentication
 
@@ -64,8 +62,6 @@ Admin Functionality
 
 - An Owner can add, modify, and delete products.
 - An Owner should not have access to a cart.
-
-#### Sprint 4
 
 ### MVP Features
 
@@ -93,11 +89,11 @@ This section describes the application domain.
 ![Domain Model](domain-model.png)
 
 This model demonstrates what entities exist in our
-E-Store and how they interact. Based on the MVP requirements, two main types of users exist: the Owner and Buyers. There only exists one Owner (or Product Owner). On the contrary, there is no limit on the number of Buyers. Both of these types of users can log in to the site and log out of the E-Store, as shown in the Domain Model.
+E-Store and how they interact. Based on the MVP requirements, two main types of users exist: the Owner and Buyers. There only exists one Owner (or Product Owner). On the contrary, there is no limit on the number of Buyers. Both of these types of users can log in to the site and log out of the E-Store, as shown in the Domain Model. In addition, Buyers can register new accounts with strong passwords to access the E-Store. The strong password requirement is an enhancement that keeps accounts more secure from attacks.
 
-A Buyer has many possible interactions that are unique to them. Mainly, they can search and view the Inventory. Searching provides a mean of limiting the results shown. The Inventory itself is divided into categories containing any number of Products. Each Product has descriptive information, including its name, price, quantity, and type. The Inventory may divide itself into categories based on the type of each Product, or however the Buyer wishes to view the Inventory.
+A Buyer has many possible interactions that are unique to them. Mainly, they can search and view the Inventory. Searching provides a mean of limiting the results shown. The Inventory itself is divided into categories containing any number of Products. Each Product has descriptive information, including its name, price, quantity, type, and image. The Inventory may divide itself into categories based on the type of each Product, or however the Buyer wishes to view the Inventory. This may include filtering and sorting by various attributes available to them, such as price or completion.
 
-In addition, the Buyer can also add or remove products to their Shopping Cart. From the Shopping Cart, all of its contents can be paid for using one of the Payment Methods shown in the Domain Model.
+In addition, the Buyer can also add or remove products to their Shopping Cart. From the Shopping Cart, all of its contents can be paid for using one of the Payment Methods shown in the Domain Model. Our second enhancement involves the fact that Products can be crafted together to unlock and discover a new Product. Buyers can only view Products that were unlocked by default or have discovered by purchasing its combination of two Products (e.g, Water and Fire might yield Steam).
 
 As for the Owner, they have an important role too. The Owner is mainly responsible for updating the Inventory in various ways. This may include: adding products, removing products, or editing products. Editing a Product is considered changing a piece of its data in some way so that the Buyer can see the change made in the Inventory.
 
@@ -180,7 +176,7 @@ As part of our 10% feature they have an array of unlocked spells which starts ou
 
 ### 1. Single Responsibility
 
-With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. Even in our most basic skeleton we have our REST api split into many classes, for example:
+With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. One subsystem of the backend that displays this clearly is in the product and related classes:
 
 - Product - Holds the state of each project, only has mutators and getters.
 - ProductFileDAO - Holds all the methods for interacting with, and creating, an array of products, but has no state.
@@ -197,7 +193,7 @@ After reviewing our project, we noticed that, because of the nature of our e-sto
 
 ### 3. Low Coupling
 
-Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
+Our current project structure is in a great place with coupling. All of our codebase follows this principle, but the best example is the Product subsystem:
 
 - Product - Product is only directly referenced in the ProductFileDao
 - ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
