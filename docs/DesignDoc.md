@@ -69,15 +69,13 @@ Admin Functionality
 
 ### MVP Features
 
-- A user (customer or e-store owner) can login or out to the application-minimal
-    authentication
+- A user (customer or e-store owner) can login or out to the application-minimal authentication
 - An e-store owner logs in using the reserved username admin
 - Any other username can be assumed to be a customer
 - Customer should be able to see a list of products
 - A customer should be able to search for a product
 - A customer should be able to add or remove a product from their shopping cart
-- A customer that has items in their shopping cart should be able to log out and log
-    back in with the items retained in their shopping cart
+- A customer that has items in their shopping cart should be able to log out and log back in with the items retained in their shopping cart
 - A customer should be able to proceed to check out their items for purchase
 - An e-store owner can add, remove, and edit the product data in the inventory
 - An e-store owner should not have access to a shopping cart
@@ -187,8 +185,9 @@ With the structure of our project it is incredibly important to be strongly adhe
 - Product - Holds the state of each project, only has mutators and getters.
 - ProductFileDAO - Holds all the methods for interacting with, and creating, an array of products, but has no state.
 - InventoryController - A wrapper to allow the ProductFileDAO to interact with HTTP, holds no unnecessary state.
-    We will continue with this principle, keeping our code split into single responsibility classes and components as our REST API and front end expand.
-    ![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
+
+We will continue with this principle, keeping our code split into single responsibility classes and components as our REST API and front end expand.
+![OOP Design Diagram 1, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
 ### 2. Open/Closed
 
@@ -203,8 +202,9 @@ Our current project structure is in a great place with coupling. Each class curr
 - Product - Product is only directly referenced in the ProductFileDao
 - ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
 - InventoryController - Directly references ProductFileDAO, only references Product as far as taking input for create and update.
-    With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
-    ![OOP Design Diagram 3, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
+
+With this current setup we form a chain of couples, reducing the work required in the event of refactoring any of the given classes. We’re going to continue using this principle as we expand our backend api and frontend application.
+![OOP Design Diagram 3, a class diagram depicting the above](OOP-Design-Diagram-1-and-3.png)
 
 ### 4. Information Expert
 
@@ -242,6 +242,32 @@ Another vial concept that we use in our design of the E-Store is Pure Fabricatio
 > Include any relevant screenshot(s) with each area._
 >
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+
+### Static Code Analysis
+
+#### Unused Imports
+
+We have a couple issues, brought up by sonarqube, reguarding unused imports. This isn't a crazy challenge to fix as it's just removing one line per unused import. In the future we should've set outselves a soft deadline as to insure we have enough time to clean up these small mistakes.
+
+#### Irrelivent Public Modifier on Test Methods
+
+There are _a lot_ of errors complaining about a public modifier on test methods as I believe we have a public modifier on every test method. Apparently in JUnit 5, you don't need to have a public modifier for tests compared to in JUnit 4. This is another one of those small mistakes that we should've accounted for and set aside time to fix all of them nearing the end of Sprint 3.
+
+#### Inconsistant Use of Built-In Formatting for Strings
+
+### Future Design Improvements
+
+Somethings that we could've improved on, if we had more time, includes:
+
+- Fixing all the little SonarQube issues
+- Replacing `sortByID` with `sortByDateUnlocked`
+  - As it would be a quality of life improvement to the user over sorting by a product's ID.
+- More tests
+  - To increase code coverage
+- Saving the user's credit card data
+  - So they wouldn't have to input it every time
+
+There are multiple cases, mainly with logs, that SonarQube tells us that we could've used the built-in formatter. One of the problems this introduces is a hit to performance as everytime the method is ran, it will process the concatination.
 
 ## Testing
 
