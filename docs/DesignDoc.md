@@ -251,6 +251,8 @@ There are _a lot_ of errors complaining about a public modifier on test methods 
 
 #### Inconsistant Use of Built-In Formatting for Strings
 
+There are multiple cases, mainly with logs, that SonarQube tells us that we could've used the built-in formatter. One of the problems this introduces is a hit to performance as everytime the method is ran, it will process the concatination.
+
 ### Future Design Improvements
 
 Somethings that we could've improved on, if we had more time, includes:
@@ -262,8 +264,6 @@ Somethings that we could've improved on, if we had more time, includes:
   - To increase code coverage
 - Saving the user's credit card data
   - So they wouldn't have to input it every time
-
-There are multiple cases, mainly with logs, that SonarQube tells us that we could've used the built-in formatter. One of the problems this introduces is a hit to performance as everytime the method is ran, it will process the concatination.
 
 ## Testing
 
