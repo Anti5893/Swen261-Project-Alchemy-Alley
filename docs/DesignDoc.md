@@ -115,48 +115,21 @@ This section describes the web interface flow; this is how the user views and in
 
 ### View Tier
 
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities. This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
-
-Upon entering the site a user is first met with the login component which offers them the ability to either login to an existing account
-or register for a new account. A user can begin the registration process by click the "register" button on the login page. From there 
-they must enter a unique username and strong password to be able to finalize their registration by clicking the "register" button on the register
-component. After registering a new account they can then return to the login component and login to enter the site. They are then automatically routed to the 
-catalog page component which displays our available spell products as color coated cards that display all relevant product information such as name, price and spell element 
-type. A user has the option to select one or two spells to buy as per the 10% feature that enhances the buying experience into a crafting mechanism. Their selected cards will highlight and shimmer on the catalog page to indicate that they are currently selected as well a sticky menu appears in the bottom right corner to indicate while they continue to browse products which spells they have in their cart. During browsing, a user can search for a spell by name, filter by locked/unlocked, and sort by alphabetical, product ID, and element type. When a user is ready to checkout they can click the cart button that has a shopping cart icon in the top nav bar. They are then routed to the cart component page where they can see the spells that they currently have in their cart on the left side of the screen in the same card style as the catalog page. On the right side of the screen they must enter payment credentials such as their name and credit card information in order to be able to purchase what is in their cart. If the combination of the two products that they bough craft a new product then a message will display showing them the card of the product they have now unlocked and can access to combine with other products. If no such product can be crafted from what a user just bought then they will be notified via a message informing them to try again.   
+Upon entering the site a user is first met with the login component which offers them the ability to either login to an existing account or register for a new account. A user can begin the registration process by click the "register" button on the login page. From there, they must enter a unique username and strong password to be able to finalize their registration by clicking the "register" button on the register component. After registering a new account they can then return to the login component and login to enter the site. They are then automatically routed to the catalog page component which displays our available spell products as color coated cards that display all relevant product information such as name, price and spell element type. A user has the option to select one or two spells to buy as per the 10% feature that enhances the buying experience into a crafting mechanism. Their selected cards will highlight and shimmer on the catalog page to indicate that they are currently selected as well a sticky menu appears in the bottom right corner to indicate while they continue to browse products which spells they have in their cart. During browsing, a user can search for a spell by name, filter by locked/unlocked, and sort by alphabetical, product ID, and element type. When a user is ready to checkout they can click the cart button that has a shopping cart icon in the top nav bar. They are then routed to the cart component page where they can see the spells that they currently have in their cart on the left side of the screen in the same card style as the catalog page. On the right side of the screen they must enter payment credentials such as their name and credit card information in order to be able to purchase what is in their cart. If the combination of the two products that they bough craft a new product then a message will display showing them the card of the product they have now unlocked and can access to combine with other products. If no such product can be crafted from what a user just bought then they will be notified via a message informing them to try again.   
 
 An admin can enter the admin page in the same way in which a buyer enters the site however, they will use the admin credentials to login. Upon entering the admin component page the admin is met with a spreadsheet view of all of the products currently in inventory. They can elect to modify/update any piece of product information they wish and conveniently save via a save button that is attached to every product entry in the spreadsheet view. If the admin wishes to remove a product they can do so by clicking the delete button on the specific product which will remove the product entirely from the catalog page.  
   
 Whether an admin or buyer is logged in, a logout button conveniently sits at the top right of the navbar to allow users to return to the login page. 
 
-
->
-> _**[Sprint 4]** You must provide at least **2 sequence diagrams** as is relevant to a particular aspects
-> of the design that you are describing. (**For example**, in a shopping experience application you might create a
-> sequence diagram of a customer searching for an item and adding to their cart.)
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
-> to help illustrate the end-to-end flow._
-
-## 
->
-> _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
->
-> - _Class diagrams only apply to the **ViewModel** and **Model** Tier_
-> - _A single class diagram of the entire system will not be effective. You may start with one, but will be need to break it down into smaller sections to account for requirements of each of the Tier static models below._
-> - _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
-> - _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 #### Logging In Sequence Diagram
+
 ![Sequence Diagram 1](Sequence-Diagram-Logging-In.png)  
 This Diagram explores the sequence of a user logging in to the site. The user types their username and password into text boxes on the login component and clicks the associated "login" button to begin the process of authenticating their credentials. The login component calls upon the user service which in turn makes an HTTP POST to the users/auth endpoint on the HTTP server. The server response is dependent on if the user-entered credentials are valid or not. If so the server responds with a status of 200 and thus the credentials service relays to the login component that the entered credentials are correct. As well, the login component calls the credentials service to store the now-current user's information to local storage. If the credentials are invalid for any reason then the server will respond accordingly with a non-200 status code. In this case the user service relays to the login component that the entered credentials were not correct and the login component will display an error message to inform the user.  
 
 #### Adding A Product Sequence Diagram
+
 ![Sequence Diagram 1](Sequence-Diagram-Adding-Product.png)
 This Diagram explores the sequence of the admin adding a new product to the inventory. They navigate the spreadsheet style UI to input the information of a product they want to add. In order to finalize changes, the admin must press the save button associated with the new product. Upon this click, the admin component checks that all fields have been entered in order to continue with this process. If all fields are not entered then an error message will display from the admin component informing the admin that they must enter all fields in order to add a new product. If all fields are entered then the admin component calls the product service, which in turn makes an HTTP PUT on the products endpoint. If the product already exists then the server responds with a status code of 500 which propogates through the product service and back to the admin component to display an error message that their attempt to add a new product was unsuccsessful. If the product does not already exist, the server responds with a status of 200 to the product service which in turn allows the admin component to display the newly created product on the admin page. 
-
-
-
 
 ### ViewModel Tier
 
@@ -164,10 +137,6 @@ The classes that support the ViewModel tier are as follows:
 
 - Inventory Controller
 - Users Controller
-
-> _**[Sprint 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
 
 ![View Model Image](ViewModel.jpg)
 
@@ -194,8 +163,6 @@ As part of our 10% feature they have an array of unlocked spells which starts ou
 ![Model Tier](Model-Diagram.jpg)
 
 ## OO Design Principles
-
-> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
 ### 1. Single Responsibility
 
@@ -255,12 +222,7 @@ Another vial concept that we use in our design of the E-Store is Pure Fabricatio
 
 ## Static Code Analysis/Future Design Improvements
 
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise,
-> **Identify 3-4** areas within your code that have been flagged by the Static Code
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.
-> Include any relevant screenshot(s) with each area._
->
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+> TODO: Add screenshots
 
 ### Static Code Analysis
 
@@ -297,8 +259,6 @@ As of Sprint 2, all acceptance criteria are passing. There were no complications
 ### Unit Testing and Code Coverage
 
 #### Unit Testing
-
-#### Strategy
 
 Our strategy when writing tests was to write tests confirming functionality as a part of the solution tasks for a given story. This meant that the same person writing the tests was writing the code, which we doubt is ideal. We likely would have had a better, and easier time adhering to a strategy such as pair or ping-pong programming. It also meant that we did not have a final pass to correct or update unit tests for old methods, that were not added by sprint 3 stories.
 
