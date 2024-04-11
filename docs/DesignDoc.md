@@ -178,7 +178,7 @@ As part of our 10% feature they have an array of unlocked spells which starts ou
 
 ### 1. Single Responsibility
 
-With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. Even in our most basic skeleton we have our REST api split into many classes, for example:
+With the structure of our project it is incredibly important to be strongly adhering to the principle of Single Responsibility. One subsystem of the backend that displays this clearly is in the product and related classes:
 
 - Product - Holds the state of each project, only has mutators and getters.
 - ProductFileDAO - Holds all the methods for interacting with, and creating, an array of products, but has no state.
@@ -194,7 +194,7 @@ After reviewing our project, we noticed that, because of the nature of our e-sto
 
 ### 3. Low Coupling
 
-Our current project structure is in a great place with coupling. Each class currently has only one connection, documented below.
+Our current project structure is in a great place with coupling. All of our codebase follows this principle, but the best example is the Product subsystem:
 
 - Product - Product is only directly referenced in the ProductFileDao
 - ProductFileDAO - Directly references the Product class, is referenced by the Inventory Controller
