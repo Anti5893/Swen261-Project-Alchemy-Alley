@@ -138,7 +138,7 @@ The classes that support the ViewModel tier are as follows:
 - Inventory Controller
 - Users Controller
 
-![View Model Image](ViewModel.jpg)
+![View Model Image](ViewModel.png)
 
 The inventory controller is responsible for keeping track of any changes made to our catalog of spells. The owner of the site can take use of these functions to maintain the list of products displayed on the site. The users controller is responsible for maintaining the list of all users that have registered to the site. It also provides functionality
 to authenticate a user, making sure that all usernames registered to the site are unique.
