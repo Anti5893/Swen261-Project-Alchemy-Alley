@@ -156,10 +156,6 @@ A product is a representation of a spell, therefore, it has an elemental type. T
 A recipe is a combination of exactly two spells that form to create a new spell - this takes in the spells ID's and outputs a new ID. A user is a buyer on the site and has both a username and password that they create upon registering and need to use to login. They also have a cart which is a represenation of the products that they plan on purchasing.
 As part of our 10% feature they have an array of unlocked spells which starts out at 4 basic spells and expands as the user unlocks more by purhcasing two spells that are valid inputs in a recipe to make a new spell. A buyer of the site can only view spells that have unlocked.
 
-> _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
-
 ![Model Tier](Model-Diagram.jpg)
 
 ## OO Design Principles
