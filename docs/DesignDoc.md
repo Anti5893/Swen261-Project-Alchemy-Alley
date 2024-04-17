@@ -36,6 +36,7 @@ The purpose of this project is to become familiar with the Agile software develo
 | Controller  | Acts as a communication point between the model and view |
 | Model       | Acts as the data structure of the application |
 | Persistence | Acts as the data storage mechanism for the application |
+| QOL         | Quality of Life |
 
 ## Requirements
 
@@ -243,27 +244,32 @@ Another vial concept that we use in our design of the E-Store is Pure Fabricatio
 
 #### Unused Imports
 
-We have a couple issues, brought up by sonarqube, reguarding unused imports. This isn't a crazy challenge to fix as it's just removing one line per unused import. In the future we should've set outselves a soft deadline as to insure we have enough time to clean up these small mistakes.
+We have a couple issues, brought up by SonarQube, reguarding unused imports. This isn't a crazy challenge to fix as it's just removing one line per unused import. In the future we should've set a soft deadline for ourselves to insure we have enough time to clean up these small mistakes.
+
+![Unused_Imports_from_SonarQube](Unused_Imports_from_SonarQube.png)
 
 #### Irrelivent Public Modifier on Test Methods
 
 There are _a lot_ of errors complaining about a public modifier on test methods as I believe we have a public modifier on every test method. Apparently in JUnit 5, you don't need to have a public modifier for tests compared to in JUnit 4. This is another one of those small mistakes that we should've accounted for and set aside time to fix all of them nearing the end of Sprint 3.
 
+![Remove_Public_Modifier_from_SonarQube](Remove_Public_Modifier_from_SonarQube.png)
+
 #### Inconsistant Use of Built-In Formatting for Strings
 
 There are multiple cases, mainly with logs, that SonarQube tells us that we could've used the built-in formatter. One of the problems this introduces is a hit to performance as everytime the method is ran, it will process the concatination.
+
+![Build-In_String_Formatting_from_SonarQube](Build-In_String_Formatting_from_SonarQube.png)
 
 ### Future Design Improvements
 
 Somethings that we could've improved on, if we had more time, includes:
 
-- Fixing all the little SonarQube issues
 - Saving the date a user unlocked a spell
-  - As it would allow us to sort products by "date unlocked". This would be a quality of life improvement to the user over sorting by a product's ID.
+  - As it would allow us to sort products by "date unlocked". This would be a QOL improvement to the user over sorting by a product's ID.
 - More tests
   - To increase code coverage
 - Saving the user's credit card data
-  - So they wouldn't have to input it every time
+  - To increase QOL for the user.
 
 ## Testing
 
