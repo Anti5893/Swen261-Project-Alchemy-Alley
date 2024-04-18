@@ -219,8 +219,6 @@ Another vial concept that we use in our design of the E-Store is Pure Fabricatio
 
 ## Static Code Analysis/Future Design Improvements
 
-> TODO: Add screenshots
-
 ### Static Code Analysis
 
 #### Unused Imports
