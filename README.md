@@ -1,6 +1,6 @@
 # E-Store:  Alchemy Alley
 
-An online E-store system built in Java 21=> and ___ _replace with other platform requirements_ ___
+An online E-store system built in Java 21=> and Angular 17
   
 ## Team
 
